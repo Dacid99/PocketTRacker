@@ -1,18 +1,26 @@
 package org.sbv.straightpoolcounter;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
 
     private Player player1, player2;
     private PoolTable table;
-    private TextView player1ScoreView, player2ScoreView, player1NameView, player2NameView, ballNumberView;
+    private TextView player1ScoreView, player2ScoreView, ballNumberView;
+    private TextInputLayout player1NameView, player2NameView;
+    private TextInputEditText player1NameInput, player2NameInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,36 @@ public class MainActivity extends AppCompatActivity {
         player2NameView.setText(getString(R.string.player_name_format, player2.getName()));
 
         ballNumberView.setText(getString(R.string.ball_number_format, table.getNumberOfBalls()));
+
+        
+        player1NameView.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                String newName = v.getText().toString();
+                player1.setName(newName);
+                updateNames();
+                return true;
+            }
+        });
+
+        player2NameView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String newName = s.toString();
+                player2.setName(newName);
+                updateNames();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         player1Button.setOnClickListener(new View.OnClickListener() {
             @Override
