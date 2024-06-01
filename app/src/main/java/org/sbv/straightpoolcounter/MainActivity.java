@@ -12,11 +12,14 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     private Player player1, player2, turnPlayer;
     private PoolTable table;
-    private int roundNumber = 0;
+
+    private ScoreSheet scoreSheet;
     private TextView player1ScoreView, player2ScoreView, ballNumberView;
     private TextInputLayout player1NameLayout, player2NameLayout, newBallNumberLayout;
     private TextInputEditText player1NameInput, player2NameInput, newBallNumberInput;
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         table = new PoolTable();
 
+        scoreSheet = new ScoreSheet();
 
         player1ScoreView = findViewById(R.id.player1Score);
         player2ScoreView = findViewById(R.id.player2Score);
@@ -115,34 +119,34 @@ public class MainActivity extends AppCompatActivity {
         missButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int newNumberOfBalls = Integer.parseInt(newBallNumberInput.getText().toString());
+                int newNumberOfBalls = Integer.parseInt(Objects.requireNonNull(newBallNumberInput.getText()).toString());
                 int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
                 turnPlayer.addPoints(points);
                 updateScores();
-                switchFocus();
+                switchFocus(v.toString());
             }
         });
 
         safeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int newNumberOfBalls = Integer.parseInt(newBallNumberInput.getText().toString());
+                int newNumberOfBalls = Integer.parseInt(Objects.requireNonNull(newBallNumberInput.getText()).toString());
                 int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
                 turnPlayer.addPoints(points);
                 updateScores();
-                switchFocus();
+                switchFocus(v.toString());
             }
         });
 
         foulButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int newNumberOfBalls = Integer.parseInt(newBallNumberInput.getText().toString());
+                int newNumberOfBalls = Integer.parseInt(Objects.requireNonNull(newBallNumberInput.getText()).toString());
                 int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
                 turnPlayer.addPoints(points);
-                turnPlayer.deductPoints( (roundNumber == 0) ? 2:1 );
+                turnPlayer.deductPoints( (scoreSheet.length() == 0) ? 2:1 );
                 updateScores();
-                switchFocus();
+                switchFocus(v.toString());
             }
         });
 
@@ -178,12 +182,14 @@ public class MainActivity extends AppCompatActivity {
     }
     */
 
-    private void switchFocus(){
+    private void switchFocus(String reason){
         if (turnPlayer == player1) {
             turnPlayer = player2;
         }else {
             turnPlayer = player1;
         }
-        roundNumber += 1;
+        scoreSheet.writeScoreLine(player1.getScore(), player2.getScore());
+        scoreSheet.writeSwitchReason(reason);
+
     }
 }
