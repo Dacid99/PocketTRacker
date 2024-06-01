@@ -16,11 +16,12 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Player player1, player2;
+    private Player player1, player2, focusPlayer;
     private PoolTable table;
+    private int roundNumber = 0;
     private TextView player1ScoreView, player2ScoreView, ballNumberView;
-    private TextInputLayout player1NameView, player2NameView;
-    private TextInputEditText player1NameInput, player2NameInput;
+    private TextInputLayout player1NameLayout, player2NameLayout, newBallNumberLayout;
+    private TextInputEditText player1NameInput, player2NameInput, newBallNumberInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,37 +31,53 @@ public class MainActivity extends AppCompatActivity {
         player1 = new Player("Alice");
         player2 = new Player("Bob");
 
+        focusPlayer = player1;
+
         table = new PoolTable();
 
 
         player1ScoreView = findViewById(R.id.player1Score);
         player2ScoreView = findViewById(R.id.player2Score);
 
-        player1NameView = findViewById(R.id.player1Name);
-        player2NameView = findViewById(R.id.player2Name);
+        player1NameLayout = findViewById(R.id.player1NameLayout);
+        player1NameInput = findViewById(R.id.player1Name);
+
+        player2NameLayout= findViewById(R.id.player2NameLayout);
+        player2NameInput = findViewById(R.id.player2Name);
 
         ballNumberView = findViewById(R.id.ballNumber);
 
-        MaterialButton player1Button = findViewById(R.id.player1Button);
-        MaterialButton player2Button = findViewById(R.id.player2Button);
+        newBallNumberLayout = findViewById(R.id.newBallNumberLayout);
+        newBallNumberInput = findViewById(R.id.newBallNumberInput);
 
-        player1NameView.setText(getString(R.string.player_name_format, player1.getName()));
-        player2NameView.setText(getString(R.string.player_name_format, player2.getName()));
+        MaterialButton missButton = findViewById(R.id.missButton);
+        MaterialButton safeButton = findViewById(R.id.safeButton);
+        MaterialButton foulButton = findViewById(R.id.foulButton);
+
 
         ballNumberView.setText(getString(R.string.ball_number_format, table.getNumberOfBalls()));
 
-        
-        player1NameView.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+
+        player1NameInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                String newName = v.getText().toString();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String newName = s.toString();
                 player1.setName(newName);
                 updateNames();
-                return true;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
-        player2NameView.addTextChangedListener(new TextWatcher() {
+        player2NameInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -79,40 +96,68 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        player1Button.setOnClickListener(new View.OnClickListener() {
+        missButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player1.addPoints(1);
+                int newNumberOfBalls = Integer.parseInt(newBallNumberInput.getText().toString());
+                int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
+                focusPlayer.addPoints(points);
                 updateScores();
+                switchFocus();
             }
         });
 
-        player2Button.setOnClickListener(new View.OnClickListener() {
+        safeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player2.addPoints(1);
-                table.removeBall();
+                int newNumberOfBalls = Integer.parseInt(newBallNumberInput.getText().toString());
+                int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
+                focusPlayer.addPoints(points);
                 updateScores();
+                switchFocus();
+            }
+        });
+
+        foulButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newNumberOfBalls = Integer.parseInt(newBallNumberInput.getText().toString());
+                int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
+                focusPlayer.addPoints(points);
+                focusPlayer.deductPoints( (roundNumber == 0) ? 2:1 );
+                updateScores();
+                switchFocus();
             }
         });
 
         updateScores();
+        updateNames();
     }
 
     private void updateScores() {
         player1ScoreView.setText(getString(R.string.player_score_format, player1.getScore()));
         player2ScoreView.setText(getString(R.string.player_score_format, player2.getScore()));
         ballNumberView.setText(getString(R.string.ball_number_format, table.getNumberOfBalls()));
-
     }
 
     private void updateNames(){
-        player1NameView.setText(getString(R.string.player_name_format, player1.getName()));
-        player2NameView.setText(getString(R.string.player_name_format, player2.getName()));
+        player1NameInput.setText(getString(R.string.player_name_format, player1.getName()));
+        player2NameInput.setText(getString(R.string.player_name_format, player2.getName()));
     }
 
+    /*
     private void updateClubs(){
-        player1NameView.setText(getString(R.string.player_club_format, player1.getClub()));
-        player2NameView.setText(getString(R.string.player_club_format, player2.getClub()));
+        player1ClubInput.setText(getString(R.string.player_club_format, player1.getClub()));
+        player2ClubInput.setText(getString(R.string.player_club_format, player2.getClub()));
+    }
+    */
+
+    private void switchFocus(){
+        if (focusPlayer == player1) {
+            focusPlayer = player2;
+        }else {
+            focusPlayer = player1;
+        }
+        roundNumber += 1;
     }
 }
