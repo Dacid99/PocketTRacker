@@ -3,9 +3,7 @@ package org.sbv.straightpoolcounter;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +14,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Player player1, player2, focusPlayer;
+    private Player player1, player2, turnPlayer;
     private PoolTable table;
     private int roundNumber = 0;
     private TextView player1ScoreView, player2ScoreView, ballNumberView;
@@ -28,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        player1 = new Player("Alice");
-        player2 = new Player("Bob");
+        player1 = new Player();
+        player2 = new Player();
 
-        focusPlayer = player1;
+        turnPlayer = player1;
 
         table = new PoolTable();
 
@@ -53,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton missButton = findViewById(R.id.missButton);
         MaterialButton safeButton = findViewById(R.id.safeButton);
         MaterialButton foulButton = findViewById(R.id.foulButton);
+        MaterialButton rerackButton = findViewById(R.id.rerackButton);
 
 
         ballNumberView.setText(getString(R.string.ball_number_format, table.getNumberOfBalls()));
@@ -96,12 +95,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        newBallNumberInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         missButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int newNumberOfBalls = Integer.parseInt(newBallNumberInput.getText().toString());
                 int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
-                focusPlayer.addPoints(points);
+                turnPlayer.addPoints(points);
                 updateScores();
                 switchFocus();
             }
@@ -112,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int newNumberOfBalls = Integer.parseInt(newBallNumberInput.getText().toString());
                 int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
-                focusPlayer.addPoints(points);
+                turnPlayer.addPoints(points);
                 updateScores();
                 switchFocus();
             }
@@ -123,10 +139,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int newNumberOfBalls = Integer.parseInt(newBallNumberInput.getText().toString());
                 int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
-                focusPlayer.addPoints(points);
-                focusPlayer.deductPoints( (roundNumber == 0) ? 2:1 );
+                turnPlayer.addPoints(points);
+                turnPlayer.deductPoints( (roundNumber == 0) ? 2:1 );
                 updateScores();
                 switchFocus();
+            }
+        });
+
+        rerackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int points = table.getNumberOfBalls() - 1 ;
+                turnPlayer.addPoints(points);
+                table.rerack();
+                updateScores();
             }
         });
 
@@ -153,10 +179,10 @@ public class MainActivity extends AppCompatActivity {
     */
 
     private void switchFocus(){
-        if (focusPlayer == player1) {
-            focusPlayer = player2;
+        if (turnPlayer == player1) {
+            turnPlayer = player2;
         }else {
-            focusPlayer = player1;
+            turnPlayer = player1;
         }
         roundNumber += 1;
     }

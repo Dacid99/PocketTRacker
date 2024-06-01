@@ -8,8 +8,8 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/player1Score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
         android:layout_marginTop="25dp"
         android:text="@string/player_score_format"
         android:textSize="18sp"
@@ -20,8 +20,8 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/player2Score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
         android:layout_marginTop="25dp"
         android:text="@string/player_score_format"
         android:textSize="18sp"
@@ -61,6 +61,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/player2Score" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rerackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="88dp"
+        android:text="@string/rerack_string"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ballNumber"
         app:layout_constraintTop_toBottomOf="@id/player2Score" />
 
     <com.google.android.material.textview.MaterialTextView

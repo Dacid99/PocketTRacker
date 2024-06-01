@@ -1,7 +1,7 @@
 package org.sbv.straightpoolcounter;
 
 public class Player {
-    private String name;
+    private String name = "";
     private String club = "";
     private int score;
 
@@ -13,6 +13,10 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+        this.score = 0;
+    }
+
+    public Player() {
         this.score = 0;
     }
 

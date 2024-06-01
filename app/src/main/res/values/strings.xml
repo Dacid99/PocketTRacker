@@ -1,14 +1,15 @@
 <resources>
     <string name="app_name">StraightPoolCounter</string>
     <string name="player_name_format">%1$s</string>
-    <string name="player_name_hint_format">%1$s</string>
-    <string name="newBallNumber_hint_format">%1$s</string>
+    <string name="player_name_hint_format">Player Name</string>
+    <string name="newBallNumber_hint_format">Balls on Table</string>
     <string name="player_club_format">%1$s</string>
     <string name="player_score_format">Score: %1$d</string>
     <string name="ball_number_format">Balls on table: %1$d</string>
 
     <string name="safe_string">Safe</string>
     <string name="foul_string">Foul</string>
+    <string name="rerack_string">Rerack</string>
     <string name="miss_string">Miss</string>
 
 
