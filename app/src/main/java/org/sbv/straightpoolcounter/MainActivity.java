@@ -18,11 +18,10 @@ public class MainActivity extends AppCompatActivity {
 
     private Player player1, player2, turnPlayer;
     private PoolTable table;
-
     private ScoreSheet scoreSheet;
     private TextView player1ScoreView, player2ScoreView, ballNumberView;
-    private TextInputLayout player1NameLayout, player2NameLayout, newBallNumberLayout;
-    private TextInputEditText player1NameInput, player2NameInput, newBallNumberInput;
+    private TextInputLayout player1NameLayout, player2NameLayout, player1ClubLayout, player2ClubLayout, newBallNumberLayout;
+    private TextInputEditText player1NameInput, player2NameInput, player1ClubInput, player2ClubInput, newBallNumberInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
         player2NameLayout= findViewById(R.id.player2NameLayout);
         player2NameInput = findViewById(R.id.player2Name);
 
+        player1ClubLayout = findViewById(R.id.player1ClubLayout);
+        player1ClubInput = findViewById(R.id.player1Club);
+
+        player2ClubLayout= findViewById(R.id.player2ClubLayout);
+        player2ClubInput = findViewById(R.id.player2Club);
+
+
         ballNumberView = findViewById(R.id.ballNumber);
 
         newBallNumberLayout = findViewById(R.id.newBallNumberLayout);
@@ -70,8 +76,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String newName = s.toString();
-                player1.setName(newName);
-                updateNames();
+                if (!newName.equals( player1NameInput.getText().toString() ) ) {
+                    player1.setName(newName);
+                    updateNames();
+                }
             }
 
             @Override
@@ -89,8 +97,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String newName = s.toString();
-                player2.setName(newName);
-                updateNames();
+                if (!newName.equals( player2NameInput.getText().toString() ) ) {
+                    player2.setName(newName);
+                    updateNames();
+                }
             }
 
             @Override
@@ -123,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
                 turnPlayer.addPoints(points);
                 updateScores();
-                switchFocus(v.toString());
+                switchFocus("@string/miss_string");
             }
         });
 
@@ -134,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
                 turnPlayer.addPoints(points);
                 updateScores();
-                switchFocus(v.toString());
+                switchFocus("@string/safe_string");
             }
         });
 
@@ -146,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 turnPlayer.addPoints(points);
                 turnPlayer.deductPoints( (scoreSheet.length() == 0) ? 2:1 );
                 updateScores();
-                switchFocus(v.toString());
+                switchFocus("@string/foul_string");
             }
         });
 
@@ -162,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
         updateScores();
         updateNames();
+        updateClubs();
     }
 
     private void updateScores() {
@@ -175,12 +186,12 @@ public class MainActivity extends AppCompatActivity {
         player2NameInput.setText(getString(R.string.player_name_format, player2.getName()));
     }
 
-    /*
+
     private void updateClubs(){
         player1ClubInput.setText(getString(R.string.player_club_format, player1.getClub()));
         player2ClubInput.setText(getString(R.string.player_club_format, player2.getClub()));
     }
-    */
+
 
     private void switchFocus(String reason){
         if (turnPlayer == player1) {
