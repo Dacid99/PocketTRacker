@@ -13,6 +13,9 @@ public class PoolTable {
     }
 
     public int setNewNumberOfBallsAndGiveDifference(int newNumberOfBalls){
+        if (!isValidBallNumber(newNumberOfBalls)) {
+            return -1 ;
+        }
         int ballsRemoved = this.numberOfBalls - newNumberOfBalls;
         this.numberOfBalls = newNumberOfBalls;
         if (this.numberOfBalls == 1){
@@ -32,4 +35,7 @@ public class PoolTable {
         this.numberOfBalls = 15;
     }
 
+    public boolean isValidBallNumber(int newNumberOfBalls){
+        return newNumberOfBalls < this.numberOfBalls && newNumberOfBalls >= 1;
+    }
 }

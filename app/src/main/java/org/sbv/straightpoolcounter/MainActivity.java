@@ -122,41 +122,58 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                String newText = s.toString();
+                if (!newText.isEmpty() ) {
+                    if (!table.isValidBallNumber(Integer.parseInt(newText))) {
+                        newBallNumberInput.setTextColor(getResources().getColor(R.color.red));
+                    }
+                    else {
+                        newBallNumberInput.setTextColor(getResources().getColor(R.color.black));
+                    }
+                }
             }
         });
 
         missButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int newNumberOfBalls = Integer.parseInt(Objects.requireNonNull(newBallNumberInput.getText()).toString());
-                int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
+                int points = calculatePoints();
+                if (points == -1) {
+                    updateScores();
+                    return;
+                }
                 turnPlayer.addPoints(points);
                 updateScores();
-                switchFocus("@string/miss_string");
+                switchFocus(getString(R.string.safe_string));
             }
         });
 
         safeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int newNumberOfBalls = Integer.parseInt(Objects.requireNonNull(newBallNumberInput.getText()).toString());
-                int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
+                int points = calculatePoints();
+                if (points == -1) {
+                    updateScores();
+                    return;
+                }
                 turnPlayer.addPoints(points);
                 updateScores();
-                switchFocus("@string/safe_string");
+                switchFocus(getString(R.string.safe_string));
             }
         });
 
         foulButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int newNumberOfBalls = Integer.parseInt(Objects.requireNonNull(newBallNumberInput.getText()).toString());
-                int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
+                int points = calculatePoints();
+                if (points == -1) {
+                    updateScores();
+                    return;
+                }
                 turnPlayer.addPoints(points);
-                turnPlayer.deductPoints( (scoreSheet.length() == 0) ? 2:1 );
+                turnPlayer.addPoints( (scoreSheet.length() == 0) ? -2:-1 );
                 updateScores();
-                switchFocus("@string/foul_string");
+                switchFocus(getString(R.string.safe_string));
             }
         });
 
@@ -179,6 +196,8 @@ public class MainActivity extends AppCompatActivity {
         player1ScoreView.setText(getString(R.string.player_score_format, player1.getScore()));
         player2ScoreView.setText(getString(R.string.player_score_format, player2.getScore()));
         ballNumberView.setText(getString(R.string.ball_number_format, table.getNumberOfBalls()));
+        newBallNumberInput.setHint(getString(R.string.newBallNumber_hint_format, table.getNumberOfBalls()));
+        newBallNumberInput.setText("");
     }
 
     private void updateNames(){
@@ -201,6 +220,18 @@ public class MainActivity extends AppCompatActivity {
         }
         scoreSheet.writeScoreLine(player1.getScore(), player2.getScore());
         scoreSheet.writeSwitchReason(reason);
+
+    }
+
+    private int calculatePoints(){
+        String newNumberOfBallsString = Objects.requireNonNull(newBallNumberInput.getText()).toString();
+        int newNumberOfBalls;
+        if (!newNumberOfBallsString.isEmpty() ) {
+            newNumberOfBalls = Integer.parseInt(newNumberOfBallsString);
+        } else {
+            newNumberOfBalls = table.getNumberOfBalls();
+        }
+        return table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
 
     }
 }

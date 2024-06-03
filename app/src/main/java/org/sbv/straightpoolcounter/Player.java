@@ -24,10 +24,6 @@ public class Player {
         this.score += points;
     }
 
-    public void deductPoints(int points) {
-        this.score -= points;
-    }
-
     public int getScore() {
         return score;
     }
