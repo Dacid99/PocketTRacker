@@ -14,6 +14,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
 public class MainActivity extends AppCompatActivity {
 
     private Player player1, player2, turnPlayer;
@@ -123,13 +125,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String newText = s.toString();
-                if (!newText.isEmpty() ) {
+                if ( NumberUtils.isParsable(newText)) {
                     if (!table.isValidBallNumber(Integer.parseInt(newText))) {
                         newBallNumberInput.setTextColor(getResources().getColor(R.color.red));
                     }
                     else {
                         newBallNumberInput.setTextColor(getResources().getColor(R.color.black));
                     }
+                }
+                else {
+                    newBallNumberInput.setTextColor(getResources().getColor(R.color.red));
                 }
             }
         });
@@ -144,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 turnPlayer.addPoints(points);
                 updateScores();
-                switchFocus(getString(R.string.safe_string));
+                switchFocus(getString(R.string.miss_string));
             }
         });
 
@@ -173,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
                 turnPlayer.addPoints(points);
                 turnPlayer.addPoints( (scoreSheet.length() == 0) ? -2:-1 );
                 updateScores();
-                switchFocus(getString(R.string.safe_string));
+                switchFocus(getString(R.string.foul_string));
             }
         });
 
