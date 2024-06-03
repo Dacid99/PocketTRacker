@@ -10,91 +10,84 @@
         android:id="@+id/player1Score"
         android:layout_width="100dp"
         android:layout_height="45dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
         android:text="@string/player_score_format"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.196"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1NameLayout" />
+        app:layout_constraintStart_toStartOf="@+id/player1ClubLayout"
+        app:layout_constraintTop_toBottomOf="@+id/player1ClubLayout" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/player2Score"
         android:layout_width="100dp"
         android:layout_height="45dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
         android:text="@string/player_score_format"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.803"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player2NameLayout" />
+        app:layout_constraintEnd_toEndOf="@+id/player2ClubLayout"
+        app:layout_constraintTop_toBottomOf="@+id/player2ClubLayout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/missButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="244dp"
+        android:layout_marginTop="15dp"
         android:text="@string/miss_string"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/player1Score" />
+        app:layout_constraintEnd_toEndOf="@+id/safeButton"
+        app:layout_constraintTop_toBottomOf="@+id/safeButton" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/foulButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="316dp"
+        android:layout_marginTop="15dp"
         android:text="@string/foul_string"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/player1Score" />
+        app:layout_constraintEnd_toEndOf="@+id/missButton"
+        app:layout_constraintTop_toBottomOf="@+id/missButton" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/safeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="172dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="30dp"
         android:text="@string/safe_string"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/player2Score" />
+        app:layout_constraintTop_toBottomOf="@+id/newBallNumberLayout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/rerackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginStart="40dp"
         android:text="@string/rerack_string"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ballNumber"
-        app:layout_constraintTop_toBottomOf="@id/player2Score" />
+        app:layout_constraintStart_toEndOf="@+id/newBallNumberLayout"
+        app:layout_constraintTop_toTopOf="@+id/newBallNumberLayout" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/ballNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="296dp"
+        android:layout_marginStart="134dp"
+        android:layout_marginEnd="134dp"
+        android:layout_marginBottom="80dp"
         android:text="@string/ball_number_format"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/newBallNumberLayout"
         android:layout_width="144dp"
         android:layout_height="48dp"
-        android:layout_marginStart="133dp"
-        android:layout_marginEnd="134dp"
-        android:layout_marginBottom="95dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginEnd="150dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newBallNumberInput"
@@ -109,10 +102,8 @@
         android:id="@+id/player1NameLayout"
         android:layout_width="144dp"
         android:layout_height="48dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="83dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/player2NameLayout"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -127,11 +118,9 @@
         android:id="@+id/player2NameLayout"
         android:layout_width="130dp"
         android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="81dp"
-        android:layout_marginEnd="44dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/player1NameLayout"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -145,12 +134,9 @@
         android:id="@+id/player1ClubLayout"
         android:layout_width="144dp"
         android:layout_height="48dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="83dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/player2NameLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/player1NameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/player1NameLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/player1Club"
@@ -163,12 +149,9 @@
         android:id="@+id/player2ClubLayout"
         android:layout_width="130dp"
         android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="81dp"
-        android:layout_marginEnd="44dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/player1NameLayout"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/player2NameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/player2NameLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/player2Club"
