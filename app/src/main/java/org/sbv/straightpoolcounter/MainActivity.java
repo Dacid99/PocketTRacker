@@ -144,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int points = calculatePoints();
                 if (points == -1) {
-                    updateScores();
                     return;
                 }
                 turnPlayer.addPoints(points);
@@ -158,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int points = calculatePoints();
                 if (points == -1) {
-                    updateScores();
                     return;
                 }
                 turnPlayer.addPoints(points);
@@ -172,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int points = calculatePoints();
                 if (points == -1) {
-                    updateScores();
                     return;
                 }
                 turnPlayer.addPoints(points);
