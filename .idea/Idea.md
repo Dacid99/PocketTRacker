@@ -4,7 +4,7 @@
 - keeps track of the scores 
 - scores are changed by difference of balls on table
 - revert button
-- player focus
+- player focus with indicator
 - entering of reason for end of turn, then number of balls with hidden option for next number if rerack
 
 # Future features

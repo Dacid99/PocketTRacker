@@ -43,4 +43,9 @@ public class Player {
     public void setClub(String club) {
         this.club = club;
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
 }

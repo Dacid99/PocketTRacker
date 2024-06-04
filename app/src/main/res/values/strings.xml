@@ -12,6 +12,8 @@
     <string name="foul_string">Foul</string>
     <string name="rerack_string">Rerack</string>
     <string name="miss_string">Miss</string>
+    <string name="undo_string">Undo \u21B6</string>
+    <string name="redo_string">Redo \u21B7</string>
 
 
 </resources>

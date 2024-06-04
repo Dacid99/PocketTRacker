@@ -1,5 +1,6 @@
 package org.sbv.straightpoolcounter;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView player1ScoreView, player2ScoreView, ballNumberView;
     private TextInputLayout player1NameLayout, player2NameLayout, player1ClubLayout, player2ClubLayout, newBallNumberLayout;
     private TextInputEditText player1NameInput, player2NameInput, player1ClubInput, player2ClubInput, newBallNumberInput;
+    private MaterialButton redoButton, undoButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         table = new PoolTable();
 
-        scoreSheet = new ScoreSheet();
+        scoreSheet = new ScoreSheet(table, player1, player2);
 
         player1ScoreView = findViewById(R.id.player1Score);
         player2ScoreView = findViewById(R.id.player2Score);
@@ -64,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton safeButton = findViewById(R.id.safeButton);
         MaterialButton foulButton = findViewById(R.id.foulButton);
         MaterialButton rerackButton = findViewById(R.id.rerackButton);
-
+        undoButton = findViewById(R.id.undoButton);
+        redoButton = findViewById(R.id.redoButton);
 
         ballNumberView.setText(getString(R.string.ball_number_format, table.getNumberOfBalls()));
 
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 String newName = s.toString();
                 if (!newName.equals( player1NameInput.getText().toString() ) ) {
                     player1.setName(newName);
-                    updateNames();
+                    updateNameUI();
                 }
             }
 
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 String newName = s.toString();
                 if (!newName.equals( player2NameInput.getText().toString() ) ) {
                     player2.setName(newName);
-                    updateNames();
+                    updateNameUI();
                 }
             }
 
@@ -147,8 +150,8 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 turnPlayer.addPoints(points);
-                updateScores();
-                switchFocus(getString(R.string.miss_string));
+                updateScoreUI();
+                newTurn(getString(R.string.miss_string));
             }
         });
 
@@ -160,8 +163,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 turnPlayer.addPoints(points);
-                updateScores();
-                switchFocus(getString(R.string.safe_string));
+                newTurn(getString(R.string.safe_string));
             }
         });
 
@@ -174,8 +176,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 turnPlayer.addPoints(points);
                 turnPlayer.addPoints( (scoreSheet.length() == 0) ? -2:-1 );
-                updateScores();
-                switchFocus(getString(R.string.foul_string));
+                newTurn(getString(R.string.foul_string));
             }
         });
 
@@ -185,44 +186,88 @@ public class MainActivity extends AppCompatActivity {
                 int points = table.getNumberOfBalls() - 1 ;
                 turnPlayer.addPoints(points);
                 table.rerack();
-                updateScores();
+                updateScoreUI();
             }
         });
 
-        updateScores();
-        updateNames();
-        updateClubs();
+        undoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scoreSheet.rollback();
+                switchTurnPlayer();
+                updateScoreUI();
+            }
+        });
+
+        redoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scoreSheet.progress();
+                switchTurnPlayer();
+                updateScoreUI();
+            }
+        });
+
+        updateScoreUI();
+        updateNameUI();
+        updateClubUI();
+        updateFocusUI();
     }
 
-    private void updateScores() {
+    private void updateScoreUI() {
         player1ScoreView.setText(getString(R.string.player_score_format, player1.getScore()));
         player2ScoreView.setText(getString(R.string.player_score_format, player2.getScore()));
         ballNumberView.setText(getString(R.string.ball_number_format, table.getNumberOfBalls()));
         newBallNumberInput.setHint(getString(R.string.newBallNumber_hint_format, table.getNumberOfBalls()));
         newBallNumberInput.setText("");
+        if (scoreSheet.isLatest()){
+            redoButton.setVisibility(View.INVISIBLE);
+        }else{
+            redoButton.setVisibility(View.VISIBLE);
+        }
+        if (scoreSheet.isStart()){
+            undoButton.setVisibility(View.INVISIBLE);
+        }else {
+            undoButton.setVisibility(View.VISIBLE);
+        }
     }
 
-    private void updateNames(){
+    private void updateNameUI(){
         player1NameInput.setText(getString(R.string.player_name_format, player1.getName()));
         player2NameInput.setText(getString(R.string.player_name_format, player2.getName()));
     }
 
 
-    private void updateClubs(){
+    private void updateClubUI(){
         player1ClubInput.setText(getString(R.string.player_club_format, player1.getClub()));
         player2ClubInput.setText(getString(R.string.player_club_format, player2.getClub()));
     }
 
 
-    private void switchFocus(String reason){
+    private void newTurn(String reason){
+        switchTurnPlayer();
+        scoreSheet.update();
+        scoreSheet.writeSwitchReason(reason);
+        updateScoreUI();
+    }
+
+    private void switchTurnPlayer(){
         if (turnPlayer == player1) {
             turnPlayer = player2;
         }else {
             turnPlayer = player1;
         }
-        scoreSheet.writeScoreLine(player1.getScore(), player2.getScore());
-        scoreSheet.writeSwitchReason(reason);
+        updateFocusUI();
+    }
 
+    private void updateFocusUI(){
+        if (turnPlayer == player1) {
+            player1NameInput.setBackgroundColor(Color.GREEN);
+            player2NameInput.setBackgroundColor(Color.LTGRAY);
+        }else {
+            player1NameInput.setBackgroundColor(Color.LTGRAY);
+            player2NameInput.setBackgroundColor(Color.GREEN);
+        }
     }
 
     private int calculatePoints(){

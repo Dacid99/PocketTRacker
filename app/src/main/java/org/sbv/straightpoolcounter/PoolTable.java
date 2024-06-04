@@ -38,4 +38,8 @@ public class PoolTable {
     public boolean isValidBallNumber(int newNumberOfBalls){
         return newNumberOfBalls < this.numberOfBalls && newNumberOfBalls >= 1;
     }
+
+    public void setNumberOfBalls(int numberOfBalls){
+        this.numberOfBalls = numberOfBalls;
+    }
 }
