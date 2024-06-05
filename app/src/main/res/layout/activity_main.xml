@@ -116,6 +116,24 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/winningPointsLayout"
+        android:layout_width="96dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        android:hint="@string/winnerPoints_hint_format"
+        app:layout_constraintEnd_toStartOf="@+id/player2Score"
+        app:layout_constraintStart_toEndOf="@+id/player1Score"
+        app:layout_constraintTop_toBottomOf="@+id/player1ClubLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/winningPointsInput"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="141dp"
+            tools:layout_editor_absoluteY="589dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/player1NameLayout"
         android:layout_width="144dp"
         android:layout_height="48dp"

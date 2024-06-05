@@ -1,8 +1,9 @@
+- make UI beautiful
 - turnplayer tracking
 - turn rollback is provisory
 - switchreason needs to be integrated into scoreSheet logic
-- UI focus
 - scoreSheet viewer
 - undo rerack
 - winner indicator
 - kill all warnings!
+- stuff needs to be reorganized, especially the UIupdates are hard to maintain

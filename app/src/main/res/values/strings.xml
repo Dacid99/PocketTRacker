@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">StraightPoolCounter</string>
     <string name="player_name_format">%1$s</string>
+    <string name="winnerPoints_format">%1$d</string>
+
     <string name="player_name_hint_format">Player Name</string>
     <string name="player_club_hint_format">Club</string>
     <string name="newBallNumber_hint_format">Balls: %1$d</string>
+    <string name="winnerPoints_hint_format">Points to win</string>
     <string name="player_club_format">%1$s</string>
     <string name="player_score_format">Score: %1$d</string>
     <string name="ball_number_format">Table: %1$d</string>

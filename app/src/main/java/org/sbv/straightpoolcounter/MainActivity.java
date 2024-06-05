@@ -23,9 +23,10 @@ public class MainActivity extends AppCompatActivity {
     private PoolTable table;
     private ScoreSheet scoreSheet;
     private TextView player1ScoreView, player2ScoreView, ballNumberView;
-    private TextInputLayout player1NameLayout, player2NameLayout, player1ClubLayout, player2ClubLayout, newBallNumberLayout;
-    private TextInputEditText player1NameInput, player2NameInput, player1ClubInput, player2ClubInput, newBallNumberInput;
-    private MaterialButton redoButton, undoButton;
+    private TextInputLayout player1NameLayout, player2NameLayout, player1ClubLayout, player2ClubLayout, newBallNumberLayout, winningPointsLayout;
+    private TextInputEditText player1NameInput, player2NameInput, player1ClubInput, player2ClubInput, newBallNumberInput, winningPointsInput;
+    private MaterialButton foulButton, missButton, safeButton, rerackButton, redoButton, undoButton;
+    private int winnerPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         table = new PoolTable();
 
         scoreSheet = new ScoreSheet(table, player1, player2);
+
+        winnerPoints = 40; //default value
 
         player1ScoreView = findViewById(R.id.player1Score);
         player2ScoreView = findViewById(R.id.player2Score);
@@ -62,10 +65,15 @@ public class MainActivity extends AppCompatActivity {
         newBallNumberLayout = findViewById(R.id.newBallNumberLayout);
         newBallNumberInput = findViewById(R.id.newBallNumberInput);
 
-        MaterialButton missButton = findViewById(R.id.missButton);
-        MaterialButton safeButton = findViewById(R.id.safeButton);
-        MaterialButton foulButton = findViewById(R.id.foulButton);
-        MaterialButton rerackButton = findViewById(R.id.rerackButton);
+        winningPointsLayout = findViewById(R.id.winningPointsLayout);
+        winningPointsInput = findViewById(R.id.winningPointsInput);
+
+        winningPointsInput.setText(getString(R.string.winnerPoints_format, winnerPoints));
+
+        missButton = findViewById(R.id.missButton);
+        safeButton = findViewById(R.id.safeButton);
+        foulButton = findViewById(R.id.foulButton);
+        rerackButton = findViewById(R.id.rerackButton);
         undoButton = findViewById(R.id.undoButton);
         redoButton = findViewById(R.id.redoButton);
 
@@ -142,6 +150,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        winningPointsInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String newText = s.toString();
+                if ( NumberUtils.isParsable(newText)) {
+                    int newWinnerPoints = Integer.parseInt(newText);
+                    if (newWinnerPoints != winnerPoints){
+                        winnerPoints = newWinnerPoints;
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String newText = s.toString();
+                if ( NumberUtils.isParsable(newText)) {
+                    if (!table.isValidBallNumber(Integer.parseInt(newText))) {
+                        winningPointsInput.setTextColor(getResources().getColor(R.color.red));
+                    }
+                    else {
+                        winningPointsInput.setTextColor(getResources().getColor(R.color.black));
+                    }
+                }
+                else {
+                    winningPointsInput.setTextColor(getResources().getColor(R.color.red));
+                }
+            }
+        });
+
         missButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,7 +192,6 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 turnPlayer.addPoints(points);
-                updateScoreUI();
                 newTurn(getString(R.string.miss_string));
             }
         });
@@ -230,6 +271,25 @@ public class MainActivity extends AppCompatActivity {
         }else {
             undoButton.setVisibility(View.VISIBLE);
         }
+        winningPointsInput.setClickable(scoreSheet.turn() == 0);
+        winningPointsInput.setFocusable(scoreSheet.turn() == 0);
+        winningPointsInput.setEnabled(scoreSheet.turn() == 0);
+
+        if (player1.getScore() >= winnerPoints){
+            player1NameInput.setBackgroundColor(getResources().getColor(R.color.gold));
+            player1ClubInput.setBackgroundColor(getResources().getColor(R.color.gold));
+        }else if (player2.getScore() >= winnerPoints){
+            player2NameInput.setBackgroundColor(getResources().getColor(R.color.gold));
+            player2ClubInput.setBackgroundColor(getResources().getColor(R.color.gold));
+        }
+        setButtonsStatus( (player1.getScore() < winnerPoints) && (player2.getScore() < winnerPoints) );
+    }
+
+    private void setButtonsStatus(boolean toggle){
+        foulButton.setClickable(toggle);
+        safeButton.setClickable(toggle);
+        missButton.setClickable(toggle);
+        rerackButton.setClickable(toggle);
     }
 
     private void updateNameUI(){

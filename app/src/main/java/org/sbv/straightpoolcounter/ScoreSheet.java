@@ -69,6 +69,9 @@ public class ScoreSheet {
         return player1ScoresList.size();
     }
 
+    public int turn(){
+        return pointer;
+    }
     public int longestRunPlayer1(){
         return Collections.max(player1ScoresList);
     }
