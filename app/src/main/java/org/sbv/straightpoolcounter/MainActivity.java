@@ -273,10 +273,10 @@ public class MainActivity extends AppCompatActivity {
     private int calculatePoints(){
         String newNumberOfBallsString = Objects.requireNonNull(newBallNumberInput.getText()).toString();
         int newNumberOfBalls;
-        if (!newNumberOfBallsString.isEmpty() ) {
-            newNumberOfBalls = Integer.parseInt(newNumberOfBallsString);
-        } else {
+        if (newNumberOfBallsString.isEmpty() ) {
             newNumberOfBalls = table.getNumberOfBalls();
+        } else {
+            newNumberOfBalls = Integer.parseInt(newNumberOfBallsString);
         }
         return table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
 

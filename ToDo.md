@@ -5,3 +5,4 @@
 - scoreSheet viewer
 - undo rerack
 - winner indicator
+- kill all warnings!
