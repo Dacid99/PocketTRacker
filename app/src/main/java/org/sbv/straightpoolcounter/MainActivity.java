@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 String newText = s.toString();
                 if ( NumberUtils.isParsable(newText)) {
                     int newWinnerPoints = Integer.parseInt(newText);
-                    if (newWinnerPoints != winnerPoints){
+                    if (newWinnerPoints != winnerPoints && newWinnerPoints >1){
                         winnerPoints = newWinnerPoints;
                     }
                 }
@@ -171,14 +171,13 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 String newText = s.toString();
                 if ( NumberUtils.isParsable(newText)) {
-                    if (!table.isValidBallNumber(Integer.parseInt(newText))) {
+                    if (Integer.parseInt(newText) > 0) {
+                        winningPointsInput.setTextColor(getResources().getColor(R.color.black));
+                    } else {
                         winningPointsInput.setTextColor(getResources().getColor(R.color.red));
                     }
-                    else {
-                        winningPointsInput.setTextColor(getResources().getColor(R.color.black));
-                    }
-                }
-                else {
+
+                } else {
                     winningPointsInput.setTextColor(getResources().getColor(R.color.red));
                 }
             }
@@ -259,8 +258,8 @@ public class MainActivity extends AppCompatActivity {
         player1ScoreView.setText(getString(R.string.player_score_format, player1.getScore()));
         player2ScoreView.setText(getString(R.string.player_score_format, player2.getScore()));
         ballNumberView.setText(getString(R.string.ball_number_format, table.getNumberOfBalls()));
-        newBallNumberInput.setHint(getString(R.string.newBallNumber_hint_format, table.getNumberOfBalls()));
-        newBallNumberInput.setText("");
+        newBallNumberInput.setText(getString(R.string.newBallNumber_format, table.getNumberOfBalls()));
+
         if (scoreSheet.isLatest()){
             redoButton.setVisibility(View.INVISIBLE);
         }else{

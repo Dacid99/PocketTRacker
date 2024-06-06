@@ -1,4 +1,4 @@
-- make UI beautiful
+- add new Game button
 - turnplayer tracking
 - turn rollback is provisory
 - switchreason needs to be integrated into scoreSheet logic

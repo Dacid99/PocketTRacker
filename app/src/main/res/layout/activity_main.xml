@@ -9,27 +9,30 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/player1Score"
         android:layout_width="100dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:shadowColor="@color/black"
         android:text="@string/player_score_format"
-        android:textSize="18sp"
+        android:textSize="32sp"
         app:layout_constraintStart_toStartOf="@+id/player1ClubLayout"
         app:layout_constraintTop_toBottomOf="@+id/player1ClubLayout" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/player2Score"
         android:layout_width="100dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:gravity="right"
+        android:shadowColor="@color/black"
         android:text="@string/player_score_format"
-        android:textSize="18sp"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="@+id/player2ClubLayout"
         app:layout_constraintTop_toBottomOf="@+id/player2ClubLayout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/missButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="54dp"
         android:layout_marginTop="15dp"
         android:text="@string/miss_string"
         app:layout_constraintEnd_toEndOf="@+id/safeButton"
@@ -37,8 +40,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/foulButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="54dp"
         android:layout_marginTop="15dp"
         android:text="@string/foul_string"
         app:layout_constraintEnd_toEndOf="@+id/missButton"
@@ -46,8 +49,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/safeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="54dp"
         android:layout_marginStart="110dp"
         android:layout_marginTop="30dp"
         android:text="@string/safe_string"
@@ -56,8 +59,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/rerackButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="54dp"
         android:layout_marginStart="40dp"
         android:text="@string/rerack_string"
         app:layout_constraintStart_toEndOf="@+id/newBallNumberLayout"
@@ -65,18 +68,18 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/undoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="54dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="62dp"
         android:text="@string/undo_string"
         app:layout_constraintStart_toEndOf="@+id/missButton"
         app:layout_constraintTop_toBottomOf="@+id/rerackButton" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/redoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="54dp"
         android:layout_marginStart="60dp"
         android:layout_marginTop="15dp"
         android:text="@string/redo_string"
@@ -87,21 +90,22 @@
         android:id="@+id/ballNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="134dp"
-        android:layout_marginEnd="134dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="130dp"
+        android:gravity="center"
         android:text="@string/ball_number_format"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/winningPointsLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/newBallNumberLayout"
-        android:layout_width="144dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="330dp"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="380dp"
         android:layout_marginEnd="180dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,6 +115,8 @@
             android:id="@+id/newBallNumberInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:hint="@string/newBallNumber_hint_format"
             tools:layout_editor_absoluteX="141dp"
             tools:layout_editor_absoluteY="589dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -130,15 +136,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="141dp"
-            tools:layout_editor_absoluteY="589dp" />
+            tools:layout_editor_absoluteY="589dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            app:hintEnabled="true" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/player1NameLayout"
-        android:layout_width="144dp"
-        android:layout_height="48dp"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -146,14 +156,16 @@
             android:id="@+id/player1Name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/player_name_hint_format" />
+            android:hint="@string/player_name_hint_format"
+            app:hintEnabled="true" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/player2NameLayout"
-        android:layout_width="130dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -162,14 +174,17 @@
             android:id="@+id/player2Name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/player_name_hint_format" />
+            android:gravity="right"
+            android:hint="@string/player_name_hint_format"
+            app:hintEnabled="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/player1ClubLayout"
-        android:layout_width="144dp"
-        android:layout_height="48dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/player1NameLayout"
         app:layout_constraintStart_toStartOf="@+id/player1NameLayout"
         app:layout_constraintTop_toBottomOf="@+id/player1NameLayout">
 
@@ -177,22 +192,27 @@
             android:id="@+id/player1Club"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/player_club_hint_format" />
+            android:hint="@string/player_club_hint_format"
+            app:hintEnabled="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/player2ClubLayout"
-        android:layout_width="130dp"
-        android:layout_height="48dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/player2NameLayout"
+        app:layout_constraintStart_toStartOf="@+id/player2NameLayout"
         app:layout_constraintTop_toBottomOf="@+id/player2NameLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/player2Club"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/player_club_hint_format" />
+            android:gravity="right"
+            android:textSize="16sp"
+            android:hint="@string/player_club_hint_format"
+            app:hintEnabled="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

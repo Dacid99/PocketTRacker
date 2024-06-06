@@ -8,6 +8,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
-    <color name="green">#00FF00</color>
-    <color name="gold">#FCC200</color>
+    <color name="green">#32CD32</color>
+    <color name="gold">#FFD700</color>
+    <color name="royalblue">#4169e1</color>
+    <color name="royalblue1">#4876ff</color>
+    <color name="chocolate">#d2691e</color>
+    <color name="chocolate2">#ee7621</color>
+    <color name="darkred">#8B0000</color>
+    <color name="chocolate4">#8b4513</color>
+
+
 </resources>
