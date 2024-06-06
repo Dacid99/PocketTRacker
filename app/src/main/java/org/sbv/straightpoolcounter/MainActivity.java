@@ -321,11 +321,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateFocusUI(){
         if (turnPlayer == player1) {
-            player1NameInput.setBackgroundColor(Color.GREEN);
+            player1NameLayout.setBackgroundColor(Color.GREEN);
+            player1ClubInput.setBackgroundColor(Color.GREEN);
             player2NameInput.setBackgroundColor(Color.LTGRAY);
+            player2ClubInput.setBackgroundColor(Color.LTGRAY);
+
         }else {
             player1NameInput.setBackgroundColor(Color.LTGRAY);
+            player1ClubInput.setBackgroundColor(Color.LTGRAY);
             player2NameInput.setBackgroundColor(Color.GREEN);
+            player2ClubInput.setBackgroundColor(Color.GREEN);
         }
     }
 
