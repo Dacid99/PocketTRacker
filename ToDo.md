@@ -1,9 +1,11 @@
-- add new Game button
+- landscape layout
+- dark theme
 - turnplayer tracking
 - turn rollback is provisory
 - switchreason needs to be integrated into scoreSheet logic
 - scoreSheet viewer
 - undo rerack
-- winner indicator
 - kill all warnings!
-- stuff needs to be reorganized, especially the UIupdates are hard to maintain
+- stuff needs to be reorganized, especially the UIupdates are hard to maintain, potentially tie all backend components into a Game Class
+- encapsulated winner functionality
+- club toggleable

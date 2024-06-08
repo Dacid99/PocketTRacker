@@ -18,6 +18,8 @@
     <string name="miss_string">Miss</string>
     <string name="undo_string">Undo \u21B6</string>
     <string name="redo_string">Redo \u21B7</string>
+    <string name="newGame_string">New Game</string>
+    <string name="swap_string">\u21C6</string>
 
 
 </resources>

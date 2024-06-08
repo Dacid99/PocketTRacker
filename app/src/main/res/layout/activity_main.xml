@@ -11,9 +11,9 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:shadowColor="@color/black"
         android:text="@string/player_score_format"
-        android:textSize="32sp"
+        android:textSize="36sp"
+        android:textColor="@color/text_color_selector"
         app:layout_constraintStart_toStartOf="@+id/player1ClubLayout"
         app:layout_constraintTop_toBottomOf="@+id/player1ClubLayout" />
 
@@ -23,9 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="right"
-        android:shadowColor="@color/black"
         android:text="@string/player_score_format"
-        android:textSize="32sp"
+        android:textSize="36sp"
+        android:textColor="@color/text_color_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/player1Score"
         app:layout_constraintEnd_toEndOf="@+id/player2ClubLayout"
         app:layout_constraintTop_toBottomOf="@+id/player2ClubLayout" />
 
@@ -51,10 +52,10 @@
         android:id="@+id/safeButton"
         android:layout_width="100dp"
         android:layout_height="54dp"
-        android:layout_marginStart="110dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
         android:text="@string/safe_string"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/newBallNumberLayout"
         app:layout_constraintTop_toBottomOf="@+id/newBallNumberLayout" />
 
     <com.google.android.material.button.MaterialButton
@@ -70,7 +71,7 @@
         android:id="@+id/undoButton"
         android:layout_width="100dp"
         android:layout_height="54dp"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="75dp"
         android:layout_marginTop="62dp"
         android:text="@string/undo_string"
         app:layout_constraintStart_toEndOf="@+id/missButton"
@@ -80,10 +81,9 @@
         android:id="@+id/redoButton"
         android:layout_width="100dp"
         android:layout_height="54dp"
-        android:layout_marginStart="60dp"
         android:layout_marginTop="15dp"
         android:text="@string/redo_string"
-        app:layout_constraintStart_toEndOf="@+id/foulButton"
+        app:layout_constraintEnd_toEndOf="@+id/undoButton"
         app:layout_constraintTop_toBottomOf="@+id/undoButton" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -105,7 +105,7 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="400dp"
         android:layout_marginEnd="180dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -127,6 +127,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         android:hint="@string/winnerPoints_hint_format"
+        app:layout_constraintBottom_toBottomOf="@+id/player1Score"
         app:layout_constraintEnd_toStartOf="@+id/player2Score"
         app:layout_constraintStart_toEndOf="@+id/player1Score"
         app:layout_constraintTop_toBottomOf="@+id/player1ClubLayout">
@@ -135,17 +136,17 @@
             android:id="@+id/winningPointsInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="141dp"
-            tools:layout_editor_absoluteY="589dp"
             android:gravity="center"
             android:textSize="12sp"
-            app:hintEnabled="true" />
+            app:hintEnabled="true"
+            tools:layout_editor_absoluteX="141dp"
+            tools:layout_editor_absoluteY="589dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/player1NameLayout"
-        android:layout_width="160dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="60dp"
@@ -163,12 +164,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/player2NameLayout"
-        android:layout_width="160dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginStart="90dp"
+        app:layout_constraintStart_toEndOf="@+id/player1NameLayout"
+        app:layout_constraintTop_toTopOf="@+id/player1NameLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/player2Name"
@@ -214,5 +214,32 @@
             android:hint="@string/player_club_hint_format"
             app:hintEnabled="true" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/newGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/newGame_string"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/ballNumber"
+        app:layout_constraintStart_toStartOf="@+id/ballNumber"
+        app:layout_constraintTop_toBottomOf="@+id/ballNumber" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/swapPlayers"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/swap_string"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@+id/player1ClubLayout"
+        app:layout_constraintEnd_toStartOf="@+id/player2NameLayout"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toEndOf="@+id/player1NameLayout"
+        app:layout_constraintTop_toTopOf="@+id/player1NameLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

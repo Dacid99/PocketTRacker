@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,24 +26,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView player1ScoreView, player2ScoreView, ballNumberView;
     private TextInputLayout player1NameLayout, player2NameLayout, player1ClubLayout, player2ClubLayout, newBallNumberLayout, winningPointsLayout;
     private TextInputEditText player1NameInput, player2NameInput, player1ClubInput, player2ClubInput, newBallNumberInput, winningPointsInput;
-    private MaterialButton foulButton, missButton, safeButton, rerackButton, redoButton, undoButton;
+    private MaterialButton foulButton, missButton, safeButton, rerackButton, redoButton, undoButton, newGameButton, swapPlayersButton;
     private int winnerPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        player1 = new Player();
-        player2 = new Player();
-
-        turnPlayer = player1;
-
-        table = new PoolTable();
-
-        scoreSheet = new ScoreSheet(table, player1, player2);
-
-        winnerPoints = 40; //default value
 
         player1ScoreView = findViewById(R.id.player1Score);
         player2ScoreView = findViewById(R.id.player2Score);
@@ -59,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         player2ClubLayout= findViewById(R.id.player2ClubLayout);
         player2ClubInput = findViewById(R.id.player2Club);
 
-
         ballNumberView = findViewById(R.id.ballNumber);
 
         newBallNumberLayout = findViewById(R.id.newBallNumberLayout);
@@ -68,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         winningPointsLayout = findViewById(R.id.winningPointsLayout);
         winningPointsInput = findViewById(R.id.winningPointsInput);
 
+        winnerPoints = 40; //default value
         winningPointsInput.setText(getString(R.string.winnerPoints_format, winnerPoints));
 
         missButton = findViewById(R.id.missButton);
@@ -76,9 +66,10 @@ public class MainActivity extends AppCompatActivity {
         rerackButton = findViewById(R.id.rerackButton);
         undoButton = findViewById(R.id.undoButton);
         redoButton = findViewById(R.id.redoButton);
+        newGameButton = findViewById(R.id.newGame);
+        swapPlayersButton = findViewById(R.id.swapPlayers);
 
-        ballNumberView.setText(getString(R.string.ball_number_format, table.getNumberOfBalls()));
-
+        newGame();
 
         player1NameInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -91,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 String newName = s.toString();
                 if (!newName.equals( player1NameInput.getText().toString() ) ) {
                     player1.setName(newName);
-                    updateNameUI();
+                    updatePlayerUI();
                 }
             }
 
@@ -112,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 String newName = s.toString();
                 if (!newName.equals( player2NameInput.getText().toString() ) ) {
                     player2.setName(newName);
-                    updateNameUI();
+                    updatePlayerUI();
                 }
             }
 
@@ -161,8 +152,9 @@ public class MainActivity extends AppCompatActivity {
                 String newText = s.toString();
                 if ( NumberUtils.isParsable(newText)) {
                     int newWinnerPoints = Integer.parseInt(newText);
-                    if (newWinnerPoints != winnerPoints && newWinnerPoints >1){
+                    if (newWinnerPoints != winnerPoints && newWinnerPoints >= 1){
                         winnerPoints = newWinnerPoints;
+                        updateWinner();
                     }
                 }
             }
@@ -248,10 +240,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        updateScoreUI();
-        updateNameUI();
-        updateClubUI();
-        updateFocusUI();
+        newGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newGame();
+                newGameButton.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        swapPlayersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player1.swapNameAndClubWith(player2);
+                updatePlayerUI();
+            }
+        });
     }
 
     private void updateScoreUI() {
@@ -270,18 +273,12 @@ public class MainActivity extends AppCompatActivity {
         }else {
             undoButton.setVisibility(View.VISIBLE);
         }
-        winningPointsInput.setClickable(scoreSheet.turn() == 0);
-        winningPointsInput.setFocusable(scoreSheet.turn() == 0);
-        winningPointsInput.setEnabled(scoreSheet.turn() == 0);
 
-        if (player1.getScore() >= winnerPoints){
-            player1NameInput.setBackgroundColor(getResources().getColor(R.color.gold));
-            player1ClubInput.setBackgroundColor(getResources().getColor(R.color.gold));
-        }else if (player2.getScore() >= winnerPoints){
-            player2NameInput.setBackgroundColor(getResources().getColor(R.color.gold));
-            player2ClubInput.setBackgroundColor(getResources().getColor(R.color.gold));
-        }
-        setButtonsStatus( (player1.getScore() < winnerPoints) && (player2.getScore() < winnerPoints) );
+        //winningPointsInput.setClickable(scoreSheet.turn() == 0);
+        //winningPointsInput.setFocusable(scoreSheet.turn() == 0);
+        //winningPointsInput.setEnabled(scoreSheet.turn() == 0);
+        //setButtonsStatus( (player1.getScore() < winnerPoints) && (player2.getScore() < winnerPoints) );
+        updateWinner();
     }
 
     private void setButtonsStatus(boolean toggle){
@@ -291,16 +288,13 @@ public class MainActivity extends AppCompatActivity {
         rerackButton.setClickable(toggle);
     }
 
-    private void updateNameUI(){
+    private void updatePlayerUI(){
         player1NameInput.setText(getString(R.string.player_name_format, player1.getName()));
         player2NameInput.setText(getString(R.string.player_name_format, player2.getName()));
-    }
-
-
-    private void updateClubUI(){
         player1ClubInput.setText(getString(R.string.player_club_format, player1.getClub()));
         player2ClubInput.setText(getString(R.string.player_club_format, player2.getClub()));
     }
+
 
 
     private void newTurn(String reason){
@@ -310,29 +304,68 @@ public class MainActivity extends AppCompatActivity {
         updateScoreUI();
     }
 
+    private void newGame(){
+        player1 = new Player();
+        player2 = new Player();
+
+        turnPlayer = player1;
+
+        table = new PoolTable();
+
+        scoreSheet = new ScoreSheet(table, player1, player2);
+
+        updateScoreUI();
+        updatePlayerUI();
+        updateFocus();
+    }
+
     private void switchTurnPlayer(){
         if (turnPlayer == player1) {
             turnPlayer = player2;
         }else {
             turnPlayer = player1;
         }
-        updateFocusUI();
+        updateFocus();
     }
 
-    private void updateFocusUI(){
+    private void updateFocus(){
         if (turnPlayer == player1) {
             player1NameInput.setBackgroundColor(Color.GREEN);
             player1ClubInput.setBackgroundColor(Color.GREEN);
+            player1ScoreView.setEnabled(true);
             player2NameInput.setBackgroundColor(Color.LTGRAY);
             player2ClubInput.setBackgroundColor(Color.LTGRAY);
+            player2ScoreView.setEnabled(false);
 
         }else {
             player1NameInput.setBackgroundColor(Color.LTGRAY);
             player1ClubInput.setBackgroundColor(Color.LTGRAY);
+            player1ScoreView.setEnabled(false);
             player2NameInput.setBackgroundColor(Color.GREEN);
             player2ClubInput.setBackgroundColor(Color.GREEN);
+            player2ScoreView.setEnabled(true);
         }
     }
+
+    private void updateWinner(){
+        if (player1.getScore() >= winnerPoints){
+            player1NameInput.setBackgroundColor(getResources().getColor(R.color.gold));
+            player1ClubInput.setBackgroundColor(getResources().getColor(R.color.gold));
+            player1ScoreView.setTextColor(getResources().getColor(R.color.gold));
+            newGameButton.setVisibility(View.VISIBLE);
+        }else if (player2.getScore() >= winnerPoints){
+            player2NameInput.setBackgroundColor(getResources().getColor(R.color.gold));
+            player2ClubInput.setBackgroundColor(getResources().getColor(R.color.gold));
+            player2ScoreView.setTextColor(getResources().getColor(R.color.gold));
+            newGameButton.setVisibility(View.VISIBLE);
+        } else {
+            //input backgrounds will be ungoldened by updateFocus
+            player1ScoreView.setTextColor(getResources().getColorStateList(R.color.text_color_selector));
+            player2ScoreView.setTextColor(getResources().getColorStateList(R.color.text_color_selector));
+            newGameButton.setVisibility(View.INVISIBLE);
+        }
+    }
+
 
     private int calculatePoints(){
         String newNumberOfBallsString = Objects.requireNonNull(newBallNumberInput.getText()).toString();

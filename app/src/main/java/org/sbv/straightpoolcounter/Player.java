@@ -1,5 +1,7 @@
 package org.sbv.straightpoolcounter;
 
+import androidx.annotation.NonNull;
+
 public class Player {
     private String name = "";
     private String club = "";
@@ -46,6 +48,19 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void swapNameAndClubWith(@NonNull Player otherPlayer){
+        String nameBackup = otherPlayer.getName();
+        String clubBackup = otherPlayer.getClub();
+
+        otherPlayer.setName(this.name);
+        otherPlayer.setClub(this.club);
+
+        this.name = nameBackup;
+        this.club = clubBackup;
+
+        System.out.println(this.name + this.club + otherPlayer.getName() + otherPlayer.getClub());
     }
 
 }

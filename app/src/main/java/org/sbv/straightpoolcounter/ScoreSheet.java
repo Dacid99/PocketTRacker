@@ -28,7 +28,6 @@ public class ScoreSheet {
         this.trackedPlayer2 = player2;
         //enter starting values
         update();
-        System.out.println(isHealthy());
     }
 
     public void update(){

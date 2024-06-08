@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/royalblue1</item>
         <item name="colorPrimaryVariant">@color/royalblue</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/chocolate</item>
         <item name="colorSecondaryVariant">@color/chocolate2</item>
@@ -12,4 +12,5 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/chocolate4</item>
     </style>
+
 </resources>
