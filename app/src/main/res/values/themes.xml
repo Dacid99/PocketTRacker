@@ -2,15 +2,15 @@
 <resources>
     <style name="Theme.StraightPoolCounter" parent="Theme.MaterialComponents.Light" >
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/royalblue1</item>
-        <item name="colorPrimaryVariant">@color/royalblue</item>
+        <item name="colorPrimary">@color/royalblue</item>
+        <item name="colorPrimaryVariant">@color/royalblue1</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/chocolate</item>
+        <item name="colorSecondary">@color/wooden</item>
         <item name="colorSecondaryVariant">@color/chocolate2</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/chocolate4</item>
+        <item name="android:statusBarColor">@color/wooden</item>
     </style>
 
 </resources>

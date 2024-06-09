@@ -14,6 +14,7 @@
     <color name="royalblue1">#4876ff</color>
     <color name="chocolate">#d2691e</color>
     <color name="chocolate2">#ee7621</color>
+    <color name="wooden">#a34e04</color>
     <color name="darkred">#8B0000</color>
     <color name="chocolate4">#8b4513</color>
     <color name="score_color">@color/text_color_selector</color>

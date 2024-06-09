@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         winningPointsInput = findViewById(R.id.winningPointsInput);
 
         winnerPoints = 40; //default value
+        System.out.println(winnerPoints);
         winningPointsInput.setText(getString(R.string.winnerPoints_format, winnerPoints));
 
         missButton = findViewById(R.id.missButton);
@@ -80,9 +81,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String newName = s.toString();
-                if (!newName.equals( player1NameInput.getText().toString() ) ) {
+                if (!newName.equals( player1.getName() ) ) {
                     player1.setName(newName);
-                    updatePlayerUI();
                 }
             }
 
@@ -101,9 +101,48 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String newName = s.toString();
-                if (!newName.equals( player2NameInput.getText().toString() ) ) {
+                if (!newName.equals( player2.getName()) ) {
                     player2.setName(newName);
-                    updatePlayerUI();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        player1ClubInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String newClub = s.toString();
+                if (!newClub.equals( player1.getClub() ) ) {
+                    player1.setClub(newClub);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        player2ClubInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String newClub = s.toString();
+                if (!newClub.equals( player2.getClub()) ) {
+                    player2.setClub(newClub);
                 }
             }
 

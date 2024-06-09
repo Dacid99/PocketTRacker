@@ -50,7 +50,7 @@ public class Player {
         this.score = score;
     }
 
-    public void swapNameAndClubWith(@NonNull Player otherPlayer){
+    public void swapNameAndClubWith(Player otherPlayer){
         String nameBackup = otherPlayer.getName();
         String clubBackup = otherPlayer.getClub();
 
