@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -399,8 +400,8 @@ public class MainActivity extends AppCompatActivity {
             newGameButton.setVisibility(View.VISIBLE);
         } else {
             //input backgrounds will be ungoldened by updateFocus
-            player1ScoreView.setTextColor(getResources().getColorStateList(R.color.text_color_selector));
-            player2ScoreView.setTextColor(getResources().getColorStateList(R.color.text_color_selector));
+            player1ScoreView.setTextColor(AppCompatResources.getColorStateList(this, R.color.text_color_selector));
+            player2ScoreView.setTextColor(AppCompatResources.getColorStateList(this, R.color.text_color_selector));
             newGameButton.setVisibility(View.INVISIBLE);
         }
     }
