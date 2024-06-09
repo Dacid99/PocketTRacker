@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/player_score_format"
-        android:textSize="36sp"
         android:textColor="@color/text_color_selector"
+        android:textSize="40sp"
         app:layout_constraintStart_toStartOf="@+id/player1ClubLayout"
         app:layout_constraintTop_toBottomOf="@+id/player1ClubLayout" />
 
@@ -24,8 +24,8 @@
         android:layout_marginTop="40dp"
         android:gravity="right"
         android:text="@string/player_score_format"
-        android:textSize="36sp"
         android:textColor="@color/text_color_selector"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="@+id/player1Score"
         app:layout_constraintEnd_toEndOf="@+id/player2ClubLayout"
         app:layout_constraintTop_toBottomOf="@+id/player2ClubLayout" />
@@ -137,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="12sp"
+            android:textSize="16sp"
             app:hintEnabled="true"
             tools:layout_editor_absoluteX="141dp"
             tools:layout_editor_absoluteY="589dp" />
@@ -210,8 +210,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="right"
-            android:textSize="16sp"
             android:hint="@string/player_club_hint_format"
+            android:textSize="16sp"
             app:hintEnabled="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -229,11 +229,14 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/swapPlayers"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:paddingTop="0dp"
+        android:paddingBottom="10dp"
         android:text="@string/swap_string"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="@+id/player1ClubLayout"

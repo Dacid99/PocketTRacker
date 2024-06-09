@@ -7,7 +7,7 @@
     <string name="player_club_hint_format">Club</string>
     <string name="newBallNumber_hint_format">Remaining Balls</string>
     <string name="newBallNumber_format">%1$d</string>
-    <string name="winnerPoints_hint_format">Points to win</string>
+    <string name="winnerPoints_hint_format">Goal</string>
     <string name="player_club_format">%1$s</string>
     <string name="player_score_format">%1$d</string>
     <string name="ball_number_format">Table: %1$d</string>
