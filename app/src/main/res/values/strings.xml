@@ -1,15 +1,15 @@
 <resources>
-    <string name="app_name">StraightPoolCounter</string>
-    <string name="player_name_format">%1$s</string>
-    <string name="winnerPoints_format">%1$d</string>
+    <string name="app_name" translatable="false">PocketTRacker</string>
+    <string name="player_name_format" translatable="false">%1$s</string>
+    <string name="winnerPoints_format" translatable="false">%1$d</string>
 
     <string name="player_name_hint_format">Player Name</string>
     <string name="player_club_hint_format">Club</string>
     <string name="newBallNumber_hint_format">Remaining Balls</string>
-    <string name="newBallNumber_format">%1$d</string>
+    <string name="newBallNumber_format" translatable="false">%1$d</string>
     <string name="winnerPoints_hint_format">Goal</string>
-    <string name="player_club_format">%1$s</string>
-    <string name="player_score_format">%1$d</string>
+    <string name="player_club_format" translatable="false">%1$s</string>
+    <string name="player_score_format" translatable="false">%1$d</string>
     <string name="ball_number_format">Table: %1$d</string>
 
     <string name="safe_string">Safe</string>
@@ -19,7 +19,7 @@
     <string name="undo_string">Undo \u21B6</string>
     <string name="redo_string">Redo \u21B7</string>
     <string name="newGame_string">New Game</string>
-    <string name="swap_string">\u21C6</string>
+    <string name="swap_string" translatable="false">\u21C6</string>
 
 
 </resources>

@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">PoolTRacker</string>
 
     <string name="player_name_hint_format">Spieler</string>
     <string name="player_club_hint_format">Verein</string>
