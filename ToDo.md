@@ -1,3 +1,4 @@
+- find good name
 - landscape layout
 - dark theme
 - turnplayer tracking
