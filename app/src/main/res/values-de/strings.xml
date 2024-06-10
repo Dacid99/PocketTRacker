@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PoolTRacker</string>
+
+    <string name="player_name_hint_format">Spieler</string>
+    <string name="player_club_hint_format">Verein</string>
+    <string name="newBallNumber_hint_format">Übrige Bälle</string>
+    <string name="winnerPoints_hint_format">Ziel</string>
+    <string name="ball_number_format">Tisch: %1$d</string>
+
+    <string name="safe_string">Safe</string>
+    <string name="foul_string">Foul</string>
+    <string name="rerack_string">Rerack</string>
+    <string name="miss_string">Miss</string>
+    <string name="undo_string">Zurück \u21B6</string>
+    <string name="redo_string">Vor \u21B7</string>
+    <string name="newGame_string">Neues Spiel</string>
+
+
+</resources>
