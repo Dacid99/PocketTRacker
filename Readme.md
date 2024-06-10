@@ -1,7 +1,7 @@
 # PoolTRacker ![](app/src/main/res/mipmap-xxhdpi/ic_launcher.webp)
 =============================
 
-*A little app to keep track of your straight pool games.*
+**A little app to keep track of your straight pool games.**
 
 A pool player myself, I was always annoyed by writing the score sheet for straight pool games.
 So here is a digital tool to get rid of this paperwork! 
