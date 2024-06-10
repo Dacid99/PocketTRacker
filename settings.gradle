@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PocketTracker"
+rootProject.name = "PocketTRacker"
 include ':app'
