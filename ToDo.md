@@ -1,6 +1,4 @@
 - find good name
-- landscape layout
-- dark theme
 - turnplayer tracking
 - turn rollback is provisory
 - switchreason needs to be integrated into scoreSheet logic

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.StraightPoolCounter" parent="Theme.MaterialComponents.Light" >
+    <style name="Theme.StraightPoolCounter" parent="Theme.MaterialComponents.DayNight" >
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/royalblue</item>
-        <item name="colorPrimaryVariant">@color/royalblue1</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorVariantPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/wooden</item>
-        <item name="colorSecondaryVariant">@color/chocolate2</item>
-        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorVariantSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/wooden</item>
+        <item name="android:statusBarColor">@color/statusBarColor</item>
+        <item name="android:textColor">@color/text_color_selector</item>
     </style>
 
 </resources>

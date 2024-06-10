@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="text_enabled_color">@color/white</color>
+    <color name="text_disabled_color">@color/lighter_gray</color>
+
+    <color name="winner_color">@color/darkgold</color>
+
+    <color name="colorPrimary">@color/nightblue</color>
+    <color name="colorVariantPrimary">@color/nightblue1</color>
+    <color name="colorOnPrimary">@color/white</color>
+
+    <color name="colorSecondary">@color/darkwooden</color>
+    <color name="colorVariantSecondary">@color/chocolate4</color>
+    <color name="colorOnSecondary">@color/white</color>
+
+    <color name="statusBarColor">@color/darkwooden</color>
+</resources>

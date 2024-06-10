@@ -53,7 +53,7 @@
         android:layout_width="100dp"
         android:layout_height="54dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/safe_string"
         app:layout_constraintEnd_toEndOf="@+id/newBallNumberLayout"
         app:layout_constraintTop_toBottomOf="@+id/newBallNumberLayout" />
@@ -72,12 +72,12 @@
         android:id="@+id/undoButton"
         android:layout_width="100dp"
         android:layout_height="54dp"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="27dp"
         android:gravity="center"
         android:text="@string/undo_string"
         app:layout_constraintStart_toEndOf="@+id/missButton"
-        app:layout_constraintTop_toBottomOf="@+id/rerackButton" />
+        app:layout_constraintTop_toTopOf="@+id/safeButton" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/redoButton"
@@ -93,26 +93,22 @@
         android:id="@+id/ballNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="130dp"
         android:gravity="center"
         android:text="@string/ball_number_format"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/winningPointsLayout"
+        app:layout_constraintStart_toStartOf="@+id/winningPointsLayout"
         app:layout_constraintTop_toBottomOf="@+id/winningPointsLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/newBallNumberLayout"
-        android:layout_width="160dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="180dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/block2_startmargin"
+        android:layout_marginTop="@dimen/block2_topmargin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newGame">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newBallNumberInput"
@@ -151,8 +147,8 @@
         android:id="@+id/player1NameLayout"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="@dimen/block1_startmargin"
+        android:layout_marginTop="@dimen/block1_topmargin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

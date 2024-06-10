@@ -169,14 +169,14 @@ public class MainActivity extends AppCompatActivity {
                 String newText = s.toString();
                 if ( NumberUtils.isParsable(newText)) {
                     if (!table.isValidBallNumber(Integer.parseInt(newText))) {
-                        newBallNumberInput.setTextColor(getResources().getColor(R.color.red));
+                        newBallNumberInput.setTextColor(getResources().getColor(R.color.warning_color));
                     }
                     else {
-                        newBallNumberInput.setTextColor(getResources().getColor(R.color.black));
+                        newBallNumberInput.setTextColor(getResources().getColor(R.color.score_color));
                     }
                 }
                 else {
-                    newBallNumberInput.setTextColor(getResources().getColor(R.color.red));
+                    newBallNumberInput.setTextColor(getResources().getColor(R.color.warning_color));
                 }
             }
         });
@@ -206,11 +206,11 @@ public class MainActivity extends AppCompatActivity {
                     if (Integer.parseInt(newText) > 0) {
                         winningPointsInput.setTextColor(getResources().getColor(R.color.black));
                     } else {
-                        winningPointsInput.setTextColor(getResources().getColor(R.color.red));
+                        winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
                     }
 
                 } else {
-                    winningPointsInput.setTextColor(getResources().getColor(R.color.red));
+                    winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
                 }
             }
         });
@@ -370,33 +370,32 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateFocus(){
         if (turnPlayer == player1) {
-            player1NameInput.setBackgroundColor(Color.GREEN);
-            player1ClubInput.setBackgroundColor(Color.GREEN);
+            player1NameInput.setBackgroundColor(getResources().getColor(R.color.turnplayer_color));
+            player1ClubInput.setBackgroundColor(getResources().getColor(R.color.turnplayer_color));
             player1ScoreView.setEnabled(true);
-            player2NameInput.setBackgroundColor(Color.LTGRAY);
-            player2ClubInput.setBackgroundColor(Color.LTGRAY);
+            player2NameInput.setBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+            player2ClubInput.setBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
             player2ScoreView.setEnabled(false);
-
         }else {
-            player1NameInput.setBackgroundColor(Color.LTGRAY);
-            player1ClubInput.setBackgroundColor(Color.LTGRAY);
+            player1NameInput.setBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+            player1ClubInput.setBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
             player1ScoreView.setEnabled(false);
-            player2NameInput.setBackgroundColor(Color.GREEN);
-            player2ClubInput.setBackgroundColor(Color.GREEN);
+            player2NameInput.setBackgroundColor(getResources().getColor(R.color.turnplayer_color));
+            player2ClubInput.setBackgroundColor(getResources().getColor(R.color.turnplayer_color));
             player2ScoreView.setEnabled(true);
         }
     }
 
     private void updateWinner(){
         if (player1.getScore() >= winnerPoints){
-            player1NameInput.setBackgroundColor(getResources().getColor(R.color.gold));
-            player1ClubInput.setBackgroundColor(getResources().getColor(R.color.gold));
-            player1ScoreView.setTextColor(getResources().getColor(R.color.gold));
+            player1NameInput.setBackgroundColor(getResources().getColor(R.color.winner_color));
+            player1ClubInput.setBackgroundColor(getResources().getColor(R.color.winner_color));
+            player1ScoreView.setTextColor(getResources().getColor(R.color.winner_color));
             newGameButton.setVisibility(View.VISIBLE);
         }else if (player2.getScore() >= winnerPoints){
-            player2NameInput.setBackgroundColor(getResources().getColor(R.color.gold));
-            player2ClubInput.setBackgroundColor(getResources().getColor(R.color.gold));
-            player2ScoreView.setTextColor(getResources().getColor(R.color.gold));
+            player2NameInput.setBackgroundColor(getResources().getColor(R.color.winner_color));
+            player2ClubInput.setBackgroundColor(getResources().getColor(R.color.winner_color));
+            player2ScoreView.setTextColor(getResources().getColor(R.color.winner_color));
             newGameButton.setVisibility(View.VISIBLE);
         } else {
             //input backgrounds will be ungoldened by updateFocus

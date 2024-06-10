@@ -1,23 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- base colors -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="darker_gray">@android:color/darker_gray</color>
+    <color name="lighter_gray">@android:color/lighter_gray</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
-    <color name="green">#8AFFB3</color>
+    <color name="green">#308446</color>
     <color name="gold">#FFD700</color>
+    <color name="darkgold">#B29600</color>
     <color name="royalblue">#4169e1</color>
     <color name="royalblue1">#4876ff</color>
+    <color name="nightblue">#010760</color>
+    <color name="nightblue1">#020476</color>
     <color name="chocolate">#d2691e</color>
     <color name="chocolate2">#ee7621</color>
     <color name="wooden">#a34e04</color>
+    <color name="darkwooden">#713603</color>
     <color name="darkred">#8B0000</color>
     <color name="chocolate4">#8b4513</color>
+
+    <!-- light theme colors -->
+    <color name="text_enabled_color">@color/black</color>
+    <color name="text_disabled_color">@color/darker_gray</color>
+
     <color name="score_color">@color/text_color_selector</color>
 
+    <color name="warning_color">@color/red</color>
+    <color name="winner_color">@color/gold</color>
+
+    <color name="turnplayer_color">@color/green</color>
+    <color name="notturnplayer_color">@color/darker_gray</color>
+
+    <color name="colorPrimary">@color/royalblue</color>
+    <color name="colorVariantPrimary">@color/royalblue1</color>
+    <color name="colorOnPrimary">@color/white</color>
+
+    <color name="colorSecondary">@color/wooden</color>
+    <color name="colorVariantSecondary">@color/chocolate</color>
+    <color name="colorOnSecondary">@color/white</color>
+
+    <color name="statusBarColor">@color/wooden</color>
 
 </resources>
