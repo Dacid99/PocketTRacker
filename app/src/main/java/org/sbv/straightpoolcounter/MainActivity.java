@@ -1,10 +1,8 @@
 package org.sbv.straightpoolcounter;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
@@ -215,85 +213,61 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        missButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int points = calculatePoints();
-                if (points == -1) {
-                    return;
-                }
-                turnPlayer.addPoints(points);
-                newTurn(getString(R.string.miss_string));
+        missButton.setOnClickListener(v -> {
+            int points = calculatePoints();
+            if (points == -1) {
+                return;
             }
+            turnPlayer.addPoints(points);
+            newTurn(getString(R.string.miss_string));
         });
 
-        safeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int points = calculatePoints();
-                if (points == -1) {
-                    return;
-                }
-                turnPlayer.addPoints(points);
-                newTurn(getString(R.string.safe_string));
+        safeButton.setOnClickListener(v -> {
+            int points = calculatePoints();
+            if (points == -1) {
+                return;
             }
+            turnPlayer.addPoints(points);
+            newTurn(getString(R.string.safe_string));
         });
 
-        foulButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int points = calculatePoints();
-                if (points == -1) {
-                    return;
-                }
-                turnPlayer.addPoints(points);
-                turnPlayer.addPoints( (scoreSheet.length() == 0) ? -2:-1 );
-                newTurn(getString(R.string.foul_string));
+        foulButton.setOnClickListener(v -> {
+            int points = calculatePoints();
+            if (points == -1) {
+                return;
             }
+            turnPlayer.addPoints(points);
+            turnPlayer.addPoints( (scoreSheet.length() == 0) ? -2:-1 );
+            newTurn(getString(R.string.foul_string));
         });
 
-        rerackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int points = table.getNumberOfBalls() - 1 ;
-                turnPlayer.addPoints(points);
-                table.rerack();
-                updateScoreUI();
-            }
+        rerackButton.setOnClickListener(v -> {
+            int points = table.getNumberOfBalls() - 1 ;
+            turnPlayer.addPoints(points);
+            table.rerack();
+            updateScoreUI();
         });
 
-        undoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scoreSheet.rollback();
-                switchTurnPlayer();
-                updateScoreUI();
-            }
+        undoButton.setOnClickListener(v -> {
+            scoreSheet.rollback();
+            switchTurnPlayer();
+            updateScoreUI();
         });
 
-        redoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scoreSheet.progress();
-                switchTurnPlayer();
-                updateScoreUI();
-            }
+        redoButton.setOnClickListener(v -> {
+            scoreSheet.progress();
+            switchTurnPlayer();
+            updateScoreUI();
         });
 
-        newGameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                newGame();
-                newGameButton.setVisibility(View.INVISIBLE);
-            }
+        newGameButton.setOnClickListener(v -> {
+            newGame();
+            newGameButton.setVisibility(View.INVISIBLE);
         });
 
-        swapPlayersButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                player1.swapNameAndClubWith(player2);
-                updatePlayerUI();
-            }
+        swapPlayersButton.setOnClickListener(v -> {
+            player1.swapNameAndClubWith(player2);
+            updatePlayerUI();
         });
     }
 
@@ -314,6 +288,8 @@ public class MainActivity extends AppCompatActivity {
             undoButton.setVisibility(View.VISIBLE);
         }
 
+        // blocks the user from any more input after theres a winner
+        // disabled to give the user more freedom
         //winningPointsInput.setClickable(scoreSheet.turn() == 0);
         //winningPointsInput.setFocusable(scoreSheet.turn() == 0);
         //winningPointsInput.setEnabled(scoreSheet.turn() == 0);
