@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'org.sbv.straightpoolcounter'
+    namespace 'org.sbv.pockettracker'
     compileSdk 34
 
     defaultConfig {
-        applicationId "org.sbv.straightpoolcounter"
+        applicationId "org.sbv.pockettracker"
         minSdk 21
         targetSdk 34
         versionCode 1

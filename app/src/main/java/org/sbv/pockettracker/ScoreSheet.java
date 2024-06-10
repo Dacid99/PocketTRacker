@@ -1,4 +1,4 @@
-package org.sbv.straightpoolcounter;
+package org.sbv.pockettracker;
 import java.util.ArrayList;
 import java.util.Collections;
 

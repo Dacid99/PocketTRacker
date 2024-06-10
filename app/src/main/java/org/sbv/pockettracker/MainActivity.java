@@ -1,4 +1,4 @@
-package org.sbv.straightpoolcounter;
+package org.sbv.pockettracker;
 
 import android.os.Bundle;
 import android.text.Editable;

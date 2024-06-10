@@ -1,4 +1,4 @@
-# PoolTRacker ![](app/src/main/res/mipmap-xxhdpi/ic_launcher.webp)
+# PocketTRacker ![](app/src/main/res/mipmap-xxhdpi/ic_launcher.webp)
 =============================
 
 **A little app to keep track of your straight pool games.**

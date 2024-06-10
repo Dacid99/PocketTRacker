@@ -1,4 +1,4 @@
-package org.sbv.straightpoolcounter.ui.theme
+package org.sbv.pockettracker.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

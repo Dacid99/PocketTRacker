@@ -1,6 +1,4 @@
-package org.sbv.straightpoolcounter;
-
-import java.util.Enumeration;
+package org.sbv.pockettracker;
 
 public class PoolTable {
     private int numberOfBalls ;

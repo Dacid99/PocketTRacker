@@ -1,4 +1,3 @@
-- find good name
 - turnplayer tracking
 - turn rollback is provisory
 - switchreason needs to be integrated into scoreSheet logic

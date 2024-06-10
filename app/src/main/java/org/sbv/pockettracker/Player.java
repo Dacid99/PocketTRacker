@@ -1,6 +1,4 @@
-package org.sbv.straightpoolcounter;
-
-import androidx.annotation.NonNull;
+package org.sbv.pockettracker;
 
 public class Player {
     private String name = "";
