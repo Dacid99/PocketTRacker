@@ -2,8 +2,5 @@
 <resources>
     <dimen name="block1_top">0dp</dimen>
     <dimen name="block1_start">0dp</dimen>
-    <dimen name="block1_end">360dp</dimen>
-    <dimen name="block2_topmargin">80dp</dimen>
-    <dimen name="block2_startmargin">400dp</dimen>
-
+    <dimen name="block1_end">0dp</dimen>
 </resources>
