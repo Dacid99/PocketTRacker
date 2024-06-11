@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="block1_topmargin">40dp</dimen>
-    <dimen name="block1_startmargin">40dp</dimen>
+    <dimen name="block1_top">0dp</dimen>
+    <dimen name="block1_start">0dp</dimen>
+    <dimen name="block1_end">0dp</dimen>
     <dimen name="block2_topmargin">394dp</dimen>
     <dimen name="block2_startmargin">50dp</dimen>
 </resources>

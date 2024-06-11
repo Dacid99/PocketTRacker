@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView player1ScoreView, player2ScoreView, ballNumberView;
     private TextInputLayout player1NameLayout, player2NameLayout, player1ClubLayout, player2ClubLayout, newBallNumberLayout, winningPointsLayout;
     private TextInputEditText player1NameInput, player2NameInput, player1ClubInput, player2ClubInput, newBallNumberInput, winningPointsInput;
+    private MaterialCardView player1Card, player2Card;
     private MaterialButton foulButton, missButton, safeButton, rerackButton, redoButton, undoButton, newGameButton, swapPlayersButton;
     private int winnerPoints;
 
@@ -47,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
         player2ClubLayout= findViewById(R.id.player2ClubLayout);
         player2ClubInput = findViewById(R.id.player2Club);
+
+        player1Card = findViewById(R.id.player1CardView);
+        player2Card = findViewById(R.id.player2CardView);
 
         ballNumberView = findViewById(R.id.ballNumber);
 
@@ -346,37 +351,27 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateFocus(){
         if (turnPlayer == player1) {
-            player1NameInput.setBackgroundColor(getResources().getColor(R.color.turnplayer_color));
-            player1ClubInput.setBackgroundColor(getResources().getColor(R.color.turnplayer_color));
+            player1Card.setBackgroundColor(getResources().getColor(R.color.turnplayer_color));
             player1ScoreView.setEnabled(true);
-            player2NameInput.setBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
-            player2ClubInput.setBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+            player2Card.setBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
             player2ScoreView.setEnabled(false);
         }else {
-            player1NameInput.setBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
-            player1ClubInput.setBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+            player1Card.setBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
             player1ScoreView.setEnabled(false);
-            player2NameInput.setBackgroundColor(getResources().getColor(R.color.turnplayer_color));
-            player2ClubInput.setBackgroundColor(getResources().getColor(R.color.turnplayer_color));
+            player2Card.setBackgroundColor(getResources().getColor(R.color.turnplayer_color));
             player2ScoreView.setEnabled(true);
         }
     }
 
     private void updateWinner(){
         if (player1.getScore() >= winnerPoints){
-            player1NameInput.setBackgroundColor(getResources().getColor(R.color.winner_color));
-            player1ClubInput.setBackgroundColor(getResources().getColor(R.color.winner_color));
-            player1ScoreView.setTextColor(getResources().getColor(R.color.winner_color));
+            player1Card.setBackgroundColor(getResources().getColor(R.color.winner_color));
             newGameButton.setVisibility(View.VISIBLE);
         }else if (player2.getScore() >= winnerPoints){
-            player2NameInput.setBackgroundColor(getResources().getColor(R.color.winner_color));
-            player2ClubInput.setBackgroundColor(getResources().getColor(R.color.winner_color));
-            player2ScoreView.setTextColor(getResources().getColor(R.color.winner_color));
+            player2Card.setBackgroundColor(getResources().getColor(R.color.winner_color));
             newGameButton.setVisibility(View.VISIBLE);
         } else {
-            //input backgrounds will be ungoldened by updateFocus
-            player1ScoreView.setTextColor(AppCompatResources.getColorStateList(this, R.color.text_color_selector));
-            player2ScoreView.setTextColor(AppCompatResources.getColorStateList(this, R.color.text_color_selector));
+            //card backgrounds will be ungoldened by updateFocus
             newGameButton.setVisibility(View.INVISIBLE);
         }
     }

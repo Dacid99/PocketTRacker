@@ -6,36 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/player1Score"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/player_score_format"
-        android:textColor="@color/text_color_selector"
-        android:textSize="40sp"
-        app:layout_constraintStart_toStartOf="@+id/player1ClubLayout"
-        app:layout_constraintTop_toBottomOf="@+id/player1ClubLayout" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/player2Score"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="end|right"
-        android:text="@string/player_score_format"
-        android:textColor="@color/text_color_selector"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="@+id/player1Score"
-        app:layout_constraintEnd_toEndOf="@+id/player2ClubLayout"
-        app:layout_constraintTop_toBottomOf="@+id/player2ClubLayout" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/missButton"
         android:layout_width="100dp"
         android:layout_height="54dp"
-        android:layout_marginTop="15dp"
         android:text="@string/miss_string"
+        app:layout_constraintBottom_toTopOf="@+id/foulButton"
         app:layout_constraintEnd_toEndOf="@+id/safeButton"
         app:layout_constraintTop_toBottomOf="@+id/safeButton" />
 
@@ -43,8 +19,9 @@
         android:id="@+id/foulButton"
         android:layout_width="100dp"
         android:layout_height="54dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="75dp"
         android:text="@string/foul_string"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
         app:layout_constraintEnd_toEndOf="@+id/missButton"
         app:layout_constraintTop_toBottomOf="@+id/missButton" />
 
@@ -52,51 +29,57 @@
         android:id="@+id/safeButton"
         android:layout_width="100dp"
         android:layout_height="54dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
         android:text="@string/safe_string"
+        app:layout_constraintBottom_toTopOf="@+id/missButton"
         app:layout_constraintEnd_toEndOf="@+id/newBallNumberLayout"
+        app:layout_constraintStart_toStartOf="@+id/newBallNumberLayout"
         app:layout_constraintTop_toBottomOf="@+id/newBallNumberLayout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/rerackButton"
         android:layout_width="100dp"
         android:layout_height="54dp"
-        android:layout_marginStart="40dp"
         android:gravity="center"
         android:text="@string/rerack_string"
+        app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline"
         app:layout_constraintStart_toEndOf="@+id/newBallNumberLayout"
         app:layout_constraintTop_toTopOf="@+id/newBallNumberLayout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/undoButton"
-        android:layout_width="100dp"
-        android:layout_height="54dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="@string/undo_string"
+        app:layout_constraintBottom_toTopOf="@+id/redoButton"
+        app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline"
         app:layout_constraintStart_toEndOf="@+id/missButton"
         app:layout_constraintTop_toTopOf="@+id/safeButton" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/redoButton"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="54dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/redo_string"
+        app:layout_constraintBottom_toBottomOf="@+id/foulButton"
         app:layout_constraintEnd_toEndOf="@+id/undoButton"
+        app:layout_constraintStart_toStartOf="@+id/undoButton"
         app:layout_constraintTop_toBottomOf="@+id/undoButton" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/ballNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="@string/ball_number_format"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/newGame"
         app:layout_constraintEnd_toEndOf="@+id/winningPointsLayout"
         app:layout_constraintStart_toStartOf="@+id/winningPointsLayout"
         app:layout_constraintTop_toBottomOf="@+id/winningPointsLayout" />
@@ -105,10 +88,10 @@
         android:id="@+id/newBallNumberLayout"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/block2_startmargin"
-        android:layout_marginTop="@dimen/block2_topmargin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/rerackButton"
+        app:layout_constraintStart_toStartOf="@+id/start_block2_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_block2_guideline">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/newBallNumberInput"
@@ -122,14 +105,14 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/winningPointsLayout"
-        android:layout_width="96dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:hint="@string/winnerPoints_hint_format"
-        app:layout_constraintBottom_toBottomOf="@+id/player1Score"
-        app:layout_constraintEnd_toStartOf="@+id/player2Score"
-        app:layout_constraintStart_toEndOf="@+id/player1Score"
-        app:layout_constraintTop_toBottomOf="@+id/player1ClubLayout">
+        app:layout_constraintBottom_toBottomOf="@+id/player1CardView"
+        app:layout_constraintEnd_toStartOf="@+id/player2CardView"
+        app:layout_constraintStart_toEndOf="@+id/player1CardView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/winningPointsInput"
@@ -143,105 +126,235 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/player1NameLayout"
-        android:layout_width="120dp"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/player2CardView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/block1_startmargin"
-        android:layout_marginTop="@dimen/block1_topmargin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="@dimen/block1_top"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/end_block1_guideline"
+        app:layout_constraintStart_toEndOf="@+id/winningPointsLayout"
+        app:layout_constraintTop_toTopOf="@+id/top_block1_guideline">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/player1Name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/player_name_hint_format"
-            app:hintEnabled="true" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/player2CardLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/player2NameLayout"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/player2NameLayout"
-        android:layout_width="120dp"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/player2Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/player_name_hint_format"
+                    app:hintEnabled="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/player2ClubLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/player2NameLayout"
+                app:layout_constraintStart_toStartOf="@+id/player2NameLayout"
+                app:layout_constraintTop_toBottomOf="@+id/player2NameLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/player2Club"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/player_club_hint_format"
+                    app:hintEnabled="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player2Score"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/player_score_format"
+                android:textColor="@color/text_color_selector"
+                android:textSize="40sp"
+                app:layout_constraintEnd_toEndOf="@+id/player2ClubLayout"
+                app:layout_constraintStart_toStartOf="@+id/player2ClubLayout"
+                app:layout_constraintTop_toBottomOf="@+id/player2ClubLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/player1CardView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        app:layout_constraintStart_toEndOf="@+id/player1NameLayout"
-        app:layout_constraintTop_toTopOf="@+id/player1NameLayout">
+        android:layout_marginStart="@dimen/block1_start"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/winningPointsLayout"
+        app:layout_constraintStart_toStartOf="@+id/start_block1_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_block1_guideline">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/player2Name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="end|right"
-            android:hint="@string/player_name_hint_format"
-            app:hintEnabled="true" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/player1CardLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/player1ClubLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/player1NameLayout"
-        app:layout_constraintStart_toStartOf="@+id/player1NameLayout"
-        app:layout_constraintTop_toBottomOf="@+id/player1NameLayout">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/player1NameLayout"
+                android:layout_width="102dp"
+                android:layout_height="56dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/player1Club"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/player_club_hint_format"
-            app:hintEnabled="true" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/player1Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/player_name_hint_format"
+                    app:hintEnabled="true" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/player2ClubLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/player2NameLayout"
-        app:layout_constraintStart_toStartOf="@+id/player2NameLayout"
-        app:layout_constraintTop_toBottomOf="@+id/player2NameLayout">
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/player2Club"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="end|right"
-            android:hint="@string/player_club_hint_format"
-            android:textSize="16sp"
-            app:hintEnabled="true" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/player1ClubLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/player1NameLayout"
+                app:layout_constraintStart_toStartOf="@+id/player1NameLayout"
+                app:layout_constraintTop_toBottomOf="@+id/player1NameLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/player1Club"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/player_club_hint_format"
+                    app:hintEnabled="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player1Score"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/player_score_format"
+                android:textColor="@color/text_color_selector"
+                android:textSize="40sp"
+                app:layout_constraintEnd_toEndOf="@+id/player1ClubLayout"
+                app:layout_constraintStart_toStartOf="@+id/player1ClubLayout"
+                app:layout_constraintTop_toBottomOf="@+id/player1ClubLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/newGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="@string/newGame_string"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
         app:layout_constraintEnd_toEndOf="@+id/ballNumber"
         app:layout_constraintStart_toStartOf="@+id/ballNumber"
         app:layout_constraintTop_toBottomOf="@+id/ballNumber" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/swapPlayers"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
         android:gravity="center"
         android:paddingTop="0dp"
         android:paddingBottom="10dp"
         android:text="@string/swap_string"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/player1ClubLayout"
-        app:layout_constraintEnd_toStartOf="@+id/player2NameLayout"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toEndOf="@+id/player1NameLayout"
-        app:layout_constraintTop_toTopOf="@+id/player1NameLayout" />
+        app:layout_constraintEnd_toStartOf="@+id/player2CardView"
+        app:layout_constraintStart_toEndOf="@+id/player1CardView"
+        app:layout_constraintTop_toTopOf="@+id/player1CardView" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_block2_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@fraction/top_block2_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_block1_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@fraction/top_block1_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_block2_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@fraction/bottom_block2_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_block1_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@fraction/start_block1_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_block2_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@fraction/end_block2_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_block2_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@fraction/start_block2_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_block1_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@fraction/end_block1_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_block1_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@fraction/bottom_block1_guideline_fraction" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
