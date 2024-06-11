@@ -3,4 +3,7 @@
     <dimen name="block1_top">0dp</dimen>
     <dimen name="block1_start">0dp</dimen>
     <dimen name="block1_end">0dp</dimen>
+    <dimen name="textSize">20sp</dimen>
+    <dimen name="smallTextSize">16sp</dimen>
+
 </resources>

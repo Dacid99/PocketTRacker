@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 String newText = s.toString();
                 if ( NumberUtils.isParsable(newText)) {
                     if (Integer.parseInt(newText) > 0) {
-                        winningPointsInput.setTextColor(getResources().getColor(R.color.black));
+                        winningPointsInput.setTextColor(getResources().getColor(R.color.score_color));
                     } else {
                         winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
                     }
@@ -351,24 +351,28 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateFocus(){
         if (turnPlayer == player1) {
-            player1Card.setBackgroundColor(getResources().getColor(R.color.turnplayer_color));
+            player1Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
+            player1Card.setCardElevation(10);
             player1ScoreView.setEnabled(true);
-            player2Card.setBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+            player2Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+            player2Card.setCardElevation(0);
             player2ScoreView.setEnabled(false);
         }else {
-            player1Card.setBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+            player1Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+            player1Card.setCardElevation(0);
             player1ScoreView.setEnabled(false);
-            player2Card.setBackgroundColor(getResources().getColor(R.color.turnplayer_color));
+            player2Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
+            player2Card.setCardElevation(10);
             player2ScoreView.setEnabled(true);
         }
     }
 
     private void updateWinner(){
         if (player1.getScore() >= winnerPoints){
-            player1Card.setBackgroundColor(getResources().getColor(R.color.winner_color));
+            player1Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
             newGameButton.setVisibility(View.VISIBLE);
         }else if (player2.getScore() >= winnerPoints){
-            player2Card.setBackgroundColor(getResources().getColor(R.color.winner_color));
+            player2Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
             newGameButton.setVisibility(View.VISIBLE);
         } else {
             //card backgrounds will be ungoldened by updateFocus
