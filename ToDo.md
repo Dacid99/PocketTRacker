@@ -1,3 +1,5 @@
+- update winner after goal input
+- fix reset after energy mode on/off
 - turnplayer tracking
 - turn rollback is provisory
 - switchreason needs to be integrated into scoreSheet logic
