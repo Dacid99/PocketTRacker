@@ -1,0 +1,3 @@
+- basic version
+- tracks scores based on remaining balls
+- layout optimized for mobile
