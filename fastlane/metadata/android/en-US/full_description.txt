@@ -1,0 +1,5 @@
+For everyone who likes potting billiard balls better than writing score sheets.
+Just outsource keeping tabs on the scores to this app. All you have to do is count the remaining balls on the table and it will do the rest for you!
+
+You are welcome to report any issues or ideas in the gitlab repo:
+https://gitlab.com/Dacid99/PocketTRacker
