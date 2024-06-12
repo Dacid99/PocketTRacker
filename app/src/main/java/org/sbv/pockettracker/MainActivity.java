@@ -376,6 +376,7 @@ public class MainActivity extends AppCompatActivity {
             newGameButton.setVisibility(View.VISIBLE);
         } else {
             //card backgrounds will be ungoldened by updateFocus
+            updateFocus();
             newGameButton.setVisibility(View.INVISIBLE);
         }
     }

@@ -1,4 +1,4 @@
-- update winner after goal input
+- dark theme too dark
 - fix reset after energy mode on/off
 - turnplayer tracking
 - turn rollback is provisory
