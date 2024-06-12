@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- activity_main dimensions -->
     <dimen name="block1_top">0dp</dimen>
     <dimen name="block1_start">0dp</dimen>
     <dimen name="block1_end">0dp</dimen>
     <dimen name="textSize">20sp</dimen>
     <dimen name="smallTextSize">16sp</dimen>
+    <!-- activity_scoresheet dimensions-->
+    <dimen name="turnnumber_column_weight">1</dimen>
+    <dimen name="player1Score_column_weight">3</dimen>
+    <dimen name="player2Score_column_weight">3</dimen>
+    <dimen name="ballsOnTable_column_weight">2</dimen>
 
 </resources>

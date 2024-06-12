@@ -2,9 +2,11 @@
 - turnplayer tracking
 - turn rollback is provisory
 - switchreason needs to be integrated into scoreSheet logic
-- scoreSheet viewer
 - undo rerack
 - kill all warnings!
 - stuff needs to be reorganized, especially the UIupdates are hard to maintain, potentially tie all backend components into a Game Class
 - encapsulated winner functionality
 - club toggleable
+- restruture ScoreSheet to wrap Arraylist of custom Turns class and make it iterable
+- playerHeaders personalized
+- fix weights programmtically bug: issue occurs when loading resource !?!?

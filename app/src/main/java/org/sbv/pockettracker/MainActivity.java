@@ -1,5 +1,6 @@
 package org.sbv.pockettracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,7 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private TextInputLayout player1NameLayout, player2NameLayout, player1ClubLayout, player2ClubLayout, newBallNumberLayout, winningPointsLayout;
     private TextInputEditText player1NameInput, player2NameInput, player1ClubInput, player2ClubInput, newBallNumberInput, winningPointsInput;
     private MaterialCardView player1Card, player2Card;
-    private MaterialButton foulButton, missButton, safeButton, rerackButton, redoButton, undoButton, newGameButton, swapPlayersButton;
+    private MaterialButton foulButton, missButton, safeButton, rerackButton, redoButton, undoButton, newGameButton, swapPlayersButton, viewScoreSheetButton;
     private int winnerPoints;
 
     @Override
@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         redoButton = findViewById(R.id.redoButton);
         newGameButton = findViewById(R.id.newGame);
         swapPlayersButton = findViewById(R.id.swapPlayers);
+        viewScoreSheetButton = findViewById(R.id.viewScoreSheet);
 
         newGame();
 
@@ -274,12 +275,18 @@ public class MainActivity extends AppCompatActivity {
             player1.swapNameAndClubWith(player2);
             updatePlayerUI();
         });
+
+        viewScoreSheetButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ScoreSheetActivity.class);
+            intent.putExtra("scoreSheet", scoreSheet);
+            startActivity(intent);
+        });
     }
 
     private void updateScoreUI() {
         player1ScoreView.setText(getString(R.string.player_score_format, player1.getScore()));
         player2ScoreView.setText(getString(R.string.player_score_format, player2.getScore()));
-        ballNumberView.setText(getString(R.string.ball_number_format, table.getNumberOfBalls()));
+        ballNumberView.setText(getString(R.string.ballsOnTable_format, table.getNumberOfBalls()));
         newBallNumberInput.setText(getString(R.string.newBallNumber_format, table.getNumberOfBalls()));
 
         if (scoreSheet.isLatest()){

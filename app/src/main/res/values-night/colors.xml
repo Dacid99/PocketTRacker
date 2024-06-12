@@ -18,4 +18,8 @@
     <color name="colorOnSecondary">@color/white</color>
 
     <color name="statusBarColor">@color/darkwooden</color>
+
+    <color name="cell_background">@color/black</color>
+    <color name="cell_edges">@color/white</color>
+
 </resources>

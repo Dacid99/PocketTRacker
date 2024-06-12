@@ -1,11 +1,12 @@
 <resources>
 
-    <string name="player_name_hint_format">Spieler</string>
-    <string name="player_club_hint_format">Verein</string>
-    <string name="newBallNumber_hint_format">Übrige Bälle</string>
-    <string name="winnerPoints_hint_format">Ziel</string>
-    <string name="ball_number_format">Tisch: %1$d</string>
+    <string name="player_name_hint">Spieler</string>
+    <string name="player_club_hint">Verein</string>
+    <string name="newBallNumber_hint">Übrige Bälle</string>
+    <string name="winnerPoints_hint">Ziel</string>
+    <string name="ballsOnTable_format">Tisch: %1$d</string>
 
+    <string name="ballsOnTable_columnlabel">Tisch</string>
     <string name="safe_string">Safe</string>
     <string name="foul_string">Foul</string>
     <string name="rerack_string">Rerack</string>
@@ -13,6 +14,10 @@
     <string name="undo_string">Zurück \u21B6</string>
     <string name="redo_string">Vor \u21B7</string>
     <string name="newGame_string">Neues Spiel</string>
+    <string name="turnnumber_columnlabel">Aufnahme#</string>
+    <string name="viewScoreSheet_string">Spielprotokoll</string>
+    <string name="title_activity_score_sheet">Spielprotokoll</string>
+    <string name="scoresheet_scrollview_description">Spielprotokoll für das 14 und 1 endlos Spiel</string>
 
 
 </resources>

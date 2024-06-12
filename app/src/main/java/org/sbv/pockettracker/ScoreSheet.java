@@ -1,12 +1,26 @@
 package org.sbv.pockettracker;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 // this class in is charge of the games history
 // every turn is noted and this log can be accessed for review
 // makes revert feature possible
-public class ScoreSheet {
-    private ArrayList<Integer> player1ScoresList, player2ScoresList, tableBallNumberList;
+public class ScoreSheet implements Parcelable {
+    public class Turn {
+        private int turnnumber;
+        private String endReason;
+        private int scorePlayer1;
+        private int scorePlayer2;
+    }
+    private ArrayList<Integer> player1ScoresList;
+    private ArrayList<Integer> player2ScoresList;
+    private ArrayList<Integer> tableBallNumberList;
     private ArrayList<String> switchReasonsList;
 
     //this member holds the index of the current entry in the ArrayList
@@ -29,6 +43,39 @@ public class ScoreSheet {
         //enter starting values
         update();
     }
+
+    //Parcelable methods
+    protected ScoreSheet(Parcel in){
+        this.switchReasonsList = in.readArrayList(String.class.getClassLoader());
+        this.player1ScoresList = in.readArrayList(Integer.class.getClassLoader());
+        this.player2ScoresList = in.readArrayList(Integer.class.getClassLoader());
+        this.tableBallNumberList = in.readArrayList(Integer.class.getClassLoader());
+    }
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeList(switchReasonsList);
+        dest.writeList(player1ScoresList);
+        dest.writeList(player2ScoresList);
+        dest.writeList(tableBallNumberList);
+    }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+
+    public static final Creator<ScoreSheet> CREATOR = new Creator<ScoreSheet>() {
+        @Override
+        public ScoreSheet createFromParcel(Parcel in) {
+            return new ScoreSheet(in);
+        }
+
+        @Override
+        public ScoreSheet[] newArray(int size) {
+            return new ScoreSheet[size];
+        }
+    };
+
 
     public void update(){
         if (!isLatest()){
@@ -114,5 +161,24 @@ public class ScoreSheet {
         boolean sizeChecks = ( player1ScoresList.size() == player2ScoresList.size() ) && ( player2ScoresList.size() == tableBallNumberList.size() );
 
         return pointerCheck && sizeChecks;
+    }
+
+    public int getScoreOfPlayer1At(int turn){
+        return player1ScoresList.get(turn);
+    }
+
+    public int getScoreOfPlayer2At(int turn){
+        return player2ScoresList.get(turn);
+    }
+    public int getBallsOnTableAt(int turn){
+        return tableBallNumberList.get(turn);
+    }
+
+    public String getPlayer1Name(){
+        return trackedPlayer1.getName();
+    }
+
+    public String getPlayer2Name(){
+        return trackedPlayer2.getName();
     }
 }

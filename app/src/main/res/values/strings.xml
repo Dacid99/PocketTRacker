@@ -1,17 +1,20 @@
 <resources>
-    <string name="app_name" translatable="false">PocketTRacker</string>
-    <string name="player_name_format" translatable="false">%1$s</string>
-    <string name="winnerPoints_format" translatable="false">%1$d</string>
+    <!-- formats -->
+    <string name="rawDigit_format" translatable="false">%1$d</string>
+    <string name="rawString_format" translatable="false">%1$s</string>
 
-    <string name="player_name_hint_format">Player</string>
-    <string name="player_club_hint_format">Club</string>
-    <string name="newBallNumber_hint_format">Remaining Balls</string>
-    <string name="newBallNumber_format" translatable="false">%1$d</string>
-    <string name="winnerPoints_hint_format">Goal</string>
-    <string name="player_club_format" translatable="false">%1$s</string>
-    <string name="player_score_format" translatable="false">%1$d</string>
-    <string name="ball_number_format">Table: %1$d</string>
+    <string name="player_name_format" translatable="false">@string/rawString_format</string>
+    <string name="winnerPoints_format" translatable="false">@string/rawDigit_format</string>
+    <string name="turnnumber_format" translatable="false">@string/rawDigit_format</string>
 
+    <string name="newBallNumber_format" translatable="false">@string/rawDigit_format</string>
+    <string name="player_club_format" translatable="false">@string/rawString_format</string>
+    <string name="player_score_format" translatable="false">@string/rawDigit_format</string>
+    <string name="remainingBalls_format" translatable="false">@string/rawDigit_format</string>
+    <string name="ballsOnTable_format">Table: %1$d</string>
+
+
+    <!-- mainactivity strings -->
     <string name="safe_string">Safe</string>
     <string name="foul_string">Foul</string>
     <string name="rerack_string">Rerack</string>
@@ -20,6 +23,23 @@
     <string name="redo_string">Redo \u21B7</string>
     <string name="newGame_string">New Game</string>
     <string name="swap_string" translatable="false">\u21C6</string>
+    <string name="viewScoreSheet_string">Scoresheet</string>
 
+    <string name="player_name_hint">Player</string>
+    <string name="player_club_hint">Club</string>
+    <string name="newBallNumber_hint">Remaining Balls</string>
+    <string name="winnerPoints_hint">Goal</string>
+
+    <string name="app_name" translatable="false">PocketTRacker</string>
+
+
+    <!-- scoresheet strings -->
+    <string name="title_activity_score_sheet">Scoresheet</string>
+    <string name="turnnumber_columnlabel">Turn#</string>
+    <string name="ballsOnTable_columnlabel">Table</string>
+    <string name="player_columnlabel_format" translatable="false">@string/rawString_format</string>
+    <string name="player1_columnlabel" translatable="false">Player1</string>
+    <string name="player2_columnlabel" translatable="false">Player2</string>
+    <string name="scoresheet_scrollview_description">Scoresheet for the straight pool game</string>
 
 </resources>

@@ -87,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/ball_number_format"
+        android:text="@string/ballsOnTable_format"
         android:textSize="@dimen/textSize"
         app:layout_constraintBottom_toTopOf="@+id/newGame"
         app:layout_constraintEnd_toEndOf="@+id/winningPointsLayout"
@@ -111,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:hint="@string/newBallNumber_hint_format"
+            android:hint="@string/newBallNumber_hint"
             android:textSize="@dimen/textSize" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,7 +119,7 @@
         android:id="@+id/winningPointsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/winnerPoints_hint_format"
+        android:hint="@string/winnerPoints_hint"
         app:layout_constraintBottom_toBottomOf="@+id/player1CardView"
         app:layout_constraintEnd_toStartOf="@+id/player2CardView"
         app:layout_constraintStart_toEndOf="@+id/player1CardView">
@@ -175,7 +175,7 @@
                     android:id="@+id/player2Name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/player_name_hint_format"
+                    android:hint="@string/player_name_hint"
                     android:textSize="@dimen/textSize"
                     app:hintEnabled="true" />
 
@@ -194,7 +194,7 @@
                     android:id="@+id/player2Club"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/player_club_hint_format"
+                    android:hint="@string/player_club_hint"
                     android:textSize="@dimen/textSize"
                     app:hintEnabled="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -257,7 +257,7 @@
                     android:id="@+id/player1Name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/player_name_hint_format"
+                    android:hint="@string/player_name_hint"
                     android:textSize="@dimen/textSize"
                     app:hintEnabled="true" />
 
@@ -276,7 +276,7 @@
                     android:id="@+id/player1Club"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/player_club_hint_format"
+                    android:hint="@string/player_club_hint"
                     android:textSize="@dimen/textSize"
                     app:hintEnabled="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -323,6 +323,14 @@
         app:layout_constraintEnd_toStartOf="@+id/player2CardView"
         app:layout_constraintStart_toEndOf="@+id/player1CardView"
         app:layout_constraintTop_toTopOf="@+id/player1CardView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/viewScoreSheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/viewScoreSheet_string"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_block2_guideline"
