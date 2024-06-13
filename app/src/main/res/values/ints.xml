@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="turnnumber_column_weight">1</integer>
+    <integer name="player1Score_column_weight">1</integer>
+    <integer name="player2Score_column_weight">1</integer>
+    <integer name="ballsOnTable_column_weight">1</integer>
+</resources>

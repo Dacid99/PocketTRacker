@@ -5,53 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TableLayout
-        android:id="@+id/score_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!-- Table Header Row -->
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/end_column1_guideline"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:layout_weight="@dimen/turnnumber_column_weight"
-                android:background="@drawable/cell_separator"
-                android:padding="8dp"
-                android:text="@string/turnnumber_columnlabel"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_weight="@dimen/player1Score_column_weight"
-                android:background="@drawable/cell_separator"
-                android:padding="8dp"
-                android:text="@string/player1_columnlabel"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_weight="@dimen/player2Score_column_weight"
-                android:background="@drawable/cell_separator"
-                android:padding="8dp"
-                android:text="@string/player2_columnlabel"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_weight="@dimen/ballsOnTable_column_weight"
-                android:background="@drawable/cell_separator"
-                android:padding="8dp"
-                android:text="@string/ballsOnTable_columnlabel"
-                android:textStyle="bold" />
-
-        </TableRow>
-
-    </TableLayout>
 
     <ScrollView
         android:id="@+id/score_scroll"
@@ -60,7 +13,7 @@
         android:contentDescription="@string/scoresheet_scrollview_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/score_header">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TableLayout
             android:id="@+id/score_table"
@@ -70,11 +23,9 @@
             android:layout_marginTop="1dp"
             android:layout_marginEnd="1dp">
 
-
         </TableLayout>
 
     </ScrollView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

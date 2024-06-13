@@ -14,9 +14,11 @@
     <string name="undo_string">Zurück \u21B6</string>
     <string name="redo_string">Vor \u21B7</string>
     <string name="newGame_string">Neues Spiel</string>
-    <string name="turnnumber_columnlabel">Aufnahme#</string>
+    <string name="turnnumber_columnlabel">Aufnahme</string>
     <string name="viewScoreSheet_string">Spielprotokoll</string>
     <string name="title_activity_score_sheet">Spielprotokoll</string>
+    <string name="player1_columnlabel">Spieler1</string>
+    <string name="player2_columnlabel">Spieler2</string>
     <string name="scoresheet_scrollview_description">Spielprotokoll für das 14 und 1 endlos Spiel</string>
 
 

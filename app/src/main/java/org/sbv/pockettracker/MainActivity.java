@@ -220,29 +220,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         missButton.setOnClickListener(v -> {
-            int points = calculatePoints();
-            if (points == -1) {
-                return;
-            }
-            turnPlayer.addPoints(points);
+            assignPoints();
             newTurn(getString(R.string.miss_string));
         });
 
         safeButton.setOnClickListener(v -> {
-            int points = calculatePoints();
-            if (points == -1) {
-                return;
-            }
-            turnPlayer.addPoints(points);
+            assignPoints();
             newTurn(getString(R.string.safe_string));
         });
 
         foulButton.setOnClickListener(v -> {
-            int points = calculatePoints();
-            if (points == -1) {
-                return;
-            }
-            turnPlayer.addPoints(points);
+            assignPoints();
             turnPlayer.addPoints( (scoreSheet.length() == 0) ? -2:-1 );
             newTurn(getString(R.string.foul_string));
         });
@@ -277,9 +265,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         viewScoreSheetButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ScoreSheetActivity.class);
-            intent.putExtra("scoreSheet", scoreSheet);
-            startActivity(intent);
+            if (scoreSheet.isHealthy()) {
+                Intent intent = new Intent(MainActivity.this, ScoreSheetActivity.class);
+                intent.putExtra("scoreSheet", scoreSheet);
+                startActivity(intent);
+            }
         });
     }
 
@@ -389,7 +379,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private int calculatePoints(){
+    private void assignPoints(){
         String newNumberOfBallsString = Objects.requireNonNull(newBallNumberInput.getText()).toString();
         int newNumberOfBalls;
         if (newNumberOfBallsString.isEmpty() ) {
@@ -397,7 +387,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             newNumberOfBalls = Integer.parseInt(newNumberOfBallsString);
         }
-        return table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
-
+        if (table.isValidBallNumber(newNumberOfBalls)) {
+            int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
+            turnPlayer.addPoints(points);
+        }
     }
 }

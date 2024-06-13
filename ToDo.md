@@ -1,12 +1,16 @@
 - fix reset after energy mode on/off
 - turnplayer tracking
 - turn rollback is provisory
-- switchreason needs to be integrated into scoreSheet logic
-- undo rerack
+- switchreason needs to be integrated into scoreSheet logic, perhaps using a Turn class to tie info about a turn together
+- undo rerack individually
+- more finegrain turn tracking
 - kill all warnings!
 - stuff needs to be reorganized, especially the UIupdates are hard to maintain, potentially tie all backend components into a Game Class
 - encapsulated winner functionality
 - club toggleable
-- restruture ScoreSheet to wrap Arraylist of custom Turns class and make it iterable
+- restructure ScoreSheet to wrap Arraylist of custom Turns class and make it iterable
 - playerHeaders personalized
-- fix weights programmtically bug: issue occurs when loading resource !?!?
+- shadow for header row
+- statistics panel
+- screenshots with english locale
+- move swap button upwards

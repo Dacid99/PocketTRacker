@@ -5,8 +5,6 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 
 // this class in is charge of the games history
 // every turn is noted and this log can be accessed for review
@@ -20,7 +18,7 @@ public class ScoreSheet implements Parcelable {
     }
     private ArrayList<Integer> player1ScoresList;
     private ArrayList<Integer> player2ScoresList;
-    private ArrayList<Integer> tableBallNumberList;
+    private ArrayList<Integer> ballsOnTableList;
     private ArrayList<String> switchReasonsList;
 
     //this member holds the index of the current entry in the ArrayList
@@ -34,7 +32,7 @@ public class ScoreSheet implements Parcelable {
         switchReasonsList = new ArrayList<>();
         player1ScoresList = new ArrayList<>();
         player2ScoresList = new ArrayList<>();
-        tableBallNumberList = new ArrayList<>();
+        ballsOnTableList = new ArrayList<>();
         pointer = -1;
         //watched objects
         this.trackedTable = table;
@@ -49,14 +47,14 @@ public class ScoreSheet implements Parcelable {
         this.switchReasonsList = in.readArrayList(String.class.getClassLoader());
         this.player1ScoresList = in.readArrayList(Integer.class.getClassLoader());
         this.player2ScoresList = in.readArrayList(Integer.class.getClassLoader());
-        this.tableBallNumberList = in.readArrayList(Integer.class.getClassLoader());
+        this.ballsOnTableList = in.readArrayList(Integer.class.getClassLoader());
     }
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeList(switchReasonsList);
         dest.writeList(player1ScoresList);
         dest.writeList(player2ScoresList);
-        dest.writeList(tableBallNumberList);
+        dest.writeList(ballsOnTableList);
     }
     @Override
     public int describeContents() {
@@ -83,7 +81,7 @@ public class ScoreSheet implements Parcelable {
         }
         player1ScoresList.add(trackedPlayer1.getScore());
         player2ScoresList.add(trackedPlayer2.getScore());
-        tableBallNumberList.add(trackedTable.getNumberOfBalls());
+        ballsOnTableList.add(trackedTable.getNumberOfBalls());
         pointer++;
     }
 
@@ -92,7 +90,7 @@ public class ScoreSheet implements Parcelable {
         pointer--;
         trackedPlayer1.setScore( player1ScoresList.get(pointer) );
         trackedPlayer2.setScore( player2ScoresList.get(pointer) );
-        trackedTable.setNumberOfBalls( tableBallNumberList.get(pointer) );
+        trackedTable.setNumberOfBalls( ballsOnTableList.get(pointer) );
     }
 
     public void progress(){
@@ -100,7 +98,7 @@ public class ScoreSheet implements Parcelable {
         pointer++;
         trackedPlayer1.setScore( player1ScoresList.get(pointer) );
         trackedPlayer2.setScore( player2ScoresList.get(pointer) );
-        trackedTable.setNumberOfBalls( tableBallNumberList.get(pointer) );
+        trackedTable.setNumberOfBalls( ballsOnTableList.get(pointer) );
     }
 
     public void writeSwitchReason(String reason){
@@ -118,13 +116,6 @@ public class ScoreSheet implements Parcelable {
     public int turn(){
         return pointer;
     }
-    public int longestRunPlayer1(){
-        return Collections.max(player1ScoresList);
-    }
-
-    public int longestRunPlayer2(){
-        return Collections.max(player2ScoresList);
-    }
 
     public boolean isLatest(){
         //for writing pointer must be at the last index
@@ -140,7 +131,7 @@ public class ScoreSheet implements Parcelable {
         for (int n = length()-1; n>pointer; n--){
             player1ScoresList.remove(n);
             player2ScoresList.remove(n);
-            tableBallNumberList.remove(n);
+            ballsOnTableList.remove(n);
             //switchReasonsList.remove(n);
         }
     }
@@ -151,14 +142,14 @@ public class ScoreSheet implements Parcelable {
             n = length() - 1;
             player1ScoresList.remove(n);
             player2ScoresList.remove(n);
-            tableBallNumberList.remove(n);
+            ballsOnTableList.remove(n);
             switchReasonsList.remove(n);
         }
     }
 
     public boolean isHealthy(){
         boolean pointerCheck = pointer >= 0 && pointer < player1ScoresList.size(); //pointer must not be negative or larger than the list
-        boolean sizeChecks = ( player1ScoresList.size() == player2ScoresList.size() ) && ( player2ScoresList.size() == tableBallNumberList.size() );
+        boolean sizeChecks = ( player1ScoresList.size() == player2ScoresList.size() ) && ( player2ScoresList.size() == ballsOnTableList.size() );
 
         return pointerCheck && sizeChecks;
     }
@@ -166,19 +157,40 @@ public class ScoreSheet implements Parcelable {
     public int getScoreOfPlayer1At(int turn){
         return player1ScoresList.get(turn);
     }
-
     public int getScoreOfPlayer2At(int turn){
         return player2ScoresList.get(turn);
     }
+    public int getRunOfPlayer1At(int turn) {
+        if (turn <= 0){
+            turn = 1;
+        } else if (turn >= length()) {
+            turn = length()-1;
+        }
+        return player1ScoresList.get(turn) - player1ScoresList.get(turn - 1 );
+    }
+    public int getRunOfPlayer2At(int turn) {
+        if (turn <= 0) {
+            turn = 1;
+        } else if (turn >= length()) {
+            turn = length() - 1;
+        }
+        return player2ScoresList.get(turn) - player2ScoresList.get(turn - 1);
+    }
+
     public int getBallsOnTableAt(int turn){
-        return tableBallNumberList.get(turn);
+        return ballsOnTableList.get(turn);
     }
 
-    public String getPlayer1Name(){
-        return trackedPlayer1.getName();
+    public ArrayList<Integer> getPlayer1ScoresList(){
+        return player1ScoresList;
     }
 
-    public String getPlayer2Name(){
-        return trackedPlayer2.getName();
+    public ArrayList<Integer> getPlayer2ScoresList(){
+        return player2ScoresList;
     }
+
+    public ArrayList<Integer> getBallsOnTableList(){
+        return ballsOnTableList;
+    }
+
 }
