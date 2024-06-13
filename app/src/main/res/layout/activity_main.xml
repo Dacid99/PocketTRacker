@@ -314,6 +314,7 @@
         android:id="@+id/swapPlayers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         android:gravity="center"
         android:paddingTop="0dp"
         android:paddingBottom="10dp"
