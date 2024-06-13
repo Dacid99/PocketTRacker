@@ -12,5 +12,3 @@
 - playerHeaders personalized
 - shadow for header row
 - statistics panel
-- screenshots with english locale
-- move swap button upwards
