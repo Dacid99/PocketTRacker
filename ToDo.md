@@ -4,7 +4,6 @@
 - switchreason needs to be integrated into scoreSheet logic, perhaps using a Turn class to tie info about a turn together
 - undo rerack individually
 - more finegrain turn tracking
-- kill all warnings!
 - stuff needs to be reorganized, especially the UIupdates are hard to maintain, potentially tie all backend components into a Game Class
 - encapsulated winner functionality
 - club toggleable
@@ -12,3 +11,4 @@
 - playerHeaders personalized
 - shadow for header row
 - statistics panel
+- make table more legible, use colors and mark turnplayer
