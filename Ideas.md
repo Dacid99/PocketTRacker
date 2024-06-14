@@ -6,12 +6,13 @@
 - player focus with indicator
 - scores are changed by difference of balls on table
 - entering of reason for end of turn
+- scoresheet viewer
 
 # Future features
+- extended scoresheet with coloring
 - remember players via profiles
 - statistics for players
 - new number of balls with number pane popup instead of keyboard entering
-- log viewer
 - options menu for customization
 - option of tracking by every pot
 - settings for toggling options like club on/off
