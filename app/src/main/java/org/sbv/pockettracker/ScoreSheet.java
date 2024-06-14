@@ -10,12 +10,6 @@ import java.util.ArrayList;
 // every turn is noted and this log can be accessed for review
 // makes revert feature possible
 public class ScoreSheet implements Parcelable {
-    public class Turn {
-        private int turnnumber;
-        private String endReason;
-        private int scorePlayer1;
-        private int scorePlayer2;
-    }
     private ArrayList<Integer> player1ScoresList;
     private ArrayList<Integer> player2ScoresList;
     private ArrayList<Integer> ballsOnTableList;
