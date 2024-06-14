@@ -36,10 +36,18 @@
     <!-- scoresheet strings -->
     <string name="title_activity_score_sheet">Scoresheet</string>
     <string name="turnnumber_columnlabel">Inning</string>
+    <string name="turnnumber_subcolumnlabel" translatable="false">#</string>
     <string name="ballsOnTable_columnlabel">Table</string>
+    <string name="ballsOnTable_subcolumnlabel">Balls</string>
+
     <string name="player_columnlabel_format" translatable="false">@string/rawString_format</string>
     <string name="player1_columnlabel">Player1</string>
     <string name="player2_columnlabel">Player2</string>
+    <string name="player1Increment_columnlabel" translatable="false">+</string>
+    <string name="player1Total_columnlabel" translatable="false">\u03A3</string>
+    <string name="player2Increment_columnlabel" translatable="false">+</string>
+    <string name="player2Total_columnlabel" translatable="false">\u03A3</string>
+
     <string name="scoresheet_scrollview_description">Scoresheet for the straight pool game</string>
 
 </resources>

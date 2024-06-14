@@ -161,18 +161,14 @@ public class ScoreSheet implements Parcelable {
         return player2ScoresList.get(turn);
     }
     public int getRunOfPlayer1At(int turn) {
-        if (turn <= 0){
-            turn = 1;
-        } else if (turn >= length()) {
-            turn = length()-1;
+        if (turn <= 0 || turn >= length()) {
+            return 0;
         }
         return player1ScoresList.get(turn) - player1ScoresList.get(turn - 1 );
     }
     public int getRunOfPlayer2At(int turn) {
-        if (turn <= 0) {
-            turn = 1;
-        } else if (turn >= length()) {
-            turn = length() - 1;
+        if (turn <= 0 || turn >= length()) {
+            return 0;
         }
         return player2ScoresList.get(turn) - player2ScoresList.get(turn - 1);
     }

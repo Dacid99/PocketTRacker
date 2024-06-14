@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="turnnumber_column_weight">1</integer>
-    <integer name="player1Score_column_weight">1</integer>
-    <integer name="player2Score_column_weight">1</integer>
+    <integer name="player1Score_column_weight">2</integer>
+    <integer name="player2Score_column_weight">2</integer>
     <integer name="ballsOnTable_column_weight">1</integer>
+    <integer name="player1Increment_column_weight">1</integer>
+    <integer name="player1Total_column_weight">1</integer>
+    <integer name="player2Increment_column_weight">1</integer>
+    <integer name="player2Total_column_weight">1</integer>
+
 </resources>
