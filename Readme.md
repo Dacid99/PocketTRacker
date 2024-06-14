@@ -9,7 +9,6 @@ It automatically keeps tabs on the scores. All you have to do is enter the numbe
 
 *This is just the first basic version, I have a lot of [additional features I plan on implementing](Ideas.md). Help is always welcome of course.*
 
-This app can be downloaded from the best android app store, [fdroid](https://fdroid.org).
 
 
 
