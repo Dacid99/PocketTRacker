@@ -11,8 +11,8 @@ android {
         applicationId "org.sbv.pockettracker"
         minSdk 21
         targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -25,6 +25,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    applicationVariants.all { variant ->
+            def buildName = variant.buildType.name
+            def versionName = variant.versionName
+            def versionCode = variant.versionCode
+            def fileName = "pockettracker_${buildName}_v${versionName}(${versionCode}).apk"
+            variant.outputs.all {
+                outputFileName = fileName
+            }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
