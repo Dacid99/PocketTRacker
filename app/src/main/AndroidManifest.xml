@@ -13,6 +13,11 @@
         android:theme="@style/Theme.PocketTRacker"
         tools:targetApi="31">
         <activity
+            android:name=".NumberPaneActivity"
+            android:exported="false"
+            android:label="@string/title_activity_number_pane"
+            android:theme="@style/Theme.PocketTRacker" />
+        <activity
             android:name=".ScoreSheetActivity"
             android:exported="false"
             android:label="@string/title_activity_score_sheet"

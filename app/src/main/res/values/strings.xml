@@ -50,4 +50,24 @@
 
     <string name="scoresheet_scrollview_description">Scoresheet for the straight pool game</string>
 
+    <!-- numberpane strings -->
+    <string name="clickRemainingBalls_buttonlabel">Click number of remaining balls</string>
+    <string name="button_1_label" translatable="false">1 \n (rerack)</string>
+    <string name="button_2_label" translatable="false">2</string>
+    <string name="button_3_label" translatable="false">3</string>
+    <string name="button_4_label" translatable="false">4</string>
+    <string name="button_5_label" translatable="false">5</string>
+    <string name="button_6_label" translatable="false">6</string>
+    <string name="button_7_label" translatable="false">7</string>
+    <string name="button_8_label" translatable="false">8</string>
+    <string name="button_9_label" translatable="false">9</string>
+    <string name="button_10_label" translatable="false">10</string>
+    <string name="button_11_label" translatable="false">11</string>
+    <string name="button_12_label" translatable="false">12</string>
+    <string name="button_13_label" translatable="false">13</string>
+    <string name="button_14_label" translatable="false">14</string>
+    <string name="button_15_label" translatable="false">15</string>
+    <string name="title_activity_number_pane">Click number of remaining balls</string>
+
+
 </resources>
