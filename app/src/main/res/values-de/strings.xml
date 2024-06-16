@@ -21,8 +21,6 @@
     <string name="player2_columnlabel">Spieler2</string>
     <string name="scoresheet_scrollview_description">Spielprotokoll für das 14 und 1 endlos Spiel</string>
     <string name="ballsOnTable_subcolumnlabel">Bälle</string>
-    <string name="title_activity_number_pane">Drücke die Anzahl der restlichen Bälle</string>
-    <string name="clickRemainingBalls_buttonlabel">Drücke die Anzahl der restlichen Bälle</string>
     <string name="switchReason_columnlabel">Ende</string>
     <string name="switchReason_subcolumnlabel">"  "</string>
 
