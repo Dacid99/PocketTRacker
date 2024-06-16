@@ -19,5 +19,6 @@
     <dimen name="player2Total_column_weight">1</dimen>
     <dimen name="ballsOnTable_subcolumn_weight">1</dimen>
     <dimen name="switchReason_column_weight">1</dimen>
+    <dimen name="numberPane_textsize">12sp</dimen>
 
 </resources>
