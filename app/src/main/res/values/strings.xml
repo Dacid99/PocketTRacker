@@ -54,7 +54,7 @@
     <string name="scoresheet_scrollview_description">Scoresheet for the straight pool game</string>
 
     <!-- numberpane strings -->
-    <string name="button_1_label" translatable="false">1 \n (rerack)</string>
+    <string name="button_1_label" translatable="false">1\nrerack</string>
     <string name="button_2_label" translatable="false">2</string>
     <string name="button_3_label" translatable="false">3</string>
     <string name="button_4_label" translatable="false">4</string>

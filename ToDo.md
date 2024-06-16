@@ -1,14 +1,13 @@
 - run variable and view for players
-- background color for newBallView for visibility and click incentive
+- increase numberpane and make the background transparent
+- some variable needs to pick up current remaining balls, its just stored in the view!!
 - turnplayer tracking
 - turn rollback is provisory
-- switchreason needs to be integrated into scoreSheet logic
 - undo rerack individually
 - more finegrain turn tracking
 - stuff needs to be reorganized, especially the UIupdates are hard to maintain, potentially tie all backend components into a Game Class
 - encapsulated winner functionality
 - club toggleable
 - playerHeaders personalized
-- shadow for header row
 - statistics panel
-- make table more legible, use colors and mark turnplayer
+- mark statistics in table
