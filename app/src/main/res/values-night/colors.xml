@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="text_enabled_color">@color/white</color>
-    <color name="text_disabled_color">@color/darker_gray</color>
+    <color name="text_disabled_color">@color/light_gray</color>
 
     <color name="winner_color">@color/darkgold</color>
     <color name="notwinner_color">@color/black</color>
 
-    <color name="turnplayer_color">@color/darker_gray</color>
+    <color name="turnplayer_color">@color/dark_gray</color>
     <color name="notturnplayer_color">@color/black</color>
 
     <color name="colorPrimary">@color/nightblue</color>
@@ -20,6 +20,7 @@
     <color name="statusBarColor">@color/darkwooden</color>
 
     <color name="cell_background">@color/black</color>
+    <color name="cell_background_turnplayer">@color/darker_gray</color>
     <color name="cell_edges">@color/white</color>
 
 </resources>
