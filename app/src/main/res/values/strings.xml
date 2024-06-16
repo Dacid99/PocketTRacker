@@ -7,7 +7,7 @@
     <string name="winnerPoints_format" translatable="false">@string/rawDigit_format</string>
     <string name="turnnumber_format" translatable="false">@string/rawDigit_format</string>
 
-    <string name="newBallNumber_format" translatable="false">@string/rawDigit_format</string>
+    <string name="newBallNumber_format" translatable="false">Remaining balls: %1$d</string>
     <string name="player_club_format" translatable="false">@string/rawString_format</string>
     <string name="player_score_format" translatable="false">@string/rawDigit_format</string>
     <string name="remainingBalls_format" translatable="false">@string/rawDigit_format</string>
@@ -27,7 +27,7 @@
 
     <string name="player_name_hint">Player</string>
     <string name="player_club_hint">Club</string>
-    <string name="newBallNumber_hint">Remaining Balls</string>
+    <string name="newBallNumber_hint">Touch for remaining balls</string>
     <string name="winnerPoints_hint">Goal</string>
 
     <string name="app_name" translatable="false">PocketTRacker</string>
@@ -51,7 +51,6 @@
     <string name="scoresheet_scrollview_description">Scoresheet for the straight pool game</string>
 
     <!-- numberpane strings -->
-    <string name="clickRemainingBalls_buttonlabel">Click number of remaining balls</string>
     <string name="button_1_label" translatable="false">1 \n (rerack)</string>
     <string name="button_2_label" translatable="false">2</string>
     <string name="button_3_label" translatable="false">3</string>
@@ -67,7 +66,6 @@
     <string name="button_13_label" translatable="false">13</string>
     <string name="button_14_label" translatable="false">14</string>
     <string name="button_15_label" translatable="false">15</string>
-    <string name="title_activity_number_pane">Click number of remaining balls</string>
 
 
 </resources>

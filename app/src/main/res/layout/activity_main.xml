@@ -33,33 +33,21 @@
         android:id="@+id/safeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="125dp"
         android:text="@string/safe_string"
         android:textSize="@dimen/textSize"
         app:layout_constraintBottom_toTopOf="@+id/missButton"
-        app:layout_constraintEnd_toEndOf="@+id/newBallNumberLayout"
-        app:layout_constraintStart_toStartOf="@+id/newBallNumberLayout"
-        app:layout_constraintTop_toBottomOf="@+id/newBallNumberLayout" />
+        app:layout_constraintEnd_toEndOf="@+id/newBallNumberView"
+        app:layout_constraintStart_toStartOf="@+id/newBallNumberView"
+        app:layout_constraintTop_toBottomOf="@+id/newBallNumberView" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/rerackButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:gravity="center"
-        android:text="@string/rerack_string"
-        android:textSize="@dimen/textSize"
-        app:layout_constraintBottom_toBottomOf="@+id/newBallNumberLayout"
-        app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline"
-        app:layout_constraintStart_toEndOf="@+id/newBallNumberLayout"
-        app:layout_constraintTop_toTopOf="@+id/newBallNumberLayout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/undoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="@string/undo_string"
@@ -95,25 +83,19 @@
         app:layout_constraintStart_toStartOf="@+id/winningPointsLayout"
         app:layout_constraintTop_toBottomOf="@+id/winningPointsLayout" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/newBallNumberLayout"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/newBallNumberView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
+        android:text="@string/newBallNumber_hint"
+        android:textSize="@dimen/textSize"
+        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/safeButton"
-        app:layout_constraintEnd_toStartOf="@+id/rerackButton"
+        app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_block2_guideline"
-        app:layout_constraintTop_toTopOf="@+id/top_block2_guideline">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/newBallNumberInput"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:hint="@string/newBallNumber_hint"
-            android:textSize="@dimen/textSize" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toTopOf="@+id/top_block2_guideline"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/winningPointsLayout"

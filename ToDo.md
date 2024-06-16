@@ -1,13 +1,13 @@
-- fix reset after energy mode on/off
+- run variable and view for players
+- background color for newBallView for visibility and click incentive
 - turnplayer tracking
 - turn rollback is provisory
-- switchreason needs to be integrated into scoreSheet logic, perhaps using a Turn class to tie info about a turn together
+- switchreason needs to be integrated into scoreSheet logic
 - undo rerack individually
 - more finegrain turn tracking
 - stuff needs to be reorganized, especially the UIupdates are hard to maintain, potentially tie all backend components into a Game Class
 - encapsulated winner functionality
 - club toggleable
-- restructure ScoreSheet to wrap Arraylist of custom Turns class and make it iterable
 - playerHeaders personalized
 - shadow for header row
 - statistics panel
