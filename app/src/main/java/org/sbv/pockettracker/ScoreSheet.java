@@ -33,7 +33,7 @@ public class ScoreSheet implements Parcelable {
         this.trackedPlayer1 = player1;
         this.trackedPlayer2 = player2;
         //enter starting values
-        update();
+        update("   ");
     }
 
     //Parcelable methods
@@ -69,13 +69,14 @@ public class ScoreSheet implements Parcelable {
     };
 
 
-    public void update(){
+    public void update(String reason){
         if (!isLatest()){
             clearAfterPointer();
         }
         player1ScoresList.add(trackedPlayer1.getScore());
         player2ScoresList.add(trackedPlayer2.getScore());
         ballsOnTableList.add(trackedTable.getNumberOfBalls());
+        switchReasonsList.add(reason);
         pointer++;
     }
 
@@ -93,10 +94,6 @@ public class ScoreSheet implements Parcelable {
         trackedPlayer1.setScore( player1ScoresList.get(pointer) );
         trackedPlayer2.setScore( player2ScoresList.get(pointer) );
         trackedTable.setNumberOfBalls( ballsOnTableList.get(pointer) );
-    }
-
-    public void writeSwitchReason(String reason){
-        switchReasonsList.add(reason);
     }
 
     public ArrayList<String> getSwitchReasonList(){
@@ -181,6 +178,10 @@ public class ScoreSheet implements Parcelable {
 
     public ArrayList<Integer> getBallsOnTableList(){
         return ballsOnTableList;
+    }
+
+    public char getSwitchReasonAt(int turn){
+        return switchReasonsList.get(turn).charAt(0);
     }
 
 }

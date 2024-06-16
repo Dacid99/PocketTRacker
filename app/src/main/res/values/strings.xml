@@ -7,11 +7,12 @@
     <string name="winnerPoints_format" translatable="false">@string/rawDigit_format</string>
     <string name="turnnumber_format" translatable="false">@string/rawDigit_format</string>
 
-    <string name="newBallNumber_format" translatable="false">Remaining balls: %1$d</string>
+    <string name="newBallNumber_format" translatable="false">%1$d</string>
     <string name="player_club_format" translatable="false">@string/rawString_format</string>
     <string name="player_score_format" translatable="false">@string/rawDigit_format</string>
     <string name="remainingBalls_format" translatable="false">@string/rawDigit_format</string>
     <string name="ballsOnTable_format">Table: %1$d</string>
+    <string name="switchReason_format" translatable="false">@string/rawString_format</string>
 
 
     <!-- mainactivity strings -->
@@ -39,6 +40,8 @@
     <string name="turnnumber_subcolumnlabel" translatable="false">#</string>
     <string name="ballsOnTable_columnlabel">Table</string>
     <string name="ballsOnTable_subcolumnlabel">Balls</string>
+    <string name="switchReason_columnlabel">End</string>
+    <string name="switchReason_subcolumnlabel" >"  "</string>
 
     <string name="player_columnlabel_format" translatable="false">@string/rawString_format</string>
     <string name="player1_columnlabel">Player1</string>

@@ -1,14 +1,18 @@
 package org.sbv.pockettracker;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import org.w3c.dom.Text;
 
 public class ScoreSheetActivity extends AppCompatActivity {
     private TableLayout tableLayout;
@@ -46,20 +50,31 @@ public class ScoreSheetActivity extends AppCompatActivity {
         TextView player2IncrementText = new TextView(this);
         TextView player2TotalText = new TextView(this);
         TextView ballsOnTableText = new TextView(this);
+        TextView switchReasonText = new TextView(this);
 
-        turnText.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator));
-        player1IncrementText.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator));
-        player1TotalText.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator));
-        player2IncrementText.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator));
-        player2TotalText.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator));
-        ballsOnTableText.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator));
 
         turnText.setText(getString(R.string.turnnumber_format, turn));
-        player1IncrementText.setText(getString(R.string.player_score_format, scoreSheet.getRunOfPlayer1At(turn)));
+        //only show increments for turnplayers
+        //also not for 0th turn
+        Drawable background = ContextCompat.getDrawable(this, R.drawable.cell_separator);
+        if (turn % 2 == 1 ) {
+            player1IncrementText.setText(getString(R.string.player_score_format, scoreSheet.getRunOfPlayer1At(turn)));
+            background = ContextCompat.getDrawable(this, R.drawable.cell_separator_turnplayer);
+        } else if (turn != 0){
+            player2IncrementText.setText(getString(R.string.player_score_format, scoreSheet.getRunOfPlayer2At(turn)));
+        }
         player1TotalText.setText(getString(R.string.player_score_format, scoreSheet.getScoreOfPlayer1At(turn)));
-        player2IncrementText.setText(getString(R.string.player_score_format, scoreSheet.getRunOfPlayer2At(turn)));
         player2TotalText.setText(getString(R.string.player_score_format, scoreSheet.getScoreOfPlayer2At(turn)));
         ballsOnTableText.setText(getString(R.string.remainingBalls_format, scoreSheet.getBallsOnTableAt(turn)));
+        switchReasonText.setText(getString(R.string.switchReason_format, scoreSheet.getSwitchReasonAt(turn)));
+
+        turnText.setBackground( background);
+        player1IncrementText.setBackground( background);
+        player1TotalText.setBackground( background);
+        player2IncrementText.setBackground(background);
+        player2TotalText.setBackground( background);
+        ballsOnTableText.setBackground( background);
+        switchReasonText.setBackground( background);
 
         turnText.setGravity(Gravity.CENTER);
         player1IncrementText.setGravity(Gravity.CENTER);
@@ -67,6 +82,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
         player2IncrementText.setGravity(Gravity.CENTER);
         player2TotalText.setGravity(Gravity.CENTER);
         ballsOnTableText.setGravity(Gravity.CENTER);
+        switchReasonText.setGravity(Gravity.CENTER);
 
         turnText.setPadding(4, 4, 4, 4);
         player1IncrementText.setPadding(4, 4, 4, 4);
@@ -74,6 +90,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
         player2IncrementText.setPadding(4, 4, 4, 4);
         player2TotalText.setPadding(4, 4, 4, 4);
         ballsOnTableText.setPadding(4, 4, 4, 4);
+        switchReasonText.setPadding(4, 4, 4, 4);
 
         turnText.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, (float) getResources().getInteger(R.integer.turnnumber_column_weight)));
         player1IncrementText.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, (float) getResources().getInteger(R.integer.player1Increment_column_weight)));
@@ -81,6 +98,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
         player2IncrementText.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, (float) getResources().getInteger(R.integer.player2Increment_column_weight)));
         player2TotalText.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, (float) getResources().getInteger(R.integer.player2Total_column_weight)));
         ballsOnTableText.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, (float) getResources().getInteger(R.integer.ballsOnTable_column_weight)));
+        switchReasonText.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, (float) getResources().getInteger(R.integer.switchReason_column_weight)));
 
         newTableRow.addView(turnText);
         newTableRow.addView(player1IncrementText);
@@ -88,6 +106,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
         newTableRow.addView(player2IncrementText);
         newTableRow.addView(player2TotalText);
         newTableRow.addView(ballsOnTableText);
+        newTableRow.addView(switchReasonText);
 
         tableLayout.addView(newTableRow);
     }

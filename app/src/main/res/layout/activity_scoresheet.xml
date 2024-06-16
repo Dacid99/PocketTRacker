@@ -61,6 +61,16 @@
                 android:text="@string/ballsOnTable_columnlabel"
                 android:textStyle="bold" />
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/switchReason_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/switchReason_columnlabel"
+                android:textStyle="bold" />
+
 
         </TableRow>
 
@@ -126,6 +136,16 @@
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="@string/ballsOnTable_subcolumnlabel"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/switchReason_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/switchReason_subcolumnlabel"
                 android:textStyle="bold" />
 
         </TableRow>

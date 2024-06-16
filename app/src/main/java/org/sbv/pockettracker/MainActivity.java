@@ -288,8 +288,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
     private void newTurn(String reason){
         switchTurnPlayer();
-        scoreSheet.update();
-        scoreSheet.writeSwitchReason(reason);
+        scoreSheet.update(reason);
         updateScoreUI();
     }
 

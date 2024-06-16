@@ -1,7 +1,6 @@
 package org.sbv.pockettracker;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.GridLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.button.MaterialButton;
@@ -45,7 +43,7 @@ public class NumberPaneFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_numberpane, container,false);
+        view = inflater.inflate(R.layout.fragment_numberpane, container,false);
 
         grid = view.findViewById(R.id.numberGrid);
         findButtons();

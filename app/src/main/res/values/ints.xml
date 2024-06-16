@@ -8,5 +8,5 @@
     <integer name="player1Total_column_weight">1</integer>
     <integer name="player2Increment_column_weight">1</integer>
     <integer name="player2Total_column_weight">1</integer>
-
+    <integer name="switchReason_column_weight">1</integer>
 </resources>
