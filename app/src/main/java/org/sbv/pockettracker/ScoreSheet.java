@@ -178,8 +178,24 @@ public class ScoreSheet implements Parcelable {
         return player1ScoresList;
     }
 
+    public ArrayList<Integer> getPlayer1IncrementsList(){
+        ArrayList<Integer> player1IncrementsList = new ArrayList<>();
+        for (int index =  1; index<length(); index++){
+            player1IncrementsList.add(player1ScoresList.get(index)-player1ScoresList.get(index-1));
+        }
+        return player1IncrementsList;
+    }
+
     public ArrayList<Integer> getPlayer2ScoresList(){
         return player2ScoresList;
+    }
+
+    public ArrayList<Integer> getPlayer2IncrementsList(){
+        ArrayList<Integer> player2IncrementsList = new ArrayList<>();
+        for (int index =  1; index<length(); index++){
+            player2IncrementsList.add(player2ScoresList.get(index)-player2ScoresList.get(index-1));
+        }
+        return player2IncrementsList;
     }
 
     public ArrayList<Integer> getBallsOnTableList(){

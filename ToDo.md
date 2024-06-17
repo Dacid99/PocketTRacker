@@ -9,5 +9,5 @@
 - encapsulated winner functionality
 - club toggleable
 - playerHeaders personalized
-- statistics panel
+- change statistics table into two cardviews and beautify
 - mark statistics in table

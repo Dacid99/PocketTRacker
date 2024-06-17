@@ -17,6 +17,8 @@ import org.w3c.dom.Text;
 public class ScoreSheetActivity extends AppCompatActivity {
     private TableLayout tableLayout;
     //private TextView player1Header, player2Header;
+
+    private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View;
     private ScoreSheet scoreSheet;
     private GameStatistics gameStatistics;
 
@@ -36,6 +38,15 @@ public class ScoreSheetActivity extends AppCompatActivity {
             appendTableRow(index);
         }
 
+        maxRunPlayer1View = findViewById(R.id.player1statistics_maxrun);
+        maxRunPlayer2View = findViewById(R.id.player2statistics_maxrun);
+        inningsPlayer1View = findViewById(R.id.player1statistics_innings);
+        inningsPlayer2View = findViewById(R.id.player2statistics_innings);
+
+        maxRunPlayer1View.setText(getString(R.string.player_score_format, gameStatistics.maxRunPlayer1()));
+        maxRunPlayer2View.setText(getString(R.string.player_score_format, gameStatistics.maxRunPlayer2()));
+        inningsPlayer1View.setText(getString(R.string.player_score_format, gameStatistics.player1Innings()));
+        maxRunPlayer2View.setText(getString(R.string.player_score_format, gameStatistics.player2Innings()));
     }
 
     private void appendTableRow(int turn) {
