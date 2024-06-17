@@ -4,16 +4,18 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.ArrayList;
 
 // this class in is charge of the games history
 // every turn is noted and this log can be accessed for review
 // makes revert feature possible
 public class ScoreSheet implements Parcelable {
-    private ArrayList<Integer> player1ScoresList;
-    private ArrayList<Integer> player2ScoresList;
-    private ArrayList<Integer> ballsOnTableList;
-    private ArrayList<String> switchReasonsList;
+    private final ArrayList<Integer> player1ScoresList;
+    private final ArrayList<Integer> player2ScoresList;
+    private final ArrayList<Integer> ballsOnTableList;
+    private final ArrayList<String> switchReasonsList;
 
     //this member holds the index of the current entry in the ArrayList
     //for going back in history and rewriting from there
@@ -37,7 +39,7 @@ public class ScoreSheet implements Parcelable {
     }
 
     //Parcelable methods
-    protected ScoreSheet(Parcel in){
+    protected ScoreSheet(@NonNull Parcel in){
         this.switchReasonsList = in.readArrayList(String.class.getClassLoader());
         this.player1ScoresList = in.readArrayList(Integer.class.getClassLoader());
         this.player2ScoresList = in.readArrayList(Integer.class.getClassLoader());
@@ -57,11 +59,15 @@ public class ScoreSheet implements Parcelable {
 
 
     public static final Creator<ScoreSheet> CREATOR = new Creator<ScoreSheet>() {
+        @NonNull
+        @Contract("_ -> new")
         @Override
         public ScoreSheet createFromParcel(Parcel in) {
             return new ScoreSheet(in);
         }
 
+        @NonNull
+        @Contract(value = "_ -> new", pure = true)
         @Override
         public ScoreSheet[] newArray(int size) {
             return new ScoreSheet[size];
