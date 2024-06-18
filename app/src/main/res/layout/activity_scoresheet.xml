@@ -6,13 +6,14 @@
 
 
     <TableLayout
-        android:id="@+id/score_header"
+        android:id="@+id/scoresheet_table"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toTopOf="@id/score_scroll"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/player1Statistics_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -140,30 +141,26 @@
 
         </TableRow>
 
-    </TableLayout>
-
-
-    <ScrollView
-        android:id="@+id/score_scroll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:contentDescription="@string/scoresheet_scrollview_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/score_header">
-
-        <TableLayout
-            android:id="@+id/score_table"
+        <ScrollView
+            android:id="@+id/score_scroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:contentDescription="@string/scoresheet_scrollview_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TableLayout
+                android:id="@+id/score_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
 
-        </TableLayout>
+            </TableLayout>
 
-    </ScrollView>
+        </ScrollView>
+
+    </TableLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/player1Statistics_card"
@@ -222,8 +219,9 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/player1Statistics_card"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/player1Statistics_card">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -233,33 +231,33 @@
                 android:id="@+id/player2statistics_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/player2statistics_innings"
+                android:gravity="center"
                 android:text="Player 2"
                 android:textStyle="bold"
-                android:gravity="center"/>
+                app:layout_constraintBottom_toTopOf="@+id/player2statistics_innings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/player2statistics_innings"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/player2statistics_name"
+                android:gravity="center"
                 app:layout_constraintBottom_toTopOf="@+id/player2statistics_maxrun"
-                android:gravity="center" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player2statistics_name" />
 
             <TextView
                 android:id="@+id/player2statistics_maxrun"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/player2statistics_innings"
+                android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:gravity="center" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player2statistics_innings" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
