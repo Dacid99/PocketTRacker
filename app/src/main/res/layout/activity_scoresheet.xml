@@ -168,6 +168,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
+        android:backgroundTint="@color/colorSecondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/player2Statistics_card"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -184,7 +185,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/player1statistics_innings"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp"
                 android:text="Player 1"
+                android:textColor="@color/colorOnPrimary"
+                android:background="@drawable/textview_roundedcorners"
+                android:backgroundTint="@color/colorPrimary"
                 android:textStyle="bold"
                 android:gravity="center"/>
 
@@ -196,7 +204,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/player1statistics_name"
                 app:layout_constraintBottom_toTopOf="@+id/player1statistics_maxrun"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary" />
 
             <TextView
                 android:id="@+id/player1statistics_maxrun"
@@ -206,7 +215,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/player1statistics_innings"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -218,6 +228,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
+        android:backgroundTint="@color/colorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/player1Statistics_card"
@@ -232,18 +243,27 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+
                 android:text="Player 2"
                 android:textStyle="bold"
+                android:textColor="@color/colorOnPrimary"
+                android:background="@drawable/textview_roundedcorners"
+                android:backgroundTint="@color/colorPrimary"
                 app:layout_constraintBottom_toTopOf="@+id/player2statistics_innings"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp" />
 
             <TextView
                 android:id="@+id/player2statistics_innings"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
                 app:layout_constraintBottom_toTopOf="@+id/player2statistics_maxrun"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -254,6 +274,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
