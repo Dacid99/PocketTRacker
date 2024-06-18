@@ -1,7 +1,6 @@
 - run variable and view for players
 - increase numberpane and make the background transparent
 - some variable needs to pick up current remaining balls, its just stored in the view!!
-- turnplayer tracking
 - turn rollback is provisory
 - undo rerack individually
 - more finegrain turn tracking
@@ -9,5 +8,4 @@
 - encapsulated winner functionality
 - club toggleable
 - playerHeaders personalized
-- change statistics table into two cardviews and beautify
 - mark statistics in table
