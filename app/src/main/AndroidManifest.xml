@@ -16,6 +16,7 @@
             android:name=".ScoreSheetActivity"
             android:exported="false"
             android:label="@string/title_activity_score_sheet"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.PocketTRacker" />
         <activity
             android:name=".MainActivity"
