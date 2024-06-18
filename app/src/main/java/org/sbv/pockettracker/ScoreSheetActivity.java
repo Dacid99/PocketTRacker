@@ -5,14 +5,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
-import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
-import org.w3c.dom.Text;
 
 public class ScoreSheetActivity extends AppCompatActivity {
     private TableLayout tableLayout;
@@ -46,7 +43,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
         maxRunPlayer1View.setText(getString(R.string.player_score_format, gameStatistics.maxRunPlayer1()));
         maxRunPlayer2View.setText(getString(R.string.player_score_format, gameStatistics.maxRunPlayer2()));
         inningsPlayer1View.setText(getString(R.string.player_score_format, gameStatistics.player1Innings()));
-        maxRunPlayer2View.setText(getString(R.string.player_score_format, gameStatistics.player2Innings()));
+        inningsPlayer2View.setText(getString(R.string.player_score_format, gameStatistics.player2Innings()));
     }
 
     private void appendTableRow(int turn) {
@@ -108,7 +105,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
         player1TotalText.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, (float) getResources().getInteger(R.integer.player1Total_column_weight)));
         player2IncrementText.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, (float) getResources().getInteger(R.integer.player2Increment_column_weight)));
         player2TotalText.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, (float) getResources().getInteger(R.integer.player2Total_column_weight)));
-        ballsOnTableText.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, (float) getResources().getInteger(R.integer.ballsOnTable_column_weight)));
+        ballsOnTableText.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, (float) getResources().getInteger(R.integer.ballsOnTable_subcolumn_weight)));
         switchReasonText.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, (float) getResources().getInteger(R.integer.switchReason_column_weight)));
 
         newTableRow.addView(turnText);
