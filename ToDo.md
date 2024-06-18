@@ -7,6 +7,6 @@
 - stuff needs to be reorganized, especially the UIupdates are hard to maintain, potentially tie all backend components into a Game Class
 - encapsulated winner functionality
 - club toggleable
-- playerHeaders personalized
-- mark statistics in table
+- playerHeaders personalized and mark winner
+- mark statistics in table 
 - table view landscape
