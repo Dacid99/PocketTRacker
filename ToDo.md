@@ -9,3 +9,4 @@
 - club toggleable
 - playerHeaders personalized
 - mark statistics in table
+- table view landscape

@@ -39,9 +39,8 @@
     <string name="turnnumber_columnlabel">Inning</string>
     <string name="turnnumber_subcolumnlabel" translatable="false">#</string>
     <string name="ballsOnTable_columnlabel">Table</string>
-    <string name="ballsOnTable_subcolumnlabel">Balls</string>
-    <string name="switchReason_columnlabel">End</string>
-    <string name="switchReason_subcolumnlabel" >"  "</string>
+    <string name="ballsOnTable_subcolumnlabel" translatable="false">\u2B24</string>
+    <string name="switchReason_columnlabel" translatable="false">\u25A0</string>
 
     <string name="player_columnlabel_format" translatable="false">@string/rawString_format</string>
     <string name="player1_columnlabel">Player1</string>

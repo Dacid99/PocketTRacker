@@ -7,18 +7,19 @@
     <dimen name="textSize">20sp</dimen>
     <dimen name="smallTextSize">16sp</dimen>
     <!-- activity_scoresheet dimensions-->
-    <dimen name="turnnumber_column_weight">1</dimen>
-    <dimen name="player1_column_weight">2</dimen>
-    <dimen name="player2_column_weight">2</dimen>
-    <dimen name="ballsOnTable_column_weight">1</dimen>
+    <dimen name="turn_column_weight">6</dimen>
+    <dimen name="player1_column_weight">8</dimen>
+    <dimen name="player2_column_weight">8</dimen>
+    <dimen name="ballsOnTable_column_weight">4</dimen>
 
-    <dimen name="turnnumber_subcolumn_weight" >1</dimen>
-    <dimen name="player1Increment_column_weight">1</dimen>
-    <dimen name="player1Total_column_weight">1</dimen>
-    <dimen name="player2Increment_column_weight">1</dimen>
-    <dimen name="player2Total_column_weight">1</dimen>
-    <dimen name="ballsOnTable_subcolumn_weight">1</dimen>
-    <dimen name="switchReason_column_weight">1</dimen>
+    <dimen name="turnnumber_column_weight" >3</dimen>
+    <dimen name="switchReason_column_weight">3</dimen>
+    <dimen name="player1Increment_column_weight">4</dimen>
+    <dimen name="player1Total_column_weight">4</dimen>
+    <dimen name="player2Increment_column_weight">4</dimen>
+    <dimen name="player2Total_column_weight">4</dimen>
+    <dimen name="ballsOnTable_subcolumn_weight">4</dimen>
+
     <dimen name="numberPane_textsize">12sp</dimen>
 
 </resources>
