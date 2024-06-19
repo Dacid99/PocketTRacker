@@ -30,7 +30,7 @@ android {
             def buildName = variant.buildType.name
             def versionName = variant.versionName
             def versionCode = variant.versionCode
-            def fileName = "pockettracker_${buildName}_v${versionName}(${versionCode}).apk"
+            def fileName = "pockettracker_${buildName}_${versionCode}_v${versionName}.apk"
             variant.outputs.all {
                 outputFileName = fileName
             }
