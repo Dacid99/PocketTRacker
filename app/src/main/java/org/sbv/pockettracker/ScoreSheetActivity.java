@@ -40,10 +40,10 @@ public class ScoreSheetActivity extends AppCompatActivity {
         inningsPlayer1View = findViewById(R.id.player1statistics_innings);
         inningsPlayer2View = findViewById(R.id.player2statistics_innings);
 
-        maxRunPlayer1View.setText(getString(R.string.player_score_format, gameStatistics.maxRunPlayer1()));
-        maxRunPlayer2View.setText(getString(R.string.player_score_format, gameStatistics.maxRunPlayer2()));
-        inningsPlayer1View.setText(getString(R.string.player_score_format, gameStatistics.player1Innings()));
-        inningsPlayer2View.setText(getString(R.string.player_score_format, gameStatistics.player2Innings()));
+        maxRunPlayer1View.setText(getString(R.string.player_maxrun_format, gameStatistics.maxRunPlayer1()));
+        maxRunPlayer2View.setText(getString(R.string.player_maxrun_format, gameStatistics.maxRunPlayer2()));
+        inningsPlayer1View.setText(getString(R.string.player_innings_format, gameStatistics.player1Innings()));
+        inningsPlayer2View.setText(getString(R.string.player_innings_format, gameStatistics.player2Innings()));
     }
 
     private void appendTableRow(int turn) {
