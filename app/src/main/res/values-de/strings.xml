@@ -20,7 +20,5 @@
     <string name="player1_columnlabel">Spieler1</string>
     <string name="player2_columnlabel">Spieler2</string>
     <string name="scoresheet_scrollview_description">Spielprotokoll für das 14 und 1 endlos Spiel</string>
-    <string name="switchReason_subcolumnlabel">"  "</string>
-
 
 </resources>
