@@ -366,12 +366,12 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     //numberpanelistener methods
     @Override
     public void onDialogClick(int number){
+        newBallNumberView.setText(getString(R.string.newBallNumber_format, number));
         if (number == 1) {
             int points = table.getNumberOfBalls() - 1;
             turnPlayer.addPoints(points);
             table.rerack();
             updateScoreUI();
         }
-        newBallNumberView.setText(getString(R.string.newBallNumber_format, number));
     }
 }
