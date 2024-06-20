@@ -215,12 +215,14 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         undoButton.setOnClickListener(v -> {
             scoreSheet.rollback();
             switchTurnPlayer();
+            updateFocus();
             updateScoreUI();
         });
 
         redoButton.setOnClickListener(v -> {
             scoreSheet.progress();
             switchTurnPlayer();
+            updateFocus();
             updateScoreUI();
         });
 
@@ -283,6 +285,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
     private void newTurn(String reason){
         switchTurnPlayer();
+        updateFocus();
         scoreSheet.update(reason);
         updateScoreUI();
     }
@@ -308,7 +311,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         }else {
             turnPlayer = player1;
         }
-        updateFocus();
     }
 
     private void updateFocus(){
