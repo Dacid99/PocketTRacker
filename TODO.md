@@ -1,0 +1,16 @@
+- allow click on playercard for details, statistics
+- in that view allow for changing of player to see the others stats
+- bug that kills game when scoresheet is opened from landscape
+- save game capability
+- run view for players
+- rack counter in table
+- stuff needs to be reorganized, especially the UIupdates are hard to maintain, potentially tie all backend components into a Game Class
+- separate all update functions, stop bundling them!
+- encapsulated winner functionality
+- club toggleable
+- settings menu
+- playerHeaders personalized and mark winner
+- mark statistics in table 
+- table view landscape
+- scoresheet switch button in header
+- retry layouting switch button smaller
