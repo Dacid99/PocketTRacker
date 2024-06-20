@@ -214,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         undoButton.setOnClickListener(v -> {
             scoreSheet.rollback();
+            updateUndoButtons();
             switchTurnPlayer();
             updateFocus();
             updateScoreUI();
@@ -222,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         redoButton.setOnClickListener(v -> {
             scoreSheet.progress();
+            updateUndoButtons();
             switchTurnPlayer();
             updateFocus();
             updateScoreUI();
@@ -252,6 +254,15 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         player2ScoreView.setText(getString(R.string.player_score_format, player2.getScore()));
         ballsOnTableFloatingButton.setText(getString(R.string.ballsOnTable_format, table.getNumberOfBalls()));
 
+        // blocks the user from any more input after theres a winner
+        // disabled to give the user more freedom
+        //winningPointsInput.setClickable(scoreSheet.turn() == 0);
+        //winningPointsInput.setFocusable(scoreSheet.turn() == 0);
+        //winningPointsInput.setEnabled(scoreSheet.turn() == 0);
+        //setButtonsStatus( (player1.getScore() < winnerPoints) && (player2.getScore() < winnerPoints) );
+    }
+
+    private void updateUndoButtons(){
         if (scoreSheet.isLatest()){
             redoButton.setVisibility(View.INVISIBLE);
         }else{
@@ -262,13 +273,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         }else {
             undoButton.setVisibility(View.VISIBLE);
         }
-
-        // blocks the user from any more input after theres a winner
-        // disabled to give the user more freedom
-        //winningPointsInput.setClickable(scoreSheet.turn() == 0);
-        //winningPointsInput.setFocusable(scoreSheet.turn() == 0);
-        //winningPointsInput.setEnabled(scoreSheet.turn() == 0);
-        //setButtonsStatus( (player1.getScore() < winnerPoints) && (player2.getScore() < winnerPoints) );
     }
 
     private void setButtonsStatus(boolean toggle){
@@ -288,6 +292,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         switchTurnPlayer();
         updateFocus();
         scoreSheet.update(reason);
+        updateUndoButtons();
         updateScoreUI();
         updateWinner();
     }
@@ -303,6 +308,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         scoreSheet = new ScoreSheet(table, player1, player2);
 
         updateScoreUI();
+        updateUndoButtons();
         updateWinner();
         updatePlayerUI();
         updateFocus();
