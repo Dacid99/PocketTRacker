@@ -1,6 +1,8 @@
 package org.sbv.pockettracker;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.button.MaterialButton;
+
+import java.util.Objects;
 
 public class NumberPaneFragment extends DialogFragment {
     public interface CustomDialogListener {
@@ -44,7 +48,7 @@ public class NumberPaneFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_numberpane, container,false);
-
+        Objects.requireNonNull(Objects.requireNonNull(getDialog()).getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         grid = view.findViewById(R.id.numberGrid);
         findButtons();
         setButtonListeners();
