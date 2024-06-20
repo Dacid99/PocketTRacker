@@ -4,8 +4,7 @@
 - save game capability
 - run view for players
 - rack counter in table
-- stuff needs to be reorganized, especially the UIupdates are hard to maintain, potentially tie all backend components into a Game Class
-- separate all update functions, stop bundling them!
+- potentially tie all backend components into a Game Class
 - encapsulated winner functionality
 - club toggleable
 - settings menu

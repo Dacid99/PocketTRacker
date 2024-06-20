@@ -14,8 +14,6 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.Objects;
-
 import org.apache.commons.lang3.math.NumberUtils;
 
 public class MainActivity extends AppCompatActivity implements NumberPaneFragment.CustomDialogListener{
@@ -166,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                     int newWinnerPoints = Integer.parseInt(newText);
                     if (newWinnerPoints != winnerPoints && newWinnerPoints >= 1){
                         winnerPoints = newWinnerPoints;
-                        updateWinner();
+                        updateWinnerUI();
                     }
                 }
             }
@@ -214,20 +212,20 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         undoButton.setOnClickListener(v -> {
             scoreSheet.rollback();
-            updateUndoButtons();
+            updateUnRedoUI();
             switchTurnPlayer();
-            updateFocus();
+            updateFocusUI();
             updateScoreUI();
-            updateWinner();
+            updateWinnerUI();
         });
 
         redoButton.setOnClickListener(v -> {
             scoreSheet.progress();
-            updateUndoButtons();
+            updateUnRedoUI();
             switchTurnPlayer();
-            updateFocus();
+            updateFocusUI();
             updateScoreUI();
-            updateWinner();
+            updateWinnerUI();
         });
 
         newGameButton.setOnClickListener(v -> {
@@ -262,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         //setButtonsStatus( (player1.getScore() < winnerPoints) && (player2.getScore() < winnerPoints) );
     }
 
-    private void updateUndoButtons(){
+    private void updateUnRedoUI(){
         if (scoreSheet.isLatest()){
             redoButton.setVisibility(View.INVISIBLE);
         }else{
@@ -290,11 +288,11 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
     private void newTurn(String reason){
         switchTurnPlayer();
-        updateFocus();
+        updateFocusUI();
         scoreSheet.update(reason);
-        updateUndoButtons();
+        updateUnRedoUI();
         updateScoreUI();
-        updateWinner();
+        updateWinnerUI();
     }
 
     private void newGame(){
@@ -308,10 +306,10 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         scoreSheet = new ScoreSheet(table, player1, player2);
 
         updateScoreUI();
-        updateUndoButtons();
-        updateWinner();
+        updateUnRedoUI();
+        updateWinnerUI();
         updatePlayerUI();
-        updateFocus();
+        updateFocusUI();
     }
 
     private void switchTurnPlayer(){
@@ -322,7 +320,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         }
     }
 
-    private void updateFocus(){
+    private void updateFocusUI(){
         if (turnPlayer == player1) {
             player1Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
             player1Card.setCardElevation(10);
@@ -340,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         }
     }
 
-    private void updateWinner(){
+    private void updateWinnerUI(){
         if (player1.getScore() >= winnerPoints){
             player1Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
             newGameButton.setVisibility(View.VISIBLE);
@@ -349,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             newGameButton.setVisibility(View.VISIBLE);
         } else {
             //card backgrounds will be ungoldened by updateFocus
-            updateFocus();
+            updateFocusUI();
             newGameButton.setVisibility(View.INVISIBLE);
         }
     }
@@ -367,6 +365,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             assignPoints();
         }
         updateScoreUI();
-        updateWinner();
+        updateWinnerUI();
     }
 }
