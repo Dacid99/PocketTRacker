@@ -91,6 +91,7 @@ public class ScoreSheet implements Parcelable {
         pointer--;
         trackedPlayer1.setScore( player1ScoresList.get(pointer) );
         trackedPlayer2.setScore( player2ScoresList.get(pointer) );
+        trackedTable.setOldNumberOfBalls( ballsOnTableList.get(pointer));
         trackedTable.setNumberOfBalls( ballsOnTableList.get(pointer) );
     }
 
@@ -99,6 +100,7 @@ public class ScoreSheet implements Parcelable {
         pointer++;
         trackedPlayer1.setScore( player1ScoresList.get(pointer) );
         trackedPlayer2.setScore( player2ScoresList.get(pointer) );
+        trackedTable.setOldNumberOfBalls( ballsOnTableList.get(pointer));
         trackedTable.setNumberOfBalls( ballsOnTableList.get(pointer) );
     }
 

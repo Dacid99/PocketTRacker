@@ -43,8 +43,12 @@ public class PoolTable {
     }
 
     public void setNumberOfBalls(int newNumberOfBalls){
-        if (isValidBallNumber(numberOfBalls)) {
+        if (isValidBallNumber(newNumberOfBalls)) {
             this.numberOfBalls = newNumberOfBalls;
         }
+    }
+
+    public void setOldNumberOfBalls(int newOldNumberOfBalls) {
+        this.oldNumberOfBalls = newOldNumberOfBalls;
     }
 }

@@ -209,20 +209,20 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         undoButton.setOnClickListener(v -> {
             scoreSheet.rollback();
+            updateScoreUI();
             updateUnRedoUI();
+            updateWinnerUI();
             switchTurnPlayer();
             updateFocusUI();
-            updateScoreUI();
-            updateWinnerUI();
         });
 
         redoButton.setOnClickListener(v -> {
             scoreSheet.progress();
+            updateScoreUI();
             updateUnRedoUI();
+            updateWinnerUI();
             switchTurnPlayer();
             updateFocusUI();
-            updateScoreUI();
-            updateWinnerUI();
         });
 
         newGameButton.setOnClickListener(v -> {
