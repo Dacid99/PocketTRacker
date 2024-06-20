@@ -10,6 +10,7 @@
 - scoresheet viewer
 
 # Future features
+- more layouts
 - save games
 - extended scoresheet with coloring
 - remember players via profiles
