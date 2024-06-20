@@ -5,6 +5,8 @@
     android:id="@+id/numberGrid"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:minWidth="240dp"
+    android:minHeight="400dp"
     android:columnCount="3"
     android:rowCount="5" >
 
