@@ -217,6 +217,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             switchTurnPlayer();
             updateFocus();
             updateScoreUI();
+            updateWinner();
         });
 
         redoButton.setOnClickListener(v -> {
@@ -224,6 +225,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             switchTurnPlayer();
             updateFocus();
             updateScoreUI();
+            updateWinner();
         });
 
         newGameButton.setOnClickListener(v -> {
@@ -267,7 +269,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         //winningPointsInput.setFocusable(scoreSheet.turn() == 0);
         //winningPointsInput.setEnabled(scoreSheet.turn() == 0);
         //setButtonsStatus( (player1.getScore() < winnerPoints) && (player2.getScore() < winnerPoints) );
-        updateWinner();
     }
 
     private void setButtonsStatus(boolean toggle){
@@ -288,6 +289,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         updateFocus();
         scoreSheet.update(reason);
         updateScoreUI();
+        updateWinner();
     }
 
     private void newGame(){
@@ -301,6 +303,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         scoreSheet = new ScoreSheet(table, player1, player2);
 
         updateScoreUI();
+        updateWinner();
         updatePlayerUI();
         updateFocus();
     }
@@ -358,5 +361,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             assignPoints();
         }
         updateScoreUI();
+        updateWinner();
     }
 }
