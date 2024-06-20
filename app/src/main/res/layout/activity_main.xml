@@ -38,9 +38,9 @@
         android:text="@string/safe_string"
         android:textSize="@dimen/textSize"
         app:layout_constraintBottom_toTopOf="@+id/missButton"
-        app:layout_constraintEnd_toEndOf="@+id/newBallNumberView"
-        app:layout_constraintStart_toStartOf="@+id/newBallNumberView"
-        app:layout_constraintTop_toBottomOf="@+id/newBallNumberView" />
+        app:layout_constraintEnd_toEndOf="@+id/ballsOnTableFloatingButton"
+        app:layout_constraintStart_toStartOf="@+id/ballsOnTableFloatingButton"
+        app:layout_constraintTop_toBottomOf="@+id/ballsOnTableFloatingButton" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -70,29 +70,17 @@
         app:layout_constraintStart_toStartOf="@+id/undoButton"
         app:layout_constraintTop_toBottomOf="@+id/undoButton" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/ballNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/ballsOnTable_format"
-        android:textSize="@dimen/textSize"
-        app:layout_constraintBottom_toTopOf="@+id/newGame"
-        app:layout_constraintEnd_toEndOf="@+id/winningPointsLayout"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="@+id/winningPointsLayout"
-        app:layout_constraintTop_toBottomOf="@+id/winningPointsLayout" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/newBallNumberView"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/ballsOnTableFloatingButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/cell_separator"
+        android:contentDescription="@string/newBallNumber_hint"
         android:gravity="center"
-        android:text="@string/newBallNumber_hint"
         android:textSize="@dimen/textSize"
+        android:text="@string/ballsOnTable_format"
         app:layout_constraintBottom_toTopOf="@+id/safeButton"
         app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_block2_guideline"
@@ -124,7 +112,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/block1_top"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="75dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
         app:layout_constraintEnd_toStartOf="@+id/end_block1_guideline"
@@ -188,9 +176,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="@string/player_score_format"
                 android:textColor="@color/score_color"
                 android:textSize="42sp"
+                android:text="@string/player_score_format"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/player2ClubLayout"
                 app:layout_constraintStart_toStartOf="@+id/player2ClubLayout"
@@ -205,7 +193,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/block1_start"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="75dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
         app:layout_constraintEnd_toStartOf="@+id/swapPlayers"
@@ -270,9 +258,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="@string/player_score_format"
                 android:textColor="@color/score_color"
                 android:textSize="42sp"
+                android:text="@string/player_score_format"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/player1ClubLayout"
                 app:layout_constraintStart_toStartOf="@+id/player1ClubLayout"
@@ -289,9 +277,9 @@
         android:text="@string/newGame_string"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
-        app:layout_constraintEnd_toEndOf="@+id/ballNumber"
-        app:layout_constraintStart_toStartOf="@+id/ballNumber"
-        app:layout_constraintTop_toBottomOf="@+id/ballNumber" />
+        app:layout_constraintEnd_toEndOf="@+id/winningPointsLayout"
+        app:layout_constraintStart_toStartOf="@+id/winningPointsLayout"
+        app:layout_constraintTop_toBottomOf="@+id/winningPointsLayout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/swapPlayers"
