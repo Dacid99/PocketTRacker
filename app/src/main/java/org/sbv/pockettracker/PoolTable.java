@@ -2,23 +2,27 @@ package org.sbv.pockettracker;
 
 public class PoolTable {
     private int numberOfBalls ;
+    private int oldNumberOfBalls ;
+
 
     public PoolTable(){
-        this.numberOfBalls = 15;
+        rerack();
     }
     public int getNumberOfBalls(){
         return this.numberOfBalls;
     }
 
-    public int setNewNumberOfBallsAndGiveDifference(int newNumberOfBalls){
-        if (!isValidBallNumber(newNumberOfBalls)) {
-            return -1 ;
-        }
-        int ballsRemoved = this.numberOfBalls - newNumberOfBalls;
-        this.numberOfBalls = newNumberOfBalls;
+    public int getOldNumberOfBalls(){
+        return this.oldNumberOfBalls;
+    }
+
+    public int evaluate(){
+        int ballsRemoved = this.oldNumberOfBalls - numberOfBalls;
         if (this.numberOfBalls == 1){
             rerack();
         }
+        oldNumberOfBalls = numberOfBalls;
+
         return ballsRemoved;
     }
 
@@ -31,13 +35,16 @@ public class PoolTable {
 
     public void rerack(){
         this.numberOfBalls = 15;
+        this.oldNumberOfBalls = 15;
     }
 
     public boolean isValidBallNumber(int newNumberOfBalls){
-        return newNumberOfBalls <= this.numberOfBalls && newNumberOfBalls >= 1;
+        return newNumberOfBalls <= this.oldNumberOfBalls && newNumberOfBalls >= 1;
     }
 
-    public void setNumberOfBalls(int numberOfBalls){
-        this.numberOfBalls = numberOfBalls;
+    public void setNumberOfBalls(int newNumberOfBalls){
+        if (isValidBallNumber(numberOfBalls)) {
+            this.numberOfBalls = newNumberOfBalls;
+        }
     }
 }

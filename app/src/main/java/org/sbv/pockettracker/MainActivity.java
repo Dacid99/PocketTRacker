@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private Player player1, player2, turnPlayer;
     private PoolTable table;
     private ScoreSheet scoreSheet;
-    private TextView player1ScoreView, player2ScoreView, ballNumberView, newBallNumberView;
+    private TextView player1ScoreView, player2ScoreView, ballsOnTableFloatingButton;
     private TextInputLayout player1NameLayout, player2NameLayout, player1ClubLayout, player2ClubLayout, winningPointsLayout;
     private TextInputEditText player1NameInput, player2NameInput, player1ClubInput, player2ClubInput, winningPointsInput;
     private MaterialCardView player1Card, player2Card;
@@ -53,9 +53,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         player1Card = findViewById(R.id.player1CardView);
         player2Card = findViewById(R.id.player2CardView);
 
-        ballNumberView = findViewById(R.id.ballNumber);
-
-        newBallNumberView = findViewById(R.id.newBallNumberView);
+        ballsOnTableFloatingButton = findViewById(R.id.ballsOnTableFloatingButton);
 
         winningPointsLayout = findViewById(R.id.winningPointsLayout);
         winningPointsInput = findViewById(R.id.winningPointsInput);
@@ -155,14 +153,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             }
         });
 
-        newBallNumberView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                NumberPaneFragment numberPaneFragment = NumberPaneFragment.newInstance(table.getNumberOfBalls());
-                numberPaneFragment.show(getSupportFragmentManager(), "NumberPane");
-            }
-        });
-
         winningPointsInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -194,6 +184,14 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 } else {
                     winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
                 }
+            }
+        });
+
+        ballsOnTableFloatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                NumberPaneFragment numberPaneFragment = NumberPaneFragment.newInstance(table.getOldNumberOfBalls());
+                numberPaneFragment.show(getSupportFragmentManager(), "NumberPane");
             }
         });
 
@@ -248,8 +246,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private void updateScoreUI() {
         player1ScoreView.setText(getString(R.string.player_score_format, player1.getScore()));
         player2ScoreView.setText(getString(R.string.player_score_format, player2.getScore()));
-        ballNumberView.setText(getString(R.string.ballsOnTable_format, table.getNumberOfBalls()));
-        newBallNumberView.setText(getString(R.string.newBallNumber_format, table.getNumberOfBalls()));
+        ballsOnTableFloatingButton.setText(getString(R.string.ballsOnTable_format, table.getNumberOfBalls()));
 
         if (scoreSheet.isLatest()){
             redoButton.setVisibility(View.INVISIBLE);
@@ -283,8 +280,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         player1ClubInput.setText(getString(R.string.player_club_format, player1.getClub()));
         player2ClubInput.setText(getString(R.string.player_club_format, player2.getClub()));
     }
-
-
 
     private void newTurn(String reason){
         switchTurnPlayer();
@@ -348,30 +343,18 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         }
     }
 
-
     private void assignPoints(){
-        String newNumberOfBallsString = Objects.requireNonNull(newBallNumberView.getText()).toString();
-        int newNumberOfBalls;
-        if (newNumberOfBallsString.isEmpty() ) {
-            newNumberOfBalls = table.getNumberOfBalls();
-        } else {
-            newNumberOfBalls = Integer.parseInt(newNumberOfBallsString);
-        }
-        if (table.isValidBallNumber(newNumberOfBalls)) {
-            int points = table.setNewNumberOfBallsAndGiveDifference(newNumberOfBalls);
-            turnPlayer.addPoints(points);
-        }
+        int points = table.evaluate();
+        turnPlayer.addPoints(points);
     }
 
     //numberpanelistener methods
     @Override
     public void onDialogClick(int number){
-        newBallNumberView.setText(getString(R.string.newBallNumber_format, number));
+        table.setNumberOfBalls(number);
         if (number == 1) {
-            int points = table.getNumberOfBalls() - 1;
-            turnPlayer.addPoints(points);
-            table.rerack();
-            updateScoreUI();
+            assignPoints();
         }
+        updateScoreUI();
     }
 }
