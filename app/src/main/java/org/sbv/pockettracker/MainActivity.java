@@ -185,12 +185,9 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             }
         });
 
-        ballsOnTableFloatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                NumberPaneFragment numberPaneFragment = NumberPaneFragment.newInstance(table.getOldNumberOfBalls());
-                numberPaneFragment.show(getSupportFragmentManager(), "NumberPane");
-            }
+        ballsOnTableFloatingButton.setOnClickListener(v -> {
+            NumberPaneFragment numberPaneFragment = NumberPaneFragment.newInstance(table.getOldNumberOfBalls());
+            numberPaneFragment.show(getSupportFragmentManager(), "NumberPane");
         });
 
         missButton.setOnClickListener(v -> {
