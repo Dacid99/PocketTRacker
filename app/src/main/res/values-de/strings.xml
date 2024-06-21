@@ -20,7 +20,9 @@
     <string name="player1_columnlabel_default">Spieler1</string>
     <string name="player2_columnlabel_default">Spieler2</string>
     <string name="scoresheet_scrollview_description">Spielprotokoll für das 14 und 1 endlos Spiel</string>
-    <string name="player_maxrun_format">Top run: %1$d</string>
+    <string name="player_maxrun_format">Top Lauf: %1$d</string>
     <string name="player_innings_format">Aufnahmen: %1$d</string>
+    <string name="meanInning_format">\u2300 Aufnahme: %1$.2f</string>
+    <string name="meanRun_format">\u2300 Lauf: %1$.2f</string>
 
 </resources>

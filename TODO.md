@@ -3,13 +3,14 @@
 - bug that kills game when scoresheet is opened from landscape
 - save game capability
 - run view for players
-- rack counter in table
+- rack counter in table?
 - potentially tie all backend components into a Game Class
 - encapsulated winner functionality
 - club toggleable
 - settings menu
-- playerHeaders personalized and mark winner
-- mark statistics in table 
+- mark statistics and winner in table 
 - table view landscape
 - scoresheet switch button in header
 - retry layouting switch button smaller
+- add more final keywords to mark immutability
+- find good statistics library

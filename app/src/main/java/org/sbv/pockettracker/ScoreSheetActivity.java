@@ -15,7 +15,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
     private TableLayout tableLayout;
     private TextView player1TableHeader, player2TableHeader, player1StatisticsHeader, player2StatisticsHeader;
 
-    private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View;
+    private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
     private ScoreSheet scoreSheet;
     private GameStatistics gameStatistics;
 
@@ -52,15 +52,23 @@ public class ScoreSheetActivity extends AppCompatActivity {
             appendTableRow(index);
         }
 
-        maxRunPlayer1View = findViewById(R.id.player1statistics_maxrun);
-        maxRunPlayer2View = findViewById(R.id.player2statistics_maxrun);
+        maxRunPlayer1View = findViewById(R.id.player1statistics_maxRun);
+        maxRunPlayer2View = findViewById(R.id.player2statistics_maxRun);
         inningsPlayer1View = findViewById(R.id.player1statistics_innings);
         inningsPlayer2View = findViewById(R.id.player2statistics_innings);
+        meanInningPlayer1View = findViewById(R.id.player1statistics_meanInning);
+        meanInningPlayer2View = findViewById(R.id.player2statistics_meanInning);
+        meanRunPlayer1View = findViewById(R.id.player1statistics_meanRun);
+        meanRunPlayer2View = findViewById(R.id.player2statistics_meanRun);
 
         maxRunPlayer1View.setText(getString(R.string.player_maxrun_format, gameStatistics.maxRunPlayer1()));
         maxRunPlayer2View.setText(getString(R.string.player_maxrun_format, gameStatistics.maxRunPlayer2()));
         inningsPlayer1View.setText(getString(R.string.player_innings_format, gameStatistics.player1Innings()));
         inningsPlayer2View.setText(getString(R.string.player_innings_format, gameStatistics.player2Innings()));
+        meanInningPlayer1View.setText(getString(R.string.meanInning_format, gameStatistics.meanInningPlayer1()));
+        meanInningPlayer2View.setText(getString(R.string.meanInning_format, gameStatistics.meanInningPlayer2()));
+        meanRunPlayer1View.setText(getString(R.string.meanRun_format, gameStatistics.meanRunPlayer1()));
+        meanRunPlayer2View.setText(getString(R.string.meanRun_format, gameStatistics.meanRunPlayer2()));
     }
 
     private void appendTableRow(int turn) {

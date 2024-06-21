@@ -54,6 +54,8 @@
 
     <string name="player_maxrun_format">Top run: %1$d</string>
     <string name="player_innings_format">Innings: %1$d</string>
+    <string name="meanInning_format">\u2300 inning: %1$.2$f</string>
+    <string name="meanRun_format">\u2300 run: %1$.2$f</string>
 
     <!-- numberpane strings -->
     <string name="button_1_label" translatable="false">1\nrerack</string>
@@ -71,5 +73,6 @@
     <string name="button_13_label" translatable="false">13</string>
     <string name="button_14_label" translatable="false">14</string>
     <string name="button_15_label" translatable="false">15</string>
+
 
 </resources>

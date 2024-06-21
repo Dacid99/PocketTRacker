@@ -35,6 +35,7 @@ public class ScoreSheet implements Parcelable {
         ballsOnTableList = new ArrayList<>();
         pointer = -1; //directly incremented by update
         //enter starting values
+        // this is crucial for statistics, as the list is never empty!
         update("   ");
     }
 
