@@ -4,7 +4,7 @@
     <string name="player_club_hint">Verein</string>
     <string name="newBallNumber_hint">Berühre für übrige Bälle</string>
     <string name="winnerPoints_hint">Ziel</string>
-    <string name="ballsOnTable_format">Tisch: %1$d</string>
+    <string name="ballsOnTable_format">Auf dem Tisch: %1$d</string>
 
     <string name="ballsOnTable_columnlabel">Tisch</string>
     <string name="safe_string">Safe</string>
