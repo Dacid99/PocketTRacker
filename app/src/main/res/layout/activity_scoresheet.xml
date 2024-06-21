@@ -76,8 +76,9 @@
                 android:layout_weight="@dimen/turnnumber_column_weight"
                 android:background="@drawable/cell_separator"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="4dp"
                 android:text="@string/turnnumber_subcolumnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
                 android:textStyle="bold" />
 
             <TextView
@@ -86,8 +87,9 @@
                 android:layout_weight="@dimen/switchReason_column_weight"
                 android:background="@drawable/cell_separator"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="4dp"
                 android:text="@string/switchReason_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
                 android:textStyle="bold" />
 
             <TextView
@@ -96,8 +98,9 @@
                 android:layout_weight="@dimen/player1Increment_column_weight"
                 android:background="@drawable/cell_separator"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="4dp"
                 android:text="@string/player1Increment_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
                 android:textStyle="bold" />
 
             <TextView
@@ -106,8 +109,9 @@
                 android:layout_weight="@dimen/player1Total_column_weight"
                 android:background="@drawable/cell_separator"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="4dp"
                 android:text="@string/player1Total_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
                 android:textStyle="bold" />
 
             <TextView
@@ -116,8 +120,9 @@
                 android:layout_weight="@dimen/player2Increment_column_weight"
                 android:background="@drawable/cell_separator"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="4dp"
                 android:text="@string/player2Increment_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
                 android:textStyle="bold" />
 
             <TextView
@@ -126,8 +131,9 @@
                 android:layout_weight="@dimen/player2Total_column_weight"
                 android:background="@drawable/cell_separator"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="4dp"
                 android:text="@string/player2Total_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
                 android:textStyle="bold" />
 
             <TextView
@@ -136,8 +142,9 @@
                 android:layout_weight="@dimen/ballsOnTable_subcolumn_weight"
                 android:background="@drawable/cell_separator"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="4dp"
                 android:text="@string/ballsOnTable_subcolumnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
                 android:textStyle="bold" />
 
         </TableRow>
@@ -197,6 +204,7 @@
                 android:background="@drawable/roundedcorners_background"
                 android:backgroundTint="@color/colorPrimary"
                 android:textStyle="bold"
+                android:textSize="@dimen/smallTextSize"
                 android:gravity="center"/>
 
             <TextView
@@ -208,6 +216,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/player1statistics_header"
                 app:layout_constraintBottom_toTopOf="@+id/player1statistics_maxRun"
                 android:gravity="center"
+                android:textSize="@dimen/smallTextSize"
                 android:textColor="@color/colorOnSecondary" />
 
             <TextView
@@ -219,6 +228,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/player1statistics_innings"
                 app:layout_constraintBottom_toTopOf="@id/player1statistics_meanInning"
                 android:gravity="center"
+                android:textSize="@dimen/smallTextSize"
                 android:textColor="@color/colorOnSecondary" />
 
             <TextView
@@ -230,6 +240,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/player1statistics_maxRun"
                 app:layout_constraintBottom_toTopOf="@id/player1statistics_meanRun"
                 android:gravity="center"
+                android:textSize="@dimen/smallTextSize"
                 android:textColor="@color/colorOnSecondary" />
 
             <TextView
@@ -241,6 +252,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/player1statistics_meanInning"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:gravity="center"
+                android:textSize="@dimen/smallTextSize"
                 android:textColor="@color/colorOnSecondary" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -272,6 +284,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/player2_columnlabel_default"
+                android:textSize="@dimen/smallTextSize"
                 android:textStyle="bold"
                 android:textColor="@color/colorOnPrimary"
                 android:background="@drawable/roundedcorners_background"
@@ -290,6 +303,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textSize="@dimen/smallTextSize"
                 android:textColor="@color/colorOnSecondary"
                 app:layout_constraintBottom_toTopOf="@+id/player2statistics_maxRun"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -301,6 +315,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textSize="@dimen/smallTextSize"
                 android:textColor="@color/colorOnSecondary"
                 app:layout_constraintBottom_toTopOf="@+id/player2statistics_meanInning"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -312,6 +327,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textSize="@dimen/smallTextSize"
                 android:textColor="@color/colorOnSecondary"
                 app:layout_constraintBottom_toTopOf="@+id/player2statistics_meanRun"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -323,6 +339,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textSize="@dimen/smallTextSize"
                 android:textColor="@color/colorOnSecondary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

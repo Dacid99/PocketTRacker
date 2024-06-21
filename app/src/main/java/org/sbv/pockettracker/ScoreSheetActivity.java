@@ -117,6 +117,14 @@ public class ScoreSheetActivity extends AppCompatActivity {
         player2TotalText.setGravity(Gravity.CENTER);
         ballsOnTableText.setGravity(Gravity.CENTER);
 
+        turnText.setTextSize(getResources().getDimension(R.dimen.tableTextSize));
+        switchReasonText.setTextSize(getResources().getDimension(R.dimen.tableTextSize));
+        player1IncrementText.setTextSize(getResources().getDimension(R.dimen.tableTextSize));
+        player1TotalText.setTextSize(getResources().getDimension(R.dimen.tableTextSize));
+        player2IncrementText.setTextSize(getResources().getDimension(R.dimen.tableTextSize));
+        player2TotalText.setTextSize(getResources().getDimension(R.dimen.tableTextSize));
+        ballsOnTableText.setTextSize(getResources().getDimension(R.dimen.tableTextSize));
+
         turnText.setPadding(4, 4, 4, 4);
         switchReasonText.setPadding(4, 4, 4, 4);
         player1IncrementText.setPadding(4, 4, 4, 4);
