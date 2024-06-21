@@ -131,7 +131,7 @@ public class ScoreSheet implements Parcelable {
             player1ScoresList.remove(n);
             player2ScoresList.remove(n);
             ballsOnTableList.remove(n);
-            //switchReasonsList.remove(n);
+            switchReasonsList.remove(n);
         }
     }
 
@@ -148,7 +148,9 @@ public class ScoreSheet implements Parcelable {
 
     public boolean isHealthy(){
         boolean pointerCheck = pointer >= 0 && pointer < player1ScoresList.size(); //pointer must not be negative or larger than the list
-        boolean sizeChecks = ( player1ScoresList.size() == player2ScoresList.size() ) && ( player2ScoresList.size() == ballsOnTableList.size() );
+        boolean sizeChecks = ( player1ScoresList.size() == player2ScoresList.size() )
+                && ( player2ScoresList.size() == ballsOnTableList.size() )
+                && ( ballsOnTableList.size() == switchReasonsList.size() );
 
         return pointerCheck && sizeChecks;
     }
