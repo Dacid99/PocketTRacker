@@ -24,16 +24,16 @@ public class ScoreSheet implements Parcelable {
     private Player trackedPlayer1, trackedPlayer2;
 
     public ScoreSheet(PoolTable table, Player player1, Player player2){
+        //watched objects
+        this.trackedTable = table;
+        this.trackedPlayer1 = player1;
+        this.trackedPlayer2 = player2;
         //set up containers for data
         switchReasonsList = new ArrayList<>();
         player1ScoresList = new ArrayList<>();
         player2ScoresList = new ArrayList<>();
         ballsOnTableList = new ArrayList<>();
-        pointer = -1;
-        //watched objects
-        this.trackedTable = table;
-        this.trackedPlayer1 = player1;
-        this.trackedPlayer2 = player2;
+        pointer = -1; //directly incremented by update
         //enter starting values
         update("   ");
     }
