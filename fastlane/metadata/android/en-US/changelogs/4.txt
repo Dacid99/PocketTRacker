@@ -1,0 +1,8 @@
+- more detailed scoresheet
+- first statistics for players
+- more comprehensible UI
+- various small improvements
+
+Hey there, thanks for checking out my app!
+This is the first basic version, I have many more ideas for features I'd like to implement.
+If you have any feedback please let me know!

@@ -1,0 +1,7 @@
+- added numberspanel to input number of balls
+- added scoresheet view
+- various small improvements
+
+Hey there, thanks for checking out my app!
+This is the first basic version, I have many more ideas for features I'd like to implement.
+If you have any feedback please let me know!
