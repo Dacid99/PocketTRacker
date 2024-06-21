@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <TableLayout
         android:id="@+id/scoresheet_table"
         android:layout_width="match_parent"
@@ -33,23 +32,25 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/player1table_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="@dimen/player1_column_weight"
                 android:background="@drawable/cell_separator"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="@string/player1_columnlabel"
+                android:text="@string/player1_columnlabel_default"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/player2table_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="@dimen/player2_column_weight"
                 android:background="@drawable/cell_separator"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="@string/player2_columnlabel"
+                android:text="@string/player2_columnlabel_default"
                 android:textStyle="bold" />
 
             <TextView
@@ -178,7 +179,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/player1statistics_name"
+                android:id="@+id/player1statistics_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -189,7 +190,7 @@
                 android:layout_marginBottom="1dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginEnd="1dp"
-                android:text="Player 1"
+                android:text="@string/player1_columnlabel_default"
                 android:textColor="@color/colorOnPrimary"
                 android:background="@drawable/roundedcorners_background"
                 android:backgroundTint="@color/colorPrimary"
@@ -202,7 +203,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/player1statistics_name"
+                app:layout_constraintTop_toBottomOf="@+id/player1statistics_header"
                 app:layout_constraintBottom_toTopOf="@+id/player1statistics_maxrun"
                 android:gravity="center"
                 android:textColor="@color/colorOnSecondary" />
@@ -239,12 +240,12 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/player2statistics_name"
+                android:id="@+id/player2statistics_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
 
-                android:text="Player 2"
+                android:text="@string/player2_columnlabel_default"
                 android:textStyle="bold"
                 android:textColor="@color/colorOnPrimary"
                 android:background="@drawable/roundedcorners_background"
@@ -267,7 +268,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/player2statistics_maxrun"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/player2statistics_name" />
+                app:layout_constraintTop_toBottomOf="@+id/player2statistics_header" />
 
             <TextView
                 android:id="@+id/player2statistics_maxrun"

@@ -239,6 +239,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             if (scoreSheet.isHealthy()) {
                 Intent intent = new Intent(MainActivity.this, ScoreSheetActivity.class);
                 intent.putExtra("scoreSheet", scoreSheet);
+                intent.putExtra("player1Name", player1.getName());
+                intent.putExtra("player2Name", player2.getName());
                 startActivity(intent);
             }
         });

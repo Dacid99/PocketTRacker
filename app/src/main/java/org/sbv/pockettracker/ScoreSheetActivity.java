@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat;
 
 public class ScoreSheetActivity extends AppCompatActivity {
     private TableLayout tableLayout;
-    //private TextView player1Header, player2Header;
+    private TextView player1TableHeader, player2TableHeader, player1StatisticsHeader, player2StatisticsHeader;
 
     private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View;
     private ScoreSheet scoreSheet;
@@ -26,9 +26,26 @@ public class ScoreSheetActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         scoreSheet = intent.getParcelableExtra("scoreSheet");
+        String player1Name = intent.getStringExtra("player1Name");
+        String player2Name = intent.getStringExtra("player2Name");
+
         gameStatistics = new GameStatistics(scoreSheet);
 
         tableLayout = findViewById(R.id.score_table);
+
+        player1TableHeader = findViewById(R.id.player1table_header);
+        player2TableHeader = findViewById(R.id.player2table_header);
+        player1StatisticsHeader = findViewById(R.id.player1statistics_header);
+        player2StatisticsHeader = findViewById(R.id.player2statistics_header);
+
+        if (!player1Name.isEmpty()) {
+            player1TableHeader.setText(getString(R.string.player_name_format, player1Name));
+            player1StatisticsHeader.setText(getString(R.string.player_name_format, player1Name));
+        }
+        if (!player1Name.isEmpty()) {
+            player2TableHeader.setText(getString(R.string.player_name_format, player2Name));
+            player2StatisticsHeader.setText(getString(R.string.player_name_format, player2Name));
+        }
 
         // Add rows
         for (int index = 0; index < scoreSheet.length(); index++) {
