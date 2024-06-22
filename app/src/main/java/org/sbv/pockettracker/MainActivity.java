@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private TextInputEditText player1NameInput, player2NameInput, player1ClubInput, player2ClubInput, winningPointsInput;
     private MaterialCardView player1Card, player2Card;
     private MaterialButton foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, swapPlayersButton, viewScoreSheetButton;
-    private int winnerPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +55,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         winningPointsLayout = findViewById(R.id.winningPointsLayout);
         winningPointsInput = findViewById(R.id.winningPointsInput);
 
-        winnerPoints = 40; //default value
-        System.out.println(winnerPoints);
-        winningPointsInput.setText(getString(R.string.winnerPoints_format, winnerPoints));
+        winningPointsInput.setText(getString(R.string.winnerPoints_format, Player.winningPoints));
 
         missButton = findViewById(R.id.missButton);
         safeButton = findViewById(R.id.safeButton);
@@ -162,8 +159,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 String newText = s.toString();
                 if ( NumberUtils.isParsable(newText)) {
                     int newWinnerPoints = Integer.parseInt(newText);
-                    if (newWinnerPoints != winnerPoints && newWinnerPoints >= 1){
-                        winnerPoints = newWinnerPoints;
+                    if (newWinnerPoints != Player.winningPoints && newWinnerPoints >= 1){
+                        Player.winningPoints = newWinnerPoints;
                         updateWinnerUI();
                     }
                 }
@@ -338,10 +335,10 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     }
 
     private void updateWinnerUI(){
-        if (player1.getScore() >= winnerPoints){
+        if (player1.isWinner()){
             player1Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
             newGameButton.setVisibility(View.VISIBLE);
-        }else if (player2.getScore() >= winnerPoints){
+        }else if (player2.isWinner()){
             player2Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
             newGameButton.setVisibility(View.VISIBLE);
         } else {

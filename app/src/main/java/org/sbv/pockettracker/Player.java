@@ -1,6 +1,7 @@
 package org.sbv.pockettracker;
 
 public class Player {
+    static int winningPoints = 40; //default value
     private String name = "";
     private String club = "";
     private int score;
@@ -36,6 +37,9 @@ public class Player {
         return club;
     }
 
+    public boolean isWinner(){
+        return score >= winningPoints;
+    }
     public void setName(String name) {
         this.name = name;
     }

@@ -5,7 +5,6 @@
 - run view for players
 - rack counter in table?
 - potentially tie all backend components into a Game Class
-- encapsulated winner functionality
 - club toggleable
 - settings menu
 - mark statistics and winner in table 
