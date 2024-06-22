@@ -31,6 +31,8 @@
     <string name="newBallNumber_hint">Touch for remaining balls</string>
     <string name="winnerPoints_hint">Goal</string>
 
+    <string name="cantOpenScoreSheet_toast">Can\'t open scoresheet as it is unhealthy. Please report this on gitlab!</string>
+
     <string name="app_name" translatable="false">PocketTRacker</string>
 
 
@@ -73,6 +75,7 @@
     <string name="button_13_label" translatable="false">13</string>
     <string name="button_14_label" translatable="false">14</string>
     <string name="button_15_label" translatable="false">15</string>
+    <string name="save_string">Save game</string>
 
 
 </resources>

@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -239,6 +240,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 intent.putExtra("player1Name", player1.getName());
                 intent.putExtra("player2Name", player2.getName());
                 startActivity(intent);
+            } else{
+                Toast.makeText(this, getResources().getText(R.string.cantOpenScoreSheet_toast), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -342,8 +345,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             player2Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
             newGameButton.setVisibility(View.VISIBLE);
         } else {
-            //card backgrounds will be ungoldened by updateFocus
-            updateFocusUI();
+            updateFocusUI(); //card backgrounds ungoldened by updateFocus
             newGameButton.setVisibility(View.INVISIBLE);
         }
     }

@@ -1,7 +1,7 @@
 - allow click on playercard for details, statistics
 - in that view allow for changing of player to see the others stats
 - bug that kills game when scoresheet is opened from landscape
-- save game capability
+- refine saving to csv
 - run view for players
 - rack counter in table?
 - potentially tie all backend components into a Game Class

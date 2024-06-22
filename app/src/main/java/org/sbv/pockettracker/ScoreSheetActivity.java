@@ -1,21 +1,37 @@
 package org.sbv.pockettracker;
 
+import static androidx.core.app.ActivityCompat.startActivityForResult;
+
+import android.app.Activity;
 import android.content.Intent;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import com.google.android.material.button.MaterialButton;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 public class ScoreSheetActivity extends AppCompatActivity {
     private TableLayout tableLayout;
     private TextView player1TableHeader, player2TableHeader, player1StatisticsHeader, player2StatisticsHeader;
-
     private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
+    private MaterialButton saveButton;
     private ScoreSheet scoreSheet;
     private GameStatistics gameStatistics;
 
@@ -51,6 +67,12 @@ public class ScoreSheetActivity extends AppCompatActivity {
         for (int index = 0; index < scoreSheet.length(); index++) {
             appendTableRow(index);
         }
+
+        saveButton = findViewById(R.id.save_button);
+
+        saveButton.setOnClickListener(v -> {
+            openCreateDocumentIntent();
+        });
 
         maxRunPlayer1View = findViewById(R.id.player1statistics_maxRun);
         maxRunPlayer2View = findViewById(R.id.player2statistics_maxRun);
@@ -151,5 +173,42 @@ public class ScoreSheetActivity extends AppCompatActivity {
 
 
         tableLayout.addView(newTableRow);
+    }
+
+    private void openCreateDocumentIntent(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, ScoreSheetIO.REQUEST_CODE_PERMISSIONS);
+            }
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, ScoreSheetIO.REQUEST_CODE_PERMISSIONS);
+            }
+        }
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("text/csv");
+        intent.putExtra(Intent.EXTRA_TITLE, "game.csv");
+        startActivityForResult(intent, ScoreSheetIO.REQUEST_CODE_CREATE_DOCUMENT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ScoreSheetIO.REQUEST_CODE_CREATE_DOCUMENT && resultCode == Activity.RESULT_OK) {
+            if (data != null && data.getData() != null) {
+                Uri uri = data.getData();
+                try (OutputStream outputStream = getContentResolver().openOutputStream(uri);
+                     OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);){
+                    ScoreSheetIO.writeToFile(outputStreamWriter, scoreSheet);
+                    Toast.makeText(this, "Game saved successfully!", Toast.LENGTH_SHORT).show();
+                } catch(IOException e){
+                    Toast.makeText(this, "Failed to save game:" + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        }
     }
 }
