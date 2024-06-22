@@ -1,6 +1,7 @@
 - more detailed scoresheet
 - first statistics for players
 - more comprehensible UI
+- rudimentary game saving
 - various small improvements
 
 Hey there, thanks for checking out my app!

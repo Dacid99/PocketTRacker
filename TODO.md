@@ -2,7 +2,8 @@
 - in that view allow for changing of player to see the others stats
 - bug that kills game when scoresheet is opened from landscape
 - refine saving to csv
-- run view for players
+- introduce Inning class that can return Strings and deduce more info from an Inning, which is based on the player score and the ballnumber
+- run view for player
 - rack counter in table?
 - potentially tie all backend components into a Game Class
 - club toggleable
