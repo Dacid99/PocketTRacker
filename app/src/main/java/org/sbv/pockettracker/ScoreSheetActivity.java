@@ -42,7 +42,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
             player1TableHeader.setText(getString(R.string.player_name_format, player1Name));
             player1StatisticsHeader.setText(getString(R.string.player_name_format, player1Name));
         }
-        if (!player1Name.isEmpty()) {
+        if (!player2Name.isEmpty()) {
             player2TableHeader.setText(getString(R.string.player_name_format, player2Name));
             player2StatisticsHeader.setText(getString(R.string.player_name_format, player2Name));
         }
