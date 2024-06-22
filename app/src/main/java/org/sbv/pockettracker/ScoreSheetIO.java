@@ -1,15 +1,8 @@
 package org.sbv.pockettracker;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-
-import android.content.ContentResolver;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Environment;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 

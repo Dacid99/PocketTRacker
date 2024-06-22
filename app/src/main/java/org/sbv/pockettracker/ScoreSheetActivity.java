@@ -1,7 +1,5 @@
 package org.sbv.pockettracker;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.Manifest;
@@ -42,8 +40,11 @@ public class ScoreSheetActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         scoreSheet = intent.getParcelableExtra("scoreSheet");
-        String player1Name = intent.getStringExtra("player1Name");
+        String player1Name = intent.getStringExtra("player1Name");  //just to be safe; this should not be necessary as playernames should never be uninitialized
+        player1Name = player1Name==null ? "" : player1Name;
         String player2Name = intent.getStringExtra("player2Name");
+        player1Name = player2Name==null ? "" : player2Name;
+
 
         gameStatistics = new GameStatistics(scoreSheet);
 
@@ -70,9 +71,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
 
         saveButton = findViewById(R.id.save_button);
 
-        saveButton.setOnClickListener(v -> {
-            openCreateDocumentIntent();
-        });
+        saveButton.setOnClickListener(v -> openCreateDocumentIntent());
 
         maxRunPlayer1View = findViewById(R.id.player1statistics_maxRun);
         maxRunPlayer2View = findViewById(R.id.player2statistics_maxRun);
@@ -196,7 +195,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
             if (data != null && data.getData() != null) {
                 Uri uri = data.getData();
                 try (OutputStream outputStream = getContentResolver().openOutputStream(uri);
-                     OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);){
+                     OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream)){
                     ScoreSheetIO.writeToFile(outputStreamWriter, scoreSheet);
                     Toast.makeText(this, "Game saved successfully!", Toast.LENGTH_SHORT).show();
                 } catch(IOException e){
