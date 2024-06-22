@@ -9,9 +9,8 @@ It automatically keeps tabs on the scores. All you have to do is enter the numbe
 
 *This is just the first basic version, I have a lot of [additional features I plan on implementing](Ideas.md). Help is always welcome of course.*
 
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/org.sbv.pockettracker/)
 
-
-
-
-
-
+Or download the latest APK from the [Releases Section](https://gitlab.com/Dacid99/pockettracker/-/releases)
