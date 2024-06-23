@@ -225,8 +225,5 @@ public class ScoreSheet implements Parcelable {
         player1ScoresList = new ArrayList<>(ScoreSheetIO.convertStringArrayToIntegerArrayList(list.get(1)));
         player2ScoresList = new ArrayList<>(ScoreSheetIO.convertStringArrayToIntegerArrayList(list.get(2)));
         ballsOnTableList =  new ArrayList<>(ScoreSheetIO.convertStringArrayToIntegerArrayList(list.get(3)));
-
-        pointer = length() - 2 ;
-        progress();
     }
 }

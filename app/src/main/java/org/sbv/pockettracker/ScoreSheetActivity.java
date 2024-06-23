@@ -70,11 +70,6 @@ public class ScoreSheetActivity extends AppCompatActivity {
             player2StatisticsHeader.setText(getString(R.string.player_name_format, player2Name));
         }
 
-        // Add rows
-        for (int index = 0; index < scoreSheet.length(); index++) {
-            appendTableRow(index);
-        }
-
         saveloadButton = findViewById(R.id.saveload_button);
 
         if (scoreSheet.length() > 1) {
@@ -82,7 +77,10 @@ public class ScoreSheetActivity extends AppCompatActivity {
             saveloadButton.setOnClickListener(v -> openCreateDocumentIntent());  //save if game has started
         }else{
             saveloadButton.setText(getResources().getString(R.string.loadGame_string));
-            saveloadButton.setOnClickListener(v -> openReadDocumentIntent());   //load if game has not started
+            saveloadButton.setOnClickListener(v -> {
+                openReadDocumentIntent();
+                fillScoreSheetLayout();
+            } );   //load if game has not started
         }
 
         maxRunPlayer1View = findViewById(R.id.player1statistics_maxRun);
@@ -94,6 +92,15 @@ public class ScoreSheetActivity extends AppCompatActivity {
         meanRunPlayer1View = findViewById(R.id.player1statistics_meanRun);
         meanRunPlayer2View = findViewById(R.id.player2statistics_meanRun);
 
+
+        fillScoreSheetLayout();
+    }
+
+    private void fillScoreSheetLayout() {
+        // Add rows
+        for (int index = 0; index < scoreSheet.length(); index++) {
+            appendTableRow(index);
+        }
         maxRunPlayer1View.setText(getString(R.string.player_maxrun_format, gameStatistics.maxRunPlayer1()));
         maxRunPlayer2View.setText(getString(R.string.player_maxrun_format, gameStatistics.maxRunPlayer2()));
         inningsPlayer1View.setText(getString(R.string.player_innings_format, gameStatistics.player1Innings()));
