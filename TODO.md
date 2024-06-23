@@ -4,6 +4,7 @@
 - mark statistics and winner in table 
 - scoresheet switch button in header
 - retry layouting switch button smaller
+- reset game option
 - add more final keywords to mark immutability
 - find good statistics library
 - introduce Inning class that can return Strings and deduce more info from the player score and the ballnumber

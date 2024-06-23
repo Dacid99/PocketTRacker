@@ -6,8 +6,8 @@
     <dimen name="block1_end">0dp</dimen>
     <dimen name="textSize">20sp</dimen>
     <dimen name="smallTextSize">16sp</dimen>
-    <dimen name="tableTextSize">6sp</dimen>
-    <dimen name="tableHeaderTextSize">20sp</dimen>
+    <dimen name="tableTextSize">8sp</dimen>
+    <dimen name="tableHeaderTextSize">18sp</dimen>
     <!-- activity_scoresheet dimensions-->
     <dimen name="turn_column_weight">6</dimen>
     <dimen name="player1_column_weight">8</dimen>

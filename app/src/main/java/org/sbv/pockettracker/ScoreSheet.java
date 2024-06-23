@@ -220,11 +220,12 @@ public class ScoreSheet implements Parcelable {
         return switchReasonsList.get(turn).charAt(0);
     }
 
-    public void fromList(List<String[]> list) throws IOException {
+    public void fromList(ArrayList<String[]> list) throws IOException {
         switchReasonsList = new ArrayList<>(Arrays.asList(list.get(0)));
         player1ScoresList = new ArrayList<>(ScoreSheetIO.convertStringArrayToIntegerArrayList(list.get(1)));
         player2ScoresList = new ArrayList<>(ScoreSheetIO.convertStringArrayToIntegerArrayList(list.get(2)));
         ballsOnTableList =  new ArrayList<>(ScoreSheetIO.convertStringArrayToIntegerArrayList(list.get(3)));
+
         pointer = length() - 2 ;
         progress();
     }

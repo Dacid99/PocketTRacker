@@ -173,7 +173,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/saveGame_string"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/player1Statistics_card" />
 
     <com.google.android.material.card.MaterialCardView
