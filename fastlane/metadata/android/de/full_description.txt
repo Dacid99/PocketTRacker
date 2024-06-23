@@ -1,4 +1,4 @@
-Für alle die lieber Billardkugeln lochen als Spielstände aufzuschreiben.
+Für alle die beim Billard lieber Bälle lochen als Spielstände aufzuschreiben.
 Überlass das Mitzählen einfach dieser App. Du musst nur die restlichen Kugeln auf dem Tisch zählen und sie übernimmt den Rest für dich!
 
 Bei Problemen und Ideen kannst du dich gerne im gitlab repo melden:
