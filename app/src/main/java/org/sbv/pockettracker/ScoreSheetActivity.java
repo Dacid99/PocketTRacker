@@ -26,6 +26,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class ScoreSheetActivity extends AppCompatActivity {
     private TableLayout tableLayout;
@@ -192,7 +198,12 @@ public class ScoreSheetActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("text/csv");
-        intent.putExtra(Intent.EXTRA_TITLE, "game.csv");
+
+        Date now = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+        formatter.setTimeZone(TimeZone.getTimeZone(TimeZone.getDefault().getID()));
+        String nameProposal = "game_" + formatter.format(now) + ".csv";
+        intent.putExtra(Intent.EXTRA_TITLE, nameProposal);
         startActivityForResult(intent, ScoreSheetIO.REQUEST_CODE_CREATE_DOCUMENT);
     }
 
