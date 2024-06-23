@@ -27,8 +27,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -51,7 +49,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
         String player1Name = intent.getStringExtra("player1Name");  //just to be safe; this should not be necessary as playernames should never be uninitialized
         player1Name = player1Name==null ? "" : player1Name;
         String player2Name = intent.getStringExtra("player2Name");
-        player1Name = player2Name==null ? "" : player2Name;
+        player2Name = player2Name==null ? "" : player2Name;
 
 
         gameStatistics = new GameStatistics(scoreSheet);

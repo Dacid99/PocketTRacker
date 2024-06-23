@@ -1,17 +1,13 @@
 - allow click on playercard for details, statistics
-- in that view allow for changing of player to see the others stats
-- bug that kills game when scoresheet is opened from landscape
-- refine saving to csv
-- introduce Inning class that can return Strings and deduce more info from the player score and the ballnumber
-- run view for player
-- rack counter in table?
 - potentially tie all backend components into a Game Class
-- club toggleable
-- settings menu
+- settings menu: club toggleable, set default winningpoints
 - mark statistics and winner in table 
-- table view landscape
 - scoresheet switch button in header
 - retry layouting switch button smaller
 - add more final keywords to mark immutability
 - find good statistics library
-- figure out way to read file into scoresheet
+- introduce Inning class that can return Strings and deduce more info from the player score and the ballnumber
+- refine saving and loading based on this
+# before new release:
+- exchange startActivityForResult with ActivityResultLauncher
+- scoresheet landscape

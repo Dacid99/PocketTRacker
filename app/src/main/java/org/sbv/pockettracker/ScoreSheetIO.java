@@ -1,20 +1,15 @@
 package org.sbv.pockettracker;
 
 import android.os.Environment;
-import android.widget.Toast;
-
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.android.material.color.utilities.Score;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvException;
-import com.opencsv.exceptions.CsvValidationException;
 
 public class ScoreSheetIO {
     static final int REQUEST_CODE_PERMISSIONS = 100;
