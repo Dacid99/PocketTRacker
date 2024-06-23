@@ -22,6 +22,8 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.button.MaterialButton;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
@@ -29,7 +31,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
     private TableLayout tableLayout;
     private TextView player1TableHeader, player2TableHeader, player1StatisticsHeader, player2StatisticsHeader;
     private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
-    private MaterialButton saveButton;
+    private MaterialButton saveloadButton;
     private ScoreSheet scoreSheet;
     private GameStatistics gameStatistics;
 
@@ -69,9 +71,15 @@ public class ScoreSheetActivity extends AppCompatActivity {
             appendTableRow(index);
         }
 
-        saveButton = findViewById(R.id.save_button);
+        saveloadButton = findViewById(R.id.saveload_button);
 
-        saveButton.setOnClickListener(v -> openCreateDocumentIntent());
+        if (scoreSheet.length() > 1) {
+            saveloadButton.setText(getResources().getString(R.string.saveGame_string));
+            saveloadButton.setOnClickListener(v -> openCreateDocumentIntent());  //save if game has started
+        }else{
+            saveloadButton.setText(getResources().getString(R.string.loadGame_string));
+            saveloadButton.setOnClickListener(v -> openReadDocumentIntent());   //load if game has not started
+        }
 
         maxRunPlayer1View = findViewById(R.id.player1statistics_maxRun);
         maxRunPlayer2View = findViewById(R.id.player2statistics_maxRun);
@@ -188,6 +196,18 @@ public class ScoreSheetActivity extends AppCompatActivity {
         startActivityForResult(intent, ScoreSheetIO.REQUEST_CODE_CREATE_DOCUMENT);
     }
 
+    private void openReadDocumentIntent(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, ScoreSheetIO.REQUEST_CODE_PERMISSIONS);
+            }
+        }
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("text/csv");
+        startActivityForResult(intent, ScoreSheetIO.REQUEST_CODE_READ);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -201,8 +221,18 @@ public class ScoreSheetActivity extends AppCompatActivity {
                 } catch(IOException e){
                     Toast.makeText(this, "Failed to save game:" + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
-
-
+            }
+        }
+        if (requestCode == ScoreSheetIO.REQUEST_CODE_READ && resultCode == Activity.RESULT_OK){
+            if (data != null && data.getData() != null){
+                Uri uri = data.getData();
+                try (InputStream inputStream = getContentResolver().openInputStream(uri);
+                     InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
+                    ScoreSheetIO.loadFromFile(inputStreamReader, scoreSheet);
+                    Toast.makeText(this, "Game loaded successfully!", Toast.LENGTH_SHORT).show();
+                }catch (IOException e){
+                    Toast.makeText(this, "Failed to load game:" + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         }
     }

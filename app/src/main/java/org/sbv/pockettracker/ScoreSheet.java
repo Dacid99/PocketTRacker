@@ -6,16 +6,19 @@ import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.Contract;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 // this class in is charge of the games history
 // every turn is noted and this log can be accessed for review
 // makes revert feature possible
 public class ScoreSheet implements Parcelable {
-    private final ArrayList<Integer> player1ScoresList;
-    private final ArrayList<Integer> player2ScoresList;
-    private final ArrayList<Integer> ballsOnTableList;
-    private final ArrayList<String> switchReasonsList;
+    private ArrayList<Integer> player1ScoresList;
+    private ArrayList<Integer> player2ScoresList;
+    private ArrayList<Integer> ballsOnTableList;
+    private ArrayList<String> switchReasonsList;
 
     //this member holds the index of the current entry in the ArrayList
     //for going back in history and rewriting from there
@@ -156,6 +159,12 @@ public class ScoreSheet implements Parcelable {
         return pointerCheck && sizeChecks;
     }
 
+    static boolean isHealthyList(List<String[]> list){
+        return ( list.get(0).length == list.get(1).length )
+                && ( list.get(1).length == list.get(2).length)
+                && ( list.get(2).length == list.get(3).length );
+    }
+
     public int getScoreOfPlayer1At(int turn){
         return player1ScoresList.get(turn);
     }
@@ -211,4 +220,12 @@ public class ScoreSheet implements Parcelable {
         return switchReasonsList.get(turn).charAt(0);
     }
 
+    public void fromList(List<String[]> list) throws IOException {
+        switchReasonsList = new ArrayList<>(Arrays.asList(list.get(0)));
+        player1ScoresList = new ArrayList<>(ScoreSheetIO.convertStringArrayToIntegerArrayList(list.get(1)));
+        player2ScoresList = new ArrayList<>(ScoreSheetIO.convertStringArrayToIntegerArrayList(list.get(2)));
+        ballsOnTableList =  new ArrayList<>(ScoreSheetIO.convertStringArrayToIntegerArrayList(list.get(3)));
+        pointer = length() - 2 ;
+        progress();
+    }
 }
