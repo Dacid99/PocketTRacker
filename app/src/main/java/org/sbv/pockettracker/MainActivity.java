@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         foulButton.setOnClickListener(v -> {
             assignPoints();
-            turnPlayer.addPoints( (scoreSheet.length() == 0) ? -2:-1 );
+            turnPlayer.addPoints( (scoreSheet.turn() == 0) ? -2:-1 );
             newTurn(getString(R.string.foul_string));
         });
 
