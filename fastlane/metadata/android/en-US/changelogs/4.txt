@@ -1,6 +1,7 @@
 - more detailed scoresheet
-- first statistics for players
-- more comprehensible UI
+- landscape for scoresheet
+- some statistics for players
+- more comprehensive UI
 - rudimentary game saving
 - various small improvements
 

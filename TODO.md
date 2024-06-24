@@ -6,6 +6,7 @@
 - retry layouting switch button smaller
 - reset game option
 - add more final keywords to mark immutability
+- more logging
 - find good statistics library
 - save player names
 - introduce Inning class that can return Strings and deduce more info from the player score and the ballnumber
