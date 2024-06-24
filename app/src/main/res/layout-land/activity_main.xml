@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/missButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/miss_string"
+        android:textSize="@dimen/textSize"
+        app:layout_constraintBottom_toTopOf="@+id/foulButton"
+        app:layout_constraintEnd_toEndOf="@+id/safeButton"
+        app:layout_constraintStart_toStartOf="@+id/safeButton"
+        app:layout_constraintTop_toBottomOf="@+id/safeButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/foulButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/foul_string"
+        android:textSize="@dimen/textSize"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
+        app:layout_constraintEnd_toEndOf="@+id/missButton"
+        app:layout_constraintStart_toStartOf="@+id/missButton"
+        app:layout_constraintTop_toBottomOf="@+id/missButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/safeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="125dp"
+        android:text="@string/safe_string"
+        android:textSize="@dimen/textSize"
+        app:layout_constraintBottom_toTopOf="@+id/missButton"
+        app:layout_constraintEnd_toEndOf="@+id/ballsOnTableFloatingButton"
+        app:layout_constraintStart_toStartOf="@+id/ballsOnTableFloatingButton"
+        app:layout_constraintTop_toBottomOf="@+id/ballsOnTableFloatingButton" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/undoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/undo_string"
+        android:textSize="@dimen/textSize"
+        app:layout_constraintBottom_toTopOf="@+id/redoButton"
+        app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline"
+        app:layout_constraintStart_toEndOf="@+id/missButton"
+        app:layout_constraintTop_toTopOf="@+id/safeButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/redoButton"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="@string/redo_string"
+        android:textSize="@dimen/textSize"
+        app:layout_constraintBottom_toBottomOf="@+id/foulButton"
+        app:layout_constraintEnd_toEndOf="@+id/undoButton"
+        app:layout_constraintStart_toStartOf="@+id/undoButton"
+        app:layout_constraintTop_toBottomOf="@+id/undoButton" />
+
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/ballsOnTableFloatingButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:contentDescription="@string/newBallNumber_hint"
+        android:gravity="center"
+        android:textSize="@dimen/textSize"
+        android:text="@string/ballsOnTable_format"
+        app:layout_constraintBottom_toTopOf="@+id/safeButton"
+        app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline"
+        app:layout_constraintStart_toStartOf="@+id/start_block2_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_block2_guideline" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/winningPointsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/winnerPoints_hint"
+        app:layout_constraintBottom_toBottomOf="@+id/player1CardView"
+        app:layout_constraintEnd_toStartOf="@+id/player2CardView"
+        app:layout_constraintStart_toEndOf="@+id/player1CardView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/winningPointsInput"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="@dimen/smallTextSize"
+            app:hintEnabled="true"
+            tools:layout_editor_absoluteX="141dp"
+            tools:layout_editor_absoluteY="589dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/player2CardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/block1_top"
+        android:layout_marginBottom="75dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/end_block1_guideline"
+        app:layout_constraintStart_toEndOf="@+id/swapPlayers"
+        app:layout_constraintTop_toTopOf="@+id/top_block1_guideline">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/player2CardLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/player2NameLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/player2ClubLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/player2Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/player_name_hint"
+                    android:textSize="@dimen/textSize"
+                    app:hintEnabled="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/player2ClubLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/player2Score"
+                app:layout_constraintEnd_toEndOf="@+id/player2NameLayout"
+                app:layout_constraintStart_toStartOf="@+id/player2NameLayout"
+                app:layout_constraintTop_toBottomOf="@+id/player2NameLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/player2Club"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/player_club_hint"
+                    android:textSize="@dimen/textSize"
+                    app:hintEnabled="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player2Score"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:textColor="@color/score_color"
+                android:textSize="42sp"
+                android:text="@string/player_score_format"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/player2ClubLayout"
+                app:layout_constraintStart_toStartOf="@+id/player2ClubLayout"
+                app:layout_constraintTop_toBottomOf="@+id/player2ClubLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/player1CardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/block1_start"
+        android:layout_marginBottom="75dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/swapPlayers"
+        app:layout_constraintStart_toStartOf="@+id/start_block1_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_block1_guideline">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/player1CardLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/player1NameLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/player1ClubLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/player1Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/player_name_hint"
+                    android:textSize="@dimen/textSize"
+                    app:hintEnabled="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/player1ClubLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/player1Score"
+                app:layout_constraintEnd_toEndOf="@+id/player1NameLayout"
+                app:layout_constraintStart_toStartOf="@+id/player1NameLayout"
+                app:layout_constraintTop_toBottomOf="@+id/player1NameLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/player1Club"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/player_club_hint"
+                    android:textSize="@dimen/textSize"
+                    app:hintEnabled="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player1Score"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:textColor="@color/score_color"
+                android:textSize="42sp"
+                android:text="@string/player_score_format"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/player1ClubLayout"
+                app:layout_constraintStart_toStartOf="@+id/player1ClubLayout"
+                app:layout_constraintTop_toBottomOf="@+id/player1ClubLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/newGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newGame_string"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
+        app:layout_constraintEnd_toEndOf="@+id/winningPointsLayout"
+        app:layout_constraintStart_toStartOf="@+id/winningPointsLayout"
+        app:layout_constraintTop_toBottomOf="@+id/winningPointsLayout" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/saveGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saveGame_string"
+        app:layout_constraintStart_toEndOf="@+id/newGame"
+        app:layout_constraintTop_toTopOf="@+id/newGame" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/loadGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loadGame_string"
+        app:layout_constraintEnd_toStartOf="@+id/newGame"
+        app:layout_constraintTop_toTopOf="@+id/newGame" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/swapPlayers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:paddingTop="0dp"
+        android:paddingBottom="10dp"
+        android:text="@string/swap_string"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/winningPointsLayout"
+        app:layout_constraintEnd_toStartOf="@+id/player2CardView"
+        app:layout_constraintStart_toEndOf="@+id/player1CardView"
+        app:layout_constraintTop_toTopOf="@+id/player1CardView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/viewScoreSheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/viewScoreSheet_string"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_block2_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@fraction/top_block2_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_block1_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@fraction/top_block1_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_block2_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@fraction/bottom_block2_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_block1_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@fraction/start_block1_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_block2_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@fraction/end_block2_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_block2_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@fraction/start_block2_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_block1_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@fraction/end_block1_guideline_fraction" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_block1_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@fraction/bottom_block1_guideline_fraction" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,5 @@
 - refine saving and loading based on this
 
 # before new release:
-- scoresheet landscape
-- get basic load save running
+- landscape for main activity
 - exchange startActivityForResult with ActivityResultLauncher
