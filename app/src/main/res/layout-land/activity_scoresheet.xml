@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:id="@+id/scoresheet_table"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/turn_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/turnnumber_columnlabel"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/player1table_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/player1_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/player1_columnlabel_default"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/player2table_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/player2_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/player2_columnlabel_default"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/ballsOnTable_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/ballsOnTable_columnlabel"
+                android:textStyle="bold" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/turnnumber_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/turnnumber_subcolumnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/switchReason_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/switchReason_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/player1Increment_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/player1Increment_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/player1Total_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/player1Total_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/player2Increment_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/player2Increment_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/player2Total_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/player2Total_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/ballsOnTable_subcolumn_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/ballsOnTable_subcolumnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+        </TableRow>
+
+        <ScrollView
+            android:id="@+id/score_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:contentDescription="@string/scoresheet_scrollview_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TableLayout
+                android:id="@+id/score_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </TableLayout>
+
+        </ScrollView>
+
+    </TableLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/player1Statistics_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/colorSecondary"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/player2Statistics_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/player1statistics_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/roundedcorners_background"
+                android:backgroundTint="@color/colorPrimary"
+                android:gravity="center"
+                android:text="@string/player1_columnlabel_default"
+                android:textColor="@color/colorOnPrimary"
+                android:textSize="@dimen/smallTextSize"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/player1statistics_innings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/player1statistics_innings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/player1statistics_maxRun"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player1statistics_header" />
+
+            <TextView
+                android:id="@+id/player1statistics_maxRun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toTopOf="@id/player1statistics_meanInning"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player1statistics_innings" />
+
+            <TextView
+                android:id="@+id/player1statistics_meanInning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toTopOf="@id/player1statistics_meanRun"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player1statistics_maxRun" />
+
+            <TextView
+                android:id="@+id/player1statistics_meanRun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player1statistics_meanInning" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/player2Statistics_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorSecondary"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/player1Statistics_card"
+        app:layout_constraintStart_toStartOf="@+id/player1Statistics_card"
+        app:layout_constraintTop_toBottomOf="@+id/player1Statistics_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/player2statistics_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/roundedcorners_background"
+                android:backgroundTint="@color/colorPrimary"
+                android:gravity="center"
+                android:text="@string/player2_columnlabel_default"
+                android:textColor="@color/colorOnPrimary"
+                android:textSize="@dimen/smallTextSize"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/player2statistics_innings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/player2statistics_innings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/player2statistics_maxRun"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player2statistics_header" />
+
+            <TextView
+                android:id="@+id/player2statistics_maxRun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/player2statistics_meanInning"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player2statistics_innings" />
+
+            <TextView
+                android:id="@+id/player2statistics_meanInning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/player2statistics_meanRun"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player2statistics_maxRun" />
+
+            <TextView
+                android:id="@+id/player2statistics_meanRun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player2statistics_meanInning" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@fraction/center_guideline_fraction" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
