@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,9 +16,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
@@ -291,7 +288,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                             Toast.makeText(MainActivity.this, "Failed to save game: no data returned" , Toast.LENGTH_LONG).show();
                         }
                     }else{
-                        Log.d("debug", "MainActivity.createFileActivityLauncher in Callback: Failed to load game: operation cancelled");
+                        //Log.d("debug", "MainActivity.createFileActivityLauncher in Callback: Failed to load game: operation cancelled");
                     }
                 }
             }
@@ -327,7 +324,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                             Toast.makeText(MainActivity.this, "Failed to load game: no data returned" , Toast.LENGTH_LONG).show();
                         }
                     }else{
-                        Log.d("debug", "MainActivity.readFileActivityLauncher in Callback: Failed to load game: operation cancelled");
+                        //Log.d("debug", "MainActivity.readFileActivityLauncher in Callback: Failed to load game: operation cancelled");
                     }
                 }
         });
