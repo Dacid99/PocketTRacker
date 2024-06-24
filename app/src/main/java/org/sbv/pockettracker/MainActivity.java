@@ -221,7 +221,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             newTurn(getString(R.string.foul_string));
         });
 
-
         undoButton.setOnClickListener(v -> {
             scoreSheet.rollback();
             updateScoreUI();
@@ -229,6 +228,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             updateWinnerUI();
             switchTurnPlayer();
             updateFocusUI();
+            updateSaveLoadUI();
         });
 
         redoButton.setOnClickListener(v -> {
@@ -238,6 +238,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             updateWinnerUI();
             switchTurnPlayer();
             updateFocusUI();
+            updateSaveLoadUI();
         });
 
         newGameButton.setOnClickListener(v -> {
@@ -450,6 +451,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                     ScoreSheetIO.loadFromFile(inputStreamReader, scoreSheet);
                     if (scoreSheet.turn() % 2 == 0){
                         turnPlayer = player1;
+                    }else {
+                        turnPlayer = player2;
                     }
                     updateFocusUI();
                     updateScoreUI();

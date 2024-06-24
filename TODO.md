@@ -13,5 +13,4 @@
 - refine saving and loading based on this
 
 # before new release:
-- landscape for main activity
 - exchange startActivityForResult with ActivityResultLauncher
