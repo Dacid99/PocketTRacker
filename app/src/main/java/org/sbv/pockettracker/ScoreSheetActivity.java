@@ -1,35 +1,18 @@
 package org.sbv.pockettracker;
 
-import android.app.Activity;
+
 import android.content.Intent;
-import android.Manifest;
-import android.content.pm.PackageManager;
+
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
-import com.google.android.material.button.MaterialButton;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 public class ScoreSheetActivity extends AppCompatActivity {
     private TableLayout tableLayout;
