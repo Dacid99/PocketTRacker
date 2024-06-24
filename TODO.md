@@ -7,10 +7,9 @@
 - reset game option
 - add more final keywords to mark immutability
 - find good statistics library
-- expand load game to allow to continue the game
 - save player names
 - introduce Inning class that can return Strings and deduce more info from the player score and the ballnumber
 - refine saving and loading based on this
+- backgrounds in table can be done more concisely using LayerDrawable
+- introduce viewmodel to seperate ui and data
 
-# before new release:
-- exchange startActivityForResult with ActivityResultLauncher

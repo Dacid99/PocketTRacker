@@ -9,10 +9,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,6 +41,7 @@ import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity implements NumberPaneFragment.CustomDialogListener{
 
+    private ActivityResultLauncher<Intent> createFileActivityLauncher, readFileActivityLauncher;
     private Player player1, player2, turnPlayer;
     private PoolTable table;
     private ScoreSheet scoreSheet;
@@ -263,6 +270,67 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 Toast.makeText(this, getResources().getText(R.string.cantOpenScoreSheet_toast), Toast.LENGTH_SHORT).show();
             }
         });
+
+        createFileActivityLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult o) {
+                    if (o.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = o.getData();
+                        if (data != null && data.getData() != null) {
+                            Uri uri = data.getData();
+                            try (OutputStream outputStream = getContentResolver().openOutputStream(uri);
+                                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream)) {
+                                ScoreSheetIO.writeToFile(outputStreamWriter, scoreSheet);
+                                Toast.makeText(MainActivity.this, "Game saved successfully!", Toast.LENGTH_SHORT).show();
+                            } catch (IOException e) {
+                                Toast.makeText(MainActivity.this, "Failed to save game:" + e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }else {
+                            Toast.makeText(MainActivity.this, "Failed to save game: no data returned" , Toast.LENGTH_LONG).show();
+                        }
+                    }else{
+                        Log.d("debug", "MainActivity.createFileActivityLauncher in Callback: Failed to load game: operation cancelled");
+                    }
+                }
+            }
+        );
+
+        readFileActivityLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult o) {
+                    if (o.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = o.getData();
+                        if (data != null && data.getData() != null) {
+                            Uri uri = data.getData();
+                            try (InputStream inputStream = getContentResolver().openInputStream(uri);
+                                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
+                                ScoreSheetIO.loadFromFile(inputStreamReader, scoreSheet);
+                                if (scoreSheet.turn() % 2 == 0){
+                                    turnPlayer = player1;
+                                }else {
+                                    turnPlayer = player2;
+                                }
+                                updateFocusUI();
+                                updateScoreUI();
+                                updateUnRedoUI();
+                                updateWinnerUI();
+                                updateSaveLoadUI();
+                                Toast.makeText(MainActivity.this, "Game loaded successfully!", Toast.LENGTH_SHORT).show();
+                            } catch (IOException e) {
+                                Toast.makeText(MainActivity.this, "Failed to load game:" + e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }else{
+                            Toast.makeText(MainActivity.this, "Failed to load game: no data returned" , Toast.LENGTH_LONG).show();
+                        }
+                    }else{
+                        Log.d("debug", "MainActivity.readFileActivityLauncher in Callback: Failed to load game: operation cancelled");
+                    }
+                }
+        });
     }
 
     private void updateScoreUI() {
@@ -413,7 +481,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         formatter.setTimeZone(TimeZone.getTimeZone(TimeZone.getDefault().getID()));
         String nameProposal = "game_" + formatter.format(now) + ".csv";
         intent.putExtra(Intent.EXTRA_TITLE, nameProposal);
-        startActivityForResult(intent, ScoreSheetIO.REQUEST_CODE_CREATE_DOCUMENT);
+
+        createFileActivityLauncher.launch(intent);
     }
 
     private void openReadDocumentIntent(){
@@ -425,44 +494,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");
-        startActivityForResult(intent, ScoreSheetIO.REQUEST_CODE_READ);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ScoreSheetIO.REQUEST_CODE_CREATE_DOCUMENT && resultCode == Activity.RESULT_OK) {
-            if (data != null && data.getData() != null) {
-                Uri uri = data.getData();
-                try (OutputStream outputStream = getContentResolver().openOutputStream(uri);
-                     OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream)) {
-                    ScoreSheetIO.writeToFile(outputStreamWriter, scoreSheet);
-                    Toast.makeText(this, "Game saved successfully!", Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    Toast.makeText(this, "Failed to save game:" + e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            }
-        }
-        if (requestCode == ScoreSheetIO.REQUEST_CODE_READ && resultCode == Activity.RESULT_OK) {
-            if (data != null && data.getData() != null) {
-                Uri uri = data.getData();
-                try (InputStream inputStream = getContentResolver().openInputStream(uri);
-                     InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
-                    ScoreSheetIO.loadFromFile(inputStreamReader, scoreSheet);
-                    if (scoreSheet.turn() % 2 == 0){
-                        turnPlayer = player1;
-                    }else {
-                        turnPlayer = player2;
-                    }
-                    updateFocusUI();
-                    updateScoreUI();
-                    updateUnRedoUI();
-                    updateWinnerUI();
-                    Toast.makeText(this, "Game loaded successfully!", Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    Toast.makeText(this, "Failed to load game:" + e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            }
-        }
+        readFileActivityLauncher.launch(intent);
     }
 }
