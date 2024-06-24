@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private TextInputLayout player1NameLayout, player2NameLayout, player1ClubLayout, player2ClubLayout, winningPointsLayout;
     private TextInputEditText player1NameInput, player2NameInput, player1ClubInput, player2ClubInput, winningPointsInput;
     private MaterialCardView player1Card, player2Card;
-    private MaterialButton foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, swapPlayersButton, viewScoreSheetButton, saveGameButton, loadGameButton;
+    private MaterialButton foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, swapPlayersButton, viewScoreSheetButton, saveloadGameButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +81,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         undoButton = findViewById(R.id.undoButton);
         redoButton = findViewById(R.id.redoButton);
         newGameButton = findViewById(R.id.newGame);
-        loadGameButton = findViewById(R.id.loadGame);
-        saveGameButton = findViewById(R.id.saveGame);
+        saveloadGameButton = findViewById(R.id.saveloadGame);
         viewScoreSheetButton = findViewById(R.id.viewScoreSheet);
 
         newGame();
@@ -246,18 +245,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             newGameButton.setVisibility(View.INVISIBLE);
         });
 
-        saveGameButton.setOnClickListener(v -> openCreateDocumentIntent());
-
-        loadGameButton.setOnClickListener(v -> {
-            openReadDocumentIntent();
-            if (scoreSheet.turn() % 2 == 0){
-                turnPlayer = player1;
-            }
-            updateFocusUI();
-            updateScoreUI();
-            updateUnRedoUI();
-            updateWinnerUI();
-        });
 
         swapPlayersButton.setOnClickListener(v -> {
             player1.swapNameAndClubWith(player2);
@@ -384,10 +371,12 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     }
 
     private void updateSaveLoadUI(){
-        if (scoreSheet.length() == 1){
-            loadGameButton.setVisibility(View.VISIBLE);
+        if (scoreSheet.turn() == 0){
+            saveloadGameButton.setOnClickListener(v -> openReadDocumentIntent());
+            saveloadGameButton.setText(getString(R.string.loadGame_string));
         } else {
-            loadGameButton.setVisibility(View.INVISIBLE);
+            saveloadGameButton.setOnClickListener(v -> openCreateDocumentIntent());
+            saveloadGameButton.setText(getString(R.string.saveGame_string));
         }
     }
 
@@ -459,6 +448,13 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 try (InputStream inputStream = getContentResolver().openInputStream(uri);
                      InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
                     ScoreSheetIO.loadFromFile(inputStreamReader, scoreSheet);
+                    if (scoreSheet.turn() % 2 == 0){
+                        turnPlayer = player1;
+                    }
+                    updateFocusUI();
+                    updateScoreUI();
+                    updateUnRedoUI();
+                    updateWinnerUI();
                     Toast.makeText(this, "Game loaded successfully!", Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     Toast.makeText(this, "Failed to load game:" + e.getMessage(), Toast.LENGTH_LONG).show();
