@@ -21,10 +21,10 @@
         android:id="@+id/foulButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/foul_string"
         android:textSize="@dimen/textSize"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/saveloadGame"
         app:layout_constraintEnd_toEndOf="@+id/missButton"
         app:layout_constraintStart_toStartOf="@+id/missButton"
         app:layout_constraintTop_toBottomOf="@+id/missButton" />
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="125dp"
+        android:layout_marginEnd="130dp"
         android:text="@string/safe_string"
         android:textSize="@dimen/textSize"
         app:layout_constraintBottom_toTopOf="@+id/missButton"
@@ -75,12 +75,12 @@
         android:id="@+id/ballsOnTableFloatingButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
         android:contentDescription="@string/newBallNumber_hint"
         android:gravity="center"
-        android:textSize="@dimen/textSize"
         android:text="@string/ballsOnTable_format"
+        android:textSize="@dimen/textSize"
         app:layout_constraintBottom_toTopOf="@+id/safeButton"
         app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_block2_guideline"
@@ -282,20 +282,13 @@
         app:layout_constraintTop_toBottomOf="@+id/winningPointsLayout" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/saveGame"
+        android:id="@+id/saveloadGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/saveGame_string"
-        app:layout_constraintStart_toEndOf="@+id/newGame"
-        app:layout_constraintTop_toTopOf="@+id/newGame" />
+        app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
+        app:layout_constraintStart_toStartOf="@+id/start_block1_guideline" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/loadGame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/loadGame_string"
-        app:layout_constraintEnd_toStartOf="@+id/newGame"
-        app:layout_constraintTop_toTopOf="@+id/newGame" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/swapPlayers"
