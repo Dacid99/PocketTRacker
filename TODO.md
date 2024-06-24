@@ -11,9 +11,8 @@
 - save player names
 - introduce Inning class that can return Strings and deduce more info from the player score and the ballnumber
 - refine saving and loading based on this
-- exchange startActivityForResult with ActivityResultLauncher
 
 # before new release:
 - scoresheet landscape
-- comment out all save and load stuff
-
+- get basic load save running
+- exchange startActivityForResult with ActivityResultLauncher

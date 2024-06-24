@@ -1,6 +1,11 @@
 package org.sbv.pockettracker;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
@@ -16,6 +22,16 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.lang3.math.NumberUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity implements NumberPaneFragment.CustomDialogListener{
 
@@ -26,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private TextInputLayout player1NameLayout, player2NameLayout, player1ClubLayout, player2ClubLayout, winningPointsLayout;
     private TextInputEditText player1NameInput, player2NameInput, player1ClubInput, player2ClubInput, winningPointsInput;
     private MaterialCardView player1Card, player2Card;
-    private MaterialButton foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, swapPlayersButton, viewScoreSheetButton;
+    private MaterialButton foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, swapPlayersButton, viewScoreSheetButton, saveGameButton, loadGameButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +74,15 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         winningPointsInput.setText(getString(R.string.winnerPoints_format, Player.winningPoints));
 
+        swapPlayersButton = findViewById(R.id.swapPlayers);
         missButton = findViewById(R.id.missButton);
         safeButton = findViewById(R.id.safeButton);
         foulButton = findViewById(R.id.foulButton);
         undoButton = findViewById(R.id.undoButton);
         redoButton = findViewById(R.id.redoButton);
         newGameButton = findViewById(R.id.newGame);
-        swapPlayersButton = findViewById(R.id.swapPlayers);
+        loadGameButton = findViewById(R.id.loadGame);
+        saveGameButton = findViewById(R.id.saveGame);
         viewScoreSheetButton = findViewById(R.id.viewScoreSheet);
 
         newGame();
@@ -228,6 +246,19 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             newGameButton.setVisibility(View.INVISIBLE);
         });
 
+        saveGameButton.setOnClickListener(v -> openCreateDocumentIntent());
+
+        loadGameButton.setOnClickListener(v -> {
+            openReadDocumentIntent();
+            if (scoreSheet.turn() % 2 == 0){
+                turnPlayer = player1;
+            }
+            updateFocusUI();
+            updateScoreUI();
+            updateUnRedoUI();
+            updateWinnerUI();
+        });
+
         swapPlayersButton.setOnClickListener(v -> {
             player1.swapNameAndClubWith(player2);
             updatePlayerUI();
@@ -364,5 +395,65 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         }
         updateScoreUI();
         updateWinnerUI();
+    }
+
+    private void openCreateDocumentIntent(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                    checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE}, ScoreSheetIO.REQUEST_CODE_PERMISSIONS);
+            }
+        }
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("text/csv");
+
+        Date now = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+        formatter.setTimeZone(TimeZone.getTimeZone(TimeZone.getDefault().getID()));
+        String nameProposal = "game_" + formatter.format(now) + ".csv";
+        intent.putExtra(Intent.EXTRA_TITLE, nameProposal);
+        startActivityForResult(intent, ScoreSheetIO.REQUEST_CODE_CREATE_DOCUMENT);
+    }
+
+    private void openReadDocumentIntent(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, ScoreSheetIO.REQUEST_CODE_PERMISSIONS);
+            }
+        }
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        startActivityForResult(intent, ScoreSheetIO.REQUEST_CODE_READ);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ScoreSheetIO.REQUEST_CODE_CREATE_DOCUMENT && resultCode == Activity.RESULT_OK) {
+            if (data != null && data.getData() != null) {
+                Uri uri = data.getData();
+                try (OutputStream outputStream = getContentResolver().openOutputStream(uri);
+                     OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream)) {
+                    ScoreSheetIO.writeToFile(outputStreamWriter, scoreSheet);
+                    Toast.makeText(this, "Game saved successfully!", Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    Toast.makeText(this, "Failed to save game:" + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+        if (requestCode == ScoreSheetIO.REQUEST_CODE_READ && resultCode == Activity.RESULT_OK) {
+            if (data != null && data.getData() != null) {
+                Uri uri = data.getData();
+                try (InputStream inputStream = getContentResolver().openInputStream(uri);
+                     InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
+                    ScoreSheetIO.loadFromFile(inputStreamReader, scoreSheet);
+                    Toast.makeText(this, "Game loaded successfully!", Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    Toast.makeText(this, "Failed to load game:" + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 }

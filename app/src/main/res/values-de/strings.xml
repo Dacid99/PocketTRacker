@@ -24,8 +24,8 @@
     <string name="player_innings_format">Aufnahmen: %1$d</string>
     <string name="meanInning_format">\u2300 Aufnahme: %1$.2f</string>
     <string name="meanRun_format">\u2300 Lauf: %1$.2f</string>
-    <string name="saveGame_string">Spiel speichern</string>
+    <string name="saveGame_string">Speichern</string>
     <string name="cantOpenScoreSheet_toast">Kann den Spielbericht nicht öffnen, er ist falsch. Bitte teile mir diesen Fehler auf gitlab mit!</string>
-    <string name="loadGame_string">Spiel laden</string>
+    <string name="loadGame_string">Laden</string>
 
 </resources>

@@ -168,13 +168,6 @@
 
     </TableLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/saveload_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/saveGame_string"
-        app:layout_constraintBottom_toTopOf="@+id/player1Statistics_card" />
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/player1Statistics_card"
         android:layout_width="0dp"

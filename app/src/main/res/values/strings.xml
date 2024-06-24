@@ -23,6 +23,8 @@
     <string name="undo_string">Undo \u21B6</string>
     <string name="redo_string">Redo \u21B7</string>
     <string name="newGame_string">New Game</string>
+    <string name="saveGame_string">Save</string>
+    <string name="loadGame_string">Load</string>
     <string name="swap_string" translatable="false">\u21C6</string>
     <string name="viewScoreSheet_string">Scoresheet</string>
 
@@ -53,9 +55,6 @@
     <string name="player2Total_columnlabel" translatable="false">\u03A3</string>
 
     <string name="scoresheet_scrollview_description">Scoresheet for the straight pool game</string>
-
-    <string name="saveGame_string">Save game</string>
-    <string name="loadGame_string">Load game</string>
 
     <string name="player_maxrun_format">Top run: %1$d</string>
     <string name="player_innings_format">Innings: %1$d</string>
