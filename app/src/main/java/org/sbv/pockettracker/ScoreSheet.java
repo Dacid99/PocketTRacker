@@ -44,6 +44,7 @@ public class ScoreSheet implements Parcelable {
 
     //Parcelable methods
     protected ScoreSheet(@NonNull Parcel in){
+        pointer = in.readInt();
         switchReasonsList = in.createStringArrayList();
         player1ScoresList = in.readArrayList(Integer.class.getClassLoader());
         player2ScoresList = in.readArrayList(Integer.class.getClassLoader());
@@ -51,6 +52,7 @@ public class ScoreSheet implements Parcelable {
     }
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(pointer);
         dest.writeStringList(switchReasonsList);
         dest.writeList(player1ScoresList);
         dest.writeList(player2ScoresList);

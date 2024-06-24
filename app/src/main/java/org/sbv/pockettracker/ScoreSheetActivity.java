@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -32,7 +34,6 @@ public class ScoreSheetActivity extends AppCompatActivity {
         player1Name = player1Name==null ? "" : player1Name;
         String player2Name = intent.getStringExtra("player2Name");
         player2Name = player2Name==null ? "" : player2Name;
-
 
         gameStatistics = new GameStatistics(scoreSheet);
 
@@ -63,6 +64,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
 
 
         fillScoreSheetLayout();
+        highlightScoreSheet();
     }
 
     private void fillScoreSheetLayout() {
@@ -78,6 +80,24 @@ public class ScoreSheetActivity extends AppCompatActivity {
         meanInningPlayer2View.setText(getString(R.string.meanInning_format, gameStatistics.meanInningPlayer2()));
         meanRunPlayer1View.setText(getString(R.string.meanRun_format, gameStatistics.meanRunPlayer1()));
         meanRunPlayer2View.setText(getString(R.string.meanRun_format, gameStatistics.meanRunPlayer2()));
+    }
+
+    private void highlightScoreSheet(){
+        if (scoreSheet.turn() >= 0 && scoreSheet.turn() < tableLayout.getChildCount()){
+            TableRow turnRow = (TableRow) tableLayout.getChildAt(scoreSheet.turn());
+            Drawable background;
+            if (scoreSheet.turn() % 2 == 0){
+                background = ContextCompat.getDrawable(this, R.drawable.cell_separator_turn);
+            }else {
+                background = ContextCompat.getDrawable(this, R.drawable.cell_separator_turnplayer_turn);
+
+            }
+            for (int index = 0; index < turnRow.getChildCount(); index++){
+                turnRow.getChildAt(index).setBackground(background);
+            }
+        }else{
+            Log.d("Warning", "ScoreSheetActivity.highlightScoreSheet: check of pointer failed");
+        }
     }
 
     private void appendTableRow(int turn) {
