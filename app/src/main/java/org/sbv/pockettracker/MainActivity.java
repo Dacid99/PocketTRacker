@@ -323,6 +323,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         updateUnRedoUI();
         updateScoreUI();
         updateWinnerUI();
+        updateSaveLoadUI();
     }
 
     private void newGame(){
@@ -340,6 +341,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         updateWinnerUI();
         updatePlayerUI();
         updateFocusUI();
+        updateSaveLoadUI();
     }
 
     private void switchTurnPlayer(){
@@ -378,6 +380,14 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         } else {
             updateFocusUI(); //card backgrounds ungoldened by updateFocus
             newGameButton.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void updateSaveLoadUI(){
+        if (scoreSheet.length() == 1){
+            loadGameButton.setVisibility(View.VISIBLE);
+        } else {
+            loadGameButton.setVisibility(View.INVISIBLE);
         }
     }
 
