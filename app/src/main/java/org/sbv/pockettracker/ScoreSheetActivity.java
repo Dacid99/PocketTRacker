@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
@@ -95,7 +96,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
                 turnRow.getChildAt(index).setBackground(background);
             }
         }else{
-            //Log.d("Warning", "ScoreSheetActivity.highlightScoreSheet: check of pointer failed");
+            Log.d("Failed ifelse", "ScoreSheetActivity.highlightScoreSheet: check of pointer failed");
         }
     }
 

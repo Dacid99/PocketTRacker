@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.Pools;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -288,7 +290,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                             Toast.makeText(MainActivity.this, "Failed to save game: no data returned" , Toast.LENGTH_LONG).show();
                         }
                     }else{
-                        //Log.d("debug", "MainActivity.createFileActivityLauncher in Callback: Failed to load game: operation cancelled");
+                        Log.d("IO", "MainActivity.createFileActivityLauncher in Callback: Failed to load game: operation cancelled");
                     }
                 }
             }
@@ -324,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                             Toast.makeText(MainActivity.this, "Failed to load game: no data returned" , Toast.LENGTH_LONG).show();
                         }
                     }else{
-                        //Log.d("debug", "MainActivity.readFileActivityLauncher in Callback: Failed to load game: operation cancelled");
+                        Log.d("IO", "MainActivity.readFileActivityLauncher in Callback: Failed to load game: operation cancelled");
                     }
                 }
         });
@@ -400,8 +402,10 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private void switchTurnPlayer(){
         if (turnPlayer == player1) {
             turnPlayer = player2;
-        }else {
+        }else if (turnPlayer == player2){
             turnPlayer = player1;
+        }else {
+            Log.e("Failed ifelse", "In MainActivity.switchTurnPlayer: Turnplayer is neither player1 or player2!");
         }
     }
 
@@ -413,13 +417,15 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             player2Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
             player2Card.setCardElevation(0);
             player2ScoreView.setEnabled(false);
-        }else {
+        }else if (turnPlayer == player2) {
             player1Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
             player1Card.setCardElevation(0);
             player1ScoreView.setEnabled(false);
             player2Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
             player2Card.setCardElevation(10);
             player2ScoreView.setEnabled(true);
+        }else {
+            Log.e("Failed ifelse", "In MainActivity.updateFocusUI: Turnplayer is neither player1 or player2!");
         }
     }
 
