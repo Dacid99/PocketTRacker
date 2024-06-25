@@ -77,7 +77,8 @@
     <string name="button_13_label" translatable="false">13</string>
     <string name="button_14_label" translatable="false">14</string>
     <string name="button_15_label" translatable="false">15</string>
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
