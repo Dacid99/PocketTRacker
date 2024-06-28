@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class PlayerFragment extends DialogFragment {
     private View view;
     private TextInputLayout playerNameLayout, playerClubLayout;
     private TextInputEditText playerNameInput, playerClubInput;
-    private MaterialButton toOtherPlayerButton;
+    private MaterialButton leftToOtherPlayerButton, rightToOtherPlayerButton;
 
     private TextView playerScoreView;
 
@@ -85,7 +86,16 @@ public class PlayerFragment extends DialogFragment {
         playerClubInput = view.findViewById(R.id.playerClub);
         playerScoreView = view.findViewById(R.id.playerScore);
 
-        toOtherPlayerButton = view.findViewById(R.id.toOtherPlayerButton);
+        leftToOtherPlayerButton = view.findViewById(R.id.left_toOtherPlayerButton);
+        rightToOtherPlayerButton = view.findViewById(R.id.right_toOtherPlayerButton);
+
+        if (playerNumber == 1){
+            leftToOtherPlayerButton.setVisibility(View.INVISIBLE);
+        }else if (playerNumber == 2){
+            rightToOtherPlayerButton.setVisibility(View.INVISIBLE);
+        }else {
+            Log.d("bad parameter", "In PlayerFragment.onCreateView: playerNumber is neither 0 or 1!");
+        }
 
         Player player = listener.requestPlayer(playerNumber);
         playerNameInput.setText(getString(R.string.player_name_format, player.getName()));
@@ -128,7 +138,14 @@ public class PlayerFragment extends DialogFragment {
             }
         });
 
-        toOtherPlayerButton.setOnClickListener(new View.OnClickListener() {
+        leftToOtherPlayerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToOtherPlayer();
+            }
+        });
+
+        rightToOtherPlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switchToOtherPlayer();
