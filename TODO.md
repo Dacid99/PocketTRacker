@@ -1,9 +1,8 @@
-- allow click on playercard for details, statistics
 - potentially tie all backend components into a Game Class
 - settings menu: club toggleable, set default winningpoints
 - mark statistics and winner in table 
 - scoresheet switch button in header
-- retry layouting switch button smaller
+- layout switch button into playerfragment
 - reset game option
 - add more final keywords to mark immutability
 - more logging
@@ -13,4 +12,5 @@
 - refine saving and loading based on this
 - backgrounds in table can be done more concisely using LayerDrawable
 - introduce viewmodel to seperate ui and data
+- weird winner behaviour with un and redo
 

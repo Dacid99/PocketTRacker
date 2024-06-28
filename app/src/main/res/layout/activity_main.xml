@@ -255,9 +255,9 @@
         android:layout_height="wrap_content"
         android:text="@string/newGame_string"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
-        app:layout_constraintEnd_toEndOf="@+id/winningPointsLayout"
-        app:layout_constraintStart_toStartOf="@+id/winningPointsLayout"
+        app:layout_constraintBottom_toTopOf="@+id/ballsOnTableFloatingButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/winningPointsLayout" />
 
     <com.google.android.material.button.MaterialButton

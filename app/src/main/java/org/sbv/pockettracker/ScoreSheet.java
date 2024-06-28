@@ -93,7 +93,7 @@ public class ScoreSheet implements Parcelable {
     }
 
     public void rollback(){
-        if (pointer == 0) return;
+        if (isStart()) return;
         pointer--;
         trackedPlayer1.setScore( player1ScoresList.get(pointer) );
         trackedPlayer2.setScore( player2ScoresList.get(pointer) );

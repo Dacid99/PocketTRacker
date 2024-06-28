@@ -155,8 +155,6 @@ public class PlayerFragment extends DialogFragment {
         return view;
     }
 
-
-
     private void switchToOtherPlayer(){
         FragmentManager fragmentManager = getParentFragmentManager();
         int otherPlayerNumber = (playerNumber == 1) ? 2 : 1 ;
