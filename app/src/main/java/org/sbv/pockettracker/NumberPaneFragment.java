@@ -18,10 +18,12 @@ import com.google.android.material.button.MaterialButton;
 import java.util.Objects;
 
 public class NumberPaneFragment extends DialogFragment {
-    public interface CustomDialogListener {
-        void onDialogClick(int number);
+
+    private static final String MAXNUMBERPARAMETER = "maxNumber";
+    public interface NumberPaneFragmentProvider {
+        void onNumberPaneClick(int number);
     }
-    private CustomDialogListener listener;
+    private NumberPaneFragmentProvider listener;
     private View view;
     private int maxNumber;
 
@@ -31,7 +33,7 @@ public class NumberPaneFragment extends DialogFragment {
     public static NumberPaneFragment newInstance(int maxNumber){
         NumberPaneFragment fragment = new NumberPaneFragment();
         Bundle args = new Bundle();
-        args.putInt("maxNumber", maxNumber);
+        args.putInt(MAXNUMBERPARAMETER, maxNumber);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,10 +41,19 @@ public class NumberPaneFragment extends DialogFragment {
     public void onAttach(@NonNull Context context){
         super.onAttach(context);
         try{
-            listener = (CustomDialogListener) context;
+            listener = (NumberPaneFragmentProvider) context;
         }catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + "must implement CustomDialogListener");
         }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        if (getArguments() == null){
+            dismiss();
+        }
+        maxNumber = getArguments().getInt("maxNumber");
     }
     @Nullable
     @Override
@@ -52,10 +63,6 @@ public class NumberPaneFragment extends DialogFragment {
         grid = view.findViewById(R.id.numberGrid);
         findButtons();
         setButtonListeners();
-        if (getArguments() == null){
-            dismiss();
-        }
-        maxNumber = getArguments().getInt("maxNumber");
 
         configurePanels();
 
@@ -99,7 +106,7 @@ public class NumberPaneFragment extends DialogFragment {
             buttonArray[number - 1].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onDialogClick(buttonReturnNumber);
+                    listener.onNumberPaneClick(buttonReturnNumber);
                     dismiss();
                 }
             });

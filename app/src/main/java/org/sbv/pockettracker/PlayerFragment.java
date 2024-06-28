@@ -1,64 +1,150 @@
 package org.sbv.pockettracker;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PlayerFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class PlayerFragment extends Fragment {
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.Objects;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
+public class PlayerFragment extends DialogFragment {
+
+    public interface PlayerFragmentProvider {
+        void onNameInput(int playerNumber, String name);
+        void onClubInput(int playerNumber, String club);
+        Player requestPlayer(int playerNumber);
+        ScoreSheet requestScoreSheet();
+    }
+    private static final String PLAYERNUMBERPARAMETER = "playerNumber";
+
+    private int playerNumber;
+    private View view;
+    private TextInputLayout playerNameLayout, playerClubLayout;
+    private TextInputEditText playerNameInput, playerClubInput;
+    private MaterialButton toOtherPlayerButton;
+
+    private TextView playerScoreView;
+
+
+    private PlayerFragmentProvider listener;
     public PlayerFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PlayerFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PlayerFragment newInstance(String param1, String param2) {
+    public static PlayerFragment newInstance(int playerNumber) {
         PlayerFragment fragment = new PlayerFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(PLAYERNUMBERPARAMETER, playerNumber);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context){
+        super.onAttach(context);
+        try{
+            listener = (PlayerFragment.PlayerFragmentProvider) context;
+        }catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + "must implement PlayerFragmentProvider");
+        }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            playerNumber = getArguments().getInt(PLAYERNUMBERPARAMETER);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_player, container, false);
+        view = inflater.inflate(R.layout.fragment_player, container, false);
+        Objects.requireNonNull(Objects.requireNonNull(getDialog()).getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        playerNameInput = view.findViewById(R.id.playerName);
+        playerClubInput = view.findViewById(R.id.playerClub);
+        playerScoreView = view.findViewById(R.id.playerScore);
+
+        toOtherPlayerButton = view.findViewById(R.id.toOtherPlayerButton);
+
+        Player player = listener.requestPlayer(playerNumber);
+        playerNameInput.setText(getString(R.string.player_name_format, player.getName()));
+        playerClubInput.setText(getString(R.string.player_club_format, player.getClub()));
+        playerScoreView.setText(getString(R.string.player_score_format, player.getScore()));
+
+        playerNameInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String newName = s.toString();
+                listener.onNameInput(playerNumber, newName);
+            }
+        });
+
+        playerClubInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String newName = s.toString();
+                listener.onClubInput(playerNumber, newName);
+            }
+        });
+
+        toOtherPlayerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToOtherPlayer();
+            }
+        });
+
+        return view;
+    }
+
+
+
+    private void switchToOtherPlayer(){
+        FragmentManager fragmentManager = getParentFragmentManager();
+        int otherPlayerNumber = (playerNumber == 1) ? 2 : 1 ;
+        PlayerFragment otherPlayerFragment = PlayerFragment.newInstance(otherPlayerNumber);
+        otherPlayerFragment.show(fragmentManager, "Player"+otherPlayerNumber+"Fragment");
+        dismiss();
     }
 }

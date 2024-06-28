@@ -1,11 +1,8 @@
 package org.sbv.pockettracker;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,7 +16,6 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.util.Pools;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -38,15 +34,15 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class MainActivity extends AppCompatActivity implements NumberPaneFragment.CustomDialogListener{
+public class MainActivity extends AppCompatActivity implements NumberPaneFragment.NumberPaneFragmentProvider, PlayerFragment.PlayerFragmentProvider {
 
     private ActivityResultLauncher<Intent> createFileActivityLauncher, readFileActivityLauncher;
     private Player player1, player2, turnPlayer;
     private PoolTable table;
     private ScoreSheet scoreSheet;
-    private TextView player1ScoreView, player2ScoreView, ballsOnTableFloatingButton;
-    private TextInputLayout player1NameLayout, player2NameLayout, player1ClubLayout, player2ClubLayout, winningPointsLayout;
-    private TextInputEditText player1NameInput, player2NameInput, player1ClubInput, player2ClubInput, winningPointsInput;
+    private TextView player1NameView, player2NameView, player1ClubView, player2ClubView, player1ScoreView, player2ScoreView, ballsOnTableFloatingButton;
+    private TextInputLayout winningPointsLayout;
+    private TextInputEditText winningPointsInput;
     private MaterialCardView player1Card, player2Card;
     private MaterialButton foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, swapPlayersButton, viewScoreSheetButton, saveloadGameButton;
 
@@ -55,20 +51,14 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        player1ScoreView = findViewById(R.id.player1Score);
-        player2ScoreView = findViewById(R.id.player2Score);
+        player1ScoreView = findViewById(R.id.player1ScoreView);
+        player2ScoreView = findViewById(R.id.player2ScoreView);
 
-        player1NameLayout = findViewById(R.id.player1NameLayout);
-        player1NameInput = findViewById(R.id.player1Name);
+        player1NameView = findViewById(R.id.player1NameView);
+        player2NameView = findViewById(R.id.player2NameView);
 
-        player2NameLayout= findViewById(R.id.player2NameLayout);
-        player2NameInput = findViewById(R.id.player2Name);
-
-        player1ClubLayout = findViewById(R.id.player1ClubLayout);
-        player1ClubInput = findViewById(R.id.player1Club);
-
-        player2ClubLayout= findViewById(R.id.player2ClubLayout);
-        player2ClubInput = findViewById(R.id.player2Club);
+        player1ClubView = findViewById(R.id.player1ClubView);
+        player2ClubView = findViewById(R.id.player2ClubView);
 
         player1Card = findViewById(R.id.player1CardView);
         player2Card = findViewById(R.id.player2CardView);
@@ -92,85 +82,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         newGame();
 
-        player1NameInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String newName = s.toString();
-                if (!newName.equals( player1.getName() ) ) {
-                    player1.setName(newName);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        player2NameInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String newName = s.toString();
-                if (!newName.equals( player2.getName()) ) {
-                    player2.setName(newName);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        player1ClubInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String newClub = s.toString();
-                if (!newClub.equals( player1.getClub() ) ) {
-                    player1.setClub(newClub);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        player2ClubInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String newClub = s.toString();
-                if (!newClub.equals( player2.getClub()) ) {
-                    player2.setClub(newClub);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
         winningPointsInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -203,6 +114,22 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 } else {
                     winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
                 }
+            }
+        });
+
+        player1Card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlayerFragment playerFragment = PlayerFragment.newInstance(1);
+                playerFragment.show(getSupportFragmentManager(), "Player1Fragment");
+            }
+        });
+
+        player2Card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlayerFragment playerFragment = PlayerFragment.newInstance(2);
+                playerFragment.show(getSupportFragmentManager(), "Player2Fragment");
             }
         });
 
@@ -365,10 +292,10 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     }
 
     private void updatePlayerUI(){
-        player1NameInput.setText(getString(R.string.player_name_format, player1.getName()));
-        player2NameInput.setText(getString(R.string.player_name_format, player2.getName()));
-        player1ClubInput.setText(getString(R.string.player_club_format, player1.getClub()));
-        player2ClubInput.setText(getString(R.string.player_club_format, player2.getClub()));
+        player1NameView.setText(getString(R.string.player_name_format, player1.getName()));
+        player2NameView.setText(getString(R.string.player_name_format, player2.getName()));
+        player1ClubView.setText(getString(R.string.player_club_format, player1.getClub()));
+        player2ClubView.setText(getString(R.string.player_club_format, player2.getClub()));
     }
 
     private void newTurn(String reason){
@@ -459,7 +386,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
     //numberpanelistener methods
     @Override
-    public void onDialogClick(int number){
+    public void onNumberPaneClick(int number){
         table.setNumberOfBalls(number);
         if (number == 1) {
             assignPoints();
@@ -468,6 +395,46 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         updateWinnerUI();
     }
 
+    //playerfragmentprovider methods
+    @Override
+    public void onNameInput(int playerNumber, String name){
+        if (playerNumber == 1) {
+           player1.setName(name);
+        }else if (playerNumber == 2){
+            player2.setName(name);
+        }else{
+            Log.d("argument error", "In MainActivity.onNameInput: No such playerNumber:" + playerNumber);
+        }
+        updatePlayerUI();
+    }
+    @Override
+    public void onClubInput(int playerNumber, String club){
+        if (playerNumber == 1) {
+            player1.setClub(club);
+        }else if (playerNumber == 2){
+            player2.setClub(club);
+        }else{
+            Log.d("argument error", "In MainActivity.onNameInput: No such playerNumber:" + playerNumber);
+        }
+        updatePlayerUI();
+    }
+    @Override
+    public Player requestPlayer(int playerNumber){
+        if (playerNumber == 1) {
+            return player1;
+        }else if (playerNumber == 2){
+            return player2;
+        }else {
+            Log.d("argument error", "In MainActivity.requestPlayer: No such playerNumber:" + playerNumber);
+            return null;
+        }
+    }
+    @Override
+    public ScoreSheet requestScoreSheet(){
+        return scoreSheet;
+    }
+
+    //IO for saving and loading
     private void openCreateDocumentIntent(){
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
