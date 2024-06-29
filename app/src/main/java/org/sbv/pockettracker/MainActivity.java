@@ -158,9 +158,9 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             scoreSheet.rollback();
             updateScoreUI();
             updateUnRedoUI();
-            updateWinnerUI();
             switchTurnPlayer();
             updateFocusUI();
+            updateWinnerUI();
             updateSaveLoadUI();
         });
 
@@ -168,9 +168,9 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             scoreSheet.progress();
             updateScoreUI();
             updateUnRedoUI();
-            updateWinnerUI();
             switchTurnPlayer();
             updateFocusUI();
+            updateWinnerUI();
             updateSaveLoadUI();
         });
 
