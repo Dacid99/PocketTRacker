@@ -83,10 +83,10 @@ public class ScoreSheetActivity extends AppCompatActivity {
     }
 
     private void highlightScoreSheet(){
-        if (scoreSheet.turn() >= 0 && scoreSheet.turn() < tableLayout.getChildCount()){
-            TableRow turnRow = (TableRow) tableLayout.getChildAt(scoreSheet.turn());
+        if (scoreSheet.currentTurn() >= 0 && scoreSheet.currentTurn() < tableLayout.getChildCount()){
+            TableRow turnRow = (TableRow) tableLayout.getChildAt(scoreSheet.currentTurn());
             Drawable background;
-            if (scoreSheet.turn() % 2 == 0){
+            if (scoreSheet.currentTurn() % 2 == 0){
                 background = ContextCompat.getDrawable(this, R.drawable.cell_separator_turn);
             }else {
                 background = ContextCompat.getDrawable(this, R.drawable.cell_separator_turnplayer_turn);

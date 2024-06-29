@@ -1,24 +1,21 @@
 package org.sbv.pockettracker;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.Contract;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Iterator;
 
 // this class in is charge of the games history
 // every turn is noted and this log can be accessed for review
 // makes revert feature possible
-public class ScoreSheet implements Parcelable {
-    private ArrayList<Integer> player1ScoresList;
-    private ArrayList<Integer> player2ScoresList;
-    private ArrayList<Integer> ballsOnTableList;
-    private ArrayList<String> switchReasonsList;
+public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
+    private final ArrayList<Inning> inningsList;
 
     //this member holds the index of the current entry in the ArrayList
     //for going back in history and rewriting from there
@@ -26,17 +23,86 @@ public class ScoreSheet implements Parcelable {
     private PoolTable trackedTable;
     private Player trackedPlayer1, trackedPlayer2;
 
+    @NonNull
+    @Override
+    public Iterator<Inning> iterator() {
+        return inningsList.iterator();
+    }
+
+    public static class Inning implements Parcelable{
+        public String switchReason;
+        public int player1Score;
+        public int player2Score;
+        public int ballsOnTable;
+
+        public Inning(){
+        }
+        public Inning(String[] array){
+            if (array.length == 4) {
+                switchReason = array[0];
+                try {
+                    player1Score = Integer.parseInt(array[1]);
+                    player2Score = Integer.parseInt(array[2]);
+                    ballsOnTable = Integer.parseInt(array[3]);
+                }catch (NumberFormatException e){
+                    Log.d("Exception occurred", "In ScoreSheet.Turn.fromStringArray: "+e.getMessage());
+                }
+            }else {
+                Log.d("Bad argument", "In ScoreSheet.Turn.fromStringArray: array.length is not 4!"+ Arrays.toString(array));
+            }
+        }
+        public String[] toStringArray(){
+            String[] array =  new String[4];
+            array[0] = switchReason;
+            array[1] = String.valueOf(player1Score);
+            array[2] = String.valueOf(player2Score);
+            array[3] = String.valueOf(ballsOnTable);
+            return array;
+        }
+        // parcelable methods
+        protected Inning(Parcel in){
+            switchReason = in.readString();
+            player1Score = in.readInt();
+            player2Score = in.readInt();
+            ballsOnTable = in.readInt();
+        }
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+        @Override
+        public void writeToParcel(@NonNull Parcel dest, int flags) {
+            dest.writeString(switchReason);
+            dest.writeInt(player1Score);
+            dest.writeInt(player2Score);
+            dest.writeInt(ballsOnTable);
+        }
+        public static final Creator<Inning> CREATOR = new Creator<Inning>() {
+            @NonNull
+            @Contract("_ -> new")
+            @Override
+            public Inning createFromParcel(Parcel in) {
+                return new Inning(in);
+            }
+
+            @NonNull
+            @Contract(value = "_ -> new", pure = true)
+            @Override
+            public Inning[] newArray(int size) {
+                return new Inning[size];
+            }
+        };
+    }
+
     public ScoreSheet(PoolTable table, Player player1, Player player2){
         //watched objects
         this.trackedTable = table;
         this.trackedPlayer1 = player1;
         this.trackedPlayer2 = player2;
         //set up containers for data
-        switchReasonsList = new ArrayList<>();
-        player1ScoresList = new ArrayList<>();
-        player2ScoresList = new ArrayList<>();
-        ballsOnTableList = new ArrayList<>();
-        pointer = -1; //directly incremented by update
+        this.inningsList = new ArrayList<>();
+
+        this.pointer = -1; //directly incremented by update
         //enter starting values
         // this is crucial for statistics, as the list is never empty!
         update("   ");
@@ -45,18 +111,12 @@ public class ScoreSheet implements Parcelable {
     //Parcelable methods
     protected ScoreSheet(@NonNull Parcel in){
         pointer = in.readInt();
-        switchReasonsList = in.createStringArrayList();
-        player1ScoresList = in.readArrayList(Integer.class.getClassLoader());
-        player2ScoresList = in.readArrayList(Integer.class.getClassLoader());
-        ballsOnTableList = in.readArrayList(Integer.class.getClassLoader());
+        inningsList = in.readArrayList(Inning.class.getClassLoader());
     }
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(pointer);
-        dest.writeStringList(switchReasonsList);
-        dest.writeList(player1ScoresList);
-        dest.writeList(player2ScoresList);
-        dest.writeList(ballsOnTableList);
+        dest.writeList(inningsList);
     }
     @Override
     public int describeContents() {
@@ -85,40 +145,39 @@ public class ScoreSheet implements Parcelable {
         if (!isLatest()){
             clearAfterPointer();
         }
-        player1ScoresList.add(trackedPlayer1.getScore());
-        player2ScoresList.add(trackedPlayer2.getScore());
-        ballsOnTableList.add(trackedTable.getNumberOfBalls());
-        switchReasonsList.add(reason);
+        Inning turn = new Inning();
+        turn.switchReason = reason;
+        turn.player1Score = trackedPlayer1.getScore();
+        turn.player2Score = trackedPlayer2.getScore();
+        turn.ballsOnTable = trackedTable.getNumberOfBalls();
+
+        inningsList.add(turn);
         pointer++;
     }
 
     public void rollback(){
         if (isStart()) return;
         pointer--;
-        trackedPlayer1.setScore( player1ScoresList.get(pointer) );
-        trackedPlayer2.setScore( player2ScoresList.get(pointer) );
-        trackedTable.setOldNumberOfBalls( ballsOnTableList.get(pointer));
-        trackedTable.setNumberOfBalls( ballsOnTableList.get(pointer) );
+        trackedPlayer1.setScore( inningsList.get(pointer).player1Score );
+        trackedPlayer2.setScore( inningsList.get(pointer).player2Score );
+        trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+        trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
     }
 
     public void progress(){
         if (isLatest()) return;
         pointer++;
-        trackedPlayer1.setScore( player1ScoresList.get(pointer) );
-        trackedPlayer2.setScore( player2ScoresList.get(pointer) );
-        trackedTable.setOldNumberOfBalls( ballsOnTableList.get(pointer));
-        trackedTable.setNumberOfBalls( ballsOnTableList.get(pointer) );
-    }
-
-    public ArrayList<String> getSwitchReasonList(){
-        return switchReasonsList;
+        trackedPlayer1.setScore( inningsList.get(pointer).player1Score );
+        trackedPlayer2.setScore( inningsList.get(pointer).player2Score );
+        trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+        trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
     }
 
     public int length(){
-        return player1ScoresList.size();
+        return inningsList.size();
     }
 
-    public int turn(){
+    public int currentTurn(){
         return pointer;
     }
 
@@ -133,102 +192,93 @@ public class ScoreSheet implements Parcelable {
     }
 
     private void clearAfterPointer(){
-        for (int n = length()-1; n>pointer; n--){
-            player1ScoresList.remove(n);
-            player2ScoresList.remove(n);
-            ballsOnTableList.remove(n);
-            switchReasonsList.remove(n);
-        }
-    }
-
-    private void clearUntilPresent(){
-        int n;
-        while (!isLatest()){
-            n = length() - 1;
-            player1ScoresList.remove(n);
-            player2ScoresList.remove(n);
-            ballsOnTableList.remove(n);
-            switchReasonsList.remove(n);
+        if (length() > pointer + 1) {
+            inningsList.subList(pointer + 1, length()).clear();
         }
     }
 
     public boolean isHealthy(){
-        boolean pointerCheck = pointer >= 0 && pointer < player1ScoresList.size(); //pointer must not be negative or larger than the list
-        boolean sizeChecks = ( player1ScoresList.size() == player2ScoresList.size() )
-                && ( player2ScoresList.size() == ballsOnTableList.size() )
-                && ( ballsOnTableList.size() == switchReasonsList.size() );
-
-        return pointerCheck && sizeChecks;
+        return pointer >= 0 && pointer < length();
     }
 
-    static boolean isHealthyList(List<String[]> list){
-        return ( list.get(0).length == list.get(1).length )
-                && ( list.get(1).length == list.get(2).length)
-                && ( list.get(2).length == list.get(3).length );
+    public ArrayList<Inning> getInningsList(){
+        return inningsList;
     }
-
+    public ArrayList<String> getSwitchReasonList(){
+        ArrayList<String> switchReasonsList = new ArrayList<>();
+        for (Inning turn : inningsList){
+            switchReasonsList.add(turn.switchReason);
+        }
+        return switchReasonsList;
+    }
+    public ArrayList<Integer> getPlayer1ScoresList(){
+        ArrayList<Integer> player1ScoresList = new ArrayList<>();
+        for (Inning turn : inningsList){
+            player1ScoresList.add(turn.player1Score);
+        }
+        return player1ScoresList;
+    }
+    public ArrayList<Integer> getPlayer2ScoresList(){
+        ArrayList<Integer> player2ScoresList = new ArrayList<>();
+        for (Inning turn : inningsList){
+            player2ScoresList.add(turn.player2Score);
+        }
+        return player2ScoresList;
+    }
+    public ArrayList<Integer> getBallsOnTableList(){
+        ArrayList<Integer> ballsOnTableList = new ArrayList<>();
+        for (Inning turn : inningsList){
+            ballsOnTableList.add(turn.ballsOnTable);
+        }
+        return ballsOnTableList;
+    }
     public int getScoreOfPlayer1At(int turn){
-        return player1ScoresList.get(turn);
+        return inningsList.get(turn).player1Score;
     }
     public int getScoreOfPlayer2At(int turn){
-        return player2ScoresList.get(turn);
+        return inningsList.get(turn).player2Score;
     }
+    public int getBallsOnTableAt(int turn){
+        return inningsList.get(turn).ballsOnTable;
+    }
+
     public int getRunOfPlayer1At(int turn) {
         if (turn <= 0 || turn >= length()) {
             return 0;
         }
-        return player1ScoresList.get(turn) - player1ScoresList.get(turn - 1 );
+        return getScoreOfPlayer1At(turn) - getScoreOfPlayer1At(turn - 1 );
     }
     public int getRunOfPlayer2At(int turn) {
         if (turn <= 0 || turn >= length()) {
             return 0;
         }
-        return player2ScoresList.get(turn) - player2ScoresList.get(turn - 1);
-    }
-
-    public int getBallsOnTableAt(int turn){
-        return ballsOnTableList.get(turn);
-    }
-
-    public ArrayList<Integer> getPlayer1ScoresList(){
-        return player1ScoresList;
+        return getScoreOfPlayer2At(turn) - getScoreOfPlayer2At(turn - 1);
     }
 
     public ArrayList<Integer> getPlayer1IncrementsList(){
         ArrayList<Integer> player1IncrementsList = new ArrayList<>();
         for (int index =  1; index<length(); index++){
-            player1IncrementsList.add(player1ScoresList.get(index)-player1ScoresList.get(index-1));
+            player1IncrementsList.add(getRunOfPlayer1At(index));
         }
         return player1IncrementsList;
     }
-
-    public ArrayList<Integer> getPlayer2ScoresList(){
-        return player2ScoresList;
-    }
-
     public ArrayList<Integer> getPlayer2IncrementsList(){
         ArrayList<Integer> player2IncrementsList = new ArrayList<>();
         for (int index =  1; index<length(); index++){
-            player2IncrementsList.add(player2ScoresList.get(index)-player2ScoresList.get(index-1));
+            player2IncrementsList.add(getRunOfPlayer2At(index));
         }
         return player2IncrementsList;
     }
 
-    public ArrayList<Integer> getBallsOnTableList(){
-        return ballsOnTableList;
-    }
-
     public char getSwitchReasonAt(int turn){
-        return switchReasonsList.get(turn).charAt(0);
+        return inningsList.get(turn).switchReason.charAt(0);
     }
 
-    public void fromList(ArrayList<String[]> list) throws IOException {
-        switchReasonsList = new ArrayList<>(Arrays.asList(list.get(0)));
-        player1ScoresList = new ArrayList<>(ScoreSheetIO.convertStringArrayToIntegerArrayList(list.get(1)));
-        player2ScoresList = new ArrayList<>(ScoreSheetIO.convertStringArrayToIntegerArrayList(list.get(2)));
-        ballsOnTableList =  new ArrayList<>(ScoreSheetIO.convertStringArrayToIntegerArrayList(list.get(3)));
-
-        pointer = length() -2 ;
+    public void update(Inning turn){
+        if (!isLatest()){
+            clearAfterPointer();
+        }
+        inningsList.add(turn);
         progress();
     }
 }

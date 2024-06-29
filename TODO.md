@@ -6,9 +6,6 @@
 - add more final keywords to mark immutability
 - more logging
 - find good statistics library
-- save player names
-- introduce Inning class that can return Strings and deduce more info from the player score and the ballnumber
-- refine saving and loading based on this
 - backgrounds in table can be done more concisely using LayerDrawable
 - introduce viewmodel to seperate ui and data
 

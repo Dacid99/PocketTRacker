@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         foulButton.setOnClickListener(v -> {
             assignPoints();
-            turnPlayer.addPoints( (scoreSheet.turn() == 0) ? -2:-1 );
+            turnPlayer.addPoints( (scoreSheet.currentTurn() == 0) ? -2:-1 );
             newTurn(getString(R.string.foul_string));
         });
 
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                             Uri uri = data.getData();
                             try (OutputStream outputStream = getContentResolver().openOutputStream(uri);
                                  OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream)) {
-                                ScoreSheetIO.writeToFile(outputStreamWriter, scoreSheet);
+                                ScoreSheetIO.writeToFile(outputStreamWriter, player1, player2, scoreSheet);
                                 Toast.makeText(MainActivity.this, "Game saved successfully!", Toast.LENGTH_SHORT).show();
                             } catch (IOException e) {
                                 Toast.makeText(MainActivity.this, "Failed to save game:" + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -227,12 +227,13 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                             Uri uri = data.getData();
                             try (InputStream inputStream = getContentResolver().openInputStream(uri);
                                  InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
-                                ScoreSheetIO.loadFromFile(inputStreamReader, scoreSheet);
-                                if (scoreSheet.turn() % 2 == 0){
+                                ScoreSheetIO.readFromFile(inputStreamReader, player1, player2, scoreSheet);
+                                if (scoreSheet.currentTurn() % 2 == 0){
                                     turnPlayer = player1;
                                 }else {
                                     turnPlayer = player2;
                                 }
+                                updatePlayerUI();
                                 updateFocusUI();
                                 updateScoreUI();
                                 updateUnRedoUI();
@@ -371,7 +372,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     }
 
     private void updateSaveLoadUI(){
-        if (scoreSheet.turn() == 0){
+        if (scoreSheet.currentTurn() == 0){
             saveloadGameButton.setOnClickListener(v -> openReadDocumentIntent());
             saveloadGameButton.setText(getString(R.string.loadGame_string));
         } else {
