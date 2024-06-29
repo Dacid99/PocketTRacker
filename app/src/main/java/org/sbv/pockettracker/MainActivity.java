@@ -334,16 +334,24 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             player1Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
             player1Card.setCardElevation(10);
             player1ScoreView.setEnabled(true);
+            player1NameView.setEnabled(true);
+            player1ClubView.setEnabled(true);
             player2Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
             player2Card.setCardElevation(0);
             player2ScoreView.setEnabled(false);
+            player2NameView.setEnabled(false);
+            player2ClubView.setEnabled(false);
         }else if (turnPlayer == player2) {
             player1Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
             player1Card.setCardElevation(0);
             player1ScoreView.setEnabled(false);
+            player1NameView.setEnabled(false);
+            player1ClubView.setEnabled(false);
             player2Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
             player2Card.setCardElevation(10);
             player2ScoreView.setEnabled(true);
+            player2NameView.setEnabled(true);
+            player2ClubView.setEnabled(true);
         }else {
             Log.e("Failed ifelse", "In MainActivity.updateFocusUI: Turnplayer is neither player1 or player2!");
         }
