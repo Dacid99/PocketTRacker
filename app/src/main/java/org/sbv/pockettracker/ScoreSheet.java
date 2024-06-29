@@ -116,7 +116,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(pointer);
-        dest.writeList(inningsList);
+        dest.writeTypedList(inningsList);
     }
     @Override
     public int describeContents() {
