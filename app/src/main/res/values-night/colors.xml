@@ -4,7 +4,6 @@
     <color name="text_disabled_color">@color/light_gray</color>
 
     <color name="winner_color">@color/darkgold</color>
-    <color name="notwinner_color">@color/black</color>
 
     <color name="turnplayer_color">@color/dark_gray</color>
     <color name="notturnplayer_color">@color/black</color>

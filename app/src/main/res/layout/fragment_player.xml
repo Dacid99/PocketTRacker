@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PlayerFragment"
-    android:minWidth="240dp"
-    android:minHeight="400dp" >
+    android:minWidth="@dimen/playerFragment_width"
+    android:minHeight="@dimen/playerFragment_height" >
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/playerCard"
@@ -89,6 +89,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/right_arrow_string"
+        android:textSize="@dimen/textSize"
+        android:paddingBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/swapPlayerButton"
@@ -99,6 +101,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/left_arrow_string"
+        android:textSize="@dimen/textSize"
+        android:paddingBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/swapPlayerButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,6 +115,8 @@
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:text="@string/swap_string"
+        android:textSize="@dimen/textSize"
+        android:paddingBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/left_toOtherPlayerButton"
         app:layout_constraintEnd_toStartOf="@+id/right_toOtherPlayerButton"
