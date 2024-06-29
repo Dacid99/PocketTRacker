@@ -23,5 +23,7 @@
     <dimen name="ballsOnTable_subcolumn_weight">4</dimen>
 
     <dimen name="numberPane_textsize">12sp</dimen>
+    <dimen name="scoreTextSize">32sp</dimen>
+    <dimen name="bigScoreTextSize">48sp</dimen>
 
 </resources>

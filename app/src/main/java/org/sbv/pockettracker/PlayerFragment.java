@@ -7,9 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -31,6 +29,7 @@ public class PlayerFragment extends DialogFragment {
     public interface PlayerFragmentProvider {
         void onNameInput(int playerNumber, String name);
         void onClubInput(int playerNumber, String club);
+        void onSwapButtonClick();
         Player requestPlayer(int playerNumber);
         ScoreSheet requestScoreSheet();
     }
@@ -40,7 +39,7 @@ public class PlayerFragment extends DialogFragment {
     private View view;
     private TextInputLayout playerNameLayout, playerClubLayout;
     private TextInputEditText playerNameInput, playerClubInput;
-    private MaterialButton leftToOtherPlayerButton, rightToOtherPlayerButton;
+    private MaterialButton leftToOtherPlayerButton, rightToOtherPlayerButton, swapPlayersButton;
 
     private TextView playerScoreView;
 
@@ -88,6 +87,7 @@ public class PlayerFragment extends DialogFragment {
 
         leftToOtherPlayerButton = view.findViewById(R.id.left_toOtherPlayerButton);
         rightToOtherPlayerButton = view.findViewById(R.id.right_toOtherPlayerButton);
+        swapPlayersButton = view.findViewById(R.id.swapPlayerButton);
 
         if (playerNumber == 1){
             leftToOtherPlayerButton.setVisibility(View.INVISIBLE);
@@ -97,10 +97,7 @@ public class PlayerFragment extends DialogFragment {
             Log.d("bad parameter", "In PlayerFragment.onCreateView: playerNumber is neither 0 or 1!");
         }
 
-        Player player = listener.requestPlayer(playerNumber);
-        playerNameInput.setText(getString(R.string.player_name_format, player.getName()));
-        playerClubInput.setText(getString(R.string.player_club_format, player.getClub()));
-        playerScoreView.setText(getString(R.string.player_score_format, player.getScore()));
+        updatePlayerFields();
 
         playerNameInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -152,7 +149,22 @@ public class PlayerFragment extends DialogFragment {
             }
         });
 
+        swapPlayersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onSwapButtonClick();
+                updatePlayerFields();
+            }
+        });
+
         return view;
+    }
+
+    private void updatePlayerFields(){
+        Player player = listener.requestPlayer(playerNumber);
+        playerNameInput.setText(getString(R.string.player_name_format, player.getName()));
+        playerClubInput.setText(getString(R.string.player_club_format, player.getClub()));
+        playerScoreView.setText(getString(R.string.player_score_format, player.getScore()));
     }
 
     private void switchToOtherPlayer(){

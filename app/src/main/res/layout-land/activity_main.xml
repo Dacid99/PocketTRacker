@@ -116,7 +116,7 @@
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
         app:layout_constraintEnd_toStartOf="@+id/end_block1_guideline"
-        app:layout_constraintStart_toEndOf="@+id/swapPlayers"
+        app:layout_constraintStart_toEndOf="@+id/winningPointsLayout"
         app:layout_constraintTop_toTopOf="@+id/top_block1_guideline">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -141,9 +141,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:textSize="@dimen/textSize"
+                android:textSize="@dimen/scoreTextSize"
                 android:hint="@string/player_name_hint"
-                android:text="@string/player_name_format" />
+                android:text="@string/player_name_format"
+                android:gravity="center" />
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -154,9 +155,10 @@
                 app:layout_constraintEnd_toEndOf="@+id/player2NameView"
                 app:layout_constraintStart_toStartOf="@+id/player2NameView"
                 app:layout_constraintTop_toBottomOf="@+id/player2NameView"
-                android:textSize="@dimen/textSize"
+                android:textSize="@dimen/scoreTextSize"
                 android:hint="@string/player_name_hint"
-                android:text="@string/player_name_format"  />
+                android:text="@string/player_name_format"
+                android:gravity="center" />
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -166,7 +168,7 @@
                 android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:textColor="@color/score_color"
-                android:textSize="42sp"
+                android:textSize="@dimen/bigScoreTextSize"
                 android:text="@string/player_score_format"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/player2ClubView"
@@ -185,7 +187,7 @@
         android:layout_marginBottom="75dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/swapPlayers"
+        app:layout_constraintEnd_toStartOf="@+id/winningPointsLayout"
         app:layout_constraintStart_toStartOf="@+id/start_block1_guideline"
         app:layout_constraintTop_toTopOf="@+id/top_block1_guideline">
 
@@ -212,9 +214,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:textSize="@dimen/textSize"
+                android:textSize="@dimen/scoreTextSize"
                 android:hint="@string/player_name_hint"
-                android:text="@string/player_name_format"  />
+                android:text="@string/player_name_format"
+                android:gravity="center" />
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -225,9 +228,10 @@
                 app:layout_constraintEnd_toEndOf="@+id/player1NameView"
                 app:layout_constraintStart_toStartOf="@+id/player1NameView"
                 app:layout_constraintTop_toBottomOf="@+id/player1NameView"
-                android:textSize="@dimen/textSize"
+                android:textSize="@dimen/scoreTextSize"
                 android:hint="@string/player_name_hint"
-                android:text="@string/player_name_format" />
+                android:text="@string/player_name_format"
+                android:gravity="center" />
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -266,21 +270,6 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_block1_guideline" />
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/swapPlayers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:paddingTop="0dp"
-        android:paddingBottom="10dp"
-        android:text="@string/swap_string"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/winningPointsLayout"
-        app:layout_constraintEnd_toStartOf="@+id/player2CardView"
-        app:layout_constraintStart_toEndOf="@+id/player1CardView"
-        app:layout_constraintTop_toTopOf="@+id/player1CardView" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/viewScoreSheet"

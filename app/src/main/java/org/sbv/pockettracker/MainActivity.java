@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private TextInputLayout winningPointsLayout;
     private TextInputEditText winningPointsInput;
     private MaterialCardView player1Card, player2Card;
-    private MaterialButton foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, swapPlayersButton, viewScoreSheetButton, saveloadGameButton;
+    private MaterialButton foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, viewScoreSheetButton, saveloadGameButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         winningPointsInput.setText(getString(R.string.winnerPoints_format, Player.winningPoints));
 
-        swapPlayersButton = findViewById(R.id.swapPlayers);
         missButton = findViewById(R.id.missButton);
         safeButton = findViewById(R.id.safeButton);
         foulButton = findViewById(R.id.foulButton);
@@ -177,12 +176,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         newGameButton.setOnClickListener(v -> {
             newGame();
             newGameButton.setVisibility(View.INVISIBLE);
-        });
-
-
-        swapPlayersButton.setOnClickListener(v -> {
-            player1.swapNameAndClubWith(player2);
-            updatePlayerUI();
         });
 
         viewScoreSheetButton.setOnClickListener(v -> {
@@ -416,6 +409,11 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         }else{
             Log.d("argument error", "In MainActivity.onNameInput: No such playerNumber:" + playerNumber);
         }
+        updatePlayerUI();
+    }
+    @Override
+    public void onSwapButtonClick(){
+        player1.swapNameAndClubWith(player2);
         updatePlayerUI();
     }
     @Override

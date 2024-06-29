@@ -8,7 +8,6 @@
     android:minWidth="240dp"
     android:minHeight="400dp" >
 
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/playerCard"
         android:layout_width="0dp"
@@ -76,7 +75,7 @@
                 android:gravity="center"
                 android:text="@string/player_score_format"
                 android:textColor="@color/score_color"
-                android:textSize="42sp"
+                android:textSize="60sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/playerClubLayout"
                 app:layout_constraintStart_toStartOf="@+id/playerClubLayout"
@@ -93,7 +92,7 @@
         android:text="@string/right_arrow_string"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/left_toOtherPlayerButton"
+        app:layout_constraintStart_toEndOf="@+id/swapPlayerButton"
         app:layout_constraintTop_toBottomOf="@+id/playerCard" />
 
     <com.google.android.material.button.MaterialButton
@@ -102,8 +101,20 @@
         android:layout_height="wrap_content"
         android:text="@string/left_arrow_string"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/right_toOtherPlayerButton"
+        app:layout_constraintEnd_toStartOf="@id/swapPlayerButton"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerCard" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/swapPlayerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:text="@string/swap_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/left_toOtherPlayerButton"
+        app:layout_constraintEnd_toStartOf="@+id/right_toOtherPlayerButton"
         app:layout_constraintTop_toBottomOf="@+id/playerCard" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
