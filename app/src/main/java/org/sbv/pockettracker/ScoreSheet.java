@@ -111,7 +111,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     //Parcelable methods
     protected ScoreSheet(@NonNull Parcel in){
         pointer = in.readInt();
-        inningsList = in.readArrayList(Inning.class.getClassLoader());
+        inningsList = in.createTypedArrayList(ScoreSheet.Inning.CREATOR);
     }
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {

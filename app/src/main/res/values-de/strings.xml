@@ -27,5 +27,6 @@
     <string name="saveGame_string">Speichern</string>
     <string name="cantOpenScoreSheet_toast">Kann den Spielbericht nicht öffnen, er ist falsch. Bitte teile mir diesen Fehler auf gitlab mit!</string>
     <string name="loadGame_string">Laden</string>
+    <string name="button_1_label">1\nrerack</string>
 
 </resources>

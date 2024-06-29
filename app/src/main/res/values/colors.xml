@@ -15,7 +15,6 @@
     <color name="purple">#321b47</color>
     <color name="blue">#3865e4</color>
     <color name="orange">#fb6729</color>
-    <color name="pink">#ffc0cb</color>
     <color name="gold">#FFD700</color>
     <color name="darkgold">#B29600</color>
     <color name="royalblue">#4169e1</color>
@@ -23,7 +22,6 @@
     <color name="nightblue">#0e267d</color>
     <color name="nightblue1">#020476</color>
     <color name="chocolate">#d2691e</color>
-    <color name="chocolate2">#ee7621</color>
     <color name="wooden">#a34e04</color>
     <color name="darkwooden">#713603</color>
     <color name="darkred">#831312</color>
@@ -37,7 +35,6 @@
 
     <color name="warning_color">@color/red</color>
     <color name="winner_color">@color/gold</color>
-    <color name="notwinner_color">@color/white</color>
 
     <color name="cell_background">@color/white</color>
     <color name="cell_background_turnplayer">@color/lighter_gray</color>

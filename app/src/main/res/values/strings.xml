@@ -7,7 +7,6 @@
     <string name="winnerPoints_format" translatable="false">@string/rawDigit_format</string>
     <string name="turnnumber_format" translatable="false">@string/rawDigit_format</string>
 
-    <string name="newBallNumber_format" translatable="false">%1$d</string>
     <string name="player_club_format" translatable="false">@string/rawString_format</string>
     <string name="player_score_format" translatable="false">@string/rawDigit_format</string>
     <string name="remainingBalls_format" translatable="false">@string/rawDigit_format</string>
@@ -18,7 +17,6 @@
     <!-- mainactivity strings -->
     <string name="safe_string">Safe</string>
     <string name="foul_string">Foul</string>
-    <string name="rerack_string">Rerack</string>
     <string name="miss_string">Miss</string>
     <string name="undo_string">Undo \u21B6</string>
     <string name="redo_string">Redo \u21B7</string>
@@ -46,7 +44,6 @@
     <string name="ballsOnTable_subcolumnlabel" translatable="false">\u2B24</string>
     <string name="switchReason_columnlabel" translatable="false">\u25A0</string>
 
-    <string name="player_columnlabel_format" translatable="false">@string/rawString_format</string>
     <string name="player1_columnlabel_default">Player1</string>
     <string name="player2_columnlabel_default">Player2</string>
     <string name="player1Increment_columnlabel" translatable="false">+</string>
@@ -62,7 +59,7 @@
     <string name="meanRun_format">\u2300 run: %1$.2f</string>
 
     <!-- numberpane strings -->
-    <string name="button_1_label" translatable="false">1\nrerack</string>
+    <string name="button_1_label">1\nrerack</string>
     <string name="button_2_label" translatable="false">2</string>
     <string name="button_3_label" translatable="false">3</string>
     <string name="button_4_label" translatable="false">4</string>

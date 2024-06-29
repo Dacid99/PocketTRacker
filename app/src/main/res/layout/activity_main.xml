@@ -120,7 +120,6 @@
         app:layout_constraintTop_toTopOf="@+id/top_block1_guideline">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/player2CardLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="5dp"
@@ -190,7 +189,6 @@
         app:layout_constraintTop_toTopOf="@+id/top_block1_guideline">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/player1CardLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="5dp"
