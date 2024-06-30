@@ -7,5 +7,6 @@
 - more logging
 - find good statistics library
 - backgrounds in table can be done more concisely using LayerDrawable
-- introduce viewmodel to seperate ui and data
+- introduce viewmodel or saveinstance to seperate ui and data
+- new screenshots
 

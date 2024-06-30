@@ -8,13 +8,20 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
+
+import java.util.Objects;
 
 public class ScoreSheetActivity extends AppCompatActivity {
     private TableLayout tableLayout;
@@ -22,6 +29,8 @@ public class ScoreSheetActivity extends AppCompatActivity {
     private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
     private ScoreSheet scoreSheet;
     private GameStatistics gameStatistics;
+    private MaterialToolbar toolbar;
+    private MaterialButton counterButton, scoreSheetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +43,18 @@ public class ScoreSheetActivity extends AppCompatActivity {
         player1Name = player1Name==null ? "" : player1Name;
         String player2Name = intent.getStringExtra("player2Name");
         player2Name = player2Name==null ? "" : player2Name;
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
+        counterButton = findViewById(R.id.counter_button);
+        scoreSheetButton = findViewById(R.id.scoresheet_button);
+        //deactivate scoreSheet button in this activity
+        scoreSheetButton.setClickable(false);
+        scoreSheetButton.setTextColor(getResources().getColor(R.color.current_activity_color));
+
+        counterButton.setOnClickListener(v -> finish());
 
         gameStatistics = new GameStatistics(scoreSheet);
 

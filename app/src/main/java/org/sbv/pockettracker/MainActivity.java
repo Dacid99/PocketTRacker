@@ -17,6 +17,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
@@ -32,6 +33,7 @@ import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity implements NumberPaneFragment.NumberPaneFragmentProvider, PlayerFragment.PlayerFragmentProvider {
@@ -44,12 +46,24 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private TextInputLayout winningPointsLayout;
     private TextInputEditText winningPointsInput;
     private MaterialCardView player1Card, player2Card;
-    private MaterialButton foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, viewScoreSheetButton, saveloadGameButton;
+    private MaterialButton counterButton, scoreSheetButton, foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, saveloadGameButton;
+    private MaterialToolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //toolbar buttons
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
+        counterButton = findViewById(R.id.counter_button);
+        scoreSheetButton = findViewById(R.id.scoresheet_button);
+        //deactivate counter button in this activity
+        counterButton.setClickable(false);
+        counterButton.setTextColor(getResources().getColor(R.color.current_activity_color));
 
         player1ScoreView = findViewById(R.id.player1ScoreView);
         player2ScoreView = findViewById(R.id.player2ScoreView);
@@ -77,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         redoButton = findViewById(R.id.redoButton);
         newGameButton = findViewById(R.id.newGame);
         saveloadGameButton = findViewById(R.id.saveloadGame);
-        viewScoreSheetButton = findViewById(R.id.viewScoreSheet);
 
         newGame();
 
@@ -178,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             newGameButton.setVisibility(View.INVISIBLE);
         });
 
-        viewScoreSheetButton.setOnClickListener(v -> {
+        scoreSheetButton.setOnClickListener(v -> {
             if (scoreSheet.isHealthy()) {
                 Intent intent = new Intent(MainActivity.this, ScoreSheetActivity.class);
                 intent.putExtra("scoreSheet", scoreSheet);

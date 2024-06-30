@@ -22,4 +22,7 @@
     <color name="cell_background_turnplayer">@color/darker_gray</color>
     <color name="cell_edges">@color/white</color>
 
+    <!-- toolbar colors -->
+    <color name="current_activity_color">@color/black</color>
+    <color name="other_activity_color">@color/white</color>
 </resources>

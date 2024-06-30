@@ -79,4 +79,8 @@
     <string name="left_arrow_string" translatable="false">\u2190</string>
     <string name="right_arrow_string" translatable="false">\u2192</string>
 
+
+    <!-- toolbar strings -->
+    <string name="counter_string" translatable="false">@string/app_name</string>
+    <string name="scoresheet_string" translatable="false">@string/title_activity_score_sheet</string>
 </resources>

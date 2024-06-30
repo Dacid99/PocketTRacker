@@ -15,6 +15,7 @@
 - remember players via profiles
 - extensive statistics for players and profiles with plots
 - extended scoresheet with coloring of highest run etc
+- editing of scores in scoresheet
 - options menu for customization
 - option of tracking by every pot
 - settings for toggling options like club on/off

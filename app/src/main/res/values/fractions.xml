@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- activity_main dimensions-->
-    <fraction name="top_block1_guideline_fraction">0.02</fraction>
+    <fraction name="top_block1_guideline_fraction">0.1</fraction>
     <fraction name="start_block1_guideline_fraction">0.05</fraction>
     <fraction name="end_block1_guideline_fraction">0.95</fraction>
     <fraction name="end_block2_guideline_fraction">0.95</fraction>
