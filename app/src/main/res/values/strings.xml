@@ -24,7 +24,6 @@
     <string name="saveGame_string">Save</string>
     <string name="loadGame_string">Load</string>
     <string name="swap_string" translatable="false">\u2927</string>
-    <string name="viewScoreSheet_string">Scoresheet</string>
 
     <string name="player_name_hint">Player</string>
     <string name="player_club_hint">Club</string>
