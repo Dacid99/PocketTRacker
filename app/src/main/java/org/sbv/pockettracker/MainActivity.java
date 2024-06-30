@@ -15,6 +15,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -38,6 +39,7 @@ import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity implements NumberPaneFragment.NumberPaneFragmentProvider, PlayerFragment.PlayerFragmentProvider {
 
+    private static final String SCORESHEETSAVEPARAMETER = "scoresheet_savestate";
     private ActivityResultLauncher<Intent> createFileActivityLauncher, readFileActivityLauncher;
     private Player player1, player2, turnPlayer;
     private PoolTable table;
@@ -265,6 +267,32 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 }
         });
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(SCORESHEETSAVEPARAMETER, scoreSheet);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        ScoreSheet savedScoreSheet = savedInstanceState.getParcelable(SCORESHEETSAVEPARAMETER);
+        if (savedScoreSheet!= null) {
+            scoreSheet.include(savedScoreSheet);
+        }
+        updateScoreUI();
+        if (scoreSheet.currentTurn() % 2 == 0){
+            turnPlayer = player1;
+        }else {
+            turnPlayer = player2;
+        }
+        updateUnRedoUI();
+        updateFocusUI();
+        updateWinnerUI();
+        updateSaveLoadUI();
+    }
+
 
     private void updateScoreUI() {
         player1ScoreView.setText(getString(R.string.player_score_format, player1.getScore()));

@@ -15,7 +15,7 @@ import java.util.Iterator;
 // every turn is noted and this log can be accessed for review
 // makes revert feature possible
 public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
-    private final ArrayList<Inning> inningsList;
+    private ArrayList<Inning> inningsList;
 
     //this member holds the index of the current entry in the ArrayList
     //for going back in history and rewriting from there
@@ -106,6 +106,12 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         //enter starting values
         // this is crucial for statistics, as the list is never empty!
         update("   ");
+    }
+
+    public void include(ScoreSheet scoreSheet){
+        inningsList = scoreSheet.getInningsList();
+        pointer = scoreSheet.currentTurn() - 1;
+        progress();
     }
 
     //Parcelable methods

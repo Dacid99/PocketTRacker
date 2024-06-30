@@ -1,12 +1,10 @@
 - potentially tie all backend components into a Game Class
 - settings menu: club toggleable, set default winningpoints
 - mark statistics and winner in table 
-- scoresheet switch button in header
 - reset game option
 - add more final keywords to mark immutability
 - more logging
 - find good statistics library
 - backgrounds in table can be done more concisely using LayerDrawable
-- introduce viewmodel or saveinstance to seperate ui and data
 - new screenshots
 
