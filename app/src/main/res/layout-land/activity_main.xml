@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/missButton"
         android:layout_width="wrap_content"
@@ -77,6 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginEnd="35dp"
+        android:layout_marginTop="10dp"
         android:contentDescription="@string/newBallNumber_hint"
         android:gravity="center"
         android:text="@string/ballsOnTable_format"
@@ -84,7 +94,7 @@
         app:layout_constraintBottom_toTopOf="@+id/safeButton"
         app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_block2_guideline"
-        app:layout_constraintTop_toTopOf="@+id/top_block2_guideline" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/winningPointsLayout"
@@ -117,7 +127,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
         app:layout_constraintEnd_toStartOf="@+id/end_block1_guideline"
         app:layout_constraintStart_toEndOf="@+id/winningPointsLayout"
-        app:layout_constraintTop_toTopOf="@+id/top_block1_guideline">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/player2CardLayout"
@@ -189,7 +199,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
         app:layout_constraintEnd_toStartOf="@+id/winningPointsLayout"
         app:layout_constraintStart_toStartOf="@+id/start_block1_guideline"
-        app:layout_constraintTop_toTopOf="@+id/top_block1_guideline">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/player1CardLayout"
@@ -259,8 +269,8 @@
         android:text="@string/newGame_string"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/start_block2_guideline"
-        app:layout_constraintStart_toStartOf="@+id/end_block1_guideline" />
+        app:layout_constraintEnd_toEndOf="@+id/winningPointsLayout"
+        app:layout_constraintStart_toStartOf="@+id/winningPointsLayout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveloadGame"
@@ -268,30 +278,8 @@
         android:layout_height="wrap_content"
         android:text="@string/saveGame_string"
         app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
-        app:layout_constraintStart_toStartOf="@+id/start_block1_guideline" />
+        app:layout_constraintEnd_toEndOf="@+id/end_block2_guideline" />
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/viewScoreSheet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/viewScoreSheet_string"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/top_block2_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@fraction/top_block2_guideline_fraction" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/top_block1_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@fraction/top_block1_guideline_fraction" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottom_block2_guideline"

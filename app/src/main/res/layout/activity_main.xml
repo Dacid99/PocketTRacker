@@ -285,13 +285,6 @@
         app:layout_constraintGuide_percent="@fraction/top_block2_guideline_fraction" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/top_block1_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@fraction/top_block1_guideline_fraction" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottom_block2_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
