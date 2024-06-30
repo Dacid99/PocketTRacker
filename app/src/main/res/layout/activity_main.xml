@@ -100,10 +100,12 @@
         android:id="@+id/winningPointsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
         android:hint="@string/winnerPoints_hint"
         app:layout_constraintBottom_toBottomOf="@+id/player1CardView"
         app:layout_constraintEnd_toStartOf="@+id/player2CardView"
-        app:layout_constraintStart_toEndOf="@+id/player1CardView">
+        app:layout_constraintStart_toEndOf="@+id/player1CardView"
+        app:layout_constraintTop_toTopOf="@+id/player1CardView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/winningPointsInput"
