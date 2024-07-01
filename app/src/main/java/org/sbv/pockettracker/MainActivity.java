@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private static final String SCORESHEETSAVEPARAMETER = "scoresheet_savestate";
     private static final String PLAYER1SAVEPARAMETER = "player1_savestate";
     private static final String PLAYER2SAVEPARAMETER = "player2_savestate";
+    public static final String SCORESHEETPARAMETER = "scoresheet";
+    public static final String PLAYER1PARAMETER = "player1";
+    public static final String PLAYER2PARAMETER = "player2";
     private ActivityResultLauncher<Intent> createFileActivityLauncher, readFileActivityLauncher;
     private Player player1, player2, turnPlayer;
     private PoolTable table;
@@ -226,9 +229,9 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         scoreSheetButton.setOnClickListener(v -> {
             if (scoreSheet.isHealthy()) {
                 Intent intent = new Intent(MainActivity.this, ScoreSheetActivity.class);
-                intent.putExtra("scoreSheet", scoreSheet);
-                intent.putExtra("player1Name", player1.getName());
-                intent.putExtra("player2Name", player2.getName());
+                intent.putExtra(SCORESHEETPARAMETER, scoreSheet);
+                intent.putExtra(PLAYER1PARAMETER, player1);
+                intent.putExtra(PLAYER2PARAMETER, player2);
                 startActivity(intent);
             } else{
                 Toast.makeText(this, getResources().getText(R.string.cantOpenScoreSheet_toast), Toast.LENGTH_SHORT).show();

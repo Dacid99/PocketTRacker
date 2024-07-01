@@ -26,6 +26,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
     private TextView player1TableHeader, player2TableHeader, player1StatisticsHeader, player2StatisticsHeader;
     private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
     private ScoreSheet scoreSheet;
+    private Player player1, player2;
     private MaterialToolbar toolbar;
     private MaterialButton counterButton, scoreSheetButton;
 
@@ -35,11 +36,11 @@ public class ScoreSheetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scoresheet);
 
         Intent intent = getIntent();
-        scoreSheet = intent.getParcelableExtra("scoreSheet");
-        String player1Name = intent.getStringExtra("player1Name");  //just to be safe; this should not be necessary as playernames should never be uninitialized
-        player1Name = player1Name==null ? "" : player1Name;
-        String player2Name = intent.getStringExtra("player2Name");
-        player2Name = player2Name==null ? "" : player2Name;
+        scoreSheet = intent.getParcelableExtra(MainActivity.SCORESHEETPARAMETER);
+        Player player1 = intent.getParcelableExtra(MainActivity.PLAYER1PARAMETER);
+        Player player2 = intent.getParcelableExtra(MainActivity.PLAYER2PARAMETER);
+        assert player1 != null;
+        assert player2 != null;
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,14 +62,12 @@ public class ScoreSheetActivity extends AppCompatActivity {
         player1StatisticsHeader = findViewById(R.id.player1statistics_header);
         player2StatisticsHeader = findViewById(R.id.player2statistics_header);
 
-        if (!player1Name.isEmpty()) {
-            player1TableHeader.setText(getString(R.string.player_name_format, player1Name));
-            player1StatisticsHeader.setText(getString(R.string.player_name_format, player1Name));
-        }
-        if (!player2Name.isEmpty()) {
-            player2TableHeader.setText(getString(R.string.player_name_format, player2Name));
-            player2StatisticsHeader.setText(getString(R.string.player_name_format, player2Name));
-        }
+        player1TableHeader.setText(getString(R.string.player_name_format, player1.getName()));
+        player1StatisticsHeader.setText(getString(R.string.player_name_format, player1.getName()));
+
+        player2TableHeader.setText(getString(R.string.player_name_format, player2.getName()));
+        player2StatisticsHeader.setText(getString(R.string.player_name_format, player2.getName()));
+
 
         maxRunPlayer1View = findViewById(R.id.player1statistics_maxRun);
         maxRunPlayer2View = findViewById(R.id.player2statistics_maxRun);
@@ -107,17 +106,24 @@ public class ScoreSheetActivity extends AppCompatActivity {
         if (scoreSheet.currentTurn() >= 0 && scoreSheet.currentTurn() < tableLayout.getChildCount()){
             TableRow turnRow = (TableRow) tableLayout.getChildAt(scoreSheet.currentTurn());
             Drawable background;
-            if (scoreSheet.currentTurn() % 2 == 0){
+            if (scoreSheet.isPlayer1Turn()){
                 background = ContextCompat.getDrawable(this, R.drawable.cell_separator_turn);
             }else {
                 background = ContextCompat.getDrawable(this, R.drawable.cell_separator_turnplayer_turn);
-
             }
             for (int index = 0; index < turnRow.getChildCount(); index++){
                 turnRow.getChildAt(index).setBackground(background);
             }
         }else{
             Log.d("Failed ifelse", "ScoreSheetActivity.highlightScoreSheet: check of pointer failed");
+        }
+        if (player1.isWinner()){
+            player1TableHeader.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator_winner));
+            player1StatisticsHeader.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator_winner));
+        }
+        if (player2.isWinner()){
+            player2TableHeader.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator_winner));
+            player2StatisticsHeader.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator_winner));
         }
     }
 
