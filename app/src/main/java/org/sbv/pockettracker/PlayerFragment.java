@@ -40,7 +40,7 @@ public class PlayerFragment extends DialogFragment {
     private View view;
     private TextInputLayout playerNameLayout, playerClubLayout;
     private TextInputEditText playerNameInput, playerClubInput;
-    private MaterialButton leftToOtherPlayerButton, rightToOtherPlayerButton, swapPlayersButton;
+    private MaterialButton leftToOtherPlayerButton, rightToOtherPlayerButton, leftSwapPlayersButton, rightSwapPlayersButton;
     private TextView playerScoreView, inningsView, meanInningView, meanRunView, maxRunView;
 
 
@@ -108,12 +108,15 @@ public class PlayerFragment extends DialogFragment {
 
         leftToOtherPlayerButton = view.findViewById(R.id.left_toOtherPlayerButton);
         rightToOtherPlayerButton = view.findViewById(R.id.right_toOtherPlayerButton);
-        swapPlayersButton = view.findViewById(R.id.swapPlayerButton);
+        leftSwapPlayersButton = view.findViewById(R.id.left_swapButton);
+        rightSwapPlayersButton = view.findViewById(R.id.right_swapButton);
 
         if (playerNumber == 1){
             leftToOtherPlayerButton.setVisibility(View.INVISIBLE);
+            leftSwapPlayersButton.setVisibility(View.INVISIBLE);
         }else if (playerNumber == 2){
             rightToOtherPlayerButton.setVisibility(View.INVISIBLE);
+            rightSwapPlayersButton.setVisibility(View.INVISIBLE);
         }else {
             Log.d("bad parameter", "In PlayerFragment.onCreateView: playerNumber is neither 0 or 1!");
         }
@@ -170,7 +173,15 @@ public class PlayerFragment extends DialogFragment {
             }
         });
 
-        swapPlayersButton.setOnClickListener(new View.OnClickListener() {
+        leftSwapPlayersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onSwapButtonClick();
+                updatePlayerFields();
+            }
+        });
+
+        rightSwapPlayersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onSwapButtonClick();

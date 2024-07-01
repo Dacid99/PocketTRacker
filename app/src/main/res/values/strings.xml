@@ -23,7 +23,6 @@
     <string name="newGame_string">New Game</string>
     <string name="saveGame_string">Save</string>
     <string name="loadGame_string">Load</string>
-    <string name="swap_string" translatable="false">\u2927</string>
 
     <string name="player_name_hint">Player</string>
     <string name="player_club_hint">Club</string>
@@ -77,9 +76,11 @@
     <!-- playerFragment strings -->
     <string name="left_arrow_string" translatable="false">\u2190</string>
     <string name="right_arrow_string" translatable="false">\u2192</string>
-
+    <string name="left_swap_string" translatable="false">\u21C6</string>
+    <string name="right_swap_string" translatable="false">\u21C4</string>
 
     <!-- toolbar strings -->
     <string name="counter_string" translatable="false">@string/app_name</string>
     <string name="scoresheet_string" translatable="false">@string/title_activity_score_sheet</string>
+
 </resources>

@@ -47,6 +47,24 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/right_swapButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/playerClubLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/playerNameLayout"
+                android:text="@string/right_swap_string" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/left_swapButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                app:layout_constraintBottom_toTopOf="@+id/playerClubLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/playerNameLayout"
+                android:text="@string/left_swap_string"/>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/playerClubLayout"
                 android:layout_width="0dp"
@@ -148,38 +166,26 @@
         android:id="@+id/right_toOtherPlayerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:paddingBottom="12dp"
         android:text="@string/right_arrow_string"
         android:textSize="@dimen/textSize"
-        android:paddingBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/swapPlayerButton"
+        app:layout_constraintStart_toEndOf="@+id/left_toOtherPlayerButton"
         app:layout_constraintTop_toBottomOf="@+id/playerCard" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/left_toOtherPlayerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:paddingBottom="12dp"
         android:text="@string/left_arrow_string"
         android:textSize="@dimen/textSize"
-        android:paddingBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/swapPlayerButton"
+        app:layout_constraintEnd_toStartOf="@id/right_toOtherPlayerButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerCard" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/swapPlayerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:text="@string/swap_string"
-        android:textSize="@dimen/textSize"
-        android:paddingBottom="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/left_toOtherPlayerButton"
-        app:layout_constraintEnd_toStartOf="@+id/right_toOtherPlayerButton"
         app:layout_constraintTop_toBottomOf="@+id/playerCard" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
