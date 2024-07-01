@@ -162,21 +162,43 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     }
 
     public void rollback(){
-        if (isStart()) return;
-        pointer--;
-        trackedPlayer1.setScore( inningsList.get(pointer).player1Score );
-        trackedPlayer2.setScore( inningsList.get(pointer).player2Score );
-        trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
-        trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+        if (!isStart()) {
+            pointer--;
+            trackedPlayer1.setScore( inningsList.get(pointer).player1Score );
+            trackedPlayer2.setScore( inningsList.get(pointer).player2Score );
+            trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+            trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+        }
+
+    }
+
+    public void toStart(){
+        if (!isStart()){
+            pointer = 0;
+            trackedPlayer1.setScore( inningsList.get(pointer).player1Score );
+            trackedPlayer2.setScore( inningsList.get(pointer).player2Score );
+            trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+            trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+        }
     }
 
     public void progress(){
-        if (isLatest()) return;
-        pointer++;
-        trackedPlayer1.setScore( inningsList.get(pointer).player1Score );
-        trackedPlayer2.setScore( inningsList.get(pointer).player2Score );
-        trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
-        trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+        if (!isLatest()) {
+            pointer++;
+            trackedPlayer1.setScore(inningsList.get(pointer).player1Score);
+            trackedPlayer2.setScore(inningsList.get(pointer).player2Score);
+            trackedTable.setOldNumberOfBalls(inningsList.get(pointer).ballsOnTable);
+            trackedTable.setNumberOfBalls(inningsList.get(pointer).ballsOnTable);
+        }
+    }
+    public void toLatest(){
+        if (!isLatest()){
+            pointer = length() - 1;
+            trackedPlayer1.setScore( inningsList.get(pointer).player1Score );
+            trackedPlayer2.setScore( inningsList.get(pointer).player2Score );
+            trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+            trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+        }
     }
 
     public int length(){

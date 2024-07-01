@@ -180,6 +180,20 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             updateSaveLoadUI();
         });
 
+        undoButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                scoreSheet.toStart();
+                updateScoreUI();
+                updateUnRedoUI();
+                switchTurnPlayer();
+                updateFocusUI();
+                updateWinnerUI();
+                updateSaveLoadUI();
+                return true;
+            }
+        });
+
         redoButton.setOnClickListener(v -> {
             scoreSheet.progress();
             updateScoreUI();
@@ -188,6 +202,20 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             updateFocusUI();
             updateWinnerUI();
             updateSaveLoadUI();
+        });
+
+        redoButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                scoreSheet.toLatest();
+                updateScoreUI();
+                updateUnRedoUI();
+                switchTurnPlayer();
+                updateFocusUI();
+                updateWinnerUI();
+                updateSaveLoadUI();
+                return true;
+            }
         });
 
         newGameButton.setOnClickListener(v -> {

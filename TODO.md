@@ -1,12 +1,10 @@
 - potentially tie all backend components into a Game Class
 - settings menu: club toggleable, set default winningpoints
-- mark statistics and winner in table 
-- reset game option
+- mark statistics and winner in table
 - add more final keywords to mark immutability
 - more logging
-- find good statistics library
+- find good statistics and plots library
 - backgrounds in table can be done more concisely using LayerDrawable
 - new screenshots
-- restructure gameStatistics to provide static methods
 - move increments math to gamestats class 
-- rethink some variable passings in terms of effciency
+- rethink some variable passings in terms of efficiency
