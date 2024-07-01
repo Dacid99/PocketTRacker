@@ -189,7 +189,11 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 scoreSheet.toStart();
                 updateScoreUI();
                 updateUnRedoUI();
-                switchTurnPlayer();
+                if (scoreSheet.isPlayer1Turn()){
+                    turnPlayer = player1;
+                }else {
+                    turnPlayer = player2;
+                }
                 updateFocusUI();
                 updateWinnerUI();
                 updateSaveLoadUI();
@@ -201,7 +205,11 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             scoreSheet.progress();
             updateScoreUI();
             updateUnRedoUI();
-            switchTurnPlayer();
+            if (scoreSheet.isPlayer1Turn()){
+                turnPlayer = player1;
+            }else {
+                turnPlayer = player2;
+            }
             updateFocusUI();
             updateWinnerUI();
             updateSaveLoadUI();

@@ -8,3 +8,4 @@
 - new screenshots
 - move increments math to gamestats class 
 - rethink some variable passings in terms of efficiency
+- test new features: long clicks unredo, colored winners in scoresheet, playerstats in playerfragment, left and right swap buttons
