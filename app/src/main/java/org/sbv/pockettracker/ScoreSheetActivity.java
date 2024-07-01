@@ -37,8 +37,8 @@ public class ScoreSheetActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         scoreSheet = intent.getParcelableExtra(MainActivity.SCORESHEETPARAMETER);
-        Player player1 = intent.getParcelableExtra(MainActivity.PLAYER1PARAMETER);
-        Player player2 = intent.getParcelableExtra(MainActivity.PLAYER2PARAMETER);
+        player1 = intent.getParcelableExtra(MainActivity.PLAYER1PARAMETER);
+        player2 = intent.getParcelableExtra(MainActivity.PLAYER2PARAMETER);
         assert player1 != null;
         assert player2 != null;
 
