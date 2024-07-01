@@ -40,6 +40,8 @@ import java.util.TimeZone;
 public class MainActivity extends AppCompatActivity implements NumberPaneFragment.NumberPaneFragmentProvider, PlayerFragment.PlayerFragmentProvider {
 
     private static final String SCORESHEETSAVEPARAMETER = "scoresheet_savestate";
+    private static final String PLAYER1SAVEPARAMETER = "player1_savestate";
+    private static final String PLAYER2SAVEPARAMETER = "player2_savestate";
     private ActivityResultLauncher<Intent> createFileActivityLauncher, readFileActivityLauncher;
     private Player player1, player2, turnPlayer;
     private PoolTable table;
@@ -272,15 +274,28 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     protected void onSaveInstanceState(@NonNull Bundle outState){
         super.onSaveInstanceState(outState);
         outState.putParcelable(SCORESHEETSAVEPARAMETER, scoreSheet);
+        outState.putParcelable(PLAYER1SAVEPARAMETER, player1);
+        outState.putParcelable(PLAYER2SAVEPARAMETER, player2);
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
+
         ScoreSheet savedScoreSheet = savedInstanceState.getParcelable(SCORESHEETSAVEPARAMETER);
         if (savedScoreSheet!= null) {
             scoreSheet.include(savedScoreSheet);
         }
+        Player savedPlayer1 = savedInstanceState.getParcelable(PLAYER1SAVEPARAMETER);
+        if (savedPlayer1 != null){
+            player1 = savedPlayer1;
+        }
+        Player savedPlayer2 = savedInstanceState.getParcelable(PLAYER2SAVEPARAMETER);
+        if (savedPlayer2 != null){
+            player2 = savedPlayer2;
+        }
+
+        updatePlayerUI();
         updateScoreUI();
         if (scoreSheet.currentTurn() % 2 == 0){
             turnPlayer = player1;

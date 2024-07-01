@@ -58,8 +58,6 @@ public class Player implements Parcelable {
 
         this.name = nameBackup;
         this.club = clubBackup;
-
-        System.out.println(this.name + this.club + otherPlayer.getName() + otherPlayer.getClub());
     }
 
     //parcelable
