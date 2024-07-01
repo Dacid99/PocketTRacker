@@ -1,84 +1,63 @@
 package org.sbv.pockettracker;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.NoSuchElementException;
 
 public class GameStatistics {
-    final ScoreSheet scoreSheet ;
-
-    public GameStatistics(ScoreSheet scoreSheet){
-        this.scoreSheet = scoreSheet;
-    }
-
-    public int maxRunPlayer1(){
-        int maxRun;
-        try {
-            maxRun = Collections.max(scoreSheet.getPlayer1IncrementsList());
+    public static int[] maxRuns(ScoreSheet scoreSheet){
+        int[] maxRun = new int[2];
+        try { //should be seperated, here in one because both lists are of same length by design -> exception should be thrown at first line
+            maxRun[0] = Collections.max(scoreSheet.getPlayer1IncrementsList());
+            maxRun[1] = Collections.max(scoreSheet.getPlayer2IncrementsList());
         } catch (NoSuchElementException e){ //indicating an empty list
-            maxRun = 0;
-        }
-        return maxRun;
-    }
-    public int maxRunPlayer2(){
-        int maxRun;
-        try {
-            maxRun = Collections.max(scoreSheet.getPlayer2IncrementsList());
-        } catch (NoSuchElementException e){
-            maxRun = 0;
+            maxRun[0] = 0;
+            maxRun[1] = 0;
         }
         return maxRun;
     }
 
-    public int player1Innings(){
-        return (int) Math.ceil(Math.abs(scoreSheet.length()/2.0 - 0.5));
+    public static int[] playerInnings(ScoreSheet scoreSheet){
+        int[] innings = new int[2];
+        innings[0] = (int) Math.ceil(Math.abs(scoreSheet.length()/2.0 - 0.5));
+        innings[1] = (int) Math.floor(Math.abs(scoreSheet.length()/2.0 - 0.5));
+        return innings;
     }
 
-    public int player2Innings(){
-        return (int) Math.floor(Math.abs(scoreSheet.length()/2.0 - 0.5));
-    }
-
-    public double meanInningPlayer1(){
+    public static double[] meanInnings(ScoreSheet scoreSheet){
+        double [] meanInnings = new double[2];
         ArrayList<Integer> player1Innings = scoreSheet.getPlayer1IncrementsList() ;
-        double sum = 0.0;
-        for (int inning : player1Innings){
-            sum += inning;
-        }
-        return sum / scoreSheet.length();
-    }
-
-    public double meanInningPlayer2(){
         ArrayList<Integer> player2Innings = scoreSheet.getPlayer2IncrementsList() ;
-        double sum = 0.0;
-        for (int inning : player2Innings){
-            sum += inning;
+        double sumPlayer1 = 0.0;
+        double sumPlayer2 = 0.0;
+        for (int index = 0; index < scoreSheet.length(); index++){
+            sumPlayer1 += player1Innings.get(index);
+            sumPlayer2 += player2Innings.get(index);
         }
-        return sum / scoreSheet.length();
+        meanInnings[0] = sumPlayer1 / scoreSheet.length();
+        meanInnings[1] = sumPlayer2/ scoreSheet.length();
+
+        return meanInnings;
     }
 
-    public double meanRunPlayer1(){
+    public static double[] meanRuns(ScoreSheet scoreSheet){
+        double [] meanRuns = new double[2];
         ArrayList<Integer> player1Innings = scoreSheet.getPlayer1IncrementsList() ;
-        double sum = 0.0;
-        int count = 0;
-        for (int inning : player1Innings){
-            if (inning > 0) {
-                sum += inning;
-                count++;
-            }
-        }
-        return count == 0 ? 0 : sum / count;
-    }
-
-    public double meanRunPlayer2(){
         ArrayList<Integer> player2Innings = scoreSheet.getPlayer2IncrementsList() ;
-        double sum = 0.0;
-        int count = 0;
-        for (int inning : player2Innings){
-            if (inning > 0) {
-                sum += inning;
-                count++;
-            }
+        player1Innings.removeAll(Collections.singleton(0));
+        player2Innings.removeAll(Collections.singleton(0));
+        double sumPlayer1 = 0.0;
+        double sumPlayer2 = 0.0;
+        for (int index = 0; index < player1Innings.size(); index++){
+            sumPlayer1 += player1Innings.get(index);
         }
-        return count == 0 ? 0 : sum / count;
+        for (int index = 0; index < player2Innings.size(); index++){
+            sumPlayer2 += player2Innings.get(index);
+        }
+        meanRuns[0] = sumPlayer1 / player1Innings.size();
+        meanRuns[1] = sumPlayer2/ player2Innings.size();
+
+        return meanRuns;
     }
 }

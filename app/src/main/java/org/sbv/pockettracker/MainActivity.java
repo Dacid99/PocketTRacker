@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         player1Card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayerFragment playerFragment = PlayerFragment.newInstance(1);
+                PlayerFragment playerFragment = PlayerFragment.newInstance(1, scoreSheet);
                 playerFragment.show(getSupportFragmentManager(), "Player1Fragment");
             }
         });
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         player2Card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayerFragment playerFragment = PlayerFragment.newInstance(2);
+                PlayerFragment playerFragment = PlayerFragment.newInstance(2, scoreSheet);
                 playerFragment.show(getSupportFragmentManager(), "Player2Fragment");
             }
         });
@@ -492,11 +492,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             return null;
         }
     }
-    @Override
-    public ScoreSheet requestScoreSheet(){
-        return scoreSheet;
-    }
-
     //IO for saving and loading
     private void openCreateDocumentIntent(){
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);

@@ -26,7 +26,6 @@ public class ScoreSheetActivity extends AppCompatActivity {
     private TextView player1TableHeader, player2TableHeader, player1StatisticsHeader, player2StatisticsHeader;
     private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
     private ScoreSheet scoreSheet;
-    private GameStatistics gameStatistics;
     private MaterialToolbar toolbar;
     private MaterialButton counterButton, scoreSheetButton;
 
@@ -54,7 +53,6 @@ public class ScoreSheetActivity extends AppCompatActivity {
 
         counterButton.setOnClickListener(v -> finish());
 
-        gameStatistics = new GameStatistics(scoreSheet);
 
         tableLayout = findViewById(R.id.score_table);
 
@@ -91,14 +89,18 @@ public class ScoreSheetActivity extends AppCompatActivity {
         for (int index = 0; index < scoreSheet.length(); index++) {
             appendTableRow(index);
         }
-        maxRunPlayer1View.setText(getString(R.string.player_maxrun_format, gameStatistics.maxRunPlayer1()));
-        maxRunPlayer2View.setText(getString(R.string.player_maxrun_format, gameStatistics.maxRunPlayer2()));
-        inningsPlayer1View.setText(getString(R.string.player_innings_format, gameStatistics.player1Innings()));
-        inningsPlayer2View.setText(getString(R.string.player_innings_format, gameStatistics.player2Innings()));
-        meanInningPlayer1View.setText(getString(R.string.meanInning_format, gameStatistics.meanInningPlayer1()));
-        meanInningPlayer2View.setText(getString(R.string.meanInning_format, gameStatistics.meanInningPlayer2()));
-        meanRunPlayer1View.setText(getString(R.string.meanRun_format, gameStatistics.meanRunPlayer1()));
-        meanRunPlayer2View.setText(getString(R.string.meanRun_format, gameStatistics.meanRunPlayer2()));
+        double[] meanInnings = GameStatistics.meanInnings(scoreSheet);
+        double[] meanRuns = GameStatistics.meanRuns(scoreSheet);
+        int[] playerInnings = GameStatistics.playerInnings(scoreSheet);
+        int[] maxRuns = GameStatistics.maxRuns(scoreSheet);
+        maxRunPlayer1View.setText(getString(R.string.player_maxrun_format, maxRuns[0]));
+        maxRunPlayer2View.setText(getString(R.string.player_maxrun_format, maxRuns[1]));
+        inningsPlayer1View.setText(getString(R.string.player_innings_format, playerInnings[0]));
+        inningsPlayer2View.setText(getString(R.string.player_innings_format, playerInnings[1]));
+        meanInningPlayer1View.setText(getString(R.string.meanInning_format, meanInnings[0]));
+        meanInningPlayer2View.setText(getString(R.string.meanInning_format, meanInnings[1]));
+        meanRunPlayer1View.setText(getString(R.string.meanRun_format, meanRuns[0]));
+        meanRunPlayer2View.setText(getString(R.string.meanRun_format, meanRuns[1]));
     }
 
     private void highlightScoreSheet(){

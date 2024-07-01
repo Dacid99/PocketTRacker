@@ -31,12 +31,12 @@ public class PlayerFragment extends DialogFragment {
         void onClubInput(int playerNumber, String club);
         void onSwapButtonClick();
         Player requestPlayer(int playerNumber);
-        ScoreSheet requestScoreSheet();
     }
     private static final String PLAYERNUMBERPARAMETER = "playerNumber";
+    private static final String SCORESHEETPARAMETER = "scoresheet";
 
     private int playerNumber;
-    private GameStatistics gameStatistics;
+    private ScoreSheet scoreSheet;
     private View view;
     private TextInputLayout playerNameLayout, playerClubLayout;
     private TextInputEditText playerNameInput, playerClubInput;
@@ -49,11 +49,11 @@ public class PlayerFragment extends DialogFragment {
         // Required empty public constructor
     }
 
-    public static PlayerFragment newInstance(int playerNumber) {
+    public static PlayerFragment newInstance(int playerNumber, ScoreSheet scoreSheet) {
         PlayerFragment fragment = new PlayerFragment();
         Bundle args = new Bundle();
         args.putInt(PLAYERNUMBERPARAMETER, playerNumber);
-        //args.putParcelable(SCORESHEETPARAMETER, scoreSheet);
+        args.putParcelable(SCORESHEETPARAMETER, scoreSheet);
         fragment.setArguments(args);
         return fragment;
     }
@@ -64,7 +64,7 @@ public class PlayerFragment extends DialogFragment {
         try{
             listener = (PlayerFragment.PlayerFragmentProvider) context;
         }catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + "must implement PlayerFragmentProvider");
+            throw new ClassCastException(context + "must implement PlayerFragmentProvider");
         }
     }
 
@@ -74,7 +74,6 @@ public class PlayerFragment extends DialogFragment {
         if (getArguments() != null) {
             playerNumber = getArguments().getInt(PLAYERNUMBERPARAMETER);
         }
-        gameStatistics = new GameStatistics(listener.requestScoreSheet());
     }
 
     @Override
@@ -92,19 +91,10 @@ public class PlayerFragment extends DialogFragment {
         meanRunView = view.findViewById(R.id.meanRunPlayer_view);
         maxRunView = view.findViewById(R.id.maxRunPlayer_view);
 
-        if (playerNumber == 1){
-            inningsView.setText(getResources().getString(R.string.player_innings_format, gameStatistics.player1Innings()));
-            meanInningView.setText(getResources().getString(R.string.meanInning_format, gameStatistics.meanInningPlayer1()));
-            meanRunView.setText(getResources().getString(R.string.meanRun_format, gameStatistics.meanRunPlayer1()));
-            maxRunView.setText(getResources().getString(R.string.player_maxrun_format, gameStatistics.maxRunPlayer1()));
-        }else if (playerNumber == 2){
-            inningsView.setText(getResources().getString(R.string.player_innings_format, gameStatistics.player2Innings()));
-            meanInningView.setText(getResources().getString(R.string.meanInning_format, gameStatistics.meanInningPlayer2()));
-            meanRunView.setText(getResources().getString(R.string.meanRun_format, gameStatistics.meanRunPlayer2()));
-            maxRunView.setText(getResources().getString(R.string.player_maxrun_format, gameStatistics.maxRunPlayer2()));
-        }else {
-            Log.d("failed ifelse", "In PlayerFragment.onCreateView");
-        }
+        inningsView.setText(getResources().getString(R.string.player_innings_format, GameStatistics.playerInnings(scoreSheet)[playerNumber - 1]));
+        meanInningView.setText(getResources().getString(R.string.meanInning_format, GameStatistics.meanInnings(scoreSheet)[playerNumber - 1]));
+        meanRunView.setText(getResources().getString(R.string.meanRun_format, GameStatistics.meanRuns(scoreSheet)[playerNumber - 1]));
+        maxRunView.setText(getResources().getString(R.string.player_maxrun_format, GameStatistics.maxRuns(scoreSheet)[playerNumber - 1]));
 
         leftToOtherPlayerButton = view.findViewById(R.id.left_toOtherPlayerButton);
         rightToOtherPlayerButton = view.findViewById(R.id.right_toOtherPlayerButton);
@@ -202,7 +192,7 @@ public class PlayerFragment extends DialogFragment {
     private void switchToOtherPlayer(){
         FragmentManager fragmentManager = getParentFragmentManager();
         int otherPlayerNumber = (playerNumber == 1) ? 2 : 1 ;
-        PlayerFragment otherPlayerFragment = PlayerFragment.newInstance(otherPlayerNumber);
+        PlayerFragment otherPlayerFragment = PlayerFragment.newInstance(otherPlayerNumber, scoreSheet);
         otherPlayerFragment.show(fragmentManager, "Player"+otherPlayerNumber+"Fragment");
         dismiss();
     }

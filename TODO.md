@@ -8,4 +8,5 @@
 - backgrounds in table can be done more concisely using LayerDrawable
 - new screenshots
 - restructure gameStatistics to provide static methods
+- move increments math to gamestats class 
 - rethink some variable passings in terms of effciency
