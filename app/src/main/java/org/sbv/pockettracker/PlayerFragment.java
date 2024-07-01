@@ -36,12 +36,12 @@ public class PlayerFragment extends DialogFragment {
     private static final String PLAYERNUMBERPARAMETER = "playerNumber";
 
     private int playerNumber;
+    private GameStatistics gameStatistics;
     private View view;
     private TextInputLayout playerNameLayout, playerClubLayout;
     private TextInputEditText playerNameInput, playerClubInput;
     private MaterialButton leftToOtherPlayerButton, rightToOtherPlayerButton, swapPlayersButton;
-
-    private TextView playerScoreView;
+    private TextView playerScoreView, inningsView, meanInningView, meanRunView, maxRunView;
 
 
     private PlayerFragmentProvider listener;
@@ -53,6 +53,7 @@ public class PlayerFragment extends DialogFragment {
         PlayerFragment fragment = new PlayerFragment();
         Bundle args = new Bundle();
         args.putInt(PLAYERNUMBERPARAMETER, playerNumber);
+        //args.putParcelable(SCORESHEETPARAMETER, scoreSheet);
         fragment.setArguments(args);
         return fragment;
     }
@@ -73,6 +74,7 @@ public class PlayerFragment extends DialogFragment {
         if (getArguments() != null) {
             playerNumber = getArguments().getInt(PLAYERNUMBERPARAMETER);
         }
+        gameStatistics = new GameStatistics(listener.requestScoreSheet());
     }
 
     @Override
@@ -84,6 +86,25 @@ public class PlayerFragment extends DialogFragment {
         playerNameInput = view.findViewById(R.id.playerName);
         playerClubInput = view.findViewById(R.id.playerClub);
         playerScoreView = view.findViewById(R.id.playerScore);
+
+        inningsView = view.findViewById(R.id.inningsPlayer_view);
+        meanInningView = view.findViewById(R.id.meanInningPlayer_view);
+        meanRunView = view.findViewById(R.id.meanRunPlayer_view);
+        maxRunView = view.findViewById(R.id.maxRunPlayer_view);
+
+        if (playerNumber == 1){
+            inningsView.setText(getResources().getString(R.string.player_innings_format, gameStatistics.player1Innings()));
+            meanInningView.setText(getResources().getString(R.string.meanInning_format, gameStatistics.meanInningPlayer1()));
+            meanRunView.setText(getResources().getString(R.string.meanRun_format, gameStatistics.meanRunPlayer1()));
+            maxRunView.setText(getResources().getString(R.string.player_maxrun_format, gameStatistics.maxRunPlayer1()));
+        }else if (playerNumber == 2){
+            inningsView.setText(getResources().getString(R.string.player_innings_format, gameStatistics.player2Innings()));
+            meanInningView.setText(getResources().getString(R.string.meanInning_format, gameStatistics.meanInningPlayer2()));
+            meanRunView.setText(getResources().getString(R.string.meanRun_format, gameStatistics.meanRunPlayer2()));
+            maxRunView.setText(getResources().getString(R.string.player_maxrun_format, gameStatistics.maxRunPlayer2()));
+        }else {
+            Log.d("failed ifelse", "In PlayerFragment.onCreateView");
+        }
 
         leftToOtherPlayerButton = view.findViewById(R.id.left_toOtherPlayerButton);
         rightToOtherPlayerButton = view.findViewById(R.id.right_toOtherPlayerButton);

@@ -197,6 +197,10 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         return pointer == 0;
     }
 
+    public boolean isPlayer1Turn(){
+        return pointer % 2 == 0;
+    }
+
     private void clearAfterPointer(){
         if (length() > pointer + 1) {
             inningsList.subList(pointer + 1, length()).clear();

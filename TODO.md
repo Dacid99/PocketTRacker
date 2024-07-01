@@ -7,4 +7,5 @@
 - find good statistics library
 - backgrounds in table can be done more concisely using LayerDrawable
 - new screenshots
-
+- restructure gameStatistics to provide static methods
+- rethink some variable passings in terms of effciency

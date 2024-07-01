@@ -52,17 +52,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/playerScore"
-                app:layout_constraintEnd_toEndOf="@+id/playerNameLayout"
-                app:layout_constraintStart_toStartOf="@+id/playerNameLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/playerNameLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/playerClub"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:hint="@string/player_club_hint"
                     android:textSize="@dimen/textSize"
-                    android:gravity="center"
                     app:hintEnabled="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,15 +70,75 @@
                 android:id="@+id/playerScore"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="50dp"
                 android:gravity="center"
                 android:text="@string/player_score_format"
                 android:textColor="@color/score_color"
                 android:textSize="60sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/playerClubLayout"
-                app:layout_constraintStart_toStartOf="@+id/playerClubLayout"
+                app:layout_constraintBottom_toTopOf="@+id/playerStats_table"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/playerClubLayout" />
+
+            <TableLayout
+                android:id="@+id/playerStats_table"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/playerScore">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/inningsPlayer_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/scoreTextSize"
+                        android:gravity="center"
+                        android:text="test"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/meanInningPlayer_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/scoreTextSize"
+                        android:gravity="center"
+                        android:text="test" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/maxRunPlayer_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/scoreTextSize"
+                        android:gravity="center"
+                        android:text="test"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/meanRunPlayer_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/scoreTextSize"
+                        android:gravity="center"
+                        android:text="test" />
+
+                </TableRow>
+
+            </TableLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                             try (InputStream inputStream = getContentResolver().openInputStream(uri);
                                  InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
                                 ScoreSheetIO.readFromFile(inputStreamReader, player1, player2, scoreSheet);
-                                if (scoreSheet.currentTurn() % 2 == 0){
+                                if (scoreSheet.isPlayer1Turn()){
                                     turnPlayer = player1;
                                 }else {
                                     turnPlayer = player2;
@@ -297,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         updatePlayerUI();
         updateScoreUI();
-        if (scoreSheet.currentTurn() % 2 == 0){
+        if (scoreSheet.isPlayer1Turn()){
             turnPlayer = player1;
         }else {
             turnPlayer = player2;
@@ -428,7 +428,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     }
 
     private void updateSaveLoadUI(){
-        if (scoreSheet.currentTurn() == 0){
+        if (scoreSheet.isStart()){
             saveloadGameButton.setOnClickListener(v -> openReadDocumentIntent());
             saveloadGameButton.setText(getString(R.string.loadGame_string));
         } else {
@@ -501,7 +501,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private void openCreateDocumentIntent(){
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("text/csv");
+        intent.setType("*/*");
 
         Date now = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
