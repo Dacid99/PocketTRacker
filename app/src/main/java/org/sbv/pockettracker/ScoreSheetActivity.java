@@ -120,11 +120,9 @@ public class ScoreSheetActivity extends AppCompatActivity {
         }
         if (player1.isWinner()){
             player1TableHeader.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator_winner));
-            player1StatisticsHeader.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator_winner));
         }
         if (player2.isWinner()){
             player2TableHeader.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator_winner));
-            player2StatisticsHeader.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator_winner));
         }
     }
 
