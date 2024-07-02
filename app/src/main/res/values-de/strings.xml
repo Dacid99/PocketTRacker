@@ -15,8 +15,8 @@
     <string name="newGame_string">Neues Spiel</string>
     <string name="turnnumber_columnlabel">Aufnahme</string>
     <string name="title_activity_score_sheet">Spielprotokoll</string>
-    <string name="player1_columnlabel_default">Spieler1</string>
-    <string name="player2_columnlabel_default">Spieler2</string>
+    <string name="player1_default">Spieler1</string>
+    <string name="player2_default">Spieler2</string>
     <string name="scoresheet_scrollview_description">Spielprotokoll für das 14 und 1 endlos Spiel</string>
     <string name="player_maxrun_format">Top Lauf: %1$d</string>
     <string name="player_innings_format">Aufnahmen: %1$d</string>

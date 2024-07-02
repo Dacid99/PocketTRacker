@@ -54,16 +54,20 @@
                 app:layout_constraintBottom_toTopOf="@+id/playerClubLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/playerNameLayout"
-                android:text="@string/right_swap_string" />
+                android:text="@string/right_swap_string"
+                android:paddingBottom="12dp"
+                android:textSize="@dimen/textSize" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/left_swapButton"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/playerClubLayout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/playerNameLayout"
-                android:text="@string/left_swap_string"/>
+                android:text="@string/left_swap_string"
+                android:paddingBottom="12dp"
+                android:textSize="@dimen/textSize"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/playerClubLayout"
@@ -88,8 +92,6 @@
                 android:id="@+id/playerScore"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                android:layout_marginBottom="50dp"
                 android:gravity="center"
                 android:text="@string/player_score_format"
                 android:textColor="@color/score_color"
@@ -108,53 +110,42 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/playerScore">
 
-                <TableRow
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/inningsPlayer_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="test"
+                    android:textSize="@dimen/textSize" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/inningsPlayer_view"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/scoreTextSize"
-                        android:gravity="center"
-                        android:text="test"/>
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/meanInningPlayer_view"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/scoreTextSize"
-                        android:gravity="center"
-                        android:text="test" />
-
-                </TableRow>
-
-                <TableRow
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/meanInningPlayer_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="test"
+                    android:textSize="@dimen/textSize" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/maxRunPlayer_view"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/scoreTextSize"
-                        android:gravity="center"
-                        android:text="test"/>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/meanRunPlayer_view"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/scoreTextSize"
-                        android:gravity="center"
-                        android:text="test" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/maxRunPlayer_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="test"
+                    android:textSize="@dimen/textSize" />
 
-                </TableRow>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/meanRunPlayer_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="test"
+                    android:textSize="@dimen/textSize" />
 
             </TableLayout>
 

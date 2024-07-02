@@ -73,6 +73,7 @@ public class PlayerFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             playerNumber = getArguments().getInt(PLAYERNUMBERPARAMETER);
+            scoreSheet = getArguments().getParcelable(SCORESHEETPARAMETER);
         }
     }
 

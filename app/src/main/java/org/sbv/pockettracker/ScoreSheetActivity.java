@@ -39,6 +39,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
         scoreSheet = intent.getParcelableExtra(MainActivity.SCORESHEETPARAMETER);
         player1 = intent.getParcelableExtra(MainActivity.PLAYER1PARAMETER);
         player2 = intent.getParcelableExtra(MainActivity.PLAYER2PARAMETER);
+        assert scoreSheet != null;
         assert player1 != null;
         assert player2 != null;
 
@@ -62,12 +63,12 @@ public class ScoreSheetActivity extends AppCompatActivity {
         player1StatisticsHeader = findViewById(R.id.player1statistics_header);
         player2StatisticsHeader = findViewById(R.id.player2statistics_header);
 
-        player1TableHeader.setText(getString(R.string.player_name_format, player1.getName()));
-        player1StatisticsHeader.setText(getString(R.string.player_name_format, player1.getName()));
 
-        player2TableHeader.setText(getString(R.string.player_name_format, player2.getName()));
-        player2StatisticsHeader.setText(getString(R.string.player_name_format, player2.getName()));
+        player1TableHeader.setText((player1.getName().isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, player1.getName()));
+        player1StatisticsHeader.setText((player1.getName().isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, player1.getName()));
 
+        player2TableHeader.setText((player1.getName().isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, player2.getName()));
+        player2StatisticsHeader.setText((player1.getName().isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, player2.getName()));
 
         maxRunPlayer1View = findViewById(R.id.player1statistics_maxRun);
         maxRunPlayer2View = findViewById(R.id.player2statistics_maxRun);

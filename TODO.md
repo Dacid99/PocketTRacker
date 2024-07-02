@@ -2,10 +2,11 @@
 - settings menu: club toggleable, set default winningpoints
 - mark statistics and winner in table
 - add more final keywords to mark immutability
-- more logging
+- more logging and error handling!!
 - find good statistics and plots library
 - backgrounds in table can be done more concisely using LayerDrawable
 - new screenshots
 - move increments math to gamestats class 
 - rethink some variable passings in terms of efficiency
-- test new features: long clicks unredo, colored winners in scoresheet, playerstats in playerfragment, left and right swap buttons
+- playerfragment for landscape
+- test new features: colored winners in scoresheet

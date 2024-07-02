@@ -205,6 +205,10 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         return inningsList.size();
     }
 
+    public boolean isEmpty(){
+        return inningsList.isEmpty();
+    }
+
     public int currentTurn(){
         return pointer;
     }

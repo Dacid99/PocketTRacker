@@ -31,12 +31,14 @@ public class GameStatistics {
         ArrayList<Integer> player2Innings = scoreSheet.getPlayer2IncrementsList() ;
         double sumPlayer1 = 0.0;
         double sumPlayer2 = 0.0;
-        for (int index = 0; index < scoreSheet.length(); index++){
+        for (int index = 0; index < scoreSheet.length() - 1; index++){
             sumPlayer1 += player1Innings.get(index);
             sumPlayer2 += player2Innings.get(index);
         }
-        meanInnings[0] = sumPlayer1 / scoreSheet.length();
-        meanInnings[1] = sumPlayer2/ scoreSheet.length();
+
+        //scoresheet should never be empty as the constructor of scoresheet set a first element
+        meanInnings[0] = (scoreSheet.isEmpty()) ? 0 : sumPlayer1 / scoreSheet.length();
+        meanInnings[1] = (scoreSheet.isEmpty()) ? 0 : sumPlayer2 / scoreSheet.length();
 
         return meanInnings;
     }
@@ -55,8 +57,8 @@ public class GameStatistics {
         for (int index = 0; index < player2Innings.size(); index++){
             sumPlayer2 += player2Innings.get(index);
         }
-        meanRuns[0] = sumPlayer1 / player1Innings.size();
-        meanRuns[1] = sumPlayer2/ player2Innings.size();
+        meanRuns[0] = (player1Innings.isEmpty()) ? 0 : sumPlayer1 / player1Innings.size();
+        meanRuns[1] = (player2Innings.isEmpty()) ? 0 : sumPlayer2/ player2Innings.size();
 
         return meanRuns;
     }

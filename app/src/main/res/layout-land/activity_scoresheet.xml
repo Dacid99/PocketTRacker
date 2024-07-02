@@ -47,7 +47,7 @@
                 android:background="@drawable/cell_separator"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="@string/player1_columnlabel_default"
+                android:text="@string/player1_default"
                 android:textStyle="bold" />
 
             <TextView
@@ -58,7 +58,7 @@
                 android:background="@drawable/cell_separator"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="@string/player2_columnlabel_default"
+                android:text="@string/player2_default"
                 android:textStyle="bold" />
 
             <TextView
@@ -207,7 +207,7 @@
                 android:background="@drawable/roundedcorners_background"
                 android:backgroundTint="@color/colorPrimary"
                 android:gravity="center"
-                android:text="@string/player1_columnlabel_default"
+                android:text="@string/player1_default"
                 android:textColor="@color/colorOnPrimary"
                 android:textSize="@dimen/smallTextSize"
                 android:textStyle="bold"
@@ -296,7 +296,7 @@
                 android:background="@drawable/roundedcorners_background"
                 android:backgroundTint="@color/colorPrimary"
                 android:gravity="center"
-                android:text="@string/player2_columnlabel_default"
+                android:text="@string/player2_default"
                 android:textColor="@color/colorOnPrimary"
                 android:textSize="@dimen/smallTextSize"
                 android:textStyle="bold"

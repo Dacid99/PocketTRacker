@@ -27,6 +27,6 @@
 
     <!-- player_fragment dimensions-->
     <dimen name="playerFragment_width">240dp</dimen>
-    <dimen name="playerFragment_height">400dp</dimen>
+    <dimen name="playerFragment_height">500dp</dimen>
 
 </resources>
