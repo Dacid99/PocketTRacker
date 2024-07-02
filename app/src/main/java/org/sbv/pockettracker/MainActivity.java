@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private PoolTable table;
     private ScoreSheet scoreSheet;
     private TextView player1NameView, player2NameView, player1ClubView, player2ClubView, player1ScoreView, player2ScoreView, ballsOnTableFloatingButton;
-    private TextInputLayout winningPointsLayout;
     private TextInputEditText winningPointsInput;
     private MaterialCardView player1Card, player2Card;
     private MaterialButton counterButton, scoreSheetButton, foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, saveloadGameButton;
@@ -86,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         ballsOnTableFloatingButton = findViewById(R.id.ballsOnTableFloatingButton);
 
-        winningPointsLayout = findViewById(R.id.winningPointsLayout);
         winningPointsInput = findViewById(R.id.winningPointsInput);
 
         winningPointsInput.setText(getString(R.string.winnerPoints_format, Player.winningPoints));
