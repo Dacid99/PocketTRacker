@@ -1,6 +1,8 @@
 package org.sbv.pockettracker;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -15,12 +17,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 
@@ -32,17 +38,21 @@ public class PlayerFragment extends DialogFragment {
         void onSwapButtonClick();
         Player requestPlayer(int playerNumber);
     }
+    private static final String NAME_AUTOCOMPLETEPREFERENCES = "player_autocompletepreferences";
+    private static final String CLUB_AUTOCOMPLETEPREFERENCES = "club_autocompletepreferences";
+    private static final String NAME_HISTORY_KEY = "player_history";
+    private static final String CLUB_HISTORY_KEY = "club_history";
     private static final String PLAYERNUMBERPARAMETER = "playerNumber";
     private static final String SCORESHEETPARAMETER = "scoresheet";
 
     private int playerNumber;
     private ScoreSheet scoreSheet;
     private View view;
-    private TextInputLayout playerNameLayout, playerClubLayout;
-    private TextInputEditText playerNameInput, playerClubInput;
+    private AutoCompleteTextView playerNameInput, playerClubInput;
     private MaterialButton leftToOtherPlayerButton, rightToOtherPlayerButton, leftSwapPlayersButton, rightSwapPlayersButton;
     private TextView playerScoreView, inningsView, meanInningView, meanRunView, maxRunView;
-
+    private SharedPreferences namePreferences, clubPreferences;
+    private Set<String> nameHistorySet, clubHistorySet;
 
     private PlayerFragmentProvider listener;
     public PlayerFragment() {
@@ -85,6 +95,8 @@ public class PlayerFragment extends DialogFragment {
 
         playerNameInput = view.findViewById(R.id.playerName);
         playerClubInput = view.findViewById(R.id.playerClub);
+        clubPreferences = requireActivity().getSharedPreferences(CLUB_AUTOCOMPLETEPREFERENCES, Context.MODE_PRIVATE);
+
         playerScoreView = view.findViewById(R.id.playerScore);
 
         inningsView = view.findViewById(R.id.inningsPlayer_view);
@@ -131,6 +143,11 @@ public class PlayerFragment extends DialogFragment {
                 listener.onNameInput(playerNumber, newName);
             }
         });
+        namePreferences = requireActivity().getSharedPreferences(NAME_AUTOCOMPLETEPREFERENCES, Context.MODE_PRIVATE);
+        nameHistorySet = new HashSet<>(namePreferences.getStringSet(NAME_HISTORY_KEY, new HashSet<>()));
+        ArrayAdapter<String> nameAdapter = new ArrayAdapter<>(requireContext(), R.layout.dropdown_item, new ArrayList<>(nameHistorySet));
+        playerNameInput.setAdapter(nameAdapter);
+        playerNameInput.setThreshold(1);
 
         playerClubInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -149,6 +166,11 @@ public class PlayerFragment extends DialogFragment {
                 listener.onClubInput(playerNumber, newName);
             }
         });
+        clubPreferences = requireActivity().getSharedPreferences(CLUB_AUTOCOMPLETEPREFERENCES, Context.MODE_PRIVATE);
+        clubHistorySet = new HashSet<>(clubPreferences.getStringSet(CLUB_HISTORY_KEY, new HashSet<>()));
+        ArrayAdapter<String> clubAdapter = new ArrayAdapter<>(requireContext(), R.layout.dropdown_item, new ArrayList<>(clubHistorySet));
+        playerClubInput.setAdapter(clubAdapter);
+        playerClubInput.setThreshold(1);
 
         leftToOtherPlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,9 +204,39 @@ public class PlayerFragment extends DialogFragment {
 
         return view;
     }
+    @Override
+    public void onCancel(@NonNull DialogInterface dialogInterface){
+        super.onCancel(dialogInterface);
 
+        String input = playerClubInput.getText().toString();
+        if(!input.isEmpty()){
+            clubHistorySet.add(input);
+            clubPreferences.edit().putStringSet(CLUB_HISTORY_KEY, clubHistorySet).apply();
+        }
+        input = playerNameInput.getText().toString();
+        if(!input.isEmpty()){
+            nameHistorySet.add(input);
+            namePreferences.edit().putStringSet(NAME_HISTORY_KEY, nameHistorySet).apply();
+        }
+    }
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialogInterface){
+        super.onDismiss(dialogInterface);
+
+        String input = playerClubInput.getText().toString();
+        if(!input.isEmpty()){
+            clubHistorySet.add(input);
+            clubPreferences.edit().putStringSet(CLUB_HISTORY_KEY, clubHistorySet).apply();
+        }
+        input = playerNameInput.getText().toString();
+        if(!input.isEmpty()){
+            nameHistorySet.add(input);
+            namePreferences.edit().putStringSet(NAME_HISTORY_KEY, nameHistorySet).apply();
+        }
+    }
     private void updatePlayerFields(){
         Player player = listener.requestPlayer(playerNumber);
+        System.out.println(player.getScore() + player.getName());
         playerNameInput.setText(getString(R.string.player_name_format, player.getName()));
         playerClubInput.setText(getString(R.string.player_club_format, player.getClub()));
         playerScoreView.setText(getString(R.string.player_score_format, player.getScore()));

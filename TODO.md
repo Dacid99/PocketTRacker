@@ -1,6 +1,5 @@
-- potentially tie all backend components into a Game Class
 - settings menu: club toggleable, set default winningpoints
-- mark statistics and winner in table
+- mark statistics in table
 - add more final keywords to mark immutability
 - more logging and error handling!!
 - find good statistics and plots library
@@ -9,4 +8,6 @@
 - move increments math to gamestats class 
 - rethink some variable passings in terms of efficiency
 - playerfragment for landscape
-- test new features: colored winners in scoresheet
+- bug turns playerscore in view of playerfragment to 0 on orientation change
+- use one player fragment for both players, allows for faster switching and saving of states, plus you can get rid of requestplayer interface
+- maybe get rid of player.score and store everything about the scores only in scoresheet

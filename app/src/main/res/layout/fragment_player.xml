@@ -41,8 +41,9 @@
                     android:id="@+id/playerName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/textSize"
-                    android:padding="@dimen/autocompleteTextView_padding"
+                    android:textSize="@dimen/playerFragment_inputTextSize"
+                    android:paddingTop="@dimen/autocompleteTextView_paddingTop"
+                    android:paddingBottom="@dimen/autocompleteTextView_paddingBottom"
                     android:gravity="center"
                     app:hintEnabled="true" />
 
@@ -85,8 +86,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="@dimen/textSize"
-                    android:padding="@dimen/autocompleteTextView_padding"
+                    android:textSize="@dimen/playerFragment_inputTextSize"
+                    android:paddingTop="@dimen/autocompleteTextView_paddingTop"
+                    android:paddingBottom="@dimen/autocompleteTextView_paddingBottom"
                     app:hintEnabled="true" />
 
             </com.google.android.material.textfield.TextInputLayout>

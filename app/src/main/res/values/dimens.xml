@@ -28,5 +28,9 @@
     <!-- player_fragment dimensions-->
     <dimen name="playerFragment_width">240dp</dimen>
     <dimen name="playerFragment_height">540dp</dimen>
+    <dimen name="playerFragment_inputTextSize">24sp</dimen>
+    <dimen name="autocompleteTextView_paddingTop">24dp</dimen>
+    <dimen name="autocompleteTextView_paddingBottom">8dp</dimen>
+    <dimen name="dropdown_padding">12dp</dimen>
 
 </resources>
