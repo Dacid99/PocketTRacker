@@ -114,6 +114,13 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         progress();
     }
 
+    public void trackPlayer1(Player player1){
+        this.trackedPlayer1 = player1;
+    }
+
+    public void trackPlayer2(Player player2){
+        this.trackedPlayer2 = player2;
+    }
     //Parcelable methods
     protected ScoreSheet(@NonNull Parcel in){
         pointer = in.readInt();

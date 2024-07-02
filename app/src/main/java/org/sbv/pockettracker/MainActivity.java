@@ -321,17 +321,19 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
 
-        ScoreSheet savedScoreSheet = savedInstanceState.getParcelable(SCORESHEETSAVEPARAMETER);
-        if (savedScoreSheet!= null) {
-            scoreSheet.include(savedScoreSheet);
-        }
         Player savedPlayer1 = savedInstanceState.getParcelable(PLAYER1SAVEPARAMETER);
-        if (savedPlayer1 != null){
+        if (savedInstanceState.getParcelable(PLAYER1SAVEPARAMETER) != null){
             player1 = savedPlayer1;
+            scoreSheet.trackPlayer1(player1);
         }
         Player savedPlayer2 = savedInstanceState.getParcelable(PLAYER2SAVEPARAMETER);
         if (savedPlayer2 != null){
             player2 = savedPlayer2;
+            scoreSheet.trackPlayer2(player2);
+        }
+        ScoreSheet savedScoreSheet = savedInstanceState.getParcelable(SCORESHEETSAVEPARAMETER);
+        if (savedScoreSheet!= null) {
+            scoreSheet.include(savedScoreSheet);
         }
 
         updatePlayerUI();
