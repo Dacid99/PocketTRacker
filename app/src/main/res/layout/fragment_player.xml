@@ -34,14 +34,15 @@
                 app:layout_constraintBottom_toTopOf="@+id/playerClubLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:hint="@string/player_name_hint">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:id="@+id/playerName"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/player_name_hint"
+                    android:layout_height="wrap_content"
                     android:textSize="@dimen/textSize"
+                    android:padding="@dimen/autocompleteTextView_padding"
                     android:gravity="center"
                     app:hintEnabled="true" />
 
@@ -76,16 +77,18 @@
                 app:layout_constraintBottom_toTopOf="@+id/playerScore"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/playerNameLayout">
+                app:layout_constraintTop_toBottomOf="@+id/playerNameLayout"
+                android:hint="@string/player_club_hint" >
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:id="@+id/playerClub"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:hint="@string/player_club_hint"
                     android:textSize="@dimen/textSize"
+                    android:padding="@dimen/autocompleteTextView_padding"
                     app:hintEnabled="true" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textview.MaterialTextView
