@@ -113,7 +113,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textSize="@dimen/smallTextSize"
-            app:hintEnabled="true"
+            android:inputType="number"
             tools:layout_editor_absoluteX="141dp"
             tools:layout_editor_absoluteY="589dp" />
 
