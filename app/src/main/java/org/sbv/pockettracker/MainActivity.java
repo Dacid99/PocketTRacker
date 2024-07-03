@@ -2,6 +2,7 @@ package org.sbv.pockettracker;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +18,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
@@ -52,13 +54,34 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private TextView player1NameView, player2NameView, player1ClubView, player2ClubView, player1ScoreView, player2ScoreView, ballsOnTableFloatingButton;
     private TextInputEditText winningPointsInput;
     private MaterialCardView player1Card, player2Card;
-    private MaterialButton counterButton, scoreSheetButton, foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, saveloadGameButton;
+    private MaterialButton counterButton, scoreSheetButton, settingsButton, foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, saveloadGameButton;
     private MaterialToolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //enact preferences
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        try {
+            String stringWinnerPoints = sharedPreferences.getString("winnerPoints_default", "40");
+            try{
+                Player.winningPoints = Integer.parseInt(stringWinnerPoints);
+            } catch (NumberFormatException ne){
+                Log.d("Bad savestate", "In MainActivity.onCreate: winnerpoints is not saved as a parseable String!", ne);
+                Player.winningPoints = 40;
+            }
+        } catch (ClassCastException e){
+            Log.d("Bad savestate", "In MainActivity.onCreate: winnerpoints is not saved as string!",e);
+            Player.winningPoints = sharedPreferences.getInt("winnerPoints_default", 40);
+
+        }
+        Player.defaultPlayerNames[0] = sharedPreferences.getString("player1_name_default", "");
+        Player.defaultPlayerNames[1] = sharedPreferences.getString("player2_name_default", "");
+        Player.defaultPlayerClubs[0] = sharedPreferences.getString("player1_club_default", "");
+        Player.defaultPlayerClubs[1] = sharedPreferences.getString("player2_club_default", "");
+        Player.hasClub = sharedPreferences.getBoolean("club_toggle", true);
 
         //toolbar buttons
         toolbar = findViewById(R.id.toolbar);
@@ -67,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         counterButton = findViewById(R.id.counter_button);
         scoreSheetButton = findViewById(R.id.scoresheet_button);
+        settingsButton = findViewById(R.id.settings_button);
         //deactivate counter button in this activity
         counterButton.setClickable(false);
         counterButton.setTextColor(getResources().getColor(R.color.current_activity_color));
@@ -244,6 +268,11 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             }
         });
 
+        settingsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        });
+
         createFileActivityLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -398,8 +427,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     }
 
     private void newGame(){
-        player1 = new Player();
-        player2 = new Player();
+        player1 = new Player(1);
+        player2 = new Player(2);
 
         turnPlayer = player1;
 

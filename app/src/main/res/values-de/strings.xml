@@ -18,13 +18,24 @@
     <string name="player1_default">Spieler1</string>
     <string name="player2_default">Spieler2</string>
     <string name="scoresheet_scrollview_description">Spielprotokoll für das 14 und 1 endlos Spiel</string>
-    <string name="player_maxrun_format">Top Lauf: %1$d</string>
+    <string name="player_maxrun_format">Top Run: %1$d</string>
     <string name="player_innings_format">Aufnahmen: %1$d</string>
     <string name="meanInning_format">\u2300 Aufnahme: %1$.2f</string>
-    <string name="meanRun_format">\u2300 Lauf: %1$.2f</string>
+    <string name="meanRun_format">\\u2300 Run: %1$.2f</string>
     <string name="saveGame_string">Speichern</string>
     <string name="cantOpenScoreSheet_toast">Kann den Spielbericht nicht öffnen, er ist falsch. Bitte teile mir diesen Fehler auf gitlab mit!</string>
     <string name="loadGame_string">Laden</string>
     <string name="button_1_label">1\nrerack</string>
+    <string name="customization_header">Individualisierung</string>
+    <string name="player1_name_default_title">Name für Spieler 1</string>
+    <string name="player2_name_default_title">Name für Spieler 2</string>
+    <string name="defaults_header">Voreinstellungen</string>
+    <string name="player1_club_default_title">Verein für Spieler 1</string>
+    <string name="player2_club_default_title">Verein für Spieler 2</string>
+    <string name="winnerPoints_default_title">Punkte zum Sieg</string>
+    <string name="club_toggle_summary_off">Spieler haben keine Vereine</string>
+    <string name="club_toggle_summary_on">Spieler haben Vereine</string>
+    <string name="club_toggle_title">Vereine an/aus</string>
+    <string name="title_activity_settings">Einstellungen</string>
 
 </resources>

@@ -1,4 +1,3 @@
-- settings menu: club toggleable, set default winningpoints
 - mark statistics in table
 - add more final keywords to mark immutability
 - more logging and error handling!!
@@ -11,3 +10,8 @@
 - bug turns playerscore in view of playerfragment to 0 on orientation change
 - use one player fragment for both players, allows for faster switching and saving of states, plus you can get rid of requestplayer interface
 - maybe get rid of player.score and store everything about the scores only in scoresheet
+- setting for theme
+- toolbar on bottom
+- save button in settings 
+- organize MainActivity.onCreate into submethods 
+- handle input of defaultwinnerpoints manually with red color etc to avoid illegal inputs

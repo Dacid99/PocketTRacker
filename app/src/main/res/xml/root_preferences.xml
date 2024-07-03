@@ -1,0 +1,45 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/defaults_header">
+
+        <EditTextPreference
+            app:key="player1_name_default"
+            app:title="@string/player1_name_default_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:key="player2_name_default"
+            app:title="@string/player2_name_default_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:key="player1_club_default"
+            app:title="@string/player1_club_default_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:key="player2_club_default"
+            app:title="@string/player2_club_default_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:key="winnerPoints_default"
+            app:title="@string/winnerPoints_default_title"
+            app:useSimpleSummaryProvider="true"
+            android:inputType="number"/>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/customization_header">
+
+        <SwitchPreferenceCompat
+            app:key="club_toggle"
+            app:summaryOff="@string/club_toggle_summary_off"
+            app:summaryOn="@string/club_toggle_summary_on"
+            app:title="@string/club_toggle_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

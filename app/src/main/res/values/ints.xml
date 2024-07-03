@@ -7,6 +7,8 @@
     <integer name="player2Increment_column_weight">4</integer>
     <integer name="player2Total_column_weight">4</integer>
     <integer name="ballsOnTable_subcolumn_weight">4</integer>
-    <integer name="toolbar_counterbutton_weight">1</integer>
-    <integer name="toolbar_scoresheetbutton_weight">1</integer>
+    <integer name="toolbar_counterbutton_weight">4</integer>
+    <integer name="toolbar_scoresheetbutton_weight">3</integer>
+    <integer name="toolbar_settingsbutton_weight">1</integer>
+
 </resources>

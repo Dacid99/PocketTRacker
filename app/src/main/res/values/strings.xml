@@ -82,5 +82,24 @@
     <!-- toolbar strings -->
     <string name="counter_string" translatable="false">@string/app_name</string>
     <string name="scoresheet_string" translatable="false">@string/title_activity_score_sheet</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="customization_header">Customization</string>
+    <string name="defaults_header">Defaults</string>
+
+
+    <!-- Defaults Preferences -->
+    <string name="player1_name_default_title">Default name for player 1</string>
+    <string name="player2_name_default_title">Default name for player 2</string>
+    <string name="player1_club_default_title">Default club of player 1</string>
+    <string name="player2_club_default_title">Default club of player 2</string>
+    <string name="winnerPoints_default_title">Default points to win</string>
+
+    <!-- Customization Preferences -->
+    <string name="club_toggle_summary_off">Players have no clubs</string>
+    <string name="club_toggle_summary_on">Players have clubs</string>
+    <string name="club_toggle_title">Clubs on/off</string>
+    <string name="settings_string" translatable="false">\u2699</string>
 
 </resources>

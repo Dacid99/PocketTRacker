@@ -8,17 +8,29 @@ import androidx.annotation.NonNull;
 import org.jetbrains.annotations.Contract;
 
 public class Player implements Parcelable {
-    static int winningPoints = 40; //default value
-    private String name = "";
-    private String club = "";
+    public static int winningPoints = 40;
+    public static String[] defaultPlayerNames = {"",""};
+    public static String[] defaultPlayerClubs = {"",""};
+    public static boolean hasClub = true;
+
+    private final int playerNumber;
+    private String name;
+    private String club;
     private int score;
 
-    public Player() {
+    public Player(int playerNumber) {
+        this.playerNumber = playerNumber;
+        this.name = defaultPlayerNames[playerNumber-1];
+        this.club = defaultPlayerClubs[playerNumber-1];
         this.score = 0;
     }
 
     public void addPoints(int points) {
         this.score += points;
+    }
+
+    public int getPlayerNumber(){
+        return this.playerNumber;
     }
 
     public int getScore() {
@@ -68,12 +80,14 @@ public class Player implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(this.playerNumber);
         dest.writeString(this.name);
         dest.writeString(this.club);
         dest.writeInt(this.score);
     }
 
     public Player(Parcel in) {
+        this.playerNumber = in.readInt();
         this.name = in.readString();
         this.club = in.readString();
         this.score = in.readInt();
