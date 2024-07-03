@@ -12,6 +12,7 @@
 - maybe get rid of player.score and store everything about the scores only in scoresheet
 - setting for theme
 - toolbar on bottom
-- save button in settings 
 - organize MainActivity.onCreate into submethods 
-- handle input of defaultwinnerpoints manually with red color etc to avoid illegal inputs
+- connect settings and main so the defaults are dircetly set
+- save button in settings
+- implement club on/off

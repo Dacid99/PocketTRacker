@@ -64,19 +64,15 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         //enact preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        try {
-            String stringWinnerPoints = sharedPreferences.getString("winnerPoints_default", "40");
-            try{
-                Player.winningPoints = Integer.parseInt(stringWinnerPoints);
-            } catch (NumberFormatException ne){
-                Log.d("Bad savestate", "In MainActivity.onCreate: winnerpoints is not saved as a parseable String!", ne);
-                Player.winningPoints = 40;
-            }
-        } catch (ClassCastException e){
-            Log.d("Bad savestate", "In MainActivity.onCreate: winnerpoints is not saved as string!",e);
-            Player.winningPoints = sharedPreferences.getInt("winnerPoints_default", 40);
 
+        String stringWinnerPoints = sharedPreferences.getString("winnerPoints_default", "40");
+        try{
+            Player.winningPoints = Integer.parseInt(stringWinnerPoints);
+        } catch (NumberFormatException ne){
+            Log.d("Bad preference", "In MainActivity.onCreate: winnerpoints is not saved as a parseable String!", ne);
+            Player.winningPoints = 40;
         }
+
         Player.defaultPlayerNames[0] = sharedPreferences.getString("player1_name_default", "");
         Player.defaultPlayerNames[1] = sharedPreferences.getString("player2_name_default", "");
         Player.defaultPlayerClubs[0] = sharedPreferences.getString("player1_club_default", "");

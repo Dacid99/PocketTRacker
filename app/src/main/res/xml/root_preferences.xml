@@ -24,6 +24,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <EditTextPreference
+            android:id="@+id/winnerPointsDefault_input"
             app:key="winnerPoints_default"
             app:title="@string/winnerPoints_default_title"
             app:useSimpleSummaryProvider="true"
