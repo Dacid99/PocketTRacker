@@ -6,13 +6,10 @@
 - new screenshots
 - move increments math to gamestats class 
 - rethink some variable passings in terms of efficiency
-- playerfragment for landscape
 - bug turns playerscore in view of playerfragment to 0 on orientation change
 - use one player fragment for both players, allows for faster switching and saving of states, plus you can get rid of requestplayer interface
 - maybe get rid of player.score and store everything about the scores only in scoresheet
 - setting for theme
 - toolbar on bottom
-- organize MainActivity.onCreate into submethods 
-- connect settings and main so the defaults are dircetly set
+- organize MainActivity.onCreate into submethods
 - save button in settings
-- implement club on/off
