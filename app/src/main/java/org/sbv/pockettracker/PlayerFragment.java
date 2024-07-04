@@ -118,8 +118,8 @@ public class PlayerFragment extends DialogFragment {
         rightSwapPlayersButton = view.findViewById(R.id.right_swapButton);
 
         if (!Player.hasClub){
-            playerClubLayout.setVisibility(View.INVISIBLE);
-            playerClubInput.setVisibility(View.INVISIBLE);
+            playerClubLayout.setVisibility(View.GONE);
+            playerClubInput.setVisibility(View.GONE);
         }
 
         if (playerNumber == 1){

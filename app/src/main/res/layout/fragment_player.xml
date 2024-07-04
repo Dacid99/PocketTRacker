@@ -26,72 +26,74 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/playerNameLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/playerClubLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:hint="@string/player_name_hint">
-
-                <AutoCompleteTextView
-                    android:id="@+id/playerName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/playerFragment_inputTextSize"
-                    android:paddingTop="@dimen/autocompleteTextView_paddingTop"
-                    android:paddingBottom="@dimen/autocompleteTextView_paddingBottom"
-                    android:gravity="center"
-                    app:hintEnabled="true" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/right_swapButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/playerClubLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/playerNameLayout"
-                android:text="@string/right_swap_string"
-                android:paddingBottom="12dp"
-                android:textSize="@dimen/textSize" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/left_swapButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/playerClubLayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/playerNameLayout"
-                android:text="@string/left_swap_string"
-                android:paddingBottom="12dp"
-                android:textSize="@dimen/textSize"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/playerClubLayout"
+            <RelativeLayout
+                android:id="@+id/playerLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/playerScore"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/playerNameLayout"
-                android:hint="@string/player_club_hint" >
+                app:layout_constraintTop_toTopOf="parent" >
 
-                <AutoCompleteTextView
-                    android:id="@+id/playerClub"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/playerNameLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="@dimen/playerFragment_inputTextSize"
-                    android:paddingTop="@dimen/autocompleteTextView_paddingTop"
-                    android:paddingBottom="@dimen/autocompleteTextView_paddingBottom"
-                    app:hintEnabled="true" />
+                    android:hint="@string/player_name_hint"
+                    android:layout_alignParentTop="true" >
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/playerName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/autocompleteTextView_paddingTop"
+                        android:paddingBottom="@dimen/autocompleteTextView_paddingBottom"
+                        android:textSize="@dimen/playerFragment_inputTextSize"
+                        app:hintEnabled="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/right_swapButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:text="@string/right_swap_string"
+                    android:textSize="@dimen/textSize"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/playerNameLayout" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/left_swapButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:text="@string/left_swap_string"
+                    android:textSize="@dimen/textSize"
+                    android:layout_below="@+id/playerNameLayout"
+                    android:layout_alignParentStart="true" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/playerClubLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/player_club_hint"
+                    android:layout_below="@+id/right_swapButton" >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/playerClub"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/autocompleteTextView_paddingTop"
+                        android:paddingBottom="@dimen/autocompleteTextView_paddingBottom"
+                        android:textSize="@dimen/playerFragment_inputTextSize"
+                        app:hintEnabled="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/playerScore"
@@ -104,7 +106,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/playerStats_table"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/playerClubLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/playerLayout" />
 
             <TableLayout
                 android:id="@+id/playerStats_table"
