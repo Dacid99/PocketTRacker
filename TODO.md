@@ -3,7 +3,6 @@
 - more logging and error handling!!
 - find good statistics and plots library
 - backgrounds in table can be done more concisely using LayerDrawable
-- new screenshots
 - move increments math to gamestats class 
 - rethink some variable passings in terms of efficiency
 - bug turns playerscore in view of playerfragment to 0 on orientation change

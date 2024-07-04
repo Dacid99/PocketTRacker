@@ -43,7 +43,7 @@ public class NumberPaneFragment extends DialogFragment {
         try{
             listener = (NumberPaneFragmentProvider) context;
         }catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + "must implement CustomDialogListener");
+            throw new ClassCastException(context + "must implement CustomDialogListener");
         }
     }
 

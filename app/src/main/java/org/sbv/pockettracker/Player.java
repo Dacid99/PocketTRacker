@@ -9,8 +9,8 @@ import org.jetbrains.annotations.Contract;
 
 public class Player implements Parcelable {
     public static int winnerPoints = 40;
-    public static String[] defaultPlayerNames = {"",""};
-    public static String[] defaultPlayerClubs = {"",""};
+    public static final String[] defaultPlayerNames = {"",""};
+    public static final String[] defaultPlayerClubs = {"",""};
     public static boolean hasClub = true;
 
     private final int playerNumber;

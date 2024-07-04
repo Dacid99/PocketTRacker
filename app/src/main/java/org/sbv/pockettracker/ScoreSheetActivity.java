@@ -15,7 +15,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -32,7 +31,6 @@ public class ScoreSheetActivity extends AppCompatActivity {
     private Player player1, player2;
     private MaterialToolbar toolbar;
     private MaterialButton counterButton, scoreSheetButton, settingsButton;
-    private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

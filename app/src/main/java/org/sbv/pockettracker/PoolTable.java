@@ -26,13 +26,6 @@ public class PoolTable {
         return ballsRemoved;
     }
 
-    public void removeBall(){
-        this.numberOfBalls -= 1;
-        if (this.numberOfBalls == 1){
-            rerack();
-        }
-    }
-
     public void rerack(){
         this.numberOfBalls = 15;
         this.oldNumberOfBalls = 15;
