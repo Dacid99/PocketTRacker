@@ -11,5 +11,6 @@
 - maybe get rid of player.score and store everything about the scores only in scoresheet
 - setting for theme
 - toolbar on bottom
-- organize MainActivity.onCreate into submethods
+  - requires rewriting activities into fragments
+  - using viewmodels reasonable
 - save button in settings

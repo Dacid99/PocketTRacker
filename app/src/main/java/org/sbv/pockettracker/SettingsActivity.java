@@ -1,38 +1,31 @@
 package org.sbv.pockettracker;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 
 public class SettingsActivity extends AppCompatActivity {
-    private MaterialToolbar toolbar;
-    private MaterialButton counterButton, scoreSheetButton, settingsButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_settings);
 
-        counterButton = findViewById(R.id.counter_button);
-        scoreSheetButton = findViewById(R.id.scoresheet_button);
-        settingsButton = findViewById(R.id.settings_button);
-
-        settingsButton.setEnabled(false);
+        ActionBar toolbar = getSupportActionBar();
+        if (toolbar != null){
+            toolbar.setDisplayHomeAsUpEnabled(true);
+        }
 
         if (savedInstanceState == null) {
             getSupportFragmentManager()
@@ -40,10 +33,17 @@ public class SettingsActivity extends AppCompatActivity {
                     .replace(R.id.settings, new SettingsFragment())
                     .commit();
         }
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        int id = menuItem.getItemId();
+
+        if (id == android.R.id.home){
+            finish();
+            return true;
         }
+        return super.onOptionsItemSelected(menuItem);
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {

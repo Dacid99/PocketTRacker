@@ -3,16 +3,19 @@ package org.sbv.pockettracker;
 
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -28,7 +31,8 @@ public class ScoreSheetActivity extends AppCompatActivity {
     private ScoreSheet scoreSheet;
     private Player player1, player2;
     private MaterialToolbar toolbar;
-    private MaterialButton counterButton, scoreSheetButton;
+    private MaterialButton counterButton, scoreSheetButton, settingsButton;
+    private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +53,14 @@ public class ScoreSheetActivity extends AppCompatActivity {
 
         counterButton = findViewById(R.id.counter_button);
         scoreSheetButton = findViewById(R.id.scoresheet_button);
+        settingsButton = findViewById(R.id.settings_button);
         //deactivate scoreSheet button in this activity
         scoreSheetButton.setClickable(false);
         scoreSheetButton.setTextColor(getResources().getColor(R.color.current_activity_color));
 
         counterButton.setOnClickListener(v -> finish());
 
+        settingsButton.setVisibility(View.INVISIBLE);
 
         tableLayout = findViewById(R.id.score_table);
 
