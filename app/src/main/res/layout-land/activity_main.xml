@@ -144,34 +144,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/player2NameView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/player2ClubView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textSize="@dimen/scoreTextSize"
-                android:hint="@string/player_name_hint"
-                android:text="@string/player_name_format"
-                android:gravity="center" />
-
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/player2ClubView"
+            <LinearLayout
+                android:id="@+id/player2Layout"
+                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/player2ScoreView"
-                app:layout_constraintEnd_toEndOf="@+id/player2NameView"
-                app:layout_constraintStart_toStartOf="@+id/player2NameView"
-                app:layout_constraintTop_toBottomOf="@+id/player2NameView"
-                android:textSize="@dimen/scoreTextSize"
-                android:hint="@string/player_name_hint"
-                android:text="@string/player_name_format"
-                android:gravity="center" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" >
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/player2NameView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:hint="@string/player_name_hint"
+                    android:text="@string/player_name_format"
+                    android:textSize="@dimen/scoreTextSize" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/player2ClubView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="@string/player_club_hint"
+                    android:text="@string/player_club_format"
+                    android:textSize="@dimen/scoreTextSize" />
+
+            </LinearLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/player2ScoreView"
@@ -179,13 +181,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
+                android:text="@string/player_score_format"
                 android:textColor="@color/score_color"
                 android:textSize="@dimen/bigScoreTextSize"
-                android:text="@string/player_score_format"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/player2ClubView"
-                app:layout_constraintStart_toStartOf="@+id/player2ClubView"
-                app:layout_constraintTop_toBottomOf="@+id/player2ClubView" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player2Layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -217,33 +219,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/player1NameView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/player1ClubView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textSize="@dimen/scoreTextSize"
-                android:hint="@string/player_name_hint"
-                android:text="@string/player_name_format"
-                android:gravity="center" />
-
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/player1ClubView"
+            <LinearLayout
+                android:id="@+id/player1Layout"
+                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/player1ScoreView"
-                app:layout_constraintEnd_toEndOf="@+id/player1NameView"
-                app:layout_constraintStart_toStartOf="@+id/player1NameView"
-                app:layout_constraintTop_toBottomOf="@+id/player1NameView"
-                android:textSize="@dimen/scoreTextSize"
-                android:hint="@string/player_name_hint"
-                android:text="@string/player_name_format"
-                android:gravity="center" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/player1NameView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:hint="@string/player_name_hint"
+                    android:text="@string/player_name_format"
+                    android:textSize="@dimen/scoreTextSize" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/player1ClubView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="@string/player_club_hint"
+                    android:text="@string/player_club_format"
+                    android:textSize="@dimen/scoreTextSize" />
+            </LinearLayout>
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -256,9 +261,9 @@
                 android:textSize="@dimen/bigScoreTextSize"
                 android:text="@string/player_score_format"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/player1ClubView"
-                app:layout_constraintStart_toStartOf="@+id/player1ClubView"
-                app:layout_constraintTop_toBottomOf="@+id/player1ClubView" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player1Layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

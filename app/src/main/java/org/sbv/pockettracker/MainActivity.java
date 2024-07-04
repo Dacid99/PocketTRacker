@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                                 player1.setName(newNamePlayer1);
                             }
                             Player.defaultPlayerNames[0] = newNamePlayer1;
-                            System.out.println("player1name changed");
                             break;
 
                         case "player2_name_default":
@@ -122,8 +121,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                         case "club_toggle":
                             Player.hasClub = sharedPreferences.getBoolean(key, true);
                             if (!Player.hasClub){
-                                player1ClubView.setVisibility(View.INVISIBLE);
-                                player2ClubView.setVisibility(View.INVISIBLE);
+                                player1ClubView.setVisibility(View.GONE);
+                                player2ClubView.setVisibility(View.GONE);
                             }else {
                                 player1ClubView.setVisibility(View.VISIBLE);
                                 player2ClubView.setVisibility(View.VISIBLE);
@@ -158,8 +157,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         player2ClubView = findViewById(R.id.player2ClubView);
 
         if (!Player.hasClub){
-            player1ClubView.setVisibility(View.INVISIBLE);
-            player2ClubView.setVisibility(View.INVISIBLE);
+            player1ClubView.setVisibility(View.GONE);
+            player2ClubView.setVisibility(View.GONE);
         }
 
         player1Card = findViewById(R.id.player1CardView);
@@ -327,8 +326,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         });
 
         settingsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(intent);
+            Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
         });
 
         createFileActivityLauncher = registerForActivityResult(
