@@ -1,0 +1,11 @@
+- added settings
+- games now survive orientation and light/dark mode changes
+- customized toolbar
+- individual player info
+- autocomplete for names and clubs
+- go to start/end of game with long click on undo/redo button
+- other small improvements
+
+Hey there, thanks for checking out my app!
+This is the first basic version, I have many more ideas for features I'd like to implement.
+If you have any feedback please let me know!
