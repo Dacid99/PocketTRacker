@@ -81,7 +81,7 @@
 
     <!-- toolbar strings -->
     <string name="counter_string" translatable="false">@string/app_name</string>
-    <string name="scoresheet_string" translatable="false">@string/title_activity_score_sheet</string>
+    <string name="scoresheet_string" translatable="false">\u2630</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Preference Titles -->

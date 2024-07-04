@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import org.jetbrains.annotations.Contract;
 
 public class Player implements Parcelable {
-    public static int winningPoints = 40;
+    public static int winnerPoints = 40;
     public static String[] defaultPlayerNames = {"",""};
     public static String[] defaultPlayerClubs = {"",""};
     public static boolean hasClub = true;
@@ -46,7 +46,7 @@ public class Player implements Parcelable {
     }
 
     public boolean isWinner() {
-        return score >= winningPoints;
+        return score >= winnerPoints;
     }
 
     public void setName(String name) {

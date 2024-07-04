@@ -17,6 +17,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
@@ -24,7 +25,6 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     public static final String PLAYER1PARAMETER = "player1";
     public static final String PLAYER2PARAMETER = "player2";
     private ActivityResultLauncher<Intent> createFileActivityLauncher, readFileActivityLauncher;
+    private SharedPreferences preferences;
+    private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
     private Player player1, player2, turnPlayer;
     private PoolTable table;
     private ScoreSheet scoreSheet;
@@ -62,22 +64,77 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //enact preferences
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        applyPreferences();
 
-        String stringWinnerPoints = sharedPreferences.getString("winnerPoints_default", "40");
-        try{
-            Player.winningPoints = Integer.parseInt(stringWinnerPoints);
-        } catch (NumberFormatException ne){
-            Log.d("Bad preference", "In MainActivity.onCreate: winnerpoints is not saved as a parseable String!", ne);
-            Player.winningPoints = 40;
-        }
 
-        Player.defaultPlayerNames[0] = sharedPreferences.getString("player1_name_default", "");
-        Player.defaultPlayerNames[1] = sharedPreferences.getString("player2_name_default", "");
-        Player.defaultPlayerClubs[0] = sharedPreferences.getString("player1_club_default", "");
-        Player.defaultPlayerClubs[1] = sharedPreferences.getString("player2_club_default", "");
-        Player.hasClub = sharedPreferences.getBoolean("club_toggle", true);
+        sharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, @Nullable String key) {
+                if (key != null) {
+                    switch (key) {
+                       case "winnerPoints_default":
+                           String winnerPointsString = sharedPreferences.getString(key, "40");
+                           int oldWinnerPoints = Player.winnerPoints;
+                           try{
+                               Player.winnerPoints = Integer.parseInt(winnerPointsString);
+                               if (Objects.requireNonNull(winningPointsInput.getText()).toString().isEmpty() || winningPointsInput.getText().toString().equals(String.valueOf(oldWinnerPoints))){
+                                   winningPointsInput.setText(winnerPointsString);
+                               }
+                           }catch (NumberFormatException e) {
+                               Log.d("Bad preference","In SettingsActivity.onSharedPreferenceChanged: winnerpoints_default is not a parseable String! e");
+                               Player.winnerPoints = 40;
+                           }
+                           break;
+
+                        case "player1_name_default":
+                            String newNamePlayer1 = sharedPreferences.getString(key,"");
+                            if (player1NameView.getText().toString().isEmpty() || player1NameView.getText().toString().equals(Player.defaultPlayerNames[0])){
+                                player1.setName(newNamePlayer1);
+                            }
+                            Player.defaultPlayerNames[0] = newNamePlayer1;
+                            System.out.println("player1name changed");
+                            break;
+
+                        case "player2_name_default":
+                            String newNamePlayer2 = sharedPreferences.getString(key,"");
+                            if (player2NameView.getText().toString().isEmpty() || player2NameView.getText().toString().equals(Player.defaultPlayerNames[1])){
+                                player2.setName(newNamePlayer2);
+                            }
+                            Player.defaultPlayerNames[1] = newNamePlayer2;
+                            break;
+
+                        case "player1_club_default":
+                            String newClubPlayer1 = sharedPreferences.getString(key,"");
+                            if (player1ClubView.getText().toString().isEmpty() || player1ClubView.getText().toString().equals(Player.defaultPlayerClubs[0])){
+                                player1.setClub(newClubPlayer1);
+                            }
+                            Player.defaultPlayerClubs[0] = newClubPlayer1;
+                            break;
+
+                        case "player2_club_default":
+                            String newClubPlayer2 = sharedPreferences.getString(key,"");
+                            if (player2ClubView.getText().toString().isEmpty() || player2ClubView.getText().toString().equals(Player.defaultPlayerClubs[1])){
+                                player2.setClub(newClubPlayer2);
+                            }
+                            Player.defaultPlayerClubs[1] =newClubPlayer2;
+                            break;
+
+                        case "club_toggle":
+                            Player.hasClub = sharedPreferences.getBoolean(key, true);
+                            if (!Player.hasClub){
+                                player1ClubView.setVisibility(View.INVISIBLE);
+                                player2ClubView.setVisibility(View.INVISIBLE);
+                            }else {
+                                player1ClubView.setVisibility(View.VISIBLE);
+                                player2ClubView.setVisibility(View.VISIBLE);
+                            }
+                            break;
+                    }
+                    updatePlayerUI();
+                }
+            }
+        };
+        preferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
 
         //toolbar buttons
         toolbar = findViewById(R.id.toolbar);
@@ -100,6 +157,11 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         player1ClubView = findViewById(R.id.player1ClubView);
         player2ClubView = findViewById(R.id.player2ClubView);
 
+        if (!Player.hasClub){
+            player1ClubView.setVisibility(View.INVISIBLE);
+            player2ClubView.setVisibility(View.INVISIBLE);
+        }
+
         player1Card = findViewById(R.id.player1CardView);
         player2Card = findViewById(R.id.player2CardView);
 
@@ -107,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         winningPointsInput = findViewById(R.id.winningPointsInput);
 
-        winningPointsInput.setText(getString(R.string.winnerPoints_format, Player.winningPoints));
+        winningPointsInput.setText(getString(R.string.winnerPoints_format, Player.winnerPoints));
 
         missButton = findViewById(R.id.missButton);
         safeButton = findViewById(R.id.safeButton);
@@ -131,8 +193,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 String newText = s.toString();
                 if ( NumberUtils.isParsable(newText)) {
                     int newWinnerPoints = Integer.parseInt(newText);
-                    if (newWinnerPoints != Player.winningPoints && newWinnerPoints >= 1){
-                        Player.winningPoints = newWinnerPoints;
+                    if (newWinnerPoints != Player.winnerPoints && newWinnerPoints >= 1){
+                        Player.winnerPoints = newWinnerPoints;
                         updateWinnerUI();
                     }
                 }
@@ -372,18 +434,28 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         updateSaveLoadUI();
     }
 
+    private void applyPreferences(){
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String stringWinnerPoints = preferences.getString("winnerPoints_default", "40");
+        try{
+            Player.winnerPoints = Integer.parseInt(stringWinnerPoints);
+        } catch (NumberFormatException ne){
+            Log.d("Bad preference", "In MainActivity.onCreate: winnerpoints is not saved as a parseable String!", ne);
+            Player.winnerPoints = 40;
+        }
+
+        Player.defaultPlayerNames[0] = preferences.getString("player1_name_default", "");
+        Player.defaultPlayerNames[1] = preferences.getString("player2_name_default", "");
+        Player.defaultPlayerClubs[0] = preferences.getString("player1_club_default", "");
+        Player.defaultPlayerClubs[1] = preferences.getString("player2_club_default", "");
+        Player.hasClub = preferences.getBoolean("club_toggle", true);
+    }
 
     private void updateScoreUI() {
         player1ScoreView.setText(getString(R.string.player_score_format, player1.getScore()));
         player2ScoreView.setText(getString(R.string.player_score_format, player2.getScore()));
         ballsOnTableFloatingButton.setText(getString(R.string.ballsOnTable_format, table.getNumberOfBalls()));
-
-        // blocks the user from any more input after theres a winner
-        // disabled to give the user more freedom
-        //winningPointsInput.setClickable(scoreSheet.turn() == 0);
-        //winningPointsInput.setFocusable(scoreSheet.turn() == 0);
-        //winningPointsInput.setEnabled(scoreSheet.turn() == 0);
-        //setButtonsStatus( (player1.getScore() < winnerPoints) && (player2.getScore() < winnerPoints) );
     }
 
     private void updateUnRedoUI(){
@@ -397,12 +469,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         }else {
             undoButton.setVisibility(View.VISIBLE);
         }
-    }
-
-    private void setButtonsStatus(boolean toggle){
-        foulButton.setClickable(toggle);
-        safeButton.setClickable(toggle);
-        missButton.setClickable(toggle);
     }
 
     private void updatePlayerUI(){
@@ -576,5 +642,11 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");
         readFileActivityLauncher.launch(intent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        preferences.unregisterOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
     }
 }

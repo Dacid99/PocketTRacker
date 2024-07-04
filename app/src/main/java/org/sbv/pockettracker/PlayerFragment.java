@@ -22,6 +22,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,6 +49,7 @@ public class PlayerFragment extends DialogFragment {
     private int playerNumber;
     private ScoreSheet scoreSheet;
     private View view;
+    private TextInputLayout playerClubLayout;
     private AutoCompleteTextView playerNameInput, playerClubInput;
     private MaterialButton leftToOtherPlayerButton, rightToOtherPlayerButton, leftSwapPlayersButton, rightSwapPlayersButton;
     private TextView playerScoreView, inningsView, meanInningView, meanRunView, maxRunView;
@@ -94,6 +96,7 @@ public class PlayerFragment extends DialogFragment {
         Objects.requireNonNull(Objects.requireNonNull(getDialog()).getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         playerNameInput = view.findViewById(R.id.playerName);
+        playerClubLayout = view.findViewById(R.id.playerClubLayout);
         playerClubInput = view.findViewById(R.id.playerClub);
         clubPreferences = requireActivity().getSharedPreferences(CLUB_AUTOCOMPLETEPREFERENCES, Context.MODE_PRIVATE);
 
@@ -113,6 +116,11 @@ public class PlayerFragment extends DialogFragment {
         rightToOtherPlayerButton = view.findViewById(R.id.right_toOtherPlayerButton);
         leftSwapPlayersButton = view.findViewById(R.id.left_swapButton);
         rightSwapPlayersButton = view.findViewById(R.id.right_swapButton);
+
+        if (!Player.hasClub){
+            playerClubLayout.setVisibility(View.INVISIBLE);
+            playerClubInput.setVisibility(View.INVISIBLE);
+        }
 
         if (playerNumber == 1){
             leftToOtherPlayerButton.setVisibility(View.INVISIBLE);
