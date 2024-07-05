@@ -3,7 +3,6 @@ package org.sbv.pockettracker;
 
 import android.content.Intent;
 
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 
 import android.os.Bundle;
@@ -28,7 +27,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
     private TextView player1TableHeader, player2TableHeader, player1StatisticsHeader, player2StatisticsHeader;
     private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
     private ScoreSheet scoreSheet;
-    private Player player1, player2;
+    private Players players, player2;
     private ScoreBoard scoreBoard;
     private MaterialToolbar toolbar;
     private MaterialButton counterButton, scoreSheetButton, settingsButton;
@@ -40,12 +39,12 @@ public class ScoreSheetActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         scoreSheet = intent.getParcelableExtra(MainActivity.SCORESHEETPARAMETER);
-        player1 = intent.getParcelableExtra(MainActivity.PLAYER1PARAMETER);
+        players = intent.getParcelableExtra(MainActivity.PLAYERSPARAMETER);
         player2 = intent.getParcelableExtra(MainActivity.PLAYER2PARAMETER);
         scoreBoard = intent.getParcelableExtra(MainActivity.SCOREBOARDPARAMETER);
         assert scoreBoard != null;
         assert scoreSheet != null;
-        assert player1 != null;
+        assert players != null;
         assert player2 != null;
 
         toolbar = findViewById(R.id.toolbar);
@@ -71,11 +70,11 @@ public class ScoreSheetActivity extends AppCompatActivity {
         player2StatisticsHeader = findViewById(R.id.player2statistics_header);
 
 
-        player1TableHeader.setText((player1.getName().isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, player1.getName()));
-        player1StatisticsHeader.setText((player1.getName().isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, player1.getName()));
+        player1TableHeader.setText((players.getNames()[0].isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, players.getNames()));
+        player1StatisticsHeader.setText((players.getNames()[0].isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, players.getNames()));
 
-        player2TableHeader.setText((player1.getName().isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, player2.getName()));
-        player2StatisticsHeader.setText((player1.getName().isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, player2.getName()));
+        player2TableHeader.setText((players.getNames()[1].isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, player2.getNames()));
+        player2StatisticsHeader.setText((players.getNames()[1].isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, player2.getNames()));
 
         maxRunPlayer1View = findViewById(R.id.player1statistics_maxRun);
         maxRunPlayer2View = findViewById(R.id.player2statistics_maxRun);

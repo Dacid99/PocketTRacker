@@ -44,17 +44,14 @@ import java.util.TimeZone;
 public class MainActivity extends AppCompatActivity implements NumberPaneFragment.NumberPaneFragmentProvider, PlayerFragment.PlayerFragmentProvider {
 
     private static final String SCORESHEETSAVEPARAMETER = "scoresheet_savestate";
-    private static final String PLAYER1SAVEPARAMETER = "player1_savestate";
-    private static final String PLAYER2SAVEPARAMETER = "player2_savestate";
     public static final String SCORESHEETPARAMETER = "scoresheet";
     public static final String SCOREBOARDPARAMETER = "scoreboard";
-    public static final String PLAYER1PARAMETER = "player1";
+    public static final String PLAYERSPARAMETER = "player1";
     public static final String PLAYER2PARAMETER = "player2";
     private ActivityResultLauncher<Intent> createFileActivityLauncher, readFileActivityLauncher;
     private SharedPreferences preferences;
     private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
-    private Player player1, player2, turnPlayer;
-    private PlayerViewModel playerViewModel1, playerViewModel2;
+    private PlayersViewModel playersViewModel;
     private ScoreBoard scoreBoard;
     private PoolTable table;
     private ScoreSheet scoreSheet;
@@ -93,39 +90,39 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
                         case "player1_name_default":
                             String newNamePlayer1 = sharedPreferences.getString(key,"");
-                            if (player1NameView.getText().toString().isEmpty() || player1NameView.getText().toString().equals(Player.defaultPlayerNames[0])){
-                                player1.setName(newNamePlayer1);
+                            if (player1NameView.getText().toString().isEmpty() || player1NameView.getText().toString().equals(Players.defaultPlayerNames[0])){
+                                playersViewModel.updatePlayerName(1,newNamePlayer1);
                             }
-                            Player.defaultPlayerNames[0] = newNamePlayer1;
+                            Players.defaultPlayerNames[0] = newNamePlayer1;
                             break;
 
                         case "player2_name_default":
                             String newNamePlayer2 = sharedPreferences.getString(key,"");
-                            if (player2NameView.getText().toString().isEmpty() || player2NameView.getText().toString().equals(Player.defaultPlayerNames[1])){
-                                player2.setName(newNamePlayer2);
+                            if (player2NameView.getText().toString().isEmpty() || player2NameView.getText().toString().equals(Players.defaultPlayerNames[1])){
+                                playersViewModel.updatePlayerName(2,newNamePlayer2);
                             }
-                            Player.defaultPlayerNames[1] = newNamePlayer2;
+                            Players.defaultPlayerNames[1] = newNamePlayer2;
                             break;
 
                         case "player1_club_default":
                             String newClubPlayer1 = sharedPreferences.getString(key,"");
-                            if (player1ClubView.getText().toString().isEmpty() || player1ClubView.getText().toString().equals(Player.defaultPlayerClubs[0])){
-                                player1.setClub(newClubPlayer1);
+                            if (player1ClubView.getText().toString().isEmpty() || player1ClubView.getText().toString().equals(Players.defaultPlayerClubs[0])){
+                                playersViewModel.updateClubName(1, newClubPlayer1);
                             }
-                            Player.defaultPlayerClubs[0] = newClubPlayer1;
+                            Players.defaultPlayerClubs[0] = newClubPlayer1;
                             break;
 
                         case "player2_club_default":
                             String newClubPlayer2 = sharedPreferences.getString(key,"");
-                            if (player2ClubView.getText().toString().isEmpty() || player2ClubView.getText().toString().equals(Player.defaultPlayerClubs[1])){
-                                player2.setClub(newClubPlayer2);
+                            if (player2ClubView.getText().toString().isEmpty() || player2ClubView.getText().toString().equals(Players.defaultPlayerClubs[1])){
+                                playersViewModel.updateClubName(2, newClubPlayer2);
                             }
-                            Player.defaultPlayerClubs[1] =newClubPlayer2;
+                            Players.defaultPlayerClubs[1] =newClubPlayer2;
                             break;
 
                         case "club_toggle":
-                            Player.hasClub = sharedPreferences.getBoolean(key, true);
-                            if (!Player.hasClub){
+                            Players.haveClubs = sharedPreferences.getBoolean(key, true);
+                            if (!Players.haveClubs){
                                 player1ClubView.setVisibility(View.GONE);
                                 player2ClubView.setVisibility(View.GONE);
                             }else {
@@ -134,7 +131,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                             }
                             break;
                     }
-                    updatePlayerUI();
                 }
             }
         };
@@ -161,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         player1ClubView = findViewById(R.id.player1ClubView);
         player2ClubView = findViewById(R.id.player2ClubView);
 
-        if (!Player.hasClub){
+        if (!Players.haveClubs){
             player1ClubView.setVisibility(View.GONE);
             player2ClubView.setVisibility(View.GONE);
         }
@@ -183,16 +179,16 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         newGameButton = findViewById(R.id.newGame);
         saveloadGameButton = findViewById(R.id.saveloadGame);
 
-        playerViewModel1 = new ViewModelProvider(this).get(PlayerViewModel.class);
-        playerViewModel2 = new ViewModelProvider(this).get(PlayerViewModel.class);
+        playersViewModel = new ViewModelProvider(this).get(PlayersViewModel.class);
 
-        playerViewModel1.getPlayer().observe(this, new Observer<Player>() {
+        playersViewModel.getPlayers().observe(this, new Observer<Players>() {
             @Override
-            public void onChanged(Player player) {
-                if (player != null){
-                    updatePlayerUI();
-                    updateScoreUI();
-                    updateWinnerUI();
+            public void onChanged(Players players) {
+                if (players != null){
+                    player1NameView.setText(getString(R.string.player_name_format, players.getNames()[0]));
+                    player1ClubView.setText(getString(R.string.player_club_format, players.getClubs()[0]));
+                    player2NameView.setText(getString(R.string.player_name_format, players.getNames()[1]));
+                    player2ClubView.setText(getString(R.string.player_club_format, players.getClubs()[1]));
                 }
             }
         });
@@ -274,7 +270,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             scoreSheet.rollback();
             updateScoreUI();
             updateUnRedoUI();
-            switchTurnPlayer();
             updateFocusUI();
             updateWinnerUI();
             updateSaveLoadUI();
@@ -286,11 +281,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 scoreSheet.toStart();
                 updateScoreUI();
                 updateUnRedoUI();
-                if (scoreSheet.isPlayer1Turn()){
-                    turnPlayer = player1;
-                }else {
-                    turnPlayer = player2;
-                }
                 updateFocusUI();
                 updateWinnerUI();
                 updateSaveLoadUI();
@@ -302,11 +292,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             scoreSheet.progress();
             updateScoreUI();
             updateUnRedoUI();
-            if (scoreSheet.isPlayer1Turn()){
-                turnPlayer = player1;
-            }else {
-                turnPlayer = player2;
-            }
             updateFocusUI();
             updateWinnerUI();
             updateSaveLoadUI();
@@ -318,7 +303,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 scoreSheet.toLatest();
                 updateScoreUI();
                 updateUnRedoUI();
-                switchTurnPlayer();
                 updateFocusUI();
                 updateWinnerUI();
                 updateSaveLoadUI();
@@ -335,8 +319,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             if (scoreSheet.isHealthy()) {
                 Intent intent = new Intent(MainActivity.this, ScoreSheetActivity.class);
                 intent.putExtra(SCORESHEETPARAMETER, scoreSheet);
-                intent.putExtra(PLAYER1PARAMETER, player1);
-                intent.putExtra(PLAYER2PARAMETER, player2);
+                intent.putExtra(PLAYERSPARAMETER, playersViewModel.getPlayers().getValue());
                 intent.putExtra(SCOREBOARDPARAMETER, scoreBoard);
                 startActivity(intent);
             } else{
@@ -360,7 +343,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                             Uri uri = data.getData();
                             try (OutputStream outputStream = getContentResolver().openOutputStream(uri);
                                  OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream)) {
-                                ScoreSheetIO.writeToFile(outputStreamWriter, player1, player2, scoreSheet);
+                                ScoreSheetIO.writeToFile(outputStreamWriter, Objects.requireNonNull(playersViewModel.getPlayers().getValue()), scoreSheet);
                                 Toast.makeText(MainActivity.this, "Game saved successfully!", Toast.LENGTH_SHORT).show();
                             } catch (IOException e) {
                                 Toast.makeText(MainActivity.this, "Failed to save game:" + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -386,13 +369,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                             Uri uri = data.getData();
                             try (InputStream inputStream = getContentResolver().openInputStream(uri);
                                  InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
-                                ScoreSheetIO.readFromFile(inputStreamReader, player1, player2, scoreSheet);
-                                if (scoreSheet.isPlayer1Turn()){
-                                    turnPlayer = player1;
-                                }else {
-                                    turnPlayer = player2;
-                                }
-                                updatePlayerUI();
+                                ScoreSheetIO.readFromFile(inputStreamReader, Objects.requireNonNull(playersViewModel.getPlayers().getValue()), scoreSheet);
                                 updateFocusUI();
                                 updateScoreUI();
                                 updateUnRedoUI();
@@ -422,25 +399,12 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
 
-        Player savedPlayer1 = savedInstanceState.getParcelable(PLAYER1SAVEPARAMETER);
-        if (savedPlayer1 != null){
-            player1 = savedPlayer1;
-        }
-        Player savedPlayer2 = savedInstanceState.getParcelable(PLAYER2SAVEPARAMETER);
-        if (savedPlayer2 != null){
-            player2 = savedPlayer2;
-        }
         ScoreSheet savedScoreSheet = savedInstanceState.getParcelable(SCORESHEETSAVEPARAMETER);
         if (savedScoreSheet!= null) {
             scoreSheet.include(savedScoreSheet);
         }
 
         updateScoreUI();
-        if (scoreSheet.isPlayer1Turn()){
-            turnPlayer = player1;
-        }else {
-            turnPlayer = player2;
-        }
         updateUnRedoUI();
         updateFocusUI();
         updateWinnerUI();
@@ -458,11 +422,11 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             ScoreBoard.defaultWinnerPoints = 40;
         }
 
-        Player.defaultPlayerNames[0] = preferences.getString("player1_name_default", "");
-        Player.defaultPlayerNames[1] = preferences.getString("player2_name_default", "");
-        Player.defaultPlayerClubs[0] = preferences.getString("player1_club_default", "");
-        Player.defaultPlayerClubs[1] = preferences.getString("player2_club_default", "");
-        Player.hasClub = preferences.getBoolean("club_toggle", true);
+        Players.defaultPlayerNames[0] = preferences.getString("player1_name_default", "");
+        Players.defaultPlayerNames[1] = preferences.getString("player2_name_default", "");
+        Players.defaultPlayerClubs[0] = preferences.getString("player1_club_default", "");
+        Players.defaultPlayerClubs[1] = preferences.getString("player2_club_default", "");
+        Players.haveClubs = preferences.getBoolean("club_toggle", true);
     }
 
     private void updateScoreUI() {
@@ -484,15 +448,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         }
     }
 
-    private void updatePlayerUI(){
-        player1NameView.setText(getString(R.string.player_name_format, player1.getName()));
-        player2NameView.setText(getString(R.string.player_name_format, player2.getName()));
-        player1ClubView.setText(getString(R.string.player_club_format, player1.getClub()));
-        player2ClubView.setText(getString(R.string.player_club_format, player2.getClub()));
-    }
-
     private void newTurn(String reason){
-        switchTurnPlayer();
         updateFocusUI();
         scoreSheet.update(reason);
         updateUnRedoUI();
@@ -502,10 +458,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     }
 
     private void newGame(){
-        player1 = new Player(1);
-        player2 = new Player(2);
-
-        turnPlayer = player1;
+        playersViewModel.reset();
 
         table = new PoolTable();
 
@@ -516,23 +469,12 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         updateScoreUI();
         updateUnRedoUI();
         updateWinnerUI();
-        updatePlayerUI();
         updateFocusUI();
         updateSaveLoadUI();
     }
 
-    private void switchTurnPlayer(){
-        if (turnPlayer == player1) {
-            turnPlayer = player2;
-        }else if (turnPlayer == player2){
-            turnPlayer = player1;
-        }else {
-            Log.e("Failed ifelse", "In MainActivity.switchTurnPlayer: Turnplayer is neither player1 or player2!");
-        }
-    }
-
     private void updateFocusUI(){
-        if (turnPlayer == player1) {
+        if (scoreSheet.turnplayerNumber() == 0) {
             player1Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
             player1Card.setCardElevation(10);
             player1ScoreView.setEnabled(true);
@@ -543,7 +485,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             player2ScoreView.setEnabled(false);
             player2NameView.setEnabled(false);
             player2ClubView.setEnabled(false);
-        }else if (turnPlayer == player2) {
+        }else if (scoreSheet.turnplayerNumber() == 1) {
             player1Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
             player1Card.setCardElevation(0);
             player1ScoreView.setEnabled(false);
@@ -601,41 +543,15 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     //playerfragmentprovider methods
     @Override
     public void onNameInput(int playerNumber, String name){
-        if (playerNumber == 1) {
-           player1.setName(name);
-        }else if (playerNumber == 2){
-            player2.setName(name);
-        }else{
-            Log.d("argument error", "In MainActivity.onNameInput: No such playerNumber:" + playerNumber);
-        }
-        updatePlayerUI();
+        playersViewModel.updatePlayerName(playerNumber, name);
     }
     @Override
     public void onClubInput(int playerNumber, String club){
-        if (playerNumber == 1) {
-            player1.setClub(club);
-        }else if (playerNumber == 2){
-            player2.setClub(club);
-        }else{
-            Log.d("argument error", "In MainActivity.onNameInput: No such playerNumber:" + playerNumber);
-        }
-        updatePlayerUI();
+        playersViewModel.updateClubName(playerNumber, club);
     }
     @Override
     public void onSwapButtonClick(){
-        player1.swapNameAndClubWith(player2);
-        updatePlayerUI();
-    }
-    @Override
-    public Player requestPlayer(int playerNumber){
-        if (playerNumber == 1) {
-            return player1;
-        }else if (playerNumber == 2){
-            return player2;
-        }else {
-            Log.d("argument error", "In MainActivity.requestPlayer: No such playerNumber:" + playerNumber);
-            return null;
-        }
+        playersViewModel.swap();
     }
 
     @Override

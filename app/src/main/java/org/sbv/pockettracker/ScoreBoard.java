@@ -35,7 +35,7 @@ public class ScoreBoard implements Parcelable {
         this.playerScores[1] = player2Score;
     }
     public void addPoints(int playerNumber, int points){
-        playerScores[playerNumber - 1] += points;
+        playerScores[playerNumber] += points;
     }
 
     public void setWinnerPoints(int winnerPoints) {

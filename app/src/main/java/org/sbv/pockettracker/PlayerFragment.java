@@ -10,6 +10,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,7 +38,6 @@ public class PlayerFragment extends DialogFragment {
         void onNameInput(int playerNumber, String name);
         void onClubInput(int playerNumber, String club);
         void onSwapButtonClick();
-        Player requestPlayer(int playerNumber);
         ScoreBoard requestScoreBoard();
     }
     private static final String NAME_AUTOCOMPLETEPREFERENCES = "player_autocompletepreferences";
@@ -47,6 +48,7 @@ public class PlayerFragment extends DialogFragment {
     private static final String SCORESHEETPARAMETER = "scoresheet";
 
     private int playerNumber;
+    private PlayersViewModel playersViewModel;
     private ScoreSheet scoreSheet;
     private View view;
     private TextInputLayout playerClubLayout;
@@ -117,22 +119,32 @@ public class PlayerFragment extends DialogFragment {
         leftSwapPlayersButton = view.findViewById(R.id.left_swapButton);
         rightSwapPlayersButton = view.findViewById(R.id.right_swapButton);
 
-        if (!Player.hasClub){
+        if (!Players.haveClubs){
             playerClubLayout.setVisibility(View.GONE);
             playerClubInput.setVisibility(View.GONE);
         }
 
-        if (playerNumber == 1){
+        if (playerNumber == 0){
             leftToOtherPlayerButton.setVisibility(View.INVISIBLE);
             leftSwapPlayersButton.setVisibility(View.INVISIBLE);
-        }else if (playerNumber == 2){
+        }else if (playerNumber == 1){
             rightToOtherPlayerButton.setVisibility(View.INVISIBLE);
             rightSwapPlayersButton.setVisibility(View.INVISIBLE);
         }else {
             Log.d("bad parameter", "In PlayerFragment.onCreateView: playerNumber is neither 0 or 1!");
         }
 
-        updatePlayerFields();
+        playersViewModel = new ViewModelProvider(requireActivity()).get(PlayersViewModel.class);
+        playersViewModel.getPlayers().observe(this, new Observer<Players>(){
+            @Override
+            public void onChanged(Players players) {
+                if (players != null) {
+                    playerNameInput.setText(getString(R.string.player_name_format, players.getNames()[playerNumber]));
+                    playerClubInput.setText(getString(R.string.player_club_format, players.getClubs()[playerNumber]));
+                }
+            }
+        });
+        updateScore();
 
         playerNameInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -198,7 +210,7 @@ public class PlayerFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 listener.onSwapButtonClick();
-                updatePlayerFields();
+                updateScore();
             }
         });
 
@@ -206,12 +218,18 @@ public class PlayerFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 listener.onSwapButtonClick();
-                updatePlayerFields();
+                updateScore();
             }
         });
 
         return view;
     }
+
+    private void updateScore() {
+        ScoreBoard scoreBoard = listener.requestScoreBoard();
+        playerScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[playerNumber]));
+    }
+
     @Override
     public void onCancel(@NonNull DialogInterface dialogInterface){
         super.onCancel(dialogInterface);
@@ -228,31 +246,24 @@ public class PlayerFragment extends DialogFragment {
         }
     }
     @Override
-    public void onDismiss(@NonNull DialogInterface dialogInterface){
+    public void onDismiss(@NonNull DialogInterface dialogInterface) {
         super.onDismiss(dialogInterface);
 
         String input = playerClubInput.getText().toString();
-        if(!input.isEmpty()){
+        if (!input.isEmpty()) {
             clubHistorySet.add(input);
             clubPreferences.edit().putStringSet(CLUB_HISTORY_KEY, clubHistorySet).apply();
         }
         input = playerNameInput.getText().toString();
-        if(!input.isEmpty()){
+        if (!input.isEmpty()) {
             nameHistorySet.add(input);
             namePreferences.edit().putStringSet(NAME_HISTORY_KEY, nameHistorySet).apply();
         }
     }
-    private void updatePlayerFields(){
-        Player player = listener.requestPlayer(playerNumber);
-        ScoreBoard scoreBoard = listener.requestScoreBoard();
-        playerNameInput.setText(getString(R.string.player_name_format, player.getName()));
-        playerClubInput.setText(getString(R.string.player_club_format, player.getClub()));
-        playerScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[playerNumber]));
-    }
 
     private void switchToOtherPlayer(){
         FragmentManager fragmentManager = getParentFragmentManager();
-        int otherPlayerNumber = (playerNumber == 1) ? 2 : 1 ;
+        int otherPlayerNumber = Math.abs(playerNumber-1) ;
         PlayerFragment otherPlayerFragment = PlayerFragment.newInstance(otherPlayerNumber, scoreSheet);
         otherPlayerFragment.show(fragmentManager, "Player"+otherPlayerNumber+"Fragment");
         dismiss();
