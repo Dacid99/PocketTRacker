@@ -20,7 +20,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     //this member holds the index of the current entry in the ArrayList
     //for going back in history and rewriting from there
     private int pointer;
-    private PoolTable trackedTable;
+    private PoolTableViewModel trackedPoolTableViewModel;
     private ScoreBoardViewModel trackedScoreBoardViewModel;
 
     @NonNull
@@ -91,9 +91,9 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         };
     }
 
-    public ScoreSheet(PoolTable table, ScoreBoardViewModel scoreBoardViewModel){
+    public ScoreSheet(PoolTableViewModel poolTableViewModel, ScoreBoardViewModel scoreBoardViewModel){
         //watched objects
-        this.trackedTable = table;
+        this.trackedPoolTableViewModel = poolTableViewModel;
         this.trackedScoreBoardViewModel = scoreBoardViewModel;
         //set up containers for data
         this.inningsList = new ArrayList<>();
@@ -154,7 +154,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         Inning turn = new Inning();
         turn.switchReason = reason;
         turn.playerScores = trackedScoreBoardViewModel.getScores();
-        turn.ballsOnTable = trackedTable.getNumberOfBalls();
+        turn.ballsOnTable = trackedPoolTableViewModel.getNumberOfBalls();
 
         inningsList.add(turn);
         pointer++;
@@ -164,8 +164,8 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         if (!isStart()) {
             pointer--;
             trackedScoreBoardViewModel.updateScores(inningsList.get(pointer).playerScores);
-            trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
-            trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+            trackedPoolTableViewModel.updateOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+            trackedPoolTableViewModel.updateNumberOfBalls( inningsList.get(pointer).ballsOnTable );
         }
 
     }
@@ -174,8 +174,8 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         if (!isStart()){
             pointer = 0;
             trackedScoreBoardViewModel.updateScores( inningsList.get(pointer).playerScores );
-            trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
-            trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+            trackedPoolTableViewModel.updateOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+            trackedPoolTableViewModel.updateNumberOfBalls( inningsList.get(pointer).ballsOnTable );
         }
     }
 
@@ -183,16 +183,16 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         if (!isLatest()) {
             pointer++;
             trackedScoreBoardViewModel.updateScores( inningsList.get(pointer).playerScores );
-            trackedTable.setOldNumberOfBalls(inningsList.get(pointer).ballsOnTable);
-            trackedTable.setNumberOfBalls(inningsList.get(pointer).ballsOnTable);
+            trackedPoolTableViewModel.updateOldNumberOfBalls(inningsList.get(pointer).ballsOnTable);
+            trackedPoolTableViewModel.updateNumberOfBalls(inningsList.get(pointer).ballsOnTable);
         }
     }
     public void toLatest(){
         if (!isLatest()){
             pointer = length() - 1;
             trackedScoreBoardViewModel.updateScores( inningsList.get(pointer).playerScores );
-            trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
-            trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+            trackedPoolTableViewModel.updateOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+            trackedPoolTableViewModel.updateNumberOfBalls( inningsList.get(pointer).ballsOnTable );
         }
     }
 

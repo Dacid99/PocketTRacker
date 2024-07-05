@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class ScoreBoardViewModel extends ViewModel {
-    private MutableLiveData<ScoreBoard> scoreBoardLiveData;
+    private final MutableLiveData<ScoreBoard> scoreBoardLiveData = new MutableLiveData<>();
 
     public LiveData<ScoreBoard> getScoreBoard(){
         return scoreBoardLiveData;
     }
-    public void setScoreBoardLiveData(MutableLiveData<ScoreBoard> scoreBoardLiveData) {
-        this.scoreBoardLiveData = scoreBoardLiveData;
+    public void setScoreBoard(ScoreBoard scoreBoard) {
+        scoreBoardLiveData.setValue(scoreBoard);
     }
     public int[] getScores(){
         ScoreBoard scoreBoard = scoreBoardLiveData.getValue();
