@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import org.jetbrains.annotations.Contract;
 
 public class Player implements Parcelable {
-    public static int winnerPoints = 40;
     public static final String[] defaultPlayerNames = {"",""};
     public static final String[] defaultPlayerClubs = {"",""};
     public static boolean hasClub = true;
@@ -16,26 +15,18 @@ public class Player implements Parcelable {
     private final int playerNumber;
     private String name;
     private String club;
-    private int score;
 
     public Player(int playerNumber) {
         this.playerNumber = playerNumber;
         this.name = defaultPlayerNames[playerNumber-1];
         this.club = defaultPlayerClubs[playerNumber-1];
-        this.score = 0;
     }
 
-    public void addPoints(int points) {
-        this.score += points;
-    }
 
     public int getPlayerNumber(){
         return this.playerNumber;
     }
 
-    public int getScore() {
-        return score;
-    }
 
     public String getName() {
         return name;
@@ -45,9 +36,6 @@ public class Player implements Parcelable {
         return club;
     }
 
-    public boolean isWinner() {
-        return score >= winnerPoints;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -57,9 +45,6 @@ public class Player implements Parcelable {
         this.club = club;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
 
     public void swapNameAndClubWith(Player otherPlayer) {
         String nameBackup = otherPlayer.getName();
@@ -83,14 +68,12 @@ public class Player implements Parcelable {
         dest.writeInt(this.playerNumber);
         dest.writeString(this.name);
         dest.writeString(this.club);
-        dest.writeInt(this.score);
     }
 
     public Player(Parcel in) {
         this.playerNumber = in.readInt();
         this.name = in.readString();
         this.club = in.readString();
-        this.score = in.readInt();
     }
 
     public static final Creator<Player> CREATOR = new Creator<Player>() {

@@ -21,7 +21,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     //for going back in history and rewriting from there
     private int pointer;
     private PoolTable trackedTable;
-    private Player trackedPlayer1, trackedPlayer2;
+    private ScoreBoard trackedScoreBoard;
 
     @NonNull
     @Override
@@ -94,11 +94,10 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         };
     }
 
-    public ScoreSheet(PoolTable table, Player player1, Player player2){
+    public ScoreSheet(PoolTable table, ScoreBoard scoreBoard){
         //watched objects
         this.trackedTable = table;
-        this.trackedPlayer1 = player1;
-        this.trackedPlayer2 = player2;
+        this.trackedScoreBoard = scoreBoard;
         //set up containers for data
         this.inningsList = new ArrayList<>();
 
@@ -114,13 +113,10 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         progress();
     }
 
-    public void trackPlayer1(Player player1){
-        this.trackedPlayer1 = player1;
+    public void trackScoreBoard(ScoreBoard scoreBoard){
+        this.trackedScoreBoard = scoreBoard;
     }
 
-    public void trackPlayer2(Player player2){
-        this.trackedPlayer2 = player2;
-    }
     //Parcelable methods
     protected ScoreSheet(@NonNull Parcel in){
         pointer = in.readInt();
@@ -160,8 +156,8 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         }
         Inning turn = new Inning();
         turn.switchReason = reason;
-        turn.player1Score = trackedPlayer1.getScore();
-        turn.player2Score = trackedPlayer2.getScore();
+        turn.player1Score = trackedScoreBoard.getPlayerScores()[0];
+        turn.player2Score = trackedScoreBoard.getPlayerScores()[1];
         turn.ballsOnTable = trackedTable.getNumberOfBalls();
 
         inningsList.add(turn);
@@ -171,8 +167,8 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     public void rollback(){
         if (!isStart()) {
             pointer--;
-            trackedPlayer1.setScore( inningsList.get(pointer).player1Score );
-            trackedPlayer2.setScore( inningsList.get(pointer).player2Score );
+            trackedScoreBoard.setPlayer1Score( inningsList.get(pointer).player1Score );
+            trackedScoreBoard.setPlayer2Score( inningsList.get(pointer).player2Score );
             trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
             trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
         }
@@ -182,8 +178,8 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     public void toStart(){
         if (!isStart()){
             pointer = 0;
-            trackedPlayer1.setScore( inningsList.get(pointer).player1Score );
-            trackedPlayer2.setScore( inningsList.get(pointer).player2Score );
+            trackedScoreBoard.setPlayer1Score( inningsList.get(pointer).player1Score );
+            trackedScoreBoard.setPlayer2Score( inningsList.get(pointer).player2Score );
             trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
             trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
         }
@@ -192,8 +188,8 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     public void progress(){
         if (!isLatest()) {
             pointer++;
-            trackedPlayer1.setScore(inningsList.get(pointer).player1Score);
-            trackedPlayer2.setScore(inningsList.get(pointer).player2Score);
+            trackedScoreBoard.setPlayer1Score( inningsList.get(pointer).player1Score );
+            trackedScoreBoard.setPlayer2Score( inningsList.get(pointer).player2Score );
             trackedTable.setOldNumberOfBalls(inningsList.get(pointer).ballsOnTable);
             trackedTable.setNumberOfBalls(inningsList.get(pointer).ballsOnTable);
         }
@@ -201,8 +197,8 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     public void toLatest(){
         if (!isLatest()){
             pointer = length() - 1;
-            trackedPlayer1.setScore( inningsList.get(pointer).player1Score );
-            trackedPlayer2.setScore( inningsList.get(pointer).player2Score );
+            trackedScoreBoard.setPlayer1Score( inningsList.get(pointer).player1Score );
+            trackedScoreBoard.setPlayer2Score( inningsList.get(pointer).player2Score );
             trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
             trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
         }
@@ -232,6 +228,10 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
 
     public boolean isPlayer1Turn(){
         return pointer % 2 == 0;
+    }
+
+    public int turnplayerNumber(){
+        return pointer % 2;
     }
 
     private void clearAfterPointer(){

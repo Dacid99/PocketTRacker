@@ -29,6 +29,7 @@ public class ScoreSheetActivity extends AppCompatActivity {
     private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
     private ScoreSheet scoreSheet;
     private Player player1, player2;
+    private ScoreBoard scoreBoard;
     private MaterialToolbar toolbar;
     private MaterialButton counterButton, scoreSheetButton, settingsButton;
 
@@ -41,6 +42,8 @@ public class ScoreSheetActivity extends AppCompatActivity {
         scoreSheet = intent.getParcelableExtra(MainActivity.SCORESHEETPARAMETER);
         player1 = intent.getParcelableExtra(MainActivity.PLAYER1PARAMETER);
         player2 = intent.getParcelableExtra(MainActivity.PLAYER2PARAMETER);
+        scoreBoard = intent.getParcelableExtra(MainActivity.SCOREBOARDPARAMETER);
+        assert scoreBoard != null;
         assert scoreSheet != null;
         assert player1 != null;
         assert player2 != null;
@@ -122,10 +125,10 @@ public class ScoreSheetActivity extends AppCompatActivity {
         }else{
             Log.d("Failed ifelse", "ScoreSheetActivity.highlightScoreSheet: check of pointer failed");
         }
-        if (player1.isWinner()){
+        if (scoreBoard.getWinner() == 1){
             player1TableHeader.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator_winner));
         }
-        if (player2.isWinner()){
+        if (scoreBoard.getWinner() == 2){
             player2TableHeader.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator_winner));
         }
     }

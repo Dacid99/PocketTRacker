@@ -45,12 +45,14 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private static final String PLAYER1SAVEPARAMETER = "player1_savestate";
     private static final String PLAYER2SAVEPARAMETER = "player2_savestate";
     public static final String SCORESHEETPARAMETER = "scoresheet";
+    public static final String SCOREBOARDPARAMETER = "scoreboard";
     public static final String PLAYER1PARAMETER = "player1";
     public static final String PLAYER2PARAMETER = "player2";
     private ActivityResultLauncher<Intent> createFileActivityLauncher, readFileActivityLauncher;
     private SharedPreferences preferences;
     private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
     private Player player1, player2, turnPlayer;
+    private ScoreBoard scoreBoard;
     private PoolTable table;
     private ScoreSheet scoreSheet;
     private TextView player1NameView, player2NameView, player1ClubView, player2ClubView, player1ScoreView, player2ScoreView, ballsOnTableFloatingButton;
@@ -74,15 +76,15 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                     switch (key) {
                        case "winnerPoints_default":
                            String winnerPointsString = sharedPreferences.getString(key, "40");
-                           int oldWinnerPoints = Player.winnerPoints;
+                           int oldWinnerPoints = ScoreBoard.defaultWinnerPoints;
                            try{
-                               Player.winnerPoints = Integer.parseInt(winnerPointsString);
+                               ScoreBoard.defaultWinnerPoints = Integer.parseInt(winnerPointsString);
                                if (Objects.requireNonNull(winningPointsInput.getText()).toString().isEmpty() || winningPointsInput.getText().toString().equals(String.valueOf(oldWinnerPoints))){
                                    winningPointsInput.setText(winnerPointsString);
                                }
                            }catch (NumberFormatException e) {
                                Log.d("Bad preference","In SettingsActivity.onSharedPreferenceChanged: winnerpoints_default is not a parseable String! e");
-                               Player.winnerPoints = 40;
+                               ScoreBoard.defaultWinnerPoints = 40;
                            }
                            break;
 
@@ -168,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         winningPointsInput = findViewById(R.id.winningPointsInput);
 
-        winningPointsInput.setText(getString(R.string.winnerPoints_format, Player.winnerPoints));
+        winningPointsInput.setText(getString(R.string.winnerPoints_format, scoreBoard.getWinnerPoints()));
 
         missButton = findViewById(R.id.missButton);
         safeButton = findViewById(R.id.safeButton);
@@ -192,8 +194,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 String newText = s.toString();
                 if ( NumberUtils.isParsable(newText)) {
                     int newWinnerPoints = Integer.parseInt(newText);
-                    if (newWinnerPoints != Player.winnerPoints && newWinnerPoints >= 1){
-                        Player.winnerPoints = newWinnerPoints;
+                    if (newWinnerPoints != scoreBoard.getWinnerPoints() && newWinnerPoints >= 1){
+                        scoreBoard.setWinnerPoints(newWinnerPoints);
                         updateWinnerUI();
                     }
                 }
@@ -208,7 +210,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                     } else {
                         winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
                     }
-
                 } else {
                     winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
                 }
@@ -248,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         foulButton.setOnClickListener(v -> {
             assignPoints();
-            turnPlayer.addPoints( (scoreSheet.currentTurn() == 0) ? -2:-1 );
+            scoreBoard.addPoints( scoreSheet.turnplayerNumber(), (scoreSheet.currentTurn() == 0) ? -2:-1 );
             newTurn(getString(R.string.foul_string));
         });
 
@@ -319,6 +320,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 intent.putExtra(SCORESHEETPARAMETER, scoreSheet);
                 intent.putExtra(PLAYER1PARAMETER, player1);
                 intent.putExtra(PLAYER2PARAMETER, player2);
+                intent.putExtra(SCOREBOARDPARAMETER, scoreBoard);
                 startActivity(intent);
             } else{
                 Toast.makeText(this, getResources().getText(R.string.cantOpenScoreSheet_toast), Toast.LENGTH_SHORT).show();
@@ -406,14 +408,12 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         super.onRestoreInstanceState(savedInstanceState);
 
         Player savedPlayer1 = savedInstanceState.getParcelable(PLAYER1SAVEPARAMETER);
-        if (savedInstanceState.getParcelable(PLAYER1SAVEPARAMETER) != null){
+        if (savedPlayer1 != null){
             player1 = savedPlayer1;
-            scoreSheet.trackPlayer1(player1);
         }
         Player savedPlayer2 = savedInstanceState.getParcelable(PLAYER2SAVEPARAMETER);
         if (savedPlayer2 != null){
             player2 = savedPlayer2;
-            scoreSheet.trackPlayer2(player2);
         }
         ScoreSheet savedScoreSheet = savedInstanceState.getParcelable(SCORESHEETSAVEPARAMETER);
         if (savedScoreSheet!= null) {
@@ -438,10 +438,10 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         String stringWinnerPoints = preferences.getString("winnerPoints_default", "40");
         try{
-            Player.winnerPoints = Integer.parseInt(stringWinnerPoints);
+            ScoreBoard.defaultWinnerPoints = Integer.parseInt(stringWinnerPoints);
         } catch (NumberFormatException ne){
             Log.d("Bad preference", "In MainActivity.onCreate: winnerpoints is not saved as a parseable String!", ne);
-            Player.winnerPoints = 40;
+            ScoreBoard.defaultWinnerPoints = 40;
         }
 
         Player.defaultPlayerNames[0] = preferences.getString("player1_name_default", "");
@@ -452,8 +452,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     }
 
     private void updateScoreUI() {
-        player1ScoreView.setText(getString(R.string.player_score_format, player1.getScore()));
-        player2ScoreView.setText(getString(R.string.player_score_format, player2.getScore()));
+        player1ScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[0]));
+        player2ScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[1]));
         ballsOnTableFloatingButton.setText(getString(R.string.ballsOnTable_format, table.getNumberOfBalls()));
     }
 
@@ -495,7 +495,9 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         table = new PoolTable();
 
-        scoreSheet = new ScoreSheet(table, player1, player2);
+        scoreBoard = new ScoreBoard();
+
+        scoreSheet = new ScoreSheet(table, scoreBoard);
 
         updateScoreUI();
         updateUnRedoUI();
@@ -544,10 +546,10 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     }
 
     private void updateWinnerUI(){
-        if (player1.isWinner()){
+        if (scoreBoard.getWinner() == 1){
             player1Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
             newGameButton.setVisibility(View.VISIBLE);
-        }else if (player2.isWinner()){
+        }else if (scoreBoard.getWinner() == 2){
             player2Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
             newGameButton.setVisibility(View.VISIBLE);
         } else {
@@ -568,7 +570,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
     private void assignPoints(){
         int points = table.evaluate();
-        turnPlayer.addPoints(points);
+        scoreBoard.addPoints(scoreSheet.turnplayerNumber(), points);
     }
 
     //numberpanelistener methods
