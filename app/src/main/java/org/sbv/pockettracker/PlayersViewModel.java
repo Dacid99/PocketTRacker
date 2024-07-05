@@ -39,7 +39,8 @@ public class PlayersViewModel extends ViewModel {
     }
 
     public void reset(){
-        playersLiveData = new MutableLiveData<>();
+        Players players = new Players();
+        playersLiveData.setValue(players);
     }
 }
 

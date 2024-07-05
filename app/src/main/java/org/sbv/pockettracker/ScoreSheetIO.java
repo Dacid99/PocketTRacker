@@ -25,14 +25,14 @@ public class ScoreSheetIO {
         csvWriter.close();
     }
 
-    static void readFromFile(InputStreamReader inputStreamReader, Players players, ScoreSheet scoreSheet) throws IOException{
+    static void readFromFile(InputStreamReader inputStreamReader, PlayersViewModel playersViewModel, ScoreSheet scoreSheet) throws IOException{
         try (CSVReader csvReader = new CSVReader(inputStreamReader)) {
             String[] nextLine;
             nextLine = csvReader.readNext();
-            players.setName(1,nextLine[1]);
-            players.setClub(1,nextLine[2]);
-            players.setName(2,nextLine[3]);
-            players.setClub(2,nextLine[4]);
+            playersViewModel.updatePlayerName(0, nextLine[1]);
+            playersViewModel.updateClubName(0, nextLine[2]);
+            playersViewModel.updatePlayerName(1, nextLine[3]);
+            playersViewModel.updateClubName(1, nextLine[4]);
             csvReader.readNext(); //skip the first line, it is in scoresheet by default
             while ((nextLine = csvReader.readNext()) != null){
                 scoreSheet.update(new ScoreSheet.Inning(nextLine));

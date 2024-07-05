@@ -21,7 +21,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     //for going back in history and rewriting from there
     private int pointer;
     private PoolTable trackedTable;
-    private ScoreBoard trackedScoreBoard;
+    private ScoreBoardViewModel trackedScoreBoardViewModel;
 
     @NonNull
     @Override
@@ -31,8 +31,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
 
     public static class Inning implements Parcelable{
         public String switchReason;
-        public int player1Score;
-        public int player2Score;
+        public int[] playerScores;
         public int ballsOnTable;
 
         public Inning(){
@@ -41,8 +40,8 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
             if (array.length == 4) {
                 switchReason = array[0];
                 try {
-                    player1Score = Integer.parseInt(array[1]);
-                    player2Score = Integer.parseInt(array[2]);
+                    playerScores[0] = Integer.parseInt(array[1]);
+                    playerScores[1] = Integer.parseInt(array[2]);
                     ballsOnTable = Integer.parseInt(array[3]);
                 }catch (NumberFormatException e){
                     Log.d("Exception occurred", "In ScoreSheet.Turn.fromStringArray: "+e.getMessage());
@@ -54,16 +53,15 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         public String[] toStringArray(){
             String[] array =  new String[4];
             array[0] = switchReason;
-            array[1] = String.valueOf(player1Score);
-            array[2] = String.valueOf(player2Score);
+            array[1] = String.valueOf(playerScores[0]);
+            array[2] = String.valueOf(playerScores[1]);
             array[3] = String.valueOf(ballsOnTable);
             return array;
         }
         // parcelable methods
         protected Inning(Parcel in){
             switchReason = in.readString();
-            player1Score = in.readInt();
-            player2Score = in.readInt();
+            playerScores = in.createIntArray();
             ballsOnTable = in.readInt();
         }
         @Override
@@ -73,8 +71,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         @Override
         public void writeToParcel(@NonNull Parcel dest, int flags) {
             dest.writeString(switchReason);
-            dest.writeInt(player1Score);
-            dest.writeInt(player2Score);
+            dest.writeIntArray(playerScores);
             dest.writeInt(ballsOnTable);
         }
         public static final Creator<Inning> CREATOR = new Creator<Inning>() {
@@ -94,10 +91,10 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         };
     }
 
-    public ScoreSheet(PoolTable table, ScoreBoard scoreBoard){
+    public ScoreSheet(PoolTable table, ScoreBoardViewModel scoreBoardViewModel){
         //watched objects
         this.trackedTable = table;
-        this.trackedScoreBoard = scoreBoard;
+        this.trackedScoreBoardViewModel = scoreBoardViewModel;
         //set up containers for data
         this.inningsList = new ArrayList<>();
 
@@ -113,8 +110,8 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         progress();
     }
 
-    public void trackScoreBoard(ScoreBoard scoreBoard){
-        this.trackedScoreBoard = scoreBoard;
+    public void trackScoreBoard(ScoreBoardViewModel scoreBoardViewModel){
+        this.trackedScoreBoardViewModel = scoreBoardViewModel;
     }
 
     //Parcelable methods
@@ -156,8 +153,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         }
         Inning turn = new Inning();
         turn.switchReason = reason;
-        turn.player1Score = trackedScoreBoard.getPlayerScores()[0];
-        turn.player2Score = trackedScoreBoard.getPlayerScores()[1];
+        turn.playerScores = trackedScoreBoardViewModel.getScores();
         turn.ballsOnTable = trackedTable.getNumberOfBalls();
 
         inningsList.add(turn);
@@ -167,8 +163,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     public void rollback(){
         if (!isStart()) {
             pointer--;
-            trackedScoreBoard.setPlayer1Score( inningsList.get(pointer).player1Score );
-            trackedScoreBoard.setPlayer2Score( inningsList.get(pointer).player2Score );
+            trackedScoreBoardViewModel.updateScores(inningsList.get(pointer).playerScores);
             trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
             trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
         }
@@ -178,8 +173,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     public void toStart(){
         if (!isStart()){
             pointer = 0;
-            trackedScoreBoard.setPlayer1Score( inningsList.get(pointer).player1Score );
-            trackedScoreBoard.setPlayer2Score( inningsList.get(pointer).player2Score );
+            trackedScoreBoardViewModel.updateScores( inningsList.get(pointer).playerScores );
             trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
             trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
         }
@@ -188,8 +182,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     public void progress(){
         if (!isLatest()) {
             pointer++;
-            trackedScoreBoard.setPlayer1Score( inningsList.get(pointer).player1Score );
-            trackedScoreBoard.setPlayer2Score( inningsList.get(pointer).player2Score );
+            trackedScoreBoardViewModel.updateScores( inningsList.get(pointer).playerScores );
             trackedTable.setOldNumberOfBalls(inningsList.get(pointer).ballsOnTable);
             trackedTable.setNumberOfBalls(inningsList.get(pointer).ballsOnTable);
         }
@@ -197,8 +190,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     public void toLatest(){
         if (!isLatest()){
             pointer = length() - 1;
-            trackedScoreBoard.setPlayer1Score( inningsList.get(pointer).player1Score );
-            trackedScoreBoard.setPlayer2Score( inningsList.get(pointer).player2Score );
+            trackedScoreBoardViewModel.updateScores( inningsList.get(pointer).playerScores );
             trackedTable.setOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
             trackedTable.setNumberOfBalls( inningsList.get(pointer).ballsOnTable );
         }
@@ -257,14 +249,14 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     public ArrayList<Integer> getPlayer1ScoresList(){
         ArrayList<Integer> player1ScoresList = new ArrayList<>();
         for (Inning turn : inningsList){
-            player1ScoresList.add(turn.player1Score);
+            player1ScoresList.add(turn.playerScores[0]);
         }
         return player1ScoresList;
     }
     public ArrayList<Integer> getPlayer2ScoresList(){
         ArrayList<Integer> player2ScoresList = new ArrayList<>();
         for (Inning turn : inningsList){
-            player2ScoresList.add(turn.player2Score);
+            player2ScoresList.add(turn.playerScores[1]);
         }
         return player2ScoresList;
     }
@@ -276,10 +268,10 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         return ballsOnTableList;
     }
     public int getScoreOfPlayer1At(int turn){
-        return inningsList.get(turn).player1Score;
+        return inningsList.get(turn).playerScores[0];
     }
     public int getScoreOfPlayer2At(int turn){
-        return inningsList.get(turn).player2Score;
+        return inningsList.get(turn).playerScores[1];
     }
     public int getBallsOnTableAt(int turn){
         return inningsList.get(turn).ballsOnTable;

@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private SharedPreferences preferences;
     private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
     private PlayersViewModel playersViewModel;
-    private ScoreBoard scoreBoard;
+    private ScoreBoardViewModel scoreBoardViewModel;
     private PoolTable table;
     private ScoreSheet scoreSheet;
     private TextView player1NameView, player2NameView, player1ClubView, player2ClubView, player1ScoreView, player2ScoreView, ballsOnTableFloatingButton;
@@ -169,8 +169,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         winningPointsInput = findViewById(R.id.winningPointsInput);
 
-        winningPointsInput.setText(getString(R.string.winnerPoints_format, scoreBoard.getWinnerPoints()));
-
         missButton = findViewById(R.id.missButton);
         safeButton = findViewById(R.id.safeButton);
         foulButton = findViewById(R.id.foulButton);
@@ -180,7 +178,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         saveloadGameButton = findViewById(R.id.saveloadGame);
 
         playersViewModel = new ViewModelProvider(this).get(PlayersViewModel.class);
-
         playersViewModel.getPlayers().observe(this, new Observer<Players>() {
             @Override
             public void onChanged(Players players) {
@@ -189,6 +186,25 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                     player1ClubView.setText(getString(R.string.player_club_format, players.getClubs()[0]));
                     player2NameView.setText(getString(R.string.player_name_format, players.getNames()[1]));
                     player2ClubView.setText(getString(R.string.player_club_format, players.getClubs()[1]));
+                }
+            }
+        });
+        scoreBoardViewModel = new ViewModelProvider(this).get(ScoreBoardViewModel.class);
+        scoreBoardViewModel.getScoreBoard().observe(this, new Observer<ScoreBoard>() {
+            @Override
+            public void onChanged(ScoreBoard scoreBoard) {
+                player1ScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[0]));
+                player2ScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[1]));
+                winningPointsInput.setText(getString(R.string.winnerPoints_format, scoreBoard.getWinnerPoints()));
+                if (scoreBoard.getWinner() == 0){
+                    player1Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
+                    newGameButton.setVisibility(View.VISIBLE);
+                }else if (scoreBoard.getWinner() == 1){
+                    player2Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
+                    newGameButton.setVisibility(View.VISIBLE);
+                } else {
+                    updateFocusUI(); //card backgrounds ungoldened by updateFocus
+                    newGameButton.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -207,9 +223,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 String newText = s.toString();
                 if ( NumberUtils.isParsable(newText)) {
                     int newWinnerPoints = Integer.parseInt(newText);
-                    if (newWinnerPoints != scoreBoard.getWinnerPoints() && newWinnerPoints >= 1){
-                        scoreBoard.setWinnerPoints(newWinnerPoints);
-                        updateWinnerUI();
+                    if (newWinnerPoints != Objects.requireNonNull(scoreBoardViewModel.getScoreBoard().getValue()).getWinnerPoints() && newWinnerPoints >= 1){
+                        scoreBoardViewModel.updateWinnerPoints(newWinnerPoints);
                     }
                 }
             }
@@ -262,7 +277,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         foulButton.setOnClickListener(v -> {
             assignPoints();
-            scoreBoard.addPoints( scoreSheet.turnplayerNumber(), (scoreSheet.currentTurn() == 0) ? -2:-1 );
+            scoreBoardViewModel.addPoints( scoreSheet.turnplayerNumber(), (scoreSheet.currentTurn() == 0) ? -2:-1 );
             newTurn(getString(R.string.foul_string));
         });
 
@@ -271,7 +286,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             updateScoreUI();
             updateUnRedoUI();
             updateFocusUI();
-            updateWinnerUI();
             updateSaveLoadUI();
         });
 
@@ -282,7 +296,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 updateScoreUI();
                 updateUnRedoUI();
                 updateFocusUI();
-                updateWinnerUI();
                 updateSaveLoadUI();
                 return true;
             }
@@ -293,7 +306,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             updateScoreUI();
             updateUnRedoUI();
             updateFocusUI();
-            updateWinnerUI();
             updateSaveLoadUI();
         });
 
@@ -304,7 +316,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 updateScoreUI();
                 updateUnRedoUI();
                 updateFocusUI();
-                updateWinnerUI();
                 updateSaveLoadUI();
                 return true;
             }
@@ -320,7 +331,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 Intent intent = new Intent(MainActivity.this, ScoreSheetActivity.class);
                 intent.putExtra(SCORESHEETPARAMETER, scoreSheet);
                 intent.putExtra(PLAYERSPARAMETER, playersViewModel.getPlayers().getValue());
-                intent.putExtra(SCOREBOARDPARAMETER, scoreBoard);
+                intent.putExtra(SCOREBOARDPARAMETER, scoreBoardViewModel.getScoreBoard().getValue());
                 startActivity(intent);
             } else{
                 Toast.makeText(this, getResources().getText(R.string.cantOpenScoreSheet_toast), Toast.LENGTH_SHORT).show();
@@ -369,11 +380,10 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                             Uri uri = data.getData();
                             try (InputStream inputStream = getContentResolver().openInputStream(uri);
                                  InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
-                                ScoreSheetIO.readFromFile(inputStreamReader, Objects.requireNonNull(playersViewModel.getPlayers().getValue()), scoreSheet);
+                                ScoreSheetIO.readFromFile(inputStreamReader, playersViewModel, scoreSheet);
                                 updateFocusUI();
                                 updateScoreUI();
                                 updateUnRedoUI();
-                                updateWinnerUI();
                                 updateSaveLoadUI();
                                 Toast.makeText(MainActivity.this, "Game loaded successfully!", Toast.LENGTH_SHORT).show();
                             } catch (IOException e) {
@@ -407,7 +417,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         updateScoreUI();
         updateUnRedoUI();
         updateFocusUI();
-        updateWinnerUI();
         updateSaveLoadUI();
     }
 
@@ -430,8 +439,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     }
 
     private void updateScoreUI() {
-        player1ScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[0]));
-        player2ScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[1]));
         ballsOnTableFloatingButton.setText(getString(R.string.ballsOnTable_format, table.getNumberOfBalls()));
     }
 
@@ -453,7 +460,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         scoreSheet.update(reason);
         updateUnRedoUI();
         updateScoreUI();
-        updateWinnerUI();
         updateSaveLoadUI();
     }
 
@@ -462,13 +468,12 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         table = new PoolTable();
 
-        scoreBoard = new ScoreBoard();
+        scoreBoardViewModel.reset();
 
-        scoreSheet = new ScoreSheet(table, scoreBoard);
+        scoreSheet = new ScoreSheet(table, scoreBoardViewModel);
 
         updateScoreUI();
         updateUnRedoUI();
-        updateWinnerUI();
         updateFocusUI();
         updateSaveLoadUI();
     }
@@ -501,19 +506,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         }
     }
 
-    private void updateWinnerUI(){
-        if (scoreBoard.getWinner() == 1){
-            player1Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
-            newGameButton.setVisibility(View.VISIBLE);
-        }else if (scoreBoard.getWinner() == 2){
-            player2Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
-            newGameButton.setVisibility(View.VISIBLE);
-        } else {
-            updateFocusUI(); //card backgrounds ungoldened by updateFocus
-            newGameButton.setVisibility(View.INVISIBLE);
-        }
-    }
-
     private void updateSaveLoadUI(){
         if (scoreSheet.isStart()){
             saveloadGameButton.setOnClickListener(v -> openReadDocumentIntent());
@@ -526,7 +518,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
     private void assignPoints(){
         int points = table.evaluate();
-        scoreBoard.addPoints(scoreSheet.turnplayerNumber(), points);
+        scoreBoardViewModel.addPoints(scoreSheet.turnplayerNumber(), points);
     }
 
     //numberpanelistener methods
@@ -537,7 +529,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             assignPoints();
         }
         updateScoreUI();
-        updateWinnerUI();
     }
 
     //playerfragmentprovider methods
@@ -554,10 +545,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         playersViewModel.swap();
     }
 
-    @Override
-    public ScoreBoard requestScoreBoard(){
-        return scoreBoard;
-    }
     //IO for saving and loading
     private void openCreateDocumentIntent(){
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);

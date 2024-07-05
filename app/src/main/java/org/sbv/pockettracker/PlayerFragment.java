@@ -38,7 +38,6 @@ public class PlayerFragment extends DialogFragment {
         void onNameInput(int playerNumber, String name);
         void onClubInput(int playerNumber, String club);
         void onSwapButtonClick();
-        ScoreBoard requestScoreBoard();
     }
     private static final String NAME_AUTOCOMPLETEPREFERENCES = "player_autocompletepreferences";
     private static final String CLUB_AUTOCOMPLETEPREFERENCES = "club_autocompletepreferences";
@@ -49,6 +48,7 @@ public class PlayerFragment extends DialogFragment {
 
     private int playerNumber;
     private PlayersViewModel playersViewModel;
+    private ScoreBoardViewModel scoreBoardViewModel;
     private ScoreSheet scoreSheet;
     private View view;
     private TextInputLayout playerClubLayout;
@@ -144,7 +144,14 @@ public class PlayerFragment extends DialogFragment {
                 }
             }
         });
-        updateScore();
+
+        scoreBoardViewModel = new ViewModelProvider(requireActivity()).get(ScoreBoardViewModel.class);
+        scoreBoardViewModel.getScoreBoard().observe(this, new Observer<ScoreBoard>() {
+            @Override
+            public void onChanged(ScoreBoard scoreBoard) {
+                playerScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[playerNumber]));
+            }
+        });
 
         playerNameInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -210,7 +217,6 @@ public class PlayerFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 listener.onSwapButtonClick();
-                updateScore();
             }
         });
 
@@ -218,17 +224,12 @@ public class PlayerFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 listener.onSwapButtonClick();
-                updateScore();
             }
         });
 
         return view;
     }
 
-    private void updateScore() {
-        ScoreBoard scoreBoard = listener.requestScoreBoard();
-        playerScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[playerNumber]));
-    }
 
     @Override
     public void onCancel(@NonNull DialogInterface dialogInterface){
