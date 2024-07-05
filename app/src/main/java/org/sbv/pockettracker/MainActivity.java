@@ -19,6 +19,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private SharedPreferences preferences;
     private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
     private Player player1, player2, turnPlayer;
+    private PlayerViewModel playerViewModel1, playerViewModel2;
     private ScoreBoard scoreBoard;
     private PoolTable table;
     private ScoreSheet scoreSheet;
@@ -179,6 +182,20 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         redoButton = findViewById(R.id.redoButton);
         newGameButton = findViewById(R.id.newGame);
         saveloadGameButton = findViewById(R.id.saveloadGame);
+
+        playerViewModel1 = new ViewModelProvider(this).get(PlayerViewModel.class);
+        playerViewModel2 = new ViewModelProvider(this).get(PlayerViewModel.class);
+
+        playerViewModel1.getPlayer().observe(this, new Observer<Player>() {
+            @Override
+            public void onChanged(Player player) {
+                if (player != null){
+                    updatePlayerUI();
+                    updateScoreUI();
+                    updateWinnerUI();
+                }
+            }
+        });
 
         newGame();
 
@@ -399,8 +416,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     protected void onSaveInstanceState(@NonNull Bundle outState){
         super.onSaveInstanceState(outState);
         outState.putParcelable(SCORESHEETSAVEPARAMETER, scoreSheet);
-        outState.putParcelable(PLAYER1SAVEPARAMETER, player1);
-        outState.putParcelable(PLAYER2SAVEPARAMETER, player2);
     }
 
     @Override
@@ -420,7 +435,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             scoreSheet.include(savedScoreSheet);
         }
 
-        updatePlayerUI();
         updateScoreUI();
         if (scoreSheet.isPlayer1Turn()){
             turnPlayer = player1;
@@ -622,6 +636,11 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             Log.d("argument error", "In MainActivity.requestPlayer: No such playerNumber:" + playerNumber);
             return null;
         }
+    }
+
+    @Override
+    public ScoreBoard requestScoreBoard(){
+        return scoreBoard;
     }
     //IO for saving and loading
     private void openCreateDocumentIntent(){

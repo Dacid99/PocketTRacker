@@ -37,6 +37,7 @@ public class PlayerFragment extends DialogFragment {
         void onClubInput(int playerNumber, String club);
         void onSwapButtonClick();
         Player requestPlayer(int playerNumber);
+        ScoreBoard requestScoreBoard();
     }
     private static final String NAME_AUTOCOMPLETEPREFERENCES = "player_autocompletepreferences";
     private static final String CLUB_AUTOCOMPLETEPREFERENCES = "club_autocompletepreferences";
@@ -243,10 +244,10 @@ public class PlayerFragment extends DialogFragment {
     }
     private void updatePlayerFields(){
         Player player = listener.requestPlayer(playerNumber);
-        System.out.println(player.getScore() + player.getName());
+        ScoreBoard scoreBoard = listener.requestScoreBoard();
         playerNameInput.setText(getString(R.string.player_name_format, player.getName()));
         playerClubInput.setText(getString(R.string.player_club_format, player.getClub()));
-        playerScoreView.setText(getString(R.string.player_score_format, player.getScore()));
+        playerScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[playerNumber]));
     }
 
     private void switchToOtherPlayer(){
