@@ -1,99 +1,97 @@
 package org.sbv.pockettracker;
 
 
-import android.content.Intent;
-
 import android.graphics.drawable.Drawable;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.button.MaterialButton;
-
-import java.util.Objects;
-
-public class ScoreSheetActivity extends AppCompatActivity {
+public class ScoreSheetFragment extends Fragment {
     private TableLayout tableLayout;
     private TextView player1TableHeader, player2TableHeader, player1StatisticsHeader, player2StatisticsHeader;
     private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
-    private ScoreSheet scoreSheet;
-    private Players players;
-    private ScoreBoard scoreBoard;
-    private MaterialToolbar toolbar;
-    private MaterialButton counterButton, scoreSheetButton, settingsButton;
+    private ScoreSheetViewModel scoreSheetViewModel;
+    private PlayersViewModel playersViewModel;
+    private ScoreBoardViewModel scoreBoardViewModel;
+    private View view;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scoresheet);
-
-        Intent intent = getIntent();
-        scoreSheet = intent.getParcelableExtra(MainActivity.SCORESHEETPARAMETER);
-        players = intent.getParcelableExtra(MainActivity.PLAYERSPARAMETER);
-        scoreBoard = intent.getParcelableExtra(MainActivity.SCOREBOARDPARAMETER);
-
-        if (scoreSheet == null || scoreBoard == null || players == null){
-            Toast.makeText(this, "Scoresheet activity could not be launched! Please report this error", Toast.LENGTH_LONG).show();
-        }
-
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
-
-        counterButton = findViewById(R.id.counter_button);
-        scoreSheetButton = findViewById(R.id.scoresheet_button);
-        settingsButton = findViewById(R.id.settings_button);
-        //deactivate scoreSheet button in this activity
-        scoreSheetButton.setClickable(false);
-        scoreSheetButton.setTextColor(getResources().getColor(R.color.current_activity_color));
-
-        counterButton.setOnClickListener(v -> finish());
-
-        settingsButton.setVisibility(View.INVISIBLE);
-
-        tableLayout = findViewById(R.id.score_table);
-
-        player1TableHeader = findViewById(R.id.player1table_header);
-        player2TableHeader = findViewById(R.id.player2table_header);
-        player1StatisticsHeader = findViewById(R.id.player1statistics_header);
-        player2StatisticsHeader = findViewById(R.id.player2statistics_header);
-
-
-        player1TableHeader.setText((players.getNames()[0].isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, players.getNames()[0]));
-        player1StatisticsHeader.setText((players.getNames()[0].isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, players.getNames()[0]));
-
-        player2TableHeader.setText((players.getNames()[1].isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, players.getNames()[1]));
-        player2StatisticsHeader.setText((players.getNames()[1].isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, players.getNames()[1]));
-
-        maxRunPlayer1View = findViewById(R.id.player1statistics_maxRun);
-        maxRunPlayer2View = findViewById(R.id.player2statistics_maxRun);
-        inningsPlayer1View = findViewById(R.id.player1statistics_innings);
-        inningsPlayer2View = findViewById(R.id.player2statistics_innings);
-        meanInningPlayer1View = findViewById(R.id.player1statistics_meanInning);
-        meanInningPlayer2View = findViewById(R.id.player2statistics_meanInning);
-        meanRunPlayer1View = findViewById(R.id.player1statistics_meanRun);
-        meanRunPlayer2View = findViewById(R.id.player2statistics_meanRun);
-
-
-        fillScoreSheetLayout();
-        highlightScoreSheet();
+    public interface ScoreSheetFragmentListener{
     }
 
-    private void fillScoreSheetLayout() {
+    @Override
+    public View onCreateView(@NonNull LayoutInflater layoutInflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        view = layoutInflater.inflate(R.layout.fragment_scoresheet, container, false);
+
+        tableLayout = view.findViewById(R.id.score_table);
+
+        player1TableHeader = view.findViewById(R.id.player1table_header);
+        player2TableHeader = view.findViewById(R.id.player2table_header);
+        player1StatisticsHeader = view.findViewById(R.id.player1statistics_header);
+        player2StatisticsHeader = view.findViewById(R.id.player2statistics_header);
+
+        maxRunPlayer1View = view.findViewById(R.id.player1statistics_maxRun);
+        maxRunPlayer2View = view.findViewById(R.id.player2statistics_maxRun);
+        inningsPlayer1View = view.findViewById(R.id.player1statistics_innings);
+        inningsPlayer2View = view.findViewById(R.id.player2statistics_innings);
+        meanInningPlayer1View = view.findViewById(R.id.player1statistics_meanInning);
+        meanInningPlayer2View = view.findViewById(R.id.player2statistics_meanInning);
+        meanRunPlayer1View = view.findViewById(R.id.player1statistics_meanRun);
+        meanRunPlayer2View = view.findViewById(R.id.player2statistics_meanRun);
+
+        playersViewModel = new ViewModelProvider(requireActivity()).get(PlayersViewModel.class);
+        playersViewModel.getPlayers().observe(getViewLifecycleOwner(), new Observer<Players>() {
+            @Override
+            public void onChanged(Players players) {
+                player1TableHeader.setText((players.getNames()[0].isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, players.getNames()[0]));
+                player1StatisticsHeader.setText((players.getNames()[0].isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, players.getNames()[0]));
+                player2TableHeader.setText((players.getNames()[1].isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, players.getNames()[1]));
+                player2StatisticsHeader.setText((players.getNames()[1].isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, players.getNames()[1]));
+            }
+        });
+
+        scoreSheetViewModel = new ViewModelProvider(requireActivity()).get(ScoreSheetViewModel.class);
+        scoreSheetViewModel.getScoreSheet().observe(getViewLifecycleOwner(), new Observer<ScoreSheet>() {
+            @Override
+            public void onChanged(ScoreSheet scoreSheet) {
+                fillScoreSheetLayout(scoreSheet);
+                highlightScoreSheet(scoreSheet);
+            }
+        });
+
+        scoreBoardViewModel = new ViewModelProvider(requireActivity()).get(ScoreBoardViewModel.class);
+        scoreBoardViewModel.getScoreBoard().observe(getViewLifecycleOwner(), new Observer<ScoreBoard>() {
+            @Override
+            public void onChanged(ScoreBoard scoreBoard) {
+                if (scoreBoard.getWinner() == 1){
+                    player1TableHeader.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.cell_separator_winner));
+                }
+                if (scoreBoard.getWinner() == 2){
+                    player2TableHeader.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.cell_separator_winner));
+                }
+            }
+        });
+
+        return view;
+    }
+
+    private void fillScoreSheetLayout(ScoreSheet scoreSheet) {
         // Add rows
         for (int index = 0; index < scoreSheet.length(); index++) {
-            appendTableRow(index);
+            appendTableRow(index, scoreSheet);
         }
         double[] meanInnings = GameStatistics.meanInnings(scoreSheet);
         double[] meanRuns = GameStatistics.meanRuns(scoreSheet);
@@ -109,14 +107,14 @@ public class ScoreSheetActivity extends AppCompatActivity {
         meanRunPlayer2View.setText(getString(R.string.meanRun_format, meanRuns[1]));
     }
 
-    private void highlightScoreSheet(){
+    private void highlightScoreSheet(ScoreSheet scoreSheet){
         if (scoreSheet.currentTurn() >= 0 && scoreSheet.currentTurn() < tableLayout.getChildCount()){
             TableRow turnRow = (TableRow) tableLayout.getChildAt(scoreSheet.currentTurn());
             Drawable background;
-            if (scoreSheet.isPlayer1Turn()){
-                background = ContextCompat.getDrawable(this, R.drawable.cell_separator_turn);
+            if (scoreSheet.turnplayerNumber() == 0){
+                background = ContextCompat.getDrawable(requireContext(), R.drawable.cell_separator_turn);
             }else {
-                background = ContextCompat.getDrawable(this, R.drawable.cell_separator_turnplayer_turn);
+                background = ContextCompat.getDrawable(requireContext(), R.drawable.cell_separator_turnplayer_turn);
             }
             for (int index = 0; index < turnRow.getChildCount(); index++){
                 turnRow.getChildAt(index).setBackground(background);
@@ -124,37 +122,32 @@ public class ScoreSheetActivity extends AppCompatActivity {
         }else{
             Log.d("Failed ifelse", "ScoreSheetActivity.highlightScoreSheet: check of pointer failed");
         }
-        if (scoreBoard.getWinner() == 1){
-            player1TableHeader.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator_winner));
-        }
-        if (scoreBoard.getWinner() == 2){
-            player2TableHeader.setBackground(ContextCompat.getDrawable(this, R.drawable.cell_separator_winner));
-        }
+
     }
 
-    private void appendTableRow(int turn) {
+    private void appendTableRow(int turn, ScoreSheet scoreSheet) {
 
-        TableRow newTableRow = new TableRow(this);
+        TableRow newTableRow = new TableRow(requireContext());
         TableLayout.LayoutParams rowLayoutParams = new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         newTableRow.setLayoutParams(rowLayoutParams);
 
-        TextView turnText = new TextView(this);
-        TextView switchReasonText = new TextView(this);
-        TextView player1IncrementText = new TextView(this);
-        TextView player1TotalText = new TextView(this);
-        TextView player2IncrementText = new TextView(this);
-        TextView player2TotalText = new TextView(this);
-        TextView ballsOnTableText = new TextView(this);
+        TextView turnText = new TextView(requireContext());
+        TextView switchReasonText = new TextView(requireContext());
+        TextView player1IncrementText = new TextView(requireContext());
+        TextView player1TotalText = new TextView(requireContext());
+        TextView player2IncrementText = new TextView(requireContext());
+        TextView player2TotalText = new TextView(requireContext());
+        TextView ballsOnTableText = new TextView(requireContext());
 
 
         turnText.setText(getString(R.string.turnnumber_format, turn));
         switchReasonText.setText(getString(R.string.switchReason_format, scoreSheet.getSwitchReasonAt(turn)));
         //only show increments for turnplayers
         //also not for 0th turn
-        Drawable background = ContextCompat.getDrawable(this, R.drawable.cell_separator);
+        Drawable background = ContextCompat.getDrawable(requireContext(), R.drawable.cell_separator);
         if (turn % 2 == 1 ) {
             player1IncrementText.setText(getString(R.string.player_score_format, scoreSheet.getRunOfPlayer1At(turn)));
-            background = ContextCompat.getDrawable(this, R.drawable.cell_separator_turnplayer);
+            background = ContextCompat.getDrawable(requireContext(), R.drawable.cell_separator_turnplayer);
         } else if (turn != 0){
             player2IncrementText.setText(getString(R.string.player_score_format, scoreSheet.getRunOfPlayer2At(turn)));
         }
@@ -213,4 +206,5 @@ public class ScoreSheetActivity extends AppCompatActivity {
 
         tableLayout.addView(newTableRow);
     }
+
 }

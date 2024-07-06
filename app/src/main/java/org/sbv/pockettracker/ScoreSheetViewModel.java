@@ -87,6 +87,12 @@ public class ScoreSheetViewModel extends ViewModel {
             return scoreSheet.currentTurn();
         }else return 0;
     }
+    public int length(){
+        ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
+        if (scoreSheet != null){
+            return scoreSheet.length();
+        }else return 1;
+    }
 
 
     public void reset(PoolTableViewModel poolTableViewModel, ScoreBoardViewModel scoreBoardViewModel){

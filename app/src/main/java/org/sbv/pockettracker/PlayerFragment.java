@@ -124,7 +124,7 @@ public class PlayerFragment extends DialogFragment {
             rightToOtherPlayerButton.setVisibility(View.INVISIBLE);
             rightSwapPlayersButton.setVisibility(View.INVISIBLE);
         }else {
-            Log.d("bad parameter", "In PlayerFragment.onCreateView: playerNumber is neither 0 or 1!");
+            Log.d("Bad parameter", "In PlayerFragment.onCreateView: playerNumber is neither 0 or 1!");
         }
 
         playersViewModel = new ViewModelProvider(requireActivity()).get(PlayersViewModel.class);
