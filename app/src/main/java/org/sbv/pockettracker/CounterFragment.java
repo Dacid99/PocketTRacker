@@ -1,0 +1,400 @@
+package org.sbv.pockettracker;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
+
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textfield.TextInputEditText;
+
+import org.apache.commons.lang3.math.NumberUtils;
+
+import java.util.Objects;
+
+public class CounterFragment extends Fragment{
+    public static final String SCORESHEETPARAMETER = "scoresheet";
+    public static final String SCOREBOARDPARAMETER = "scoreboard";
+    public static final String PLAYERSPARAMETER = "player1";
+    public static interface CounterFragmentListener{
+        void onSaveButtonClick();
+        void onLoadButtonClick();
+        void onPlayerCardClick(int playerNumber);
+        void onBallsOnTableFloatingButtonClick();
+    }
+    private ActivityResultLauncher<Intent> createFileActivityLauncher, readFileActivityLauncher;
+    private SharedPreferences preferences;
+    private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
+    private PlayersViewModel playersViewModel;
+    private ScoreBoardViewModel scoreBoardViewModel;
+    private PoolTableViewModel poolTableViewModel;
+    private ScoreSheetViewModel scoreSheetViewModel;
+    private TextView player1NameView, player2NameView, player1ClubView, player2ClubView, player1ScoreView, player2ScoreView, ballsOnTableFloatingButton;
+    private TextInputEditText winningPointsInput;
+    private MaterialCardView player1Card, player2Card;
+    private MaterialButton  foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, saveloadGameButton;
+    private View view;
+    private CounterFragmentListener listener;
+
+    @Override
+    public void onAttach(@NonNull Context context){
+        super.onAttach(context);
+        try{
+            listener = (CounterFragmentListener) context;
+        }catch (ClassCastException e) {
+            throw new ClassCastException(context + "must implement CounterFragmentListener!");
+        }
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater layoutInflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = layoutInflater.inflate(R.layout.fragment_counter, container,false);
+
+        player1ScoreView = view.findViewById(R.id.player1ScoreView);
+        player2ScoreView = view.findViewById(R.id.player2ScoreView);
+
+        player1NameView = view.findViewById(R.id.player1NameView);
+        player2NameView = view.findViewById(R.id.player2NameView);
+
+        player1ClubView = view.findViewById(R.id.player1ClubView);
+        player2ClubView = view.findViewById(R.id.player2ClubView);
+
+        if (!Players.haveClubs){
+            player1ClubView.setVisibility(View.GONE);
+            player2ClubView.setVisibility(View.GONE);
+        }
+
+        player1Card = view.findViewById(R.id.player1CardView);
+        player2Card = view.findViewById(R.id.player2CardView);
+
+        ballsOnTableFloatingButton = view.findViewById(R.id.ballsOnTableFloatingButton);
+
+        winningPointsInput = view.findViewById(R.id.winningPointsInput);
+
+        missButton = view.findViewById(R.id.missButton);
+        safeButton = view.findViewById(R.id.safeButton);
+        foulButton = view.findViewById(R.id.foulButton);
+        undoButton = view.findViewById(R.id.undoButton);
+        redoButton = view.findViewById(R.id.redoButton);
+        newGameButton = view.findViewById(R.id.newGame);
+        saveloadGameButton = view.findViewById(R.id.saveloadGame);
+
+        playersViewModel = new ViewModelProvider(requireActivity()).get(PlayersViewModel.class);
+        playersViewModel.getPlayers().observe(getViewLifecycleOwner(), new Observer<Players>() {
+            @Override
+            public void onChanged(Players players) {
+                if (players != null){
+                    player1NameView.setText(getString(R.string.player_name_format, players.getNames()[0]));
+                    player1ClubView.setText(getString(R.string.player_club_format, players.getClubs()[0]));
+                    player2NameView.setText(getString(R.string.player_name_format, players.getNames()[1]));
+                    player2ClubView.setText(getString(R.string.player_club_format, players.getClubs()[1]));
+                }
+            }
+        });
+        scoreBoardViewModel = new ViewModelProvider(requireActivity()).get(ScoreBoardViewModel.class);
+        scoreBoardViewModel.getScoreBoard().observe(getViewLifecycleOwner(), new Observer<ScoreBoard>() {
+            @Override
+            public void onChanged(ScoreBoard scoreBoard) {
+                if (scoreBoard != null){
+                    player1ScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[0]));
+                    player2ScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[1]));
+                    winningPointsInput.setText(getString(R.string.winnerPoints_format, scoreBoard.getWinnerPoints()));
+                    if (scoreBoard.getWinner() == 0){
+                        player1Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
+                        newGameButton.setVisibility(View.VISIBLE);
+                    }else if (scoreBoard.getWinner() == 1){
+                        player2Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
+                        newGameButton.setVisibility(View.VISIBLE);
+                    } else {
+                        newGameButton.setVisibility(View.INVISIBLE);
+                    }
+                }
+            }
+        });
+
+        poolTableViewModel = new ViewModelProvider(requireActivity()).get(PoolTableViewModel.class);
+        poolTableViewModel.getPoolTable().observe(getViewLifecycleOwner(), new Observer<PoolTable>() {
+            @Override
+            public void onChanged(PoolTable poolTable) {
+                if (poolTable != null) {
+                    ballsOnTableFloatingButton.setText(getString(R.string.ballsOnTable_format, poolTable.getNumberOfBalls()));
+                }
+            }
+        });
+
+        scoreSheetViewModel = new ViewModelProvider(requireActivity()).get(ScoreSheetViewModel.class);
+        scoreSheetViewModel.getScoreSheet().observe(getViewLifecycleOwner(), new Observer<ScoreSheet>() {
+            @Override
+            public void onChanged(ScoreSheet scoreSheet) {
+                if (scoreSheet != null) {
+                    if (scoreSheet.turnplayerNumber() == 0) {
+                        player1Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
+                        player1Card.setCardElevation(10);
+                        player1ScoreView.setEnabled(true);
+                        player1NameView.setEnabled(true);
+                        player1ClubView.setEnabled(true);
+                        player2Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+                        player2Card.setCardElevation(0);
+                        player2ScoreView.setEnabled(false);
+                        player2NameView.setEnabled(false);
+                        player2ClubView.setEnabled(false);
+                    } else if (scoreSheet.turnplayerNumber() == 1) {
+                        player1Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+                        player1Card.setCardElevation(0);
+                        player1ScoreView.setEnabled(false);
+                        player1NameView.setEnabled(false);
+                        player1ClubView.setEnabled(false);
+                        player2Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
+                        player2Card.setCardElevation(10);
+                        player2ScoreView.setEnabled(true);
+                        player2NameView.setEnabled(true);
+                        player2ClubView.setEnabled(true);
+                    } else {
+                        Log.e("Failed ifelse", "In MainActivity.updateFocusUI: Turnplayer is neither player1 or player2!");
+                    }
+                    if (scoreSheetViewModel.isStart()) {
+                        saveloadGameButton.setOnClickListener(v -> listener.onLoadButtonClick());
+                        saveloadGameButton.setText(getString(R.string.loadGame_string));
+                    } else {
+                        saveloadGameButton.setOnClickListener(v -> listener.onSaveButtonClick());
+                        saveloadGameButton.setText(getString(R.string.saveGame_string));
+                    }
+                    if (scoreSheetViewModel.isLatest()) {
+                        redoButton.setVisibility(View.INVISIBLE);
+                    } else {
+                        redoButton.setVisibility(View.VISIBLE);
+                    }
+                    if (scoreSheetViewModel.isStart()) {
+                        undoButton.setVisibility(View.INVISIBLE);
+                    } else {
+                        undoButton.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+        applyPreferences();
+
+        sharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, @Nullable String key) {
+                if (key != null) {
+                    switch (key) {
+                       case "winnerPoints_default":
+                           String winnerPointsString = sharedPreferences.getString(key, "40");
+                           int oldWinnerPoints = ScoreBoard.defaultWinnerPoints;
+                           try{
+                               ScoreBoard.defaultWinnerPoints = Integer.parseInt(winnerPointsString);
+                               if (Objects.requireNonNull(winningPointsInput.getText()).toString().isEmpty() || winningPointsInput.getText().toString().equals(String.valueOf(oldWinnerPoints))){
+                                   winningPointsInput.setText(winnerPointsString);
+                               }
+                           }catch (NumberFormatException e) {
+                               Log.d("Bad preference","In SettingsActivity.onSharedPreferenceChanged: winnerpoints_default is not a parseable String! e");
+                               ScoreBoard.defaultWinnerPoints = 40;
+                           }
+                           break;
+
+                        case "player1_name_default":
+                            String newNamePlayer1 = sharedPreferences.getString(key,"");
+                            if (player1NameView.getText().toString().isEmpty() || player1NameView.getText().toString().equals(Players.defaultPlayerNames[0])){
+                                playersViewModel.updatePlayerName(1,newNamePlayer1);
+                            }
+                            Players.defaultPlayerNames[0] = newNamePlayer1;
+                            break;
+
+                        case "player2_name_default":
+                            String newNamePlayer2 = sharedPreferences.getString(key,"");
+                            if (player2NameView.getText().toString().isEmpty() || player2NameView.getText().toString().equals(Players.defaultPlayerNames[1])){
+                                playersViewModel.updatePlayerName(2,newNamePlayer2);
+                            }
+                            Players.defaultPlayerNames[1] = newNamePlayer2;
+                            break;
+
+                        case "player1_club_default":
+                            String newClubPlayer1 = sharedPreferences.getString(key,"");
+                            if (player1ClubView.getText().toString().isEmpty() || player1ClubView.getText().toString().equals(Players.defaultPlayerClubs[0])){
+                                playersViewModel.updateClubName(1, newClubPlayer1);
+                            }
+                            Players.defaultPlayerClubs[0] = newClubPlayer1;
+                            break;
+
+                        case "player2_club_default":
+                            String newClubPlayer2 = sharedPreferences.getString(key,"");
+                            if (player2ClubView.getText().toString().isEmpty() || player2ClubView.getText().toString().equals(Players.defaultPlayerClubs[1])){
+                                playersViewModel.updateClubName(2, newClubPlayer2);
+                            }
+                            Players.defaultPlayerClubs[1] =newClubPlayer2;
+                            break;
+
+                        case "club_toggle":
+                            Players.haveClubs = sharedPreferences.getBoolean(key, true);
+                            if (!Players.haveClubs){
+                                player1ClubView.setVisibility(View.GONE);
+                                player2ClubView.setVisibility(View.GONE);
+                            }else {
+                                player1ClubView.setVisibility(View.VISIBLE);
+                                player2ClubView.setVisibility(View.VISIBLE);
+                            }
+                            break;
+                    }
+                }
+            }
+        };
+        preferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
+
+        winningPointsInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String newText = s.toString();
+                if ( NumberUtils.isParsable(newText)) {
+                    int newWinnerPoints = Integer.parseInt(newText);
+                    if (newWinnerPoints >= 1){
+                        scoreBoardViewModel.updateWinnerPoints(newWinnerPoints);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String newText = s.toString();
+                if ( NumberUtils.isParsable(newText)) {
+                    if (Integer.parseInt(newText) > 0) {
+                        winningPointsInput.setTextColor(getResources().getColor(R.color.score_color));
+                    } else {
+                        winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
+                    }
+                } else {
+                    winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
+                }
+            }
+        });
+
+        player1Card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onPlayerCardClick(0);
+            }
+        });
+
+        player2Card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onPlayerCardClick(1);
+            }
+        });
+
+        ballsOnTableFloatingButton.setOnClickListener(v -> {
+            listener.onBallsOnTableFloatingButtonClick();
+        });
+
+        missButton.setOnClickListener(v -> {
+            assignPoints();
+            newTurn(getString(R.string.miss_string));
+        });
+
+        safeButton.setOnClickListener(v -> {
+            assignPoints();
+            newTurn(getString(R.string.safe_string));
+        });
+
+        foulButton.setOnClickListener(v -> {
+            assignPoints();
+            scoreBoardViewModel.addPoints( scoreSheetViewModel.turnplayerNumber(), (scoreSheetViewModel.currentTurn() == 0) ? -2:-1 );
+            newTurn(getString(R.string.foul_string));
+        });
+
+        undoButton.setOnClickListener(v -> {
+            scoreSheetViewModel.rollback();
+        });
+
+        undoButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                scoreSheetViewModel.toStart();
+                return true;
+            }
+        });
+
+        redoButton.setOnClickListener(v -> {
+            scoreSheetViewModel.progress();
+        });
+
+        redoButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                scoreSheetViewModel.toLatest();
+                return true;
+            }
+        });
+
+        newGameButton.setOnClickListener(v -> {
+            newGame();
+            newGameButton.setVisibility(View.INVISIBLE);
+        });
+
+        return view;
+    }
+
+    private void applyPreferences(){
+        preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+
+        String stringWinnerPoints = preferences.getString("winnerPoints_default", "40");
+        try{
+            ScoreBoard.defaultWinnerPoints = Integer.parseInt(stringWinnerPoints);
+        } catch (NumberFormatException ne){
+            Log.d("Bad preference", "In MainActivity.onCreate: winnerpoints is not saved as a parseable String!", ne);
+            ScoreBoard.defaultWinnerPoints = 40;
+        }
+
+        Players.defaultPlayerNames[0] = preferences.getString("player1_name_default", "");
+        Players.defaultPlayerNames[1] = preferences.getString("player2_name_default", "");
+        Players.defaultPlayerClubs[0] = preferences.getString("player1_club_default", "");
+        Players.defaultPlayerClubs[1] = preferences.getString("player2_club_default", "");
+        Players.haveClubs = preferences.getBoolean("club_toggle", true);
+    }
+
+    private void newTurn(String reason){
+        scoreSheetViewModel.update(reason);
+    }
+
+    private void newGame(){
+        playersViewModel.reset();
+
+        poolTableViewModel.reset();
+
+        scoreBoardViewModel.reset();
+
+        scoreSheetViewModel.reset(poolTableViewModel, scoreBoardViewModel);
+    }
+
+    private void assignPoints(){
+        int points = poolTableViewModel.evaluate();
+        scoreBoardViewModel.addPoints(scoreSheetViewModel.turnplayerNumber(), points);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        preferences.unregisterOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
+    }
+}
