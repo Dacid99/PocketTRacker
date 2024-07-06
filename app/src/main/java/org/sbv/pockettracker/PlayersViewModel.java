@@ -17,7 +17,7 @@ public class PlayersViewModel extends ViewModel {
     public void updatePlayerName(int playerNumber, String name) {
         Players players = playersLiveData.getValue();
         if (players != null) {
-            if (players.getNames()[playerNumber].equals(name)) {
+            if (!players.getNames()[playerNumber].equals(name)) {
                 players.setName(playerNumber, name);
                 playersLiveData.setValue(players);
             }
@@ -27,7 +27,7 @@ public class PlayersViewModel extends ViewModel {
     public void updateClubName(int playerNumber, String club) {
         Players players = playersLiveData.getValue();
         if (players != null) {
-            if (players.getClubs()[playerNumber].equals(club)) {
+            if (!players.getClubs()[playerNumber].equals(club)) {
                 players.setClub(playerNumber, club);
                 playersLiveData.setValue(players);
             }

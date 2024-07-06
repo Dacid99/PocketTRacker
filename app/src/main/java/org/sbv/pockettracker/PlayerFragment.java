@@ -151,10 +151,10 @@ public class PlayerFragment extends DialogFragment {
             @Override
             public void onChanged(ScoreSheet scoreSheet) {
                 if (scoreSheet != null) {
-                    inningsView.setText(getResources().getString(R.string.player_innings_format, GameStatistics.playerInnings(Objects.requireNonNull(scoreSheetViewModel.getScoreSheet().getValue()))[playerNumber - 1]));
-                    meanInningView.setText(getResources().getString(R.string.meanInning_format, GameStatistics.meanInnings(Objects.requireNonNull(scoreSheetViewModel.getScoreSheet().getValue()))[playerNumber - 1]));
-                    meanRunView.setText(getResources().getString(R.string.meanRun_format, GameStatistics.meanRuns(Objects.requireNonNull(scoreSheetViewModel.getScoreSheet().getValue()))[playerNumber - 1]));
-                    maxRunView.setText(getResources().getString(R.string.player_maxrun_format, GameStatistics.maxRuns(Objects.requireNonNull(scoreSheetViewModel.getScoreSheet().getValue()))[playerNumber - 1]));
+                    inningsView.setText(getResources().getString(R.string.player_innings_format, GameStatistics.playerInnings(Objects.requireNonNull(scoreSheetViewModel.getScoreSheet().getValue()))[playerNumber]));
+                    meanInningView.setText(getResources().getString(R.string.meanInning_format, GameStatistics.meanInnings(Objects.requireNonNull(scoreSheetViewModel.getScoreSheet().getValue()))[playerNumber]));
+                    meanRunView.setText(getResources().getString(R.string.meanRun_format, GameStatistics.meanRuns(Objects.requireNonNull(scoreSheetViewModel.getScoreSheet().getValue()))[playerNumber]));
+                    maxRunView.setText(getResources().getString(R.string.player_maxrun_format, GameStatistics.maxRuns(Objects.requireNonNull(scoreSheetViewModel.getScoreSheet().getValue()))[playerNumber]));
                 }
             }
         });
