@@ -31,7 +31,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
 
     public static class Inning implements Parcelable{
         public String switchReason;
-        public int[] playerScores;
+        public int[] playerScores = new int[2];
         public int ballsOnTable;
 
         public Inning(){
@@ -102,16 +102,6 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         //enter starting values
         // this is crucial for statistics, as the list is never empty!
         append("   ");
-    }
-
-    public void include(ScoreSheet scoreSheet){
-        inningsList = scoreSheet.getInningsList();
-        pointer = scoreSheet.currentTurn() - 1;
-        progress();
-    }
-
-    public void trackScoreBoard(ScoreBoardViewModel scoreBoardViewModel){
-        this.trackedScoreBoardViewModel = scoreBoardViewModel;
     }
 
     //Parcelable methods

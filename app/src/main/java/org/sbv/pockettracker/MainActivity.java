@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     public static final String SCORESHEETPARAMETER = "scoresheet";
     public static final String SCOREBOARDPARAMETER = "scoreboard";
     public static final String PLAYERSPARAMETER = "player1";
-    public static final String PLAYER2PARAMETER = "player2";
     private ActivityResultLauncher<Intent> createFileActivityLauncher, readFileActivityLauncher;
     private SharedPreferences preferences;
     private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
