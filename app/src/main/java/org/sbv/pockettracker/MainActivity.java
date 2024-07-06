@@ -43,7 +43,6 @@ import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity implements NumberPaneFragment.NumberPaneFragmentProvider, PlayerFragment.PlayerFragmentProvider {
 
-    private static final String SCORESHEETSAVEPARAMETER = "scoresheet_savestate";
     public static final String SCORESHEETPARAMETER = "scoresheet";
     public static final String SCOREBOARDPARAMETER = "scoreboard";
     public static final String PLAYERSPARAMETER = "player1";
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
     private PlayersViewModel playersViewModel;
     private ScoreBoardViewModel scoreBoardViewModel;
     private PoolTableViewModel poolTableViewModel;
-    private ScoreSheet scoreSheet;
+    private ScoreSheetViewModel scoreSheetViewModel;
     private TextView player1NameView, player2NameView, player1ClubView, player2ClubView, player1ScoreView, player2ScoreView, ballsOnTableFloatingButton;
     private TextInputEditText winningPointsInput;
     private MaterialCardView player1Card, player2Card;
@@ -204,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                         player2Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
                         newGameButton.setVisibility(View.VISIBLE);
                     } else {
-                        updateFocusUI(); //card backgrounds ungoldened by updateFocus
                         newGameButton.setVisibility(View.INVISIBLE);
                     }
                 }
@@ -217,6 +215,58 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
             public void onChanged(PoolTable poolTable) {
                 if (poolTable != null) {
                     ballsOnTableFloatingButton.setText(getString(R.string.ballsOnTable_format, poolTable.getNumberOfBalls()));
+                }
+            }
+        });
+
+        ScoreSheetViewModelFactory factory = new ScoreSheetViewModelFactory(poolTableViewModel, scoreBoardViewModel);
+        scoreSheetViewModel = new ViewModelProvider(this, factory).get(ScoreSheetViewModel.class);
+        scoreSheetViewModel.getScoreSheet().observe(this, new Observer<ScoreSheet>() {
+            @Override
+            public void onChanged(ScoreSheet scoreSheet) {
+                if (scoreSheet != null) {
+                    if (scoreSheet.turnplayerNumber() == 0) {
+                        player1Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
+                        player1Card.setCardElevation(10);
+                        player1ScoreView.setEnabled(true);
+                        player1NameView.setEnabled(true);
+                        player1ClubView.setEnabled(true);
+                        player2Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+                        player2Card.setCardElevation(0);
+                        player2ScoreView.setEnabled(false);
+                        player2NameView.setEnabled(false);
+                        player2ClubView.setEnabled(false);
+                    } else if (scoreSheet.turnplayerNumber() == 1) {
+                        player1Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+                        player1Card.setCardElevation(0);
+                        player1ScoreView.setEnabled(false);
+                        player1NameView.setEnabled(false);
+                        player1ClubView.setEnabled(false);
+                        player2Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
+                        player2Card.setCardElevation(10);
+                        player2ScoreView.setEnabled(true);
+                        player2NameView.setEnabled(true);
+                        player2ClubView.setEnabled(true);
+                    } else {
+                        Log.e("Failed ifelse", "In MainActivity.updateFocusUI: Turnplayer is neither player1 or player2!");
+                    }
+                    if (scoreSheetViewModel.isStart()){
+                        saveloadGameButton.setOnClickListener(v -> openReadDocumentIntent());
+                        saveloadGameButton.setText(getString(R.string.loadGame_string));
+                    } else {
+                        saveloadGameButton.setOnClickListener(v -> openCreateDocumentIntent());
+                        saveloadGameButton.setText(getString(R.string.saveGame_string));
+                    }
+                    if (scoreSheetViewModel.isLatest()){
+                        redoButton.setVisibility(View.INVISIBLE);
+                    }else{
+                        redoButton.setVisibility(View.VISIBLE);
+                    }
+                    if (scoreSheetViewModel.isStart()){
+                        undoButton.setVisibility(View.INVISIBLE);
+                    }else {
+                        undoButton.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });
@@ -259,7 +309,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         player1Card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayerFragment playerFragment = PlayerFragment.newInstance(1, scoreSheet);
+                PlayerFragment playerFragment = PlayerFragment.newInstance(0);
                 playerFragment.show(getSupportFragmentManager(), "Player1Fragment");
             }
         });
@@ -267,7 +317,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         player2Card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayerFragment playerFragment = PlayerFragment.newInstance(2, scoreSheet);
+                PlayerFragment playerFragment = PlayerFragment.newInstance(1);
                 playerFragment.show(getSupportFragmentManager(), "Player2Fragment");
             }
         });
@@ -289,42 +339,30 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         foulButton.setOnClickListener(v -> {
             assignPoints();
-            scoreBoardViewModel.addPoints( scoreSheet.turnplayerNumber(), (scoreSheet.currentTurn() == 0) ? -2:-1 );
+            scoreBoardViewModel.addPoints( scoreSheetViewModel.turnplayerNumber(), (scoreSheetViewModel.currentTurn() == 0) ? -2:-1 );
             newTurn(getString(R.string.foul_string));
         });
 
         undoButton.setOnClickListener(v -> {
-            scoreSheet.rollback();
-            updateUnRedoUI();
-            updateFocusUI();
-            updateSaveLoadUI();
+            scoreSheetViewModel.rollback();
         });
 
         undoButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                scoreSheet.toStart();
-                updateUnRedoUI();
-                updateFocusUI();
-                updateSaveLoadUI();
+                scoreSheetViewModel.toStart();
                 return true;
             }
         });
 
         redoButton.setOnClickListener(v -> {
-            scoreSheet.progress();
-            updateUnRedoUI();
-            updateFocusUI();
-            updateSaveLoadUI();
+            scoreSheetViewModel.progress();
         });
 
         redoButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                scoreSheet.toLatest();
-                updateUnRedoUI();
-                updateFocusUI();
-                updateSaveLoadUI();
+                scoreSheetViewModel.toLatest();
                 return true;
             }
         });
@@ -335,15 +373,12 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         });
 
         scoreSheetButton.setOnClickListener(v -> {
-            if (scoreSheet.isHealthy()) {
-                Intent intent = new Intent(MainActivity.this, ScoreSheetActivity.class);
-                intent.putExtra(SCORESHEETPARAMETER, scoreSheet);
-                intent.putExtra(PLAYERSPARAMETER, playersViewModel.getPlayers().getValue());
-                intent.putExtra(SCOREBOARDPARAMETER, scoreBoardViewModel.getScoreBoard().getValue());
-                startActivity(intent);
-            } else{
-                Toast.makeText(this, getResources().getText(R.string.cantOpenScoreSheet_toast), Toast.LENGTH_SHORT).show();
-            }
+            Intent intent = new Intent(MainActivity.this, ScoreSheetActivity.class);
+            intent.putExtra(SCORESHEETPARAMETER, scoreSheetViewModel.getScoreSheet().getValue());
+            intent.putExtra(PLAYERSPARAMETER, playersViewModel.getPlayers().getValue());
+            intent.putExtra(SCOREBOARDPARAMETER, scoreBoardViewModel.getScoreBoard().getValue());
+            startActivity(intent);
+
         });
 
         settingsButton.setOnClickListener(v -> {
@@ -362,7 +397,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                             Uri uri = data.getData();
                             try (OutputStream outputStream = getContentResolver().openOutputStream(uri);
                                  OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream)) {
-                                ScoreSheetIO.writeToFile(outputStreamWriter, Objects.requireNonNull(playersViewModel.getPlayers().getValue()), scoreSheet);
+                                ScoreSheetIO.writeToFile(outputStreamWriter, Objects.requireNonNull(playersViewModel.getPlayers().getValue()), Objects.requireNonNull(scoreSheetViewModel.getScoreSheet().getValue()));
                                 Toast.makeText(MainActivity.this, "Game saved successfully!", Toast.LENGTH_SHORT).show();
                             } catch (IOException e) {
                                 Toast.makeText(MainActivity.this, "Failed to save game:" + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -388,10 +423,7 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                             Uri uri = data.getData();
                             try (InputStream inputStream = getContentResolver().openInputStream(uri);
                                  InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
-                                ScoreSheetIO.readFromFile(inputStreamReader, playersViewModel, scoreSheet);
-                                updateFocusUI();
-                                updateUnRedoUI();
-                                updateSaveLoadUI();
+                                ScoreSheetIO.readFromFile(inputStreamReader, playersViewModel, scoreSheetViewModel);
                                 Toast.makeText(MainActivity.this, "Game loaded successfully!", Toast.LENGTH_SHORT).show();
                             } catch (IOException e) {
                                 Toast.makeText(MainActivity.this, "Failed to load game:" + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -404,26 +436,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                     }
                 }
         });
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState){
-        super.onSaveInstanceState(outState);
-        outState.putParcelable(SCORESHEETSAVEPARAMETER, scoreSheet);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState){
-        super.onRestoreInstanceState(savedInstanceState);
-
-        ScoreSheet savedScoreSheet = savedInstanceState.getParcelable(SCORESHEETSAVEPARAMETER);
-        if (savedScoreSheet!= null) {
-            scoreSheet.include(savedScoreSheet);
-        }
-
-        updateUnRedoUI();
-        updateFocusUI();
-        updateSaveLoadUI();
     }
 
     private void applyPreferences(){
@@ -444,24 +456,8 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
         Players.haveClubs = preferences.getBoolean("club_toggle", true);
     }
 
-    private void updateUnRedoUI(){
-        if (scoreSheet.isLatest()){
-            redoButton.setVisibility(View.INVISIBLE);
-        }else{
-            redoButton.setVisibility(View.VISIBLE);
-        }
-        if (scoreSheet.isStart()){
-            undoButton.setVisibility(View.INVISIBLE);
-        }else {
-            undoButton.setVisibility(View.VISIBLE);
-        }
-    }
-
     private void newTurn(String reason){
-        updateFocusUI();
-        scoreSheet.update(reason);
-        updateUnRedoUI();
-        updateSaveLoadUI();
+        scoreSheetViewModel.update(reason);
     }
 
     private void newGame(){
@@ -471,54 +467,12 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
 
         scoreBoardViewModel.reset();
 
-        scoreSheet = new ScoreSheet(poolTableViewModel, scoreBoardViewModel);
-
-        updateUnRedoUI();
-        updateFocusUI();
-        updateSaveLoadUI();
-    }
-
-    private void updateFocusUI(){
-        if (scoreSheet.turnplayerNumber() == 0) {
-            player1Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
-            player1Card.setCardElevation(10);
-            player1ScoreView.setEnabled(true);
-            player1NameView.setEnabled(true);
-            player1ClubView.setEnabled(true);
-            player2Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
-            player2Card.setCardElevation(0);
-            player2ScoreView.setEnabled(false);
-            player2NameView.setEnabled(false);
-            player2ClubView.setEnabled(false);
-        }else if (scoreSheet.turnplayerNumber() == 1) {
-            player1Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
-            player1Card.setCardElevation(0);
-            player1ScoreView.setEnabled(false);
-            player1NameView.setEnabled(false);
-            player1ClubView.setEnabled(false);
-            player2Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
-            player2Card.setCardElevation(10);
-            player2ScoreView.setEnabled(true);
-            player2NameView.setEnabled(true);
-            player2ClubView.setEnabled(true);
-        }else {
-            Log.e("Failed ifelse", "In MainActivity.updateFocusUI: Turnplayer is neither player1 or player2!");
-        }
-    }
-
-    private void updateSaveLoadUI(){
-        if (scoreSheet.isStart()){
-            saveloadGameButton.setOnClickListener(v -> openReadDocumentIntent());
-            saveloadGameButton.setText(getString(R.string.loadGame_string));
-        } else {
-            saveloadGameButton.setOnClickListener(v -> openCreateDocumentIntent());
-            saveloadGameButton.setText(getString(R.string.saveGame_string));
-        }
+        scoreSheetViewModel.reset(poolTableViewModel, scoreBoardViewModel);
     }
 
     private void assignPoints(){
         int points = poolTableViewModel.evaluate();
-        scoreBoardViewModel.addPoints(scoreSheet.turnplayerNumber(), points);
+        scoreBoardViewModel.addPoints(scoreSheetViewModel.turnplayerNumber(), points);
     }
 
     //numberpanelistener methods

@@ -25,7 +25,7 @@ public class ScoreSheetIO {
         csvWriter.close();
     }
 
-    static void readFromFile(InputStreamReader inputStreamReader, PlayersViewModel playersViewModel, ScoreSheet scoreSheet) throws IOException{
+    static void readFromFile(InputStreamReader inputStreamReader, PlayersViewModel playersViewModel, ScoreSheetViewModel scoreSheetViewModel) throws IOException{
         try (CSVReader csvReader = new CSVReader(inputStreamReader)) {
             String[] nextLine;
             nextLine = csvReader.readNext();
@@ -35,7 +35,7 @@ public class ScoreSheetIO {
             playersViewModel.updateClubName(1, nextLine[4]);
             csvReader.readNext(); //skip the first line, it is in scoresheet by default
             while ((nextLine = csvReader.readNext()) != null){
-                scoreSheet.update(new ScoreSheet.Inning(nextLine));
+                scoreSheetViewModel.append(new ScoreSheet.Inning(nextLine));
             }
         }catch (CsvException e){
             throw new IOException(e.toString());

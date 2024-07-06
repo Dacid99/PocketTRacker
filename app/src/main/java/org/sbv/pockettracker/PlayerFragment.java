@@ -49,7 +49,7 @@ public class PlayerFragment extends DialogFragment {
     private int playerNumber;
     private PlayersViewModel playersViewModel;
     private ScoreBoardViewModel scoreBoardViewModel;
-    private ScoreSheet scoreSheet;
+    private ScoreSheetViewModel scoreSheetViewModel;
     private View view;
     private TextInputLayout playerClubLayout;
     private AutoCompleteTextView playerNameInput, playerClubInput;
@@ -63,11 +63,10 @@ public class PlayerFragment extends DialogFragment {
         // Required empty public constructor
     }
 
-    public static PlayerFragment newInstance(int playerNumber, ScoreSheet scoreSheet) {
+    public static PlayerFragment newInstance(int playerNumber) {
         PlayerFragment fragment = new PlayerFragment();
         Bundle args = new Bundle();
         args.putInt(PLAYERNUMBERPARAMETER, playerNumber);
-        args.putParcelable(SCORESHEETPARAMETER, scoreSheet);
         fragment.setArguments(args);
         return fragment;
     }
@@ -87,7 +86,6 @@ public class PlayerFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             playerNumber = getArguments().getInt(PLAYERNUMBERPARAMETER);
-            scoreSheet = getArguments().getParcelable(SCORESHEETPARAMETER);
         }
     }
 
@@ -108,11 +106,6 @@ public class PlayerFragment extends DialogFragment {
         meanInningView = view.findViewById(R.id.meanInningPlayer_view);
         meanRunView = view.findViewById(R.id.meanRunPlayer_view);
         maxRunView = view.findViewById(R.id.maxRunPlayer_view);
-
-        inningsView.setText(getResources().getString(R.string.player_innings_format, GameStatistics.playerInnings(scoreSheet)[playerNumber - 1]));
-        meanInningView.setText(getResources().getString(R.string.meanInning_format, GameStatistics.meanInnings(scoreSheet)[playerNumber - 1]));
-        meanRunView.setText(getResources().getString(R.string.meanRun_format, GameStatistics.meanRuns(scoreSheet)[playerNumber - 1]));
-        maxRunView.setText(getResources().getString(R.string.player_maxrun_format, GameStatistics.maxRuns(scoreSheet)[playerNumber - 1]));
 
         leftToOtherPlayerButton = view.findViewById(R.id.left_toOtherPlayerButton);
         rightToOtherPlayerButton = view.findViewById(R.id.right_toOtherPlayerButton);
@@ -150,6 +143,19 @@ public class PlayerFragment extends DialogFragment {
             @Override
             public void onChanged(ScoreBoard scoreBoard) {
                 playerScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[playerNumber]));
+            }
+        });
+
+        scoreSheetViewModel = new ViewModelProvider(requireActivity()).get(ScoreSheetViewModel.class);
+        scoreSheetViewModel.getScoreSheet().observe(this, new Observer<ScoreSheet>() {
+            @Override
+            public void onChanged(ScoreSheet scoreSheet) {
+                if (scoreSheet != null) {
+                    inningsView.setText(getResources().getString(R.string.player_innings_format, GameStatistics.playerInnings(Objects.requireNonNull(scoreSheetViewModel.getScoreSheet().getValue()))[playerNumber - 1]));
+                    meanInningView.setText(getResources().getString(R.string.meanInning_format, GameStatistics.meanInnings(Objects.requireNonNull(scoreSheetViewModel.getScoreSheet().getValue()))[playerNumber - 1]));
+                    meanRunView.setText(getResources().getString(R.string.meanRun_format, GameStatistics.meanRuns(Objects.requireNonNull(scoreSheetViewModel.getScoreSheet().getValue()))[playerNumber - 1]));
+                    maxRunView.setText(getResources().getString(R.string.player_maxrun_format, GameStatistics.maxRuns(Objects.requireNonNull(scoreSheetViewModel.getScoreSheet().getValue()))[playerNumber - 1]));
+                }
             }
         });
 
@@ -265,7 +271,7 @@ public class PlayerFragment extends DialogFragment {
     private void switchToOtherPlayer(){
         FragmentManager fragmentManager = getParentFragmentManager();
         int otherPlayerNumber = Math.abs(playerNumber-1) ;
-        PlayerFragment otherPlayerFragment = PlayerFragment.newInstance(otherPlayerNumber, scoreSheet);
+        PlayerFragment otherPlayerFragment = PlayerFragment.newInstance(otherPlayerNumber);
         otherPlayerFragment.show(fragmentManager, "Player"+otherPlayerNumber+"Fragment");
         dismiss();
     }
