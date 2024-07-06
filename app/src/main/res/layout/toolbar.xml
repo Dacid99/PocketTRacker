@@ -9,48 +9,24 @@
     android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
     app:contentInsetStart="0dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center" >
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/counter_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="@integer/toolbar_counterbutton_weight"
-            android:text="@string/counter_string"
-            android:textAllCaps="false"
-            app:cornerRadius="0dp"
-            android:insetBottom="0dp"
-            android:insetTop="0dp"
-            android:textSize="18sp"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/scoresheet_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="@integer/toolbar_scoresheetbutton_weight"
-            android:text="@string/scoresheet_string"
-            android:textAllCaps="false"
-            app:cornerRadius="0dp"
-            android:insetBottom="0dp"
-            android:insetTop="0dp"
-            android:textSize="18sp"/>
+        android:layout_height="wrap_content">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/settings_button"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="@integer/toolbar_settingsbutton_weight"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:text="@string/settings_string"
             android:textAllCaps="false"
             app:cornerRadius="0dp"
+            app:elevation="12dp"
             android:insetBottom="0dp"
             android:insetTop="0dp"
             android:textSize="18sp"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </com.google.android.material.appbar.MaterialToolbar>
