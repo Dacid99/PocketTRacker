@@ -62,7 +62,7 @@ public class Players implements Parcelable {
         dest.writeStringArray(this.clubs);
     }
 
-    public Players(Parcel in) {
+    protected Players(@NonNull Parcel in) {
         this.names = in.createStringArray();
         this.clubs = in.createStringArray();
     }

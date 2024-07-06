@@ -14,9 +14,6 @@ public class ScoreSheetViewModel extends ViewModel {
     public ScoreSheetViewModel(PoolTableViewModel poolTableViewModel, ScoreBoardViewModel scoreBoardViewModel){
         scoreSheetLiveData = new MutableLiveData<>(new ScoreSheet(poolTableViewModel, scoreBoardViewModel));
     }
-    public void setScoreSheetLiveData(ScoreSheet scoreSheet){
-        scoreSheetLiveData.setValue(scoreSheet);
-    }
 
     public void update(String reason){
         ScoreSheet scoreSheet = scoreSheetLiveData.getValue();

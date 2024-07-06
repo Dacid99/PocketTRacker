@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModel;
 public class ScoreBoardViewModel extends ViewModel {
     private final MutableLiveData<ScoreBoard> scoreBoardLiveData = new MutableLiveData<>();
 
+    public ScoreBoardViewModel(){
+        scoreBoardLiveData.setValue(new ScoreBoard());
+    }
     public LiveData<ScoreBoard> getScoreBoard(){
         return scoreBoardLiveData;
-    }
-    public void setScoreBoard(ScoreBoard scoreBoard) {
-        scoreBoardLiveData.setValue(scoreBoard);
     }
     public int[] getScores(){
         ScoreBoard scoreBoard = scoreBoardLiveData.getValue();
@@ -29,17 +29,21 @@ public class ScoreBoardViewModel extends ViewModel {
     public void updateWinnerPoints(int winnerPoints){
         ScoreBoard scoreBoard = scoreBoardLiveData.getValue();
         if (scoreBoard != null){
-            scoreBoard.setWinnerPoints(winnerPoints);
-            scoreBoardLiveData.setValue(scoreBoard);
+            if (winnerPoints != scoreBoard.getWinnerPoints()) {
+                scoreBoard.setWinnerPoints(winnerPoints);
+                scoreBoardLiveData.setValue(scoreBoard);
+            }
         }
     }
 
     public void updateScores(int[] scores){
         ScoreBoard scoreBoard = scoreBoardLiveData.getValue();
         if (scoreBoard != null){
-            scoreBoard.setPlayer1Score(scores[0]);
-            scoreBoard.setPlayer2Score(scores[1]);
-            scoreBoardLiveData.setValue(scoreBoard);
+            if (scoreBoard.getPlayerScores() != scores) {
+                scoreBoard.setPlayer1Score(scores[0]);
+                scoreBoard.setPlayer2Score(scores[1]);
+                scoreBoardLiveData.setValue(scoreBoard);
+            }
         }
     }
     public void reset(){

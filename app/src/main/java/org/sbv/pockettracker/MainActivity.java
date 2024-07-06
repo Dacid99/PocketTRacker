@@ -16,7 +16,6 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -270,9 +269,6 @@ public class MainActivity extends AppCompatActivity implements NumberPaneFragmen
                 }
             }
         });
-
-        newGame();
-
 
         winningPointsInput.addTextChangedListener(new TextWatcher() {
             @Override

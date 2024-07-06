@@ -6,14 +6,14 @@ import androidx.lifecycle.ViewModel;
 
 public class PoolTableViewModel extends ViewModel {
     private final MutableLiveData<PoolTable> poolTableLiveData = new MutableLiveData<>();
+    public PoolTableViewModel(){
+        poolTableLiveData.setValue(new PoolTable());
+    }
 
     public LiveData<PoolTable> getPoolTable(){
         return poolTableLiveData;
     }
 
-    public void setPoolTable(PoolTable poolTable){
-        poolTableLiveData.setValue(poolTable);
-    }
 
     public void updateNumberOfBalls(int numberOfBalls){
         PoolTable poolTable = poolTableLiveData.getValue();
