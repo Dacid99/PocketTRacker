@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".CounterFragment">
 
-    <include
-        layout="@layout/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/missButton"
         android:layout_width="wrap_content"
@@ -94,7 +85,7 @@
         app:layout_constraintBottom_toTopOf="@+id/safeButton"
         app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_block2_guideline"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/winningPointsLayout"
@@ -129,7 +120,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
         app:layout_constraintEnd_toStartOf="@+id/end_block1_guideline"
         app:layout_constraintStart_toEndOf="@+id/winningPointsLayout"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/player2CardLayout"
@@ -203,7 +194,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_block1_guideline"
         app:layout_constraintEnd_toStartOf="@+id/winningPointsLayout"
         app:layout_constraintStart_toStartOf="@+id/start_block1_guideline"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/player1CardLayout"
