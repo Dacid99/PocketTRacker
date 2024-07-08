@@ -44,6 +44,7 @@
     <color name="turnplayer_color">@color/white</color>
     <color name="notturnplayer_color">@color/white</color>
 
+    <!-- theme colors -->
     <color name="colorPrimary">@color/royalblue</color>
     <color name="colorVariantPrimary">@color/royalblue1</color>
     <color name="colorOnPrimary">@color/white</color>
@@ -51,6 +52,17 @@
     <color name="colorSecondary">@color/wooden</color>
     <color name="colorVariantSecondary">@color/chocolate</color>
     <color name="colorOnSecondary">@color/white</color>
+
+    <color name="primaryContainer">@color/wooden</color>
+    <color name="onPrimaryContainer">@color/white</color>
+    <color name="secondaryContainer">@color/chocolate</color>
+    <color name="onSecondaryContainer">@color/white</color>
+
+    <color name="surface">@color/white</color>
+    <color name="onSurface">@color/black</color>
+    <color name="background">@color/red</color>
+    <color name="onBackground">@color/black</color>
+
 
     <color name="statusBarColor">@color/wooden</color>
 
