@@ -13,4 +13,8 @@ It automatically keeps tabs on the scores. All you have to do is enter the numbe
      alt="Get it on F-Droid"
      height="80">](https://f-droid.org/packages/org.sbv.pockettracker/)
 
+[<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png"
+     alt="Get it on F-Droid"
+     height="80">](https://apt.izzysoft.de/fdroid/index/apk/org.sbv.pockettracker/)
+
 Or download the latest APK from the [Releases Section](https://gitlab.com/Dacid99/pockettracker/-/releases)
