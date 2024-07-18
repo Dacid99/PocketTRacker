@@ -6,6 +6,13 @@
 - move increments math to gamestats class
 - use one player fragment for both players, allows for faster switching and saving of states, plus you can get rid of requestplayer interface
 - setting for theme
-- save button in settings
 - winnerUI changes after save -> problem in order of observer.onChanged executions
 - animated transition
+- AOD feature
+- 
+- winningpointsinput needs to be repositioned for no clubs 
+- textselection jumps to front on delete
+- players are not sustained when changing fragments or rotating
+- toolbars crash into land layout
+- buttons bigger and with horizontal shifts for safer clicking
+- redo button has wrong size

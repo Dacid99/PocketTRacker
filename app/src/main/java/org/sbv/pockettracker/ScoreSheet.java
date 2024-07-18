@@ -143,7 +143,9 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         }
         Inning turn = new Inning();
         turn.switchReason = reason;
-        turn.playerScores = trackedScoreBoardViewModel.getScores();
+        //this is crucial, otherwise a reference will be created; this would update past elements as well, so the scoresheet scores would all be identical
+        turn.playerScores[0] = trackedScoreBoardViewModel.getScores()[0];
+        turn.playerScores[1] = trackedScoreBoardViewModel.getScores()[1];
         turn.ballsOnTable = trackedPoolTableViewModel.getNumberOfBalls();
 
         inningsList.add(turn);
