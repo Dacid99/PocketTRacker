@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".PlayerFragment"
     android:minWidth="@dimen/playerFragment_width"
-    android:minHeight="@dimen/playerFragment_height" >
+    android:minHeight="@dimen/playerFragment_height">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/playerCard"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:cardCornerRadius="24dp"
+        android:backgroundTint="@color/playerCardBackgroundTint"
         app:layout_constraintBottom_toTopOf="@+id/left_toOtherPlayerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,14 +34,14 @@
                 app:layout_constraintBottom_toTopOf="@+id/playerScore"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" >
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/playerNameLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/player_name_hint"
-                    android:layout_alignParentTop="true" >
+                    android:layout_alignParentTop="true"
+                    android:hint="@string/player_name_hint">
 
                     <AutoCompleteTextView
                         android:id="@+id/playerName"
@@ -58,28 +59,28 @@
                     android:id="@+id/right_swapButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/playerNameLayout"
+                    android:layout_alignParentEnd="true"
                     android:paddingBottom="12dp"
                     android:text="@string/right_swap_string"
-                    android:textSize="@dimen/textSize"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@+id/playerNameLayout" />
+                    android:textSize="@dimen/textSize" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/left_swapButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/playerNameLayout"
+                    android:layout_alignParentStart="true"
                     android:paddingBottom="12dp"
                     android:text="@string/left_swap_string"
-                    android:textSize="@dimen/textSize"
-                    android:layout_below="@+id/playerNameLayout"
-                    android:layout_alignParentStart="true" />
+                    android:textSize="@dimen/textSize" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/playerClubLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/player_club_hint"
-                    android:layout_below="@+id/right_swapButton" >
+                    android:layout_below="@+id/right_swapButton"
+                    android:hint="@string/player_club_hint">
 
                     <AutoCompleteTextView
                         android:id="@+id/playerClub"
@@ -102,7 +103,7 @@
                 android:gravity="center"
                 android:text="@string/player_score_format"
                 android:textColor="@color/score_color"
-                android:textSize="60sp"
+                android:textSize="@dimen/score_textSize_playerfragment"
                 app:layout_constraintBottom_toTopOf="@+id/playerStats_table"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="@dimen/textSize" />
+                    android:textSize="@dimen/textSize_playerfragment" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/meanInningPlayer_view"
@@ -131,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="@dimen/textSize" />
+                    android:textSize="@dimen/textSize_playerfragment" />
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -140,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="@dimen/textSize" />
+                    android:textSize="@dimen/textSize_playerfragment" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/meanRunPlayer_view"
@@ -148,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="@dimen/textSize" />
+                    android:textSize="@dimen/textSize_playerfragment" />
 
             </TableLayout>
 

@@ -10,19 +10,23 @@
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryVariant">@color/colorVariantSecondary</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <!-- Tertiary brand color. -->
+        <item name="colorTertiary">@color/colorTertiary</item>
+        <item name="colorOnTertiary">@color/colorOnTertiary</item>
         <!-- Specific color overrides for FAB -->
         <item name="colorPrimaryContainer">@color/primaryContainer</item>
         <item name="colorOnPrimaryContainer">@color/onPrimaryContainer</item>
         <item name="colorSecondaryContainer">@color/secondaryContainer</item>
         <item name="colorOnSecondaryContainer">@color/onSecondaryContainer</item>
         <!-- Additional theme colors -->
-        <item name="colorSurface">@color/surface</item>
-        <item name="colorOnSurface">@color/onSurface</item>
-        <item name="colorBackground">@color/background</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:windowBackground">@color/white</item>
         <item name="colorOnBackground">@color/onBackground</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/statusBarColor</item>
         <item name="android:textColor">@color/text_color_selector</item>
+        <!-- Bottom navigation style -->
+        <item name="bottomNavigationStyle">@style/Widget.BottomNavigation</item>
     </style>
 
     <style name="Theme.PocketTRacker.Settings" parent="Theme.Material3.DayNight">
@@ -42,10 +46,24 @@
         <!-- Additional theme colors -->
         <item name="colorSurface">@color/surface</item>
         <item name="colorOnSurface">@color/onSurface</item>
-        <item name="colorOnError">@color/background</item>
+        <item name="android:colorBackground">@color/background</item>
         <item name="colorOnBackground">@color/onBackground</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/statusBarColor</item>
         <item name="android:textColor">@color/text_color_selector</item>
+
+        <item name="actionBarStyle">@style/Widget.ActionBar</item>
+    </style>
+
+    <style name="Widget.ActionBar" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="background">@color/colorPrimary</item>
+        <item name="colorOnBackground">@color/colorOnPrimary</item>
+    </style>
+
+    <style name="Widget.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@drawable/cell_separator</item>
+        <item name="itemIconTint">@android:color/transparent</item>
+        <item name="itemTextColor">@color/colorTertiary</item>
+        <item name="elevation">20dp</item>
     </style>
 </resources>

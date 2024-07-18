@@ -1,9 +1,12 @@
 <!-- res/menu/bottom_navigation_menu.xml -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/navigation_counter"
-        android:title="@string/counter_icon" />
+        android:icon="@mipmap/ic_launcher_foreground"
+        android:title="@string/counter_menustring" />
     <item
         android:id="@+id/navigation_scoresheet"
-        android:title="@string/scoresheet_icon" />
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="@string/scoresheet_menustring" />
 </menu>

@@ -86,8 +86,8 @@
     <string name="title_activity_main" translatable="false">MainActivity</string>
 
     <!-- navigationbar strings -->
-    <string name="scoresheet_icon" translatable="false">\u25A4</string>
-    <string name="counter_icon" translatable="false">\u25AF\u25AF</string>
+    <string name="scoresheet_menustring" translatable="false">\u25A4</string>
+    <string name="counter_menustring" translatable="false">\u25AF\u25AF</string>
 
 
     <!-- Preference Titles -->

@@ -25,12 +25,16 @@
     <dimen name="scoreTextSize">32sp</dimen>
     <dimen name="bigScoreTextSize">54sp</dimen>
 
+
     <!-- player_fragment dimensions-->
     <dimen name="playerFragment_width">240dp</dimen>
     <dimen name="playerFragment_height">540dp</dimen>
-    <dimen name="playerFragment_inputTextSize">24sp</dimen>
-    <dimen name="autocompleteTextView_paddingTop">24dp</dimen>
-    <dimen name="autocompleteTextView_paddingBottom">8dp</dimen>
+    <dimen name="playerFragment_inputTextSize">28sp</dimen>
+    <dimen name="autocompleteTextView_paddingTop">16dp</dimen>
+    <dimen name="autocompleteTextView_paddingBottom">16dp</dimen>
+    <dimen name="score_textSize_playerfragment">72sp</dimen>
+    <dimen name="textSize_playerfragment">20sp</dimen>
+
     <dimen name="dropdown_padding">12dp</dimen>
 
 </resources>

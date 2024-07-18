@@ -174,6 +174,7 @@ public class PlayerFragment extends DialogFragment {
             public void afterTextChanged(Editable s) {
                 String newName = s.toString();
                 listener.onNameInput(playerNumber, newName);
+                playerNameInput.setSelection(playerNameInput.length());
             }
         });
         namePreferences = requireActivity().getSharedPreferences(NAME_AUTOCOMPLETEPREFERENCES, Context.MODE_PRIVATE);
@@ -197,6 +198,7 @@ public class PlayerFragment extends DialogFragment {
             public void afterTextChanged(Editable s) {
                 String newName = s.toString();
                 listener.onClubInput(playerNumber, newName);
+                playerClubInput.setSelection(playerClubInput.length());
             }
         });
         clubPreferences = requireActivity().getSharedPreferences(CLUB_AUTOCOMPLETEPREFERENCES, Context.MODE_PRIVATE);

@@ -15,7 +15,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/title_activity_main"
+            android:label="@string/app_name"
             android:theme="@style/Theme.PocketTRacker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,22 +28,6 @@
             android:exported="false"
             android:label="@string/title_activity_settings"
             android:theme="@style/Theme.PocketTRacker.Settings" />
-        <activity
-            android:name=".ScoreSheetFragment"
-            android:exported="false"
-            android:label="@string/title_activity_score_sheet"
-            android:theme="@style/Theme.PocketTRacker" />
-        <activity
-            android:name=".CounterFragment"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.PocketTRacker">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

@@ -144,8 +144,8 @@ public class CounterFragment extends Fragment{
             public void onChanged(ScoreSheet scoreSheet) {
                 if (scoreSheet != null) {
                     if (scoreSheet.turnplayerNumber() == 0) {
+                        player1Card.setCardElevation(getResources().getInteger(R.integer.turnplayer_cardelevation));
                         player1Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
-                        player1Card.setCardElevation(10);
                         player1ScoreView.setEnabled(true);
                         player1NameView.setEnabled(true);
                         player1ClubView.setEnabled(true);
@@ -160,14 +160,15 @@ public class CounterFragment extends Fragment{
                         player1ScoreView.setEnabled(false);
                         player1NameView.setEnabled(false);
                         player1ClubView.setEnabled(false);
+                        player2Card.setCardElevation(getResources().getInteger(R.integer.turnplayer_cardelevation));
                         player2Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
-                        player2Card.setCardElevation(10);
                         player2ScoreView.setEnabled(true);
                         player2NameView.setEnabled(true);
                         player2ClubView.setEnabled(true);
                     } else {
                         Log.e("Failed ifelse", "In MainActivity.updateFocusUI: Turnplayer is neither player1 or player2!");
                     }
+
                     if (scoreSheetViewModel.isStart()) {
                         saveloadGameButton.setOnClickListener(v -> listener.onLoadButtonClick());
                         saveloadGameButton.setText(getString(R.string.loadGame_string));
@@ -175,14 +176,13 @@ public class CounterFragment extends Fragment{
                         saveloadGameButton.setOnClickListener(v -> listener.onSaveButtonClick());
                         saveloadGameButton.setText(getString(R.string.saveGame_string));
                     }
+
                     if (scoreSheetViewModel.isLatest()) {
                         redoButton.setVisibility(View.INVISIBLE);
-                    } else {
-                        redoButton.setVisibility(View.VISIBLE);
-                    }
-                    if (scoreSheetViewModel.isStart()) {
+                    } else if (scoreSheetViewModel.isStart()) {
                         undoButton.setVisibility(View.INVISIBLE);
                     } else {
+                        redoButton.setVisibility(View.VISIBLE);
                         undoButton.setVisibility(View.VISIBLE);
                     }
                 }
@@ -265,13 +265,7 @@ public class CounterFragment extends Fragment{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String newText = s.toString();
-                if ( NumberUtils.isParsable(newText)) {
-                    int newWinnerPoints = Integer.parseInt(newText);
-                    if (newWinnerPoints >= 1){
-                        scoreBoardViewModel.updateWinnerPoints(newWinnerPoints);
-                    }
-                }
+
             }
 
             @Override
@@ -280,12 +274,15 @@ public class CounterFragment extends Fragment{
                 if ( NumberUtils.isParsable(newText)) {
                     if (Integer.parseInt(newText) > 0) {
                         winningPointsInput.setTextColor(getResources().getColor(R.color.score_color));
+                        int newWinnerPoints = Integer.parseInt(newText);
+                        scoreBoardViewModel.updateWinnerPoints(newWinnerPoints);
                     } else {
                         winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
                     }
                 } else {
                     winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
                 }
+                winningPointsInput.setSelection(winningPointsInput.length());
             }
         });
 

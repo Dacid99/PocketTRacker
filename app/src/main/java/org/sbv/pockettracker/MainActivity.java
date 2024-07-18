@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         //toolbar buttons
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
         settingsButton = findViewById(R.id.settings_button);
         settingsButton.setOnClickListener(v -> {
