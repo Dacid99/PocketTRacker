@@ -91,7 +91,7 @@
         android:id="@+id/winningPointsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="@dimen/winningPointsOffset"
         android:hint="@string/winnerPoints_hint"
         app:layout_constraintBottom_toBottomOf="@+id/player1CardView"
         app:layout_constraintEnd_toStartOf="@+id/player2CardView"

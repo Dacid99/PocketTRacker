@@ -29,9 +29,6 @@ import org.apache.commons.lang3.math.NumberUtils;
 import java.util.Objects;
 
 public class CounterFragment extends Fragment{
-    public static final String SCORESHEETPARAMETER = "scoresheet";
-    public static final String SCOREBOARDPARAMETER = "scoreboard";
-    public static final String PLAYERSPARAMETER = "player1";
     public static interface CounterFragmentListener{
         void onSaveButtonClick();
         void onLoadButtonClick();
@@ -179,10 +176,12 @@ public class CounterFragment extends Fragment{
 
                     if (scoreSheetViewModel.isLatest()) {
                         redoButton.setVisibility(View.INVISIBLE);
-                    } else if (scoreSheetViewModel.isStart()) {
-                        undoButton.setVisibility(View.INVISIBLE);
                     } else {
                         redoButton.setVisibility(View.VISIBLE);
+                    }
+                    if (scoreSheetViewModel.isStart()) {
+                        undoButton.setVisibility(View.INVISIBLE);
+                    } else {
                         undoButton.setVisibility(View.VISIBLE);
                     }
                 }

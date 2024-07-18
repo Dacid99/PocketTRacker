@@ -18,7 +18,7 @@
 
     <color name="surface">@color/black</color>
     <color name="onSurface">@color/white</color>
-    <color name="background">@color/red</color>
+    <color name="background">@color/black</color>
     <color name="onBackground">@color/white</color>
 
     <color name="statusBarColor">@color/darkwooden</color>
@@ -29,7 +29,7 @@
 
     <!-- playerfragment colors -->
     <color name="dropdown_background_color">@color/darker_gray</color>
-    <color name="playerCardBackground">@color/black</color>
+    <color name="playerCardBackgroundTint">@color/black</color>
 
 
     <!-- toolbar colors -->

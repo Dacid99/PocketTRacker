@@ -20,7 +20,7 @@
         <item name="colorOnSecondaryContainer">@color/onSecondaryContainer</item>
         <!-- Additional theme colors -->
         <item name="android:colorBackground">@color/background</item>
-        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowBackground">@color/background</item>
         <item name="colorOnBackground">@color/onBackground</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/statusBarColor</item>

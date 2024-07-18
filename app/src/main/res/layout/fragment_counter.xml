@@ -90,7 +90,7 @@
         android:id="@+id/winningPointsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="@dimen/winningPointsOffset"
         android:hint="@string/winnerPoints_hint"
         app:layout_constraintBottom_toBottomOf="@+id/player1CardView"
         app:layout_constraintEnd_toStartOf="@+id/player2CardView"
@@ -102,8 +102,8 @@
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="@dimen/smallTextSize"
             android:inputType="number"
+            android:textSize="@dimen/smallTextSize"
             tools:layout_editor_absoluteX="141dp"
             tools:layout_editor_absoluteY="589dp" />
 

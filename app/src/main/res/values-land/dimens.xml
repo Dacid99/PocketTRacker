@@ -4,4 +4,5 @@
     <dimen name="block1_start">0dp</dimen>
     <dimen name="playerFragment_width">500dp</dimen>
     <dimen name="playerFragment_height">350dp</dimen>
+    <dimen name="winningPointsOffset">120dp</dimen>
 </resources>
