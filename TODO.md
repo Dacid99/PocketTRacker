@@ -16,3 +16,4 @@
 - toolbars crash into land layout
 - buttons bigger and with horizontal shifts for safer clicking
 - redo button has wrong size
+- sort src files into subfolders

@@ -258,6 +258,7 @@ public class CounterFragment extends Fragment{
 
             @Override
             public void afterTextChanged(Editable s) {
+                int cursorPosition = winningPointsInput.getSelectionStart();
                 String newText = s.toString();
                 if ( NumberUtils.isParsable(newText)) {
                     if (Integer.parseInt(newText) > 0) {
@@ -270,7 +271,7 @@ public class CounterFragment extends Fragment{
                 } else {
                     winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
                 }
-                winningPointsInput.setSelection(winningPointsInput.length());
+                winningPointsInput.setSelection(cursorPosition);
             }
         });
 

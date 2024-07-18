@@ -172,9 +172,10 @@ public class PlayerFragment extends DialogFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                int cursorPosition = playerNameInput.getSelectionStart();
                 String newName = s.toString();
                 listener.onNameInput(playerNumber, newName);
-                playerNameInput.setSelection(playerNameInput.length());
+                playerNameInput.setSelection(cursorPosition);
             }
         });
         namePreferences = requireActivity().getSharedPreferences(NAME_AUTOCOMPLETEPREFERENCES, Context.MODE_PRIVATE);
@@ -196,9 +197,10 @@ public class PlayerFragment extends DialogFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                int cursorPosition = playerClubInput.getSelectionStart();
                 String newName = s.toString();
                 listener.onClubInput(playerNumber, newName);
-                playerClubInput.setSelection(playerClubInput.length());
+                playerClubInput.setSelection(cursorPosition);
             }
         });
         clubPreferences = requireActivity().getSharedPreferences(CLUB_AUTOCOMPLETEPREFERENCES, Context.MODE_PRIVATE);
