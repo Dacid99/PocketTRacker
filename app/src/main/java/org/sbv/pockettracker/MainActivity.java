@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
     private ScoreBoardViewModel scoreBoardViewModel;
     private PoolTableViewModel poolTableViewModel;
     private ScoreSheetViewModel scoreSheetViewModel;
-
     private SharedPreferences preferences;
     private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
     private MaterialToolbar toolbar;

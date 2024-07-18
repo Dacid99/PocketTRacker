@@ -24,7 +24,7 @@
         android:layout_marginBottom="20dp"
         android:text="@string/foul_string"
         android:textSize="@dimen/textSize"
-        app:layout_constraintBottom_toTopOf="@+id/saveloadGame"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
         app:layout_constraintEnd_toEndOf="@+id/missButton"
         app:layout_constraintStart_toStartOf="@+id/missButton"
         app:layout_constraintTop_toBottomOf="@+id/missButton" />
@@ -265,15 +265,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player1CardView" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/saveloadGame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/saveGame_string"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_block2_guideline"

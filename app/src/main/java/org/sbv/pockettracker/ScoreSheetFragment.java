@@ -1,6 +1,7 @@
 package org.sbv.pockettracker;
 
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import android.os.Bundle;
@@ -20,16 +21,32 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.button.MaterialButton;
+
 public class ScoreSheetFragment extends Fragment {
     private TableLayout tableLayout;
     private TextView player1TableHeader, player2TableHeader, player1StatisticsHeader, player2StatisticsHeader;
     private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
+    private MaterialButton loadGameButton, saveGameButton;
     private ScoreSheetViewModel scoreSheetViewModel;
     private PlayersViewModel playersViewModel;
     private ScoreBoardViewModel scoreBoardViewModel;
     private View view;
+    private ScoreSheetFragmentListener listener;
 
     public interface ScoreSheetFragmentListener{
+        void onSaveButtonClick();
+        void onLoadButtonClick();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context){
+        super.onAttach(context);
+        try{
+            listener = (ScoreSheetFragment.ScoreSheetFragmentListener) context;
+        }catch (ClassCastException e) {
+            throw new ClassCastException(context + "must implement CounterFragmentListener!");
+        }
     }
 
     @Override
@@ -51,6 +68,9 @@ public class ScoreSheetFragment extends Fragment {
         meanInningPlayer2View = view.findViewById(R.id.player2statistics_meanInning);
         meanRunPlayer1View = view.findViewById(R.id.player1statistics_meanRun);
         meanRunPlayer2View = view.findViewById(R.id.player2statistics_meanRun);
+
+        saveGameButton = view.findViewById(R.id.saveGame);
+        loadGameButton = view.findViewById(R.id.loadGame);
 
         playersViewModel = new ViewModelProvider(requireActivity()).get(PlayersViewModel.class);
         playersViewModel.getPlayers().observe(getViewLifecycleOwner(), new Observer<Players>() {
@@ -84,6 +104,10 @@ public class ScoreSheetFragment extends Fragment {
                 }
             }
         });
+
+        loadGameButton.setOnClickListener(v -> listener.onLoadButtonClick());
+
+        saveGameButton.setOnClickListener(v -> listener.onSaveButtonClick());
 
         return view;
     }

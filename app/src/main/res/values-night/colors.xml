@@ -5,7 +5,7 @@
 
     <color name="winner_color">@color/darkgold</color>
 
-    <color name="turnplayer_color">@color/dark_gray</color>
+    <color name="turnplayer_color">@color/darker_gray</color>
     <color name="notturnplayer_color">@color/black</color>
 
     <color name="colorPrimary">@color/nightblue</color>

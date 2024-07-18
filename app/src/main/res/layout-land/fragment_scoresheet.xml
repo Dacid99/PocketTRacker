@@ -169,6 +169,26 @@
 
     </TableLayout>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/loadGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loadGame_string"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/saveGame"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/saveGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saveGame_string"
+        app:layout_constraintTop_toBottomOf="@+id/loadGame"
+        app:layout_constraintBottom_toTopOf="@+id/player1Statistics_card"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/player1Statistics_card"
         android:layout_width="0dp"
@@ -181,7 +201,7 @@
         app:layout_constraintBottom_toTopOf="@+id/player2Statistics_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/saveGame">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

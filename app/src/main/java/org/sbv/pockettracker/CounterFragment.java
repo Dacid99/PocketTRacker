@@ -30,8 +30,6 @@ import java.util.Objects;
 
 public class CounterFragment extends Fragment{
     public static interface CounterFragmentListener{
-        void onSaveButtonClick();
-        void onLoadButtonClick();
         void onPlayerCardClick(int playerNumber);
         void onBallsOnTableFloatingButtonClick();
     }
@@ -45,7 +43,7 @@ public class CounterFragment extends Fragment{
     private TextView player1NameView, player2NameView, player1ClubView, player2ClubView, player1ScoreView, player2ScoreView, ballsOnTableFloatingButton;
     private TextInputEditText winningPointsInput;
     private MaterialCardView player1Card, player2Card;
-    private MaterialButton  foulButton, missButton, safeButton, redoButton, undoButton, newGameButton, saveloadGameButton;
+    private MaterialButton  foulButton, missButton, safeButton, redoButton, undoButton, newGameButton;
     private View view;
     private CounterFragmentListener listener;
 
@@ -90,7 +88,6 @@ public class CounterFragment extends Fragment{
         undoButton = view.findViewById(R.id.undoButton);
         redoButton = view.findViewById(R.id.redoButton);
         newGameButton = view.findViewById(R.id.newGame);
-        saveloadGameButton = view.findViewById(R.id.saveloadGame);
 
         playersViewModel = new ViewModelProvider(requireActivity()).get(PlayersViewModel.class);
         playersViewModel.getPlayers().observe(getViewLifecycleOwner(), new Observer<Players>() {
@@ -164,14 +161,6 @@ public class CounterFragment extends Fragment{
                         player2ClubView.setEnabled(true);
                     } else {
                         Log.e("Failed ifelse", "In MainActivity.updateFocusUI: Turnplayer is neither player1 or player2!");
-                    }
-
-                    if (scoreSheetViewModel.isStart()) {
-                        saveloadGameButton.setOnClickListener(v -> listener.onLoadButtonClick());
-                        saveloadGameButton.setText(getString(R.string.loadGame_string));
-                    } else {
-                        saveloadGameButton.setOnClickListener(v -> listener.onSaveButtonClick());
-                        saveloadGameButton.setText(getString(R.string.saveGame_string));
                     }
 
                     if (scoreSheetViewModel.isLatest()) {
