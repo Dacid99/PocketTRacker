@@ -60,7 +60,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/redoButton"
         android:layout_width="0dp"
-        android:layout_height="54dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/redo_string"
