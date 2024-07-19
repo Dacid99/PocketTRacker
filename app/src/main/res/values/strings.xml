@@ -15,9 +15,9 @@
 
 
     <!-- mainactivity strings -->
-    <string name="safe_string">Safe</string>
-    <string name="foul_string">Foul</string>
-    <string name="miss_string">Miss</string>
+    <string name="safe_string">\n\tSafe\t\n</string>
+    <string name="foul_string">\n\tFoul\t\n</string>
+    <string name="miss_string">\n\tMiss\t\n</string>
     <string name="undo_string">Undo \u21B6</string>
     <string name="redo_string">Redo \u21B7</string>
     <string name="newGame_string">New Game</string>
