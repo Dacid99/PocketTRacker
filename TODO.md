@@ -11,7 +11,7 @@
 - AOD feature
 - 
 - winningpointsinput needs to be repositioned for no clubs
-- players are not sustained when changing fragments or rotating
 - toolbars crash into land layout
 - buttons bigger and with horizontal shifts for safer clicking
 - sort src files into subfolders
+- somethings off with averages

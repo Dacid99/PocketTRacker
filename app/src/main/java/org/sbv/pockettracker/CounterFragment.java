@@ -26,7 +26,10 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
+import java.util.Arrays;
 import java.util.Objects;
+
+import javax.crypto.NullCipher;
 
 public class CounterFragment extends Fragment{
     public static interface CounterFragmentListener{
@@ -88,8 +91,18 @@ public class CounterFragment extends Fragment{
         undoButton = view.findViewById(R.id.undoButton);
         redoButton = view.findViewById(R.id.redoButton);
         newGameButton = view.findViewById(R.id.newGame);
+        try {
+            System.out.println(Arrays.toString(playersViewModel.getPlayers().getValue().getNames()) + "on line 92");
+        } catch (NullPointerException e) {
+            System.out.println("null on line 92");
+        }
 
         playersViewModel = new ViewModelProvider(requireActivity()).get(PlayersViewModel.class);
+        try {
+            System.out.println(Arrays.toString(playersViewModel.getPlayers().getValue().getNames()) + "on line 102");
+        } catch (NullPointerException e) {
+            System.out.println("null on line 102");
+        }
         playersViewModel.getPlayers().observe(getViewLifecycleOwner(), new Observer<Players>() {
             @Override
             public void onChanged(Players players) {
@@ -101,7 +114,17 @@ public class CounterFragment extends Fragment{
                 }
             }
         });
+        try {
+            System.out.println(Arrays.toString(playersViewModel.getPlayers().getValue().getNames()) + "on line 118");
+        } catch (NullPointerException e) {
+            System.out.println("null on line 118");
+        }
         scoreBoardViewModel = new ViewModelProvider(requireActivity()).get(ScoreBoardViewModel.class);
+        try {
+            System.out.println(Arrays.toString(playersViewModel.getPlayers().getValue().getNames()) + "on line 124");
+        } catch (NullPointerException e) {
+            System.out.println("null on line 124");
+        }
         scoreBoardViewModel.getScoreBoard().observe(getViewLifecycleOwner(), new Observer<ScoreBoard>() {
             @Override
             public void onChanged(ScoreBoard scoreBoard) {
@@ -121,8 +144,18 @@ public class CounterFragment extends Fragment{
                 }
             }
         });
+        try {
+            System.out.println(Arrays.toString(playersViewModel.getPlayers().getValue().getNames()) + "on line 150");
+        } catch (NullPointerException e) {
+            System.out.println("null on line 150");
+        }
 
         poolTableViewModel = new ViewModelProvider(requireActivity()).get(PoolTableViewModel.class);
+        try {
+            System.out.println(Arrays.toString(playersViewModel.getPlayers().getValue().getNames()) + "on line 155");
+        } catch (NullPointerException e) {
+            System.out.println("null on line 155");
+        }
         poolTableViewModel.getPoolTable().observe(getViewLifecycleOwner(), new Observer<PoolTable>() {
             @Override
             public void onChanged(PoolTable poolTable) {
@@ -131,8 +164,18 @@ public class CounterFragment extends Fragment{
                 }
             }
         });
+        try {
+            System.out.println(Arrays.toString(playersViewModel.getPlayers().getValue().getNames()) + "on line 168");
+        } catch (NullPointerException e) {
+            System.out.println("null on line 168");
+        }
 
         scoreSheetViewModel = new ViewModelProvider(requireActivity()).get(ScoreSheetViewModel.class);
+        try {
+            System.out.println(Arrays.toString(playersViewModel.getPlayers().getValue().getNames()) + "on line 175");
+        } catch (NullPointerException e) {
+            System.out.println("null on line 175");
+        }
         scoreSheetViewModel.getScoreSheet().observe(getViewLifecycleOwner(), new Observer<ScoreSheet>() {
             @Override
             public void onChanged(ScoreSheet scoreSheet) {
@@ -176,8 +219,19 @@ public class CounterFragment extends Fragment{
                 }
             }
         });
-        applyPreferences();
+        try {
+            System.out.println(Arrays.toString(playersViewModel.getPlayers().getValue().getNames()) + "on line 223");
+        } catch (NullPointerException e) {
+            System.out.println("null on line 223");
+        }
 
+        try {
+            System.out.println(Arrays.toString(playersViewModel.getPlayers().getValue().getNames()) + "on line 229");
+        } catch (NullPointerException e) {
+            System.out.println("null on line 229");
+        }
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         sharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, @Nullable String key) {
@@ -339,24 +393,6 @@ public class CounterFragment extends Fragment{
         });
 
         return view;
-    }
-
-    private void applyPreferences(){
-        preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
-
-        String stringWinnerPoints = preferences.getString("winnerPoints_default", "40");
-        try{
-            ScoreBoard.defaultWinnerPoints = Integer.parseInt(stringWinnerPoints);
-        } catch (NumberFormatException ne){
-            Log.d("Bad preference", "In MainActivity.onCreate: winnerpoints is not saved as a parseable String!", ne);
-            ScoreBoard.defaultWinnerPoints = 40;
-        }
-
-        Players.defaultPlayerNames[0] = preferences.getString("player1_name_default", "");
-        Players.defaultPlayerNames[1] = preferences.getString("player2_name_default", "");
-        Players.defaultPlayerClubs[0] = preferences.getString("player1_club_default", "");
-        Players.defaultPlayerClubs[1] = preferences.getString("player2_club_default", "");
-        Players.haveClubs = preferences.getBoolean("club_toggle", true);
     }
 
     private void newTurn(String reason){
