@@ -37,8 +37,8 @@ public class GameStatistics {
         }
 
         //scoresheet should never be empty as the constructor of scoresheet set a first element
-        meanInnings[0] = (scoreSheet.isEmpty()) ? 0 : sumPlayer1 / scoreSheet.length();
-        meanInnings[1] = (scoreSheet.isEmpty()) ? 0 : sumPlayer2 / scoreSheet.length();
+        meanInnings[0] = (scoreSheet.isEmpty()) ? 0 : sumPlayer1 / playerInnings(scoreSheet)[0];
+        meanInnings[1] = (scoreSheet.isEmpty()) ? 0 : sumPlayer2 / playerInnings(scoreSheet)[1];
 
         return meanInnings;
     }

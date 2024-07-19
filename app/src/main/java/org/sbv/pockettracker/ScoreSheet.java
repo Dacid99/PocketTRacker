@@ -210,10 +210,6 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         return pointer == 0;
     }
 
-    public boolean isPlayer1Turn(){
-        return pointer % 2 == 0;
-    }
-
     public int turnplayerNumber(){
         return pointer % 2;
     }
@@ -227,6 +223,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     public ArrayList<Inning> getInningsList(){
         return inningsList;
     }
+
     public ArrayList<String> getSwitchReasonList(){
         ArrayList<String> switchReasonsList = new ArrayList<>();
         for (Inning turn : inningsList){
