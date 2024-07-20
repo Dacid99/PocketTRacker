@@ -37,5 +37,6 @@
     <string name="club_toggle_summary_on">Spieler haben Vereine</string>
     <string name="club_toggle_title">Vereine an/aus</string>
     <string name="title_activity_settings">Einstellungen</string>
+    <string name="about_string">About</string>
 
 </resources>

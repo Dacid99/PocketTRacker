@@ -6,24 +6,24 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.preference.PreferenceManager;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.navigationrail.NavigationRailView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,8 +44,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
     private ScoreSheetViewModel scoreSheetViewModel;
     private SharedPreferences preferences;
     private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
-    private MaterialToolbar toolbar;
-    private MaterialButton settingsButton;
+
 
     private ActivityResultLauncher<Intent> createFileActivityLauncher;
     private ActivityResultLauncher<Intent> readFileActivityLauncher;
@@ -77,38 +76,18 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         preferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
 
 
-        //toolbar buttons
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        settingsButton = findViewById(R.id.settings_button);
-        settingsButton.setOnClickListener(v -> {
-            Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(settingsIntent);
-        });
-
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        NavController navController = navHostFragment.getNavController();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        if (bottomNavigationView != null) {
+            NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        }
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment selectedFragment;
-                int itemID = menuItem.getItemId();
-                if (itemID == R.id.navigation_counter)
-                    selectedFragment = new CounterFragment();
-                else if (itemID == R.id.navigation_scoresheet)
-                    selectedFragment = new ScoreSheetFragment();
-                else
-                    selectedFragment = new CounterFragment();
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-                return true;
-            }
-        });
-
-        if (savedInstanceState == null){
-        bottomNavigationView.setSelectedItemId(R.id.navigation_counter);
+        NavigationRailView navigationRailView = findViewById(R.id.rail_navigation);
+        if (navigationRailView != null) {
+            NavigationUI.setupWithNavController(navigationRailView, navController);
         }
 
         createFileActivityLauncher = registerForActivityResult(

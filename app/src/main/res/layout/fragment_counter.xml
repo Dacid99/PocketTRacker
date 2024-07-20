@@ -21,10 +21,9 @@
         android:id="@+id/foulButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:text="@string/foul_string"
         android:textSize="@dimen/textSize"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/missButton"
         app:layout_constraintStart_toStartOf="@+id/missButton"
         app:layout_constraintTop_toBottomOf="@+id/missButton" />
@@ -73,10 +72,10 @@
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/ballsOnTableFloatingButton"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="45dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
         android:contentDescription="@string/newBallNumber_hint"
         android:gravity="center"
         android:text="@string/ballsOnTable_format"
@@ -84,18 +83,17 @@
         app:layout_constraintBottom_toTopOf="@+id/safeButton"
         app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_block2_guideline"
-        app:layout_constraintTop_toTopOf="@+id/top_block2_guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/newGame" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/winningPointsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/winningPointsOffset"
+        android:layout_marginBottom="10dp"
         android:hint="@string/winnerPoints_hint"
         app:layout_constraintBottom_toBottomOf="@+id/player1CardView"
         app:layout_constraintEnd_toStartOf="@+id/player2CardView"
-        app:layout_constraintStart_toEndOf="@+id/player1CardView"
-        app:layout_constraintTop_toTopOf="@+id/player1CardView">
+        app:layout_constraintStart_toEndOf="@+id/player1CardView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/winningPointsInput"
@@ -114,12 +112,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/block1_top"
-        android:layout_marginBottom="50dp"
         app:cardCornerRadius="16dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_block1_guideline"
+        app:layout_constraintBottom_toBottomOf="@+id/player1CardView"
         app:layout_constraintEnd_toStartOf="@+id/end_block1_guideline"
         app:layout_constraintStart_toEndOf="@+id/winningPointsLayout"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/player1CardView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -135,13 +132,13 @@
 
             <LinearLayout
                 android:id="@+id/player2Layout"
-                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/player2ScoreView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" >
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/player2NameView"
@@ -187,9 +184,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/block1_start"
-        android:layout_marginBottom="50dp"
         app:cardCornerRadius="16dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_block1_guideline"
+        app:layout_constraintBottom_toTopOf="@id/newGame"
         app:layout_constraintEnd_toStartOf="@+id/winningPointsLayout"
         app:layout_constraintStart_toStartOf="@+id/start_block1_guideline"
         app:layout_constraintTop_toTopOf="parent">
@@ -208,9 +204,9 @@
 
             <LinearLayout
                 android:id="@+id/player1Layout"
-                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/player1ScoreView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -260,25 +256,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/newGame_string"
+        android:textSize="@dimen/textSize"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/ballsOnTableFloatingButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player1CardView" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/top_block2_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@fraction/top_block2_guideline_fraction" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottom_block2_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@fraction/bottom_block2_guideline_fraction" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/start_block1_guideline"
@@ -307,13 +290,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="@fraction/end_block1_guideline_fraction" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottom_block1_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@fraction/bottom_block1_guideline_fraction" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
