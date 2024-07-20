@@ -2,48 +2,61 @@ package org.sbv.pockettracker;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.google.android.material.button.MaterialButton;
 
-public class SettingsActivity extends AppCompatActivity {
+
+public class SettingsFragment extends Fragment {
+    private View view;
+    private MaterialButton aboutButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+    public View onCreateView(@NonNull LayoutInflater layoutInflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        view = layoutInflater.inflate(R.layout.fragment_settings, container, false);
 
-        ActionBar toolbar = getSupportActionBar();
-        if (toolbar != null){
-            toolbar.setDisplayHomeAsUpEnabled(true);
-        }
+        return view;
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         if (savedInstanceState == null) {
-            getSupportFragmentManager()
+            getChildFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.settings, new SettingsFragment())
+                    .replace(R.id.settings, new SettingsSubFragment())
                     .commit();
         }
+
+        aboutButton = view.findViewById(R.id.about_button);
+        aboutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AboutFragment aboutFragment = new AboutFragment();
+                aboutFragment.show(getChildFragmentManager(), "AboutFragment");
+            }
+        });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem){
         int id = menuItem.getItemId();
-
-        if (id == android.R.id.home){
-            finish();
-            return true;
-        }
         return super.onOptionsItemSelected(menuItem);
     }
 
-    public static class SettingsFragment extends PreferenceFragmentCompat {
+    public static class SettingsSubFragment extends PreferenceFragmentCompat {
         private EditTextPreference winnerPointsDefault;
 
         @Override

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/counterFragment">
+
+    <fragment
+        android:id="@+id/counterFragment"
+        android:name="org.sbv.pockettracker.CounterFragment"
+        android:label="fragment_counter"
+        tools:layout="@layout/fragment_counter" >
+        <action
+            android:id="@+id/action_to_scoreSheetFragment"
+            app:destination="@id/scoreSheetFragment" />
+        <action
+            android:id="@+id/action_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scoreSheetFragment"
+        android:name="org.sbv.pockettracker.ScoreSheetFragment"
+        android:label="fragment_scoresheet"
+        tools:layout="@layout/fragment_scoresheet" >
+        <action
+            android:id="@+id/action_to_counterFragment"
+            app:destination="@id/counterFragment" />
+        <action
+            android:id="@+id/action_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="org.sbv.pockettracker.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_to_scoreSheetFragment"
+            app:destination="@id/scoreSheetFragment" />
+        <action
+            android:id="@+id/action_to_counterFragment"
+            app:destination="@id/counterFragment" />
+    </fragment>
+</navigation>
