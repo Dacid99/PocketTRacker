@@ -8,10 +8,9 @@
         android:id="@+id/scoresheet_table"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toStartOf="@id/loadGame"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -171,29 +170,23 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loadGame"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
         android:text="@string/loadGame_string"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/saveGame"
-        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintStart_toEndOf="@id/scoresheet_table"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveGame"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="@string/saveGame_string"
         app:layout_constraintTop_toBottomOf="@+id/loadGame"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@fraction/center_guideline_fraction" />
+        app:layout_constraintStart_toStartOf="@id/loadGame"
+        app:layout_constraintEnd_toEndOf="@+id/loadGame"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
