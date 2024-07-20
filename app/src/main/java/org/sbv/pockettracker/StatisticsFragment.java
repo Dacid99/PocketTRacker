@@ -17,7 +17,8 @@ import android.widget.TextView;
 public class StatisticsFragment extends Fragment {
 
     private ScoreSheetViewModel scoreSheetViewModel;
-    private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
+    private PlayersViewModel playersViewModel;
+    private TextView player1StatisticsHeader, player2StatisticsHeader, maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
 
     public static StatisticsFragment newInstance() {
         return new StatisticsFragment();
@@ -36,6 +37,9 @@ public class StatisticsFragment extends Fragment {
         meanRunPlayer1View = view.findViewById(R.id.player1statistics_meanRun);
         meanRunPlayer2View = view.findViewById(R.id.player2statistics_meanRun);
 
+        player1StatisticsHeader = view.findViewById(R.id.player1statistics_header);
+        player2StatisticsHeader = view.findViewById(R.id.player2statistics_header);
+
         scoreSheetViewModel = new ViewModelProvider(requireActivity()).get(ScoreSheetViewModel.class);
         scoreSheetViewModel.getScoreSheet().observe(getViewLifecycleOwner(), new Observer<ScoreSheet>() {
             @Override
@@ -52,6 +56,15 @@ public class StatisticsFragment extends Fragment {
                 meanInningPlayer2View.setText(getString(R.string.meanInning_format, meanInnings[1]));
                 meanRunPlayer1View.setText(getString(R.string.meanRun_format, meanRuns[0]));
                 meanRunPlayer2View.setText(getString(R.string.meanRun_format, meanRuns[1]));
+            }
+        });
+
+        playersViewModel = new ViewModelProvider(requireActivity()).get(PlayersViewModel.class);
+        playersViewModel.getPlayers().observe(getViewLifecycleOwner(), new Observer<Players>() {
+            @Override
+            public void onChanged(Players players) {
+                player1StatisticsHeader.setText((players.getNames()[0].isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, players.getNames()[0]));
+                player2StatisticsHeader.setText((players.getNames()[1].isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, players.getNames()[1]));
             }
         });
 

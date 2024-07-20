@@ -56,8 +56,6 @@ public class ScoreSheetFragment extends Fragment {
 
         player1TableHeader = view.findViewById(R.id.player1table_header);
         player2TableHeader = view.findViewById(R.id.player2table_header);
-        player1StatisticsHeader = view.findViewById(R.id.player1statistics_header);
-        player2StatisticsHeader = view.findViewById(R.id.player2statistics_header);
 
         saveGameButton = view.findViewById(R.id.saveGame);
         loadGameButton = view.findViewById(R.id.loadGame);
@@ -67,9 +65,7 @@ public class ScoreSheetFragment extends Fragment {
             @Override
             public void onChanged(Players players) {
                 player1TableHeader.setText((players.getNames()[0].isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, players.getNames()[0]));
-                player1StatisticsHeader.setText((players.getNames()[0].isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, players.getNames()[0]));
                 player2TableHeader.setText((players.getNames()[1].isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, players.getNames()[1]));
-                player2StatisticsHeader.setText((players.getNames()[1].isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, players.getNames()[1]));
             }
         });
 
