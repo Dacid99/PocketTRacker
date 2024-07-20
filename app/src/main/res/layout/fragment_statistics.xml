@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".StatisticsFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/player1Statistics_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/colorSecondary"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/player1statistics_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/roundedcorners_background"
+                android:backgroundTint="@color/colorPrimary"
+                android:gravity="center"
+                android:text="@string/player1_default"
+                android:textColor="@color/colorOnPrimary"
+                android:textSize="@dimen/smallTextSize"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/player1statistics_innings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/player1statistics_innings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/player1statistics_maxRun"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player1statistics_header" />
+
+            <TextView
+                android:id="@+id/player1statistics_maxRun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toTopOf="@id/player1statistics_meanInning"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player1statistics_innings" />
+
+            <TextView
+                android:id="@+id/player1statistics_meanInning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toTopOf="@id/player1statistics_meanRun"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player1statistics_maxRun" />
+
+            <TextView
+                android:id="@+id/player1statistics_meanRun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player1statistics_meanInning" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/player2Statistics_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/colorSecondary"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/player2statistics_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/roundedcorners_background"
+                android:backgroundTint="@color/colorPrimary"
+                android:gravity="center"
+                android:text="@string/player2_default"
+                android:textColor="@color/colorOnPrimary"
+                android:textSize="@dimen/smallTextSize"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/player2statistics_innings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/player2statistics_innings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/player2statistics_maxRun"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player2statistics_header" />
+
+            <TextView
+                android:id="@+id/player2statistics_maxRun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/player2statistics_meanInning"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player2statistics_innings" />
+
+            <TextView
+                android:id="@+id/player2statistics_meanInning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toTopOf="@+id/player2statistics_meanRun"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player2statistics_maxRun" />
+
+            <TextView
+                android:id="@+id/player2statistics_meanRun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorOnSecondary"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player2statistics_meanInning" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

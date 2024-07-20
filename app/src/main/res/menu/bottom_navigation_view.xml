@@ -11,7 +11,13 @@
         android:title="@string/scoresheet_menustring" />
 
     <item
+        android:id="@+id/action_to_statisticsFragment"
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="@string/statistics_menustring" />
+
+    <item
         android:title="@string/settings_string"
         android:id="@+id/action_to_settingsFragment"
         android:orderInCategory="100"/>
+
 </menu>

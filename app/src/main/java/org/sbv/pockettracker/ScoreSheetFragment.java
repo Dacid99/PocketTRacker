@@ -26,7 +26,6 @@ import com.google.android.material.button.MaterialButton;
 public class ScoreSheetFragment extends Fragment {
     private TableLayout tableLayout;
     private TextView player1TableHeader, player2TableHeader, player1StatisticsHeader, player2StatisticsHeader;
-    private TextView maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
     private MaterialButton loadGameButton, saveGameButton;
     private ScoreSheetViewModel scoreSheetViewModel;
     private PlayersViewModel playersViewModel;
@@ -59,15 +58,6 @@ public class ScoreSheetFragment extends Fragment {
         player2TableHeader = view.findViewById(R.id.player2table_header);
         player1StatisticsHeader = view.findViewById(R.id.player1statistics_header);
         player2StatisticsHeader = view.findViewById(R.id.player2statistics_header);
-
-        maxRunPlayer1View = view.findViewById(R.id.player1statistics_maxRun);
-        maxRunPlayer2View = view.findViewById(R.id.player2statistics_maxRun);
-        inningsPlayer1View = view.findViewById(R.id.player1statistics_innings);
-        inningsPlayer2View = view.findViewById(R.id.player2statistics_innings);
-        meanInningPlayer1View = view.findViewById(R.id.player1statistics_meanInning);
-        meanInningPlayer2View = view.findViewById(R.id.player2statistics_meanInning);
-        meanRunPlayer1View = view.findViewById(R.id.player1statistics_meanRun);
-        meanRunPlayer2View = view.findViewById(R.id.player2statistics_meanRun);
 
         saveGameButton = view.findViewById(R.id.saveGame);
         loadGameButton = view.findViewById(R.id.loadGame);
@@ -117,18 +107,6 @@ public class ScoreSheetFragment extends Fragment {
         for (int index = 0; index < scoreSheet.length(); index++) {
             appendTableRow(index, scoreSheet);
         }
-        double[] meanInnings = GameStatistics.meanInnings(scoreSheet);
-        double[] meanRuns = GameStatistics.meanRuns(scoreSheet);
-        int[] playerInnings = GameStatistics.playerInnings(scoreSheet);
-        int[] maxRuns = GameStatistics.maxRuns(scoreSheet);
-        maxRunPlayer1View.setText(getString(R.string.player_maxrun_format, maxRuns[0]));
-        maxRunPlayer2View.setText(getString(R.string.player_maxrun_format, maxRuns[1]));
-        inningsPlayer1View.setText(getString(R.string.player_innings_format, playerInnings[0]));
-        inningsPlayer2View.setText(getString(R.string.player_innings_format, playerInnings[1]));
-        meanInningPlayer1View.setText(getString(R.string.meanInning_format, meanInnings[0]));
-        meanInningPlayer2View.setText(getString(R.string.meanInning_format, meanInnings[1]));
-        meanRunPlayer1View.setText(getString(R.string.meanRun_format, meanRuns[0]));
-        meanRunPlayer2View.setText(getString(R.string.meanRun_format, meanRuns[1]));
     }
 
     private void highlightScoreSheet(ScoreSheet scoreSheet){
@@ -146,7 +124,6 @@ public class ScoreSheetFragment extends Fragment {
         }else{
             Log.d("Failed ifelse", "ScoreSheetActivity.highlightScoreSheet: check of pointer failed");
         }
-
     }
 
     private void appendTableRow(int turn, ScoreSheet scoreSheet) {

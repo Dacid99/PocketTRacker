@@ -108,5 +108,6 @@
     <string name="club_toggle_title">Clubs on/off</string>
     <string name="settings_string" translatable="false">\u2699</string>
     <string name="about_string">About</string>
+    <string name="statistics_menustring">Statistics</string>
 
 </resources>
