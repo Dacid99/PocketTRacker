@@ -22,7 +22,6 @@ import com.google.android.material.button.MaterialButton;
 
 public class SettingsFragment extends Fragment {
     private View view;
-    private MaterialButton aboutButton;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater layoutInflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -34,20 +33,10 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         if (savedInstanceState == null) {
-            getChildFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.settings, new SettingsSubFragment())
-                    .commit();
+            FragmentManager fragmentManager = getChildFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.settings, new SettingsSubFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.about_container, new AboutFragment()).commit();
         }
-
-        aboutButton = view.findViewById(R.id.about_button);
-        aboutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AboutFragment aboutFragment = new AboutFragment();
-                aboutFragment.show(getChildFragmentManager(), "AboutFragment");
-            }
-        });
     }
 
     @Override

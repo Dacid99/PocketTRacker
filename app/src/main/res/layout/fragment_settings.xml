@@ -8,11 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/about_button"
-        android:layout_width="wrap_content"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/about_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/about_string"/>
-
+        android:layout="@layout/fragment_about"/>
 
 </LinearLayout>
