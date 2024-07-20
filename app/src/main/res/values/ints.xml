@@ -11,5 +11,5 @@
     <integer name="toolbar_scoresheetbutton_weight">2</integer>
     <integer name="toolbar_settingsbutton_weight">1</integer>
     <integer name="turnplayer_cardelevation">50</integer>
-
+    <integer name="notturnplayer_cardelevation">0</integer>
 </resources>

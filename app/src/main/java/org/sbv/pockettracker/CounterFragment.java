@@ -1,7 +1,7 @@
 package org.sbv.pockettracker;
 
 import android.content.Context;
-import android.content.Intent;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -29,14 +28,11 @@ import org.apache.commons.lang3.math.NumberUtils;
 import java.util.Arrays;
 import java.util.Objects;
 
-import javax.crypto.NullCipher;
-
 public class CounterFragment extends Fragment{
-    public static interface CounterFragmentListener{
+    public interface CounterFragmentListener{
         void onPlayerCardClick(int playerNumber);
         void onBallsOnTableFloatingButtonClick();
     }
-    private ActivityResultLauncher<Intent> createFileActivityLauncher, readFileActivityLauncher;
     private SharedPreferences preferences;
     private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
     private PlayersViewModel playersViewModel;
@@ -122,6 +118,8 @@ public class CounterFragment extends Fragment{
                         player2Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
                         newGameButton.setVisibility(View.VISIBLE);
                     } else {
+                        player1Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+                        player2Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
                         newGameButton.setVisibility(View.INVISIBLE);
                     }
                 }
@@ -149,30 +147,21 @@ public class CounterFragment extends Fragment{
             @Override
             public void onChanged(ScoreSheet scoreSheet) {
                 if (scoreSheet != null) {
-                    if (scoreSheet.turnplayerNumber() == 0) {
-                        player1Card.setCardElevation(getResources().getInteger(R.integer.turnplayer_cardelevation));
-                        player1Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
-                        player1ScoreView.setEnabled(true);
-                        player1NameView.setEnabled(true);
-                        player1ClubView.setEnabled(true);
-                        player2Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
-                        player2Card.setCardElevation(0);
-                        player2ScoreView.setEnabled(false);
-                        player2NameView.setEnabled(false);
-                        player2ClubView.setEnabled(false);
-                    } else if (scoreSheet.turnplayerNumber() == 1) {
-                        player1Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
-                        player1Card.setCardElevation(0);
-                        player1ScoreView.setEnabled(false);
-                        player1NameView.setEnabled(false);
-                        player1ClubView.setEnabled(false);
-                        player2Card.setCardElevation(getResources().getInteger(R.integer.turnplayer_cardelevation));
-                        player2Card.setCardBackgroundColor(getResources().getColor(R.color.turnplayer_color));
-                        player2ScoreView.setEnabled(true);
-                        player2NameView.setEnabled(true);
-                        player2ClubView.setEnabled(true);
-                    } else {
-                        Log.e("Failed ifelse", "In MainActivity.updateFocusUI: Turnplayer is neither player1 or player2!");
+                    boolean isTurnplayer1Boolean = scoreSheet.turnplayerNumber() == 0;
+                    player1ScoreView.setEnabled(isTurnplayer1Boolean);
+                    player1NameView.setEnabled(isTurnplayer1Boolean);
+                    player1ClubView.setEnabled(isTurnplayer1Boolean);
+                    player2ScoreView.setEnabled(!isTurnplayer1Boolean);
+                    player2NameView.setEnabled(!isTurnplayer1Boolean);
+                    player2ClubView.setEnabled(!isTurnplayer1Boolean);
+                    player1Card.setCardElevation(getResources().getInteger(isTurnplayer1Boolean ? R.integer.turnplayer_cardelevation : R.integer.notturnplayer_cardelevation) );
+                    player2Card.setCardElevation(getResources().getInteger(!isTurnplayer1Boolean ? R.integer.turnplayer_cardelevation : R.integer.notturnplayer_cardelevation) );
+
+                    if (!(player1Card.getCardBackgroundColor().getDefaultColor() == getResources().getColor(R.color.winner_color))) {
+                        player1Card.setCardBackgroundColor(getResources().getColor(isTurnplayer1Boolean ? R.color.turnplayer_color : R.color.notturnplayer_color));
+                    }
+                    if (!(player2Card.getCardBackgroundColor().getDefaultColor() == getResources().getColor(R.color.winner_color))) {
+                        player2Card.setCardBackgroundColor(getResources().getColor(!isTurnplayer1Boolean ? R.color.turnplayer_color : R.color.notturnplayer_color));
                     }
 
                     if (scoreSheetViewModel.isLatest()) {
@@ -301,9 +290,7 @@ public class CounterFragment extends Fragment{
             }
         });
 
-        ballsOnTableFloatingButton.setOnClickListener(v -> {
-            listener.onBallsOnTableFloatingButtonClick();
-        });
+        ballsOnTableFloatingButton.setOnClickListener(v -> listener.onBallsOnTableFloatingButtonClick() );
 
         missButton.setOnClickListener(v -> {
             assignPoints();

@@ -6,7 +6,6 @@
 - move increments math to gamestats class
 - use one player fragment for both players, allows for faster switching and saving of states, plus you can get rid of requestplayer interface
 - setting for theme
-- winnerUI changes after save -> problem in order of observer.onChanged executions
 - animated transition
 - AOD feature
 - 
@@ -14,3 +13,5 @@
 - toolbars crash into land layout
 - buttons bigger and with horizontal shifts for safer clicking
 - sort src files into subfolders
+- bottomnavigation icons
+- bottomnavigation speedup -> transfer stuff to mainactivity
