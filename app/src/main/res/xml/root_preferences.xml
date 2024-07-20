@@ -37,6 +37,7 @@
 
         <SwitchPreferenceCompat
             app:key="club_toggle"
+            app:defaultValue="true"
             app:summaryOff="@string/club_toggle_summary_off"
             app:summaryOn="@string/club_toggle_summary_on"
             app:title="@string/club_toggle_title" />
