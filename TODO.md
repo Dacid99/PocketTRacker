@@ -8,10 +8,14 @@
 - setting for theme
 - animated transition
 - AOD feature
-- 
-- winningpointsinput needs to be repositioned for no clubs
-- toolbars crash into land layout
-- buttons bigger and with horizontal shifts for safer clicking
+-
 - sort src files into subfolders
 - bottomnavigation icons
 - bottomnavigation speedup -> transfer stuff to mainactivity
+- still some issues with statistics
+- make beautiful stats fragment
+- make nice about page, maybe popup from below
+- preferences for default names are buggy
+- make bottomnavigation a topnavigation perhaps
+- color bottomnavigation in royalblue
+- resolve warnings

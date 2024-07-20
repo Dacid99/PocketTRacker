@@ -25,7 +25,7 @@ import com.google.android.material.button.MaterialButton;
 
 public class ScoreSheetFragment extends Fragment {
     private TableLayout tableLayout;
-    private TextView player1TableHeader, player2TableHeader, player1StatisticsHeader, player2StatisticsHeader;
+    private TextView player1TableHeader, player2TableHeader;
     private MaterialButton loadGameButton, saveGameButton;
     private ScoreSheetViewModel scoreSheetViewModel;
     private PlayersViewModel playersViewModel;

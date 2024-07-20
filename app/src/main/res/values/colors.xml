@@ -66,7 +66,6 @@
     <color name="background">@color/white</color>
     <color name="onBackground">@color/black</color>
 
-
     <color name="statusBarColor">@color/wooden</color>
 
     <!-- number pane colors -->

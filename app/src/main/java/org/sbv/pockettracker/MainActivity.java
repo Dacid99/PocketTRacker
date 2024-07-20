@@ -222,4 +222,10 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         NumberPaneFragment numberPaneFragment = NumberPaneFragment.newInstance(poolTableViewModel.getOldNumberOfBalls());
         numberPaneFragment.show(getSupportFragmentManager(), "NumberPane");
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        preferences.unregisterOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
+    }
 }
