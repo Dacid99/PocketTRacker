@@ -1,0 +1,11 @@
+- Added navigationbars
+- AOD option for the counter
+- updated theme to material3
+- improved landscape layouts
+- added small "about" page
+- overhauled backend code to ensure persistence of data
+- added dedicated statistics view
+- fixed some smaller issues
+
+Hey there, thanks for checking out my app!
+If you have any feedback please let me know!

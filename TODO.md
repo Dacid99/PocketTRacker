@@ -7,9 +7,11 @@
 - use one player fragment for both players, allows for faster switching and saving of states, plus you can get rid of requestplayer interface
 - setting for theme
 - animated transition
--
+- tablet layouts
 - sort src files into subfolders
 - make beautiful stats fragment
 - set font
 - make bottomnavigation a topnavigation perhaps
+- move playerfragment switch button out of card if possible
 - land numberpane is broken
+- 
