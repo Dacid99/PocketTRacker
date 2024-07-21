@@ -99,6 +99,13 @@
     <string name="club_toggle_summary_off">Players have no clubs</string>
     <string name="club_toggle_summary_on">Players have clubs</string>
     <string name="club_toggle_title">Clubs on/off</string>
+
+    <!-- about page -->
     <string name="about_string">About</string>
+    <string name="versionCode_format">Version code %1$d</string>
+    <string name="versionName_format">Version name %1$s</string>
+    <string name="author_format">By %1$s</string>
+    <string name="thankyou_string">"Thank you for using my app!\nPlease report bugs, request features and, if you like, leave a star in the Gitlab repo: "</string>
+    <string name="gitlab_format" translatable="false">@string/rawString_format</string>
 
 </resources>

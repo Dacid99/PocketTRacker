@@ -11,5 +11,5 @@
 -
 - sort src files into subfolders
 - make beautiful stats fragment
-- make nice about page, maybe popup from below
+- set font
 - make bottomnavigation a topnavigation perhaps

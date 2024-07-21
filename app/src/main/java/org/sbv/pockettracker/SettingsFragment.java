@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,13 +15,26 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 
 public class SettingsFragment extends Fragment {
 
+    private ImageView aboutIcon;
     @Override
     public View onCreateView(@NonNull LayoutInflater layoutInflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return layoutInflater.inflate(R.layout.fragment_settings, container, false);
+        View view = layoutInflater.inflate(R.layout.fragment_settings, container, false);
+        aboutIcon = view.findViewById(R.id.about_icon);
+        aboutIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AboutFragment aboutFragment = new AboutFragment();
+                aboutFragment.show(getChildFragmentManager(), "about_bottomsheet");
+            }
+        });
+
+
+        return view;
     }
 
     @Override
@@ -28,7 +42,6 @@ public class SettingsFragment extends Fragment {
         if (savedInstanceState == null) {
             FragmentManager fragmentManager = getChildFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.settings, new SettingsSubFragment()).commit();
-            fragmentManager.beginTransaction().replace(R.id.about_container, new AboutFragment()).commit();
         }
     }
 

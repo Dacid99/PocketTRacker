@@ -1,13 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/about_page">
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_appname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="@dimen/textSize"
+        android:layout_toRightOf="@id/about_icon"/>
+
+    <ImageView
+        android:id="@+id/about_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_versionName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="thx"
-        android:textSize="40sp"/>
+        android:layout_below="@id/about_appname"
+        android:layout_toRightOf="@id/about_icon"
+        android:text="versionname"
+        android:textSize="@dimen/smallTextSize"/>
 
-</LinearLayout>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_versionCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/about_versionName"
+        android:layout_toRightOf="@id/about_icon"
+        android:text="versioncode"
+        android:textSize="@dimen/smallTextSize"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/about_versionCode"
+        android:text="author"
+        android:textSize="@dimen/smallTextSize"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_thankyou"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/about_author"
+        android:text="@string/thankyou_string"
+        android:textSize="@dimen/smallTextSize"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/about_gitlab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/about_thankyou"
+        android:text="gitlab"
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:textSize="@dimen/smallTextSize"/>
+</RelativeLayout>
