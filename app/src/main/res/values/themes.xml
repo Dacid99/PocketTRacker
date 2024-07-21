@@ -25,12 +25,20 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/statusBarColor</item>
         <item name="android:textColor">@color/text_color_selector</item>
+
         <!-- Bottom navigation style -->
         <item name="bottomNavigationStyle">@style/Widget.BottomNavigation</item>
-        <item name="navigationRailStyle">@style/Widget.Material3.NavigationRailView</item>
+        <item name="navigationRailStyle">@style/Widget.NavigationRailView</item>
+
     </style>
 
     <style name="Widget.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="itemIconTint">@color/colorOnPrimary</item>
+        <item name="elevation">20dp</item>
+    </style>
+
+    <style name="Widget.NavigationRailView" parent="Widget.Material3.NavigationRailView">
         <item name="android:background">@color/colorPrimary</item>
         <item name="itemIconTint">@color/colorOnPrimary</item>
         <item name="elevation">20dp</item>
