@@ -69,15 +69,6 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
 
 
         applyPreferences();
-        sharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, @Nullable String key) {
-                if (key != null) {
-
-                }
-            }
-        };
-        preferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
 
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
@@ -175,6 +166,16 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         Players.defaultPlayerClubs[0] = preferences.getString("player1_club_default", "");
         Players.defaultPlayerClubs[1] = preferences.getString("player2_club_default", "");
         Players.haveClubs = preferences.getBoolean("club_toggle", true);
+
+        sharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, @Nullable String key) {
+                if (key != null) {
+
+                }
+            }
+        };
+        preferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
     }
 
     private void assignPoints(){

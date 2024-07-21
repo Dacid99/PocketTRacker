@@ -201,7 +201,7 @@ public class CounterFragment extends Fragment{
                         case "player1_name_default":
                             String newNamePlayer1 = sharedPreferences.getString(key,"");
                             if (player1NameView.getText().toString().isEmpty() || player1NameView.getText().toString().equals(Players.defaultPlayerNames[0])){
-                                playersViewModel.updatePlayerName(1,newNamePlayer1);
+                                playersViewModel.updatePlayerName(0,newNamePlayer1);
                             }
                             Players.defaultPlayerNames[0] = newNamePlayer1;
                             break;
@@ -209,7 +209,7 @@ public class CounterFragment extends Fragment{
                         case "player2_name_default":
                             String newNamePlayer2 = sharedPreferences.getString(key,"");
                             if (player2NameView.getText().toString().isEmpty() || player2NameView.getText().toString().equals(Players.defaultPlayerNames[1])){
-                                playersViewModel.updatePlayerName(2,newNamePlayer2);
+                                playersViewModel.updatePlayerName(1,newNamePlayer2);
                             }
                             Players.defaultPlayerNames[1] = newNamePlayer2;
                             break;
@@ -217,7 +217,7 @@ public class CounterFragment extends Fragment{
                         case "player1_club_default":
                             String newClubPlayer1 = sharedPreferences.getString(key,"");
                             if (player1ClubView.getText().toString().isEmpty() || player1ClubView.getText().toString().equals(Players.defaultPlayerClubs[0])){
-                                playersViewModel.updateClubName(1, newClubPlayer1);
+                                playersViewModel.updateClubName(0, newClubPlayer1);
                             }
                             Players.defaultPlayerClubs[0] = newClubPlayer1;
                             break;
@@ -225,9 +225,9 @@ public class CounterFragment extends Fragment{
                         case "player2_club_default":
                             String newClubPlayer2 = sharedPreferences.getString(key,"");
                             if (player2ClubView.getText().toString().isEmpty() || player2ClubView.getText().toString().equals(Players.defaultPlayerClubs[1])){
-                                playersViewModel.updateClubName(2, newClubPlayer2);
+                                playersViewModel.updateClubName(1, newClubPlayer2);
                             }
-                            Players.defaultPlayerClubs[1] =newClubPlayer2;
+                            Players.defaultPlayerClubs[1] = newClubPlayer2;
                             break;
 
                         case "club_toggle":
