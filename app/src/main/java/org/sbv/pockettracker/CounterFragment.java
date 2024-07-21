@@ -59,7 +59,6 @@ public class CounterFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater layoutInflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = layoutInflater.inflate(R.layout.fragment_counter, container,false);
 
-
         player1ScoreView = view.findViewById(R.id.player1ScoreView);
         player2ScoreView = view.findViewById(R.id.player2ScoreView);
 
@@ -87,6 +86,86 @@ public class CounterFragment extends Fragment{
         undoButton = view.findViewById(R.id.undoButton);
         redoButton = view.findViewById(R.id.redoButton);
         newGameButton = view.findViewById(R.id.newGame);
+
+        assignViewModels();
+
+        applyPreferences();
+
+        winningPointsInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int cursorPosition = winningPointsInput.getSelectionStart();
+                String newText = s.toString();
+                if ( NumberUtils.isParsable(newText)) {
+                    if (Integer.parseInt(newText) > 0) {
+                        winningPointsInput.setTextColor(getResources().getColor(R.color.score_color));
+                        int newWinnerPoints = Integer.parseInt(newText);
+                        scoreBoardViewModel.updateWinnerPoints(newWinnerPoints);
+                    } else {
+                        winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
+                    }
+                } else {
+                    winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
+                }
+                winningPointsInput.setSelection(cursorPosition);
+            }
+        });
+
+        player1Card.setOnClickListener(v -> listener.onPlayerCardClick(0));
+
+        player2Card.setOnClickListener(v -> listener.onPlayerCardClick(1));
+
+        ballsOnTableFloatingButton.setOnClickListener(v -> listener.onBallsOnTableFloatingButtonClick() );
+
+        missButton.setOnClickListener(v -> {
+            assignPoints();
+            newTurn(getString(R.string.miss_string));
+        });
+
+        safeButton.setOnClickListener(v -> {
+            assignPoints();
+            newTurn(getString(R.string.safe_string));
+        });
+
+        foulButton.setOnClickListener(v -> {
+            assignPoints();
+            scoreBoardViewModel.addPoints( scoreSheetViewModel.turnplayerNumber(), (scoreSheetViewModel.currentTurn() == 0) ? -2:-1 );
+            newTurn(getString(R.string.foul_string));
+        });
+
+        undoButton.setOnClickListener(v -> scoreSheetViewModel.rollback());
+
+        undoButton.setOnLongClickListener(v -> {
+            scoreSheetViewModel.toStart();
+            return true;
+        });
+
+        redoButton.setOnClickListener(v -> scoreSheetViewModel.progress());
+
+        redoButton.setOnLongClickListener(v -> {
+            scoreSheetViewModel.toLatest();
+            return true;
+        });
+
+        newGameButton.setOnClickListener(v -> {
+            newGame();
+            newGameButton.setVisibility(View.INVISIBLE);
+        });
+
+        return view;
+    }
+
+    private void assignViewModels(){
 
         playersViewModel = new ViewModelProvider(requireActivity()).get(PlayersViewModel.class);
 
@@ -172,7 +251,9 @@ public class CounterFragment extends Fragment{
                 }
             }
         });
+    }
 
+    private void applyPreferences(){
         preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
 
         if (preferences.getBoolean("AOD_toggle", true)) {
@@ -183,19 +264,19 @@ public class CounterFragment extends Fragment{
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, @Nullable String key) {
                 if (key != null) {
                     switch (key) {
-                       case "winnerPoints_default":
-                           String winnerPointsString = sharedPreferences.getString(key, "40");
-                           int oldWinnerPoints = ScoreBoard.defaultWinnerPoints;
-                           try{
-                               ScoreBoard.defaultWinnerPoints = Integer.parseInt(winnerPointsString);
-                               if (Objects.requireNonNull(winningPointsInput.getText()).toString().isEmpty() || winningPointsInput.getText().toString().equals(String.valueOf(oldWinnerPoints))){
-                                   winningPointsInput.setText(winnerPointsString);
-                               }
-                           }catch (NumberFormatException e) {
-                               Log.d("Bad preference","In SettingsActivity.onSharedPreferenceChanged: winnerpoints_default is not a parseable String! e");
-                               ScoreBoard.defaultWinnerPoints = 40;
-                           }
-                           break;
+                        case "winnerPoints_default":
+                            String winnerPointsString = sharedPreferences.getString(key, "40");
+                            int oldWinnerPoints = ScoreBoard.defaultWinnerPoints;
+                            try{
+                                ScoreBoard.defaultWinnerPoints = Integer.parseInt(winnerPointsString);
+                                if (Objects.requireNonNull(winningPointsInput.getText()).toString().isEmpty() || winningPointsInput.getText().toString().equals(String.valueOf(oldWinnerPoints))){
+                                    winningPointsInput.setText(winnerPointsString);
+                                }
+                            }catch (NumberFormatException e) {
+                                Log.d("Bad preference","In SettingsActivity.onSharedPreferenceChanged: winnerpoints_default is not a parseable String! e");
+                                ScoreBoard.defaultWinnerPoints = 40;
+                            }
+                            break;
 
                         case "player1_name_default":
                             String newNamePlayer1 = sharedPreferences.getString(key,"");
@@ -248,79 +329,6 @@ public class CounterFragment extends Fragment{
             }
         };
         preferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
-
-        winningPointsInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                int cursorPosition = winningPointsInput.getSelectionStart();
-                String newText = s.toString();
-                if ( NumberUtils.isParsable(newText)) {
-                    if (Integer.parseInt(newText) > 0) {
-                        winningPointsInput.setTextColor(getResources().getColor(R.color.score_color));
-                        int newWinnerPoints = Integer.parseInt(newText);
-                        scoreBoardViewModel.updateWinnerPoints(newWinnerPoints);
-                    } else {
-                        winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
-                    }
-                } else {
-                    winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
-                }
-                winningPointsInput.setSelection(cursorPosition);
-            }
-        });
-
-        player1Card.setOnClickListener(v -> listener.onPlayerCardClick(0));
-
-        player2Card.setOnClickListener(v -> listener.onPlayerCardClick(1));
-
-        ballsOnTableFloatingButton.setOnClickListener(v -> listener.onBallsOnTableFloatingButtonClick() );
-
-        missButton.setOnClickListener(v -> {
-            assignPoints();
-            newTurn(getString(R.string.miss_string));
-        });
-
-        safeButton.setOnClickListener(v -> {
-            assignPoints();
-            newTurn(getString(R.string.safe_string));
-        });
-
-        foulButton.setOnClickListener(v -> {
-            assignPoints();
-            scoreBoardViewModel.addPoints( scoreSheetViewModel.turnplayerNumber(), (scoreSheetViewModel.currentTurn() == 0) ? -2:-1 );
-            newTurn(getString(R.string.foul_string));
-        });
-
-        undoButton.setOnClickListener(v -> scoreSheetViewModel.rollback());
-
-        undoButton.setOnLongClickListener(v -> {
-            scoreSheetViewModel.toStart();
-            return true;
-        });
-
-        redoButton.setOnClickListener(v -> scoreSheetViewModel.progress());
-
-        redoButton.setOnLongClickListener(v -> {
-            scoreSheetViewModel.toLatest();
-            return true;
-        });
-
-        newGameButton.setOnClickListener(v -> {
-            newGame();
-            newGameButton.setVisibility(View.INVISIBLE);
-        });
-
-        return view;
     }
 
     private void newTurn(String reason){
