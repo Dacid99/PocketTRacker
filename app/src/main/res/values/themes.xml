@@ -32,7 +32,7 @@
 
     <style name="Widget.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
         <item name="android:background">@color/colorPrimary</item>
-        <item name="itemTextColor">@color/colorOnPrimary</item>
+        <item name="itemIconTint">@color/colorOnPrimary</item>
         <item name="elevation">20dp</item>
     </style>
 </resources>

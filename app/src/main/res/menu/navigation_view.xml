@@ -5,6 +5,7 @@
         android:id="@+id/action_to_counterFragment"
         android:icon="@drawable/ic_home"
         android:title="counter" />
+
     <item
         android:id="@+id/action_to_scoreSheetFragment"
         android:icon="@drawable/ic_scoresheet"

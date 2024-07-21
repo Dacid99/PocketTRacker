@@ -6,12 +6,14 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,6 +26,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigationrail.NavigationRailView;
 
 import java.io.IOException;
@@ -84,11 +87,25 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         if (bottomNavigationView != null) {
             NavigationUI.setupWithNavController(bottomNavigationView, navController);
+            bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    NavigationUI.onNavDestinationSelected(menuItem, navController);
+                    return true;
+                }
+            });
         }
 
         NavigationRailView navigationRailView = findViewById(R.id.rail_navigation);
         if (navigationRailView != null) {
             NavigationUI.setupWithNavController(navigationRailView, navController);
+            navigationRailView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    NavigationUI.onNavDestinationSelected(menuItem, navController);
+                    return true;
+                }
+            });
         }
 
         createFileActivityLauncher = registerForActivityResult(
