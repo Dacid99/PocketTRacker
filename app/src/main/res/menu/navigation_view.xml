@@ -3,20 +3,21 @@
 
     <item
         android:id="@+id/action_to_counterFragment"
-        android:icon="@mipmap/ic_launcher_foreground"
+        android:icon="@drawable/ic_home"
         android:title="@string/counter_menustring" />
     <item
         android:id="@+id/action_to_scoreSheetFragment"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/ic_scoresheet"
         android:title="@string/scoresheet_menustring" />
 
     <item
         android:id="@+id/action_to_statisticsFragment"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/ic_statistics"
         android:title="@string/statistics_menustring" />
 
     <item
         android:title="@string/settings_string"
+        android:icon="@drawable/ic_settings"
         android:id="@+id/action_to_settingsFragment"
         android:orderInCategory="100"/>
 
