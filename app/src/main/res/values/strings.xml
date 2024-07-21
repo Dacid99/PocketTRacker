@@ -107,5 +107,8 @@
     <string name="author_format">By %1$s</string>
     <string name="thankyou_string">"Thank you for using my app!\nPlease report bugs, request features and, if you like, leave a star in the Gitlab repo: "</string>
     <string name="gitlab_format" translatable="false">@string/rawString_format</string>
+    <string name="AODon_string">AOD for mainpage enabled</string>
+    <string name="AODoff_string">AOD for mainpage disabled</string>
+    <string name="AOD_toggle_title">AOD on/off</string>
 
 </resources>

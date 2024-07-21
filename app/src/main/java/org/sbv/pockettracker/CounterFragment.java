@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,6 +59,7 @@ public class CounterFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater layoutInflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = layoutInflater.inflate(R.layout.fragment_counter, container,false);
+
 
         player1ScoreView = view.findViewById(R.id.player1ScoreView);
         player2ScoreView = view.findViewById(R.id.player2ScoreView);
@@ -172,6 +175,10 @@ public class CounterFragment extends Fragment{
         });
 
         preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+
+        if (preferences.getBoolean("AOD_toggle", true)) {
+            requireActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
         sharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, @Nullable String key) {
@@ -233,6 +240,10 @@ public class CounterFragment extends Fragment{
                                 player2ClubView.setVisibility(View.VISIBLE);
                             }
                             break;
+                        case "AOD_toggle":
+                            if (sharedPreferences.getBoolean(key, true)) {
+                                requireActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                            }
                     }
                 }
             }
@@ -333,8 +344,9 @@ public class CounterFragment extends Fragment{
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
+        requireActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         preferences.unregisterOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
     }
 }

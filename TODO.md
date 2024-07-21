@@ -7,9 +7,9 @@
 - use one player fragment for both players, allows for faster switching and saving of states, plus you can get rid of requestplayer interface
 - setting for theme
 - animated transition
-- AOD feature
 -
 - sort src files into subfolders
 - make beautiful stats fragment
 - set font
 - make bottomnavigation a topnavigation perhaps
+- land numberpane is broken

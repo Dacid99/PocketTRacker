@@ -42,5 +42,8 @@
     <string name="versionName_format">Versionsname</string>
     <string name="author_format">Von %1$s</string>
     <string name="thankyou_string">Vielen Dank dass du meine App benutzt!\nBitte melde Bugs, Featureanfragen und, wenn du möchtest, vergib einen Stern im Gitlab Repo:</string>
+    <string name="AODon_string">AOD auf der Hauptseite aktiviert</string>
+    <string name="AODoff_string">AOD auf der Hauptseite deaktiviert</string>
+    <string name="AOD_toggle_title">AOD an/aus</string>
 
 </resources>

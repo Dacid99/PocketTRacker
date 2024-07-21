@@ -42,6 +42,13 @@
             app:summaryOn="@string/club_toggle_summary_on"
             app:title="@string/club_toggle_title" />
 
+        <SwitchPreferenceCompat
+            app:key="AOD_toggle"
+            app:defaultValue="true"
+            app:summaryOff="@string/AODoff_string"
+            app:summaryOn="@string/AODon_string"
+            app:title="@string/AOD_toggle_title" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
