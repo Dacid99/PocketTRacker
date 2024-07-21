@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 public class GameStatistics {
     public static int[] maxRuns(ScoreSheet scoreSheet){
         int[] maxRun = new int[2];
-        try { //should be seperated, here in one because both lists are of same length by design -> exception should be thrown at first line
+        try { //should be separated, here in one because both lists are of same length by design -> exception should be thrown at first line
             maxRun[0] = Collections.max(scoreSheet.getPlayer1IncrementsList());
             maxRun[1] = Collections.max(scoreSheet.getPlayer2IncrementsList());
         } catch (NoSuchElementException e){ //indicating an empty list
@@ -37,8 +37,8 @@ public class GameStatistics {
         }
 
         //scoresheet should never be empty as the constructor of scoresheet set a first element
-        meanInnings[0] = (scoreSheet.isEmpty()) ? 0 : sumPlayer1 / playerInnings(scoreSheet)[0];
-        meanInnings[1] = (scoreSheet.isEmpty()) ? 0 : sumPlayer2 / playerInnings(scoreSheet)[1];
+        meanInnings[0] = (scoreSheet.length()== 1) ? 0 : sumPlayer1 / playerInnings(scoreSheet)[0];
+        meanInnings[1] = (scoreSheet.length() <= 2) ? 0 : sumPlayer2 / playerInnings(scoreSheet)[1];
 
         return meanInnings;
     }
