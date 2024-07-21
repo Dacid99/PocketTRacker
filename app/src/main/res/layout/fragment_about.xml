@@ -4,18 +4,25 @@
     android:layout_height="match_parent"
     android:id="@+id/about_page">
 
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:id="@+id/about_draghandle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/about_appname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textSize="@dimen/textSize"
-        android:layout_toEndOf="@id/about_icon"/>
+        android:layout_toEndOf="@id/about_icon"
+        android:layout_below="@id/about_draghandle"/>
 
     <ImageView
         android:id="@+id/about_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/about_draghandle"
         android:src="@mipmap/ic_launcher" />
 
     <com.google.android.material.textview.MaterialTextView
