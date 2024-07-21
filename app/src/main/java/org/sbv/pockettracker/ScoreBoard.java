@@ -5,8 +5,6 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.material.color.utilities.Score;
-
 import org.jetbrains.annotations.Contract;
 
 public class ScoreBoard implements Parcelable {

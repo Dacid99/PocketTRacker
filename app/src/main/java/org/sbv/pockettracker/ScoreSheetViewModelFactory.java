@@ -1,11 +1,9 @@
 package org.sbv.pockettracker;
 
 import androidx.annotation.NonNull;
-import androidx.core.util.Pools;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.color.utilities.Score;
 
 public class ScoreSheetViewModelFactory implements ViewModelProvider.Factory {
     private final ScoreBoardViewModel scoreBoardViewModel;

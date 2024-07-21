@@ -93,8 +93,6 @@ public class ScoreSheetViewModel extends ViewModel {
             return scoreSheet.length();
         }else return 1;
     }
-
-
     public void reset(PoolTableViewModel poolTableViewModel, ScoreBoardViewModel scoreBoardViewModel){
         ScoreSheet scoreSheet = new ScoreSheet(poolTableViewModel,scoreBoardViewModel);
         scoreSheetLiveData.setValue(scoreSheet);

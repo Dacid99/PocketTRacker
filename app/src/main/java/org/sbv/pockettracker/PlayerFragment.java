@@ -44,13 +44,11 @@ public class PlayerFragment extends DialogFragment {
     private static final String NAME_HISTORY_KEY = "player_history";
     private static final String CLUB_HISTORY_KEY = "club_history";
     private static final String PLAYERNUMBERPARAMETER = "playerNumber";
-    private static final String SCORESHEETPARAMETER = "scoresheet";
 
     private int playerNumber;
     private PlayersViewModel playersViewModel;
     private ScoreBoardViewModel scoreBoardViewModel;
     private ScoreSheetViewModel scoreSheetViewModel;
-    private View view;
     private TextInputLayout playerClubLayout;
     private AutoCompleteTextView playerNameInput, playerClubInput;
     private MaterialButton leftToOtherPlayerButton, rightToOtherPlayerButton, leftSwapPlayersButton, rightSwapPlayersButton;
@@ -92,7 +90,7 @@ public class PlayerFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_player, container, false);
+        View view = inflater.inflate(R.layout.fragment_player, container, false);
         Objects.requireNonNull(Objects.requireNonNull(getDialog()).getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         playerNameInput = view.findViewById(R.id.playerName);
@@ -209,33 +207,13 @@ public class PlayerFragment extends DialogFragment {
         playerClubInput.setAdapter(clubAdapter);
         playerClubInput.setThreshold(1);
 
-        leftToOtherPlayerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToOtherPlayer();
-            }
-        });
+        leftToOtherPlayerButton.setOnClickListener(v -> switchToOtherPlayer());
 
-        rightToOtherPlayerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToOtherPlayer();
-            }
-        });
+        rightToOtherPlayerButton.setOnClickListener(v -> switchToOtherPlayer());
 
-        leftSwapPlayersButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onSwapButtonClick();
-            }
-        });
+        leftSwapPlayersButton.setOnClickListener(v -> listener.onSwapButtonClick());
 
-        rightSwapPlayersButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onSwapButtonClick();
-            }
-        });
+        rightSwapPlayersButton.setOnClickListener(v -> listener.onSwapButtonClick());
 
         return view;
     }

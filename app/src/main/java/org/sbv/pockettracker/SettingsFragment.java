@@ -3,31 +3,24 @@ package org.sbv.pockettracker;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import com.google.android.material.button.MaterialButton;
 
 
 public class SettingsFragment extends Fragment {
-    private View view;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater layoutInflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = layoutInflater.inflate(R.layout.fragment_settings, container, false);
-
-        return view;
+        return layoutInflater.inflate(R.layout.fragment_settings, container, false);
     }
 
     @Override
@@ -37,12 +30,6 @@ public class SettingsFragment extends Fragment {
             fragmentManager.beginTransaction().replace(R.id.settings, new SettingsSubFragment()).commit();
             fragmentManager.beginTransaction().replace(R.id.about_container, new AboutFragment()).commit();
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem){
-        int id = menuItem.getItemId();
-        return super.onOptionsItemSelected(menuItem);
     }
 
     public static class SettingsSubFragment extends PreferenceFragmentCompat {

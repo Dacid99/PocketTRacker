@@ -1,6 +1,6 @@
 - mark statistics in table
 - add more final keywords to mark immutability
-- more logging and error handling!!
+- more logging and error handling, find better way than assert!!
 - find good statistics and plots library
 - backgrounds in table can be done more concisely using LayerDrawable
 - move increments math to gamestats class
@@ -12,6 +12,4 @@
 - sort src files into subfolders
 - make beautiful stats fragment
 - make nice about page, maybe popup from below
-- preferences for default names are buggy
 - make bottomnavigation a topnavigation perhaps
-- resolve warnings

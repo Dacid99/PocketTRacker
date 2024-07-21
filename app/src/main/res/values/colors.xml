@@ -61,8 +61,6 @@
     <color name="secondaryContainer">@color/chocolate</color>
     <color name="onSecondaryContainer">@color/white</color>
 
-    <color name="surface">@color/white</color>
-    <color name="onSurface">@color/black</color>
     <color name="background">@color/white</color>
     <color name="onBackground">@color/black</color>
 
@@ -89,6 +87,4 @@
     <color name="dropdown_background_color">@color/lighter_gray</color>
     <color name="playerCardBackgroundTint">@color/white</color>
 
-    <!-- toolbar colors -->
-    <color name="current_activity_color">@color/black</color>
 </resources>

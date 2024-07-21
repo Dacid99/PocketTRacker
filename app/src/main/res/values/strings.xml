@@ -29,13 +29,10 @@
     <string name="newBallNumber_hint">Touch for remaining balls</string>
     <string name="winnerPoints_hint">Goal</string>
 
-    <string name="cantOpenScoreSheet_toast">Can\'t open scoresheet as it is unhealthy. Please report this on gitlab!</string>
-
     <string name="app_name" translatable="false">PocketTRacker</string>
 
 
     <!-- scoresheet strings -->
-    <string name="title_activity_score_sheet">Scoresheet</string>
     <string name="turnnumber_columnlabel">Inning</string>
     <string name="turnnumber_subcolumnlabel" translatable="false">#</string>
     <string name="ballsOnTable_columnlabel">Table</string>
@@ -78,19 +75,18 @@
     <string name="right_arrow_string" translatable="false">\u2192</string>
     <string name="left_swap_string" translatable="false">\u21C6</string>
     <string name="right_swap_string" translatable="false">\u21C4</string>
+    <string name="playerName_accessibilityLabel">Enter player name</string>
+    <string name="playerClub_accessibilityLabel">Enter player club</string>
 
     <!-- toolbar strings -->
-    <string name="counter_string" translatable="false">@string/app_name</string>
-    <string name="scoresheet_string" translatable="false">\u2630</string>
-    <string name="title_activity_settings">Settings</string>
-    <string name="title_activity_main" translatable="false">MainActivity</string>
-
-
+    <string name="counter_string" translatable="false">counter</string>
+    <string name="scoresheet_string" translatable="false">scoresheet</string>
+    <string name="statistics_string">statistics</string>
+    <string name="settings_string" translatable="false">settings</string>
 
     <!-- Preference Titles -->
     <string name="customization_header">Customization</string>
     <string name="defaults_header">Defaults</string>
-
 
     <!-- Defaults Preferences -->
     <string name="player1_name_default_title">Default name for player 1</string>
@@ -103,8 +99,6 @@
     <string name="club_toggle_summary_off">Players have no clubs</string>
     <string name="club_toggle_summary_on">Players have clubs</string>
     <string name="club_toggle_title">Clubs on/off</string>
-    <string name="settings_string" translatable="false">\u2699</string>
     <string name="about_string">About</string>
-    <string name="statistics_menustring">Statistics</string>
 
 </resources>

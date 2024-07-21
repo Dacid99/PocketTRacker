@@ -8,7 +8,4 @@
     <fraction name="bottom_block2_guideline_fraction">0.95</fraction>
     <fraction name="start_block2_guideline_fraction">0.51</fraction>
 
-    <!-- activity_scoresheet dimensions-->
-    <fraction name="center_guideline_fraction">0.75</fraction>
-
 </resources>

@@ -103,12 +103,9 @@ public class NumberPaneFragment extends DialogFragment {
     private void setButtonListeners(){
         for (int number = 1; number< buttonArray.length + 1; number++){
             int buttonReturnNumber = number;
-            buttonArray[number - 1].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onNumberPaneClick(buttonReturnNumber);
-                    dismiss();
-                }
+            buttonArray[number - 1].setOnClickListener(v -> {
+                listener.onNumberPaneClick(buttonReturnNumber);
+                dismiss();
             });
         }
     }

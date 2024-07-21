@@ -51,6 +51,7 @@
                         android:paddingTop="@dimen/autocompleteTextView_paddingTop"
                         android:paddingBottom="@dimen/autocompleteTextView_paddingBottom"
                         android:textSize="@dimen/playerFragment_inputTextSize"
+                        android:hint="@string/playerName_accessibilityLabel"
                         app:hintEnabled="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -90,6 +91,7 @@
                         android:paddingTop="@dimen/autocompleteTextView_paddingTop"
                         android:paddingBottom="@dimen/autocompleteTextView_paddingBottom"
                         android:textSize="@dimen/playerFragment_inputTextSize"
+                        android:hint="@string/playerClub_accessibilityLabel"
                         app:hintEnabled="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>

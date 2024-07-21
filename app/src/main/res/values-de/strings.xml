@@ -14,7 +14,6 @@
     <string name="redo_string">Vor \u21B7</string>
     <string name="newGame_string">Neues Spiel</string>
     <string name="turnnumber_columnlabel">Aufnahme</string>
-    <string name="title_activity_score_sheet">Spielprotokoll</string>
     <string name="player1_default">Spieler1</string>
     <string name="player2_default">Spieler2</string>
     <string name="scoresheet_scrollview_description">Spielprotokoll für das 14 und 1 endlos Spiel</string>
@@ -23,7 +22,6 @@
     <string name="meanInning_format">\u2300 Aufnahme: %1$.2f</string>
     <string name="meanRun_format">\u2300 Run: %1$.2f</string>
     <string name="saveGame_string">Speichern</string>
-    <string name="cantOpenScoreSheet_toast">Kann den Spielbericht nicht öffnen, er ist falsch. Bitte teile mir diesen Fehler auf gitlab mit!</string>
     <string name="loadGame_string">Laden</string>
     <string name="button_1_label">1\nrerack</string>
     <string name="customization_header">Individualisierung</string>
@@ -36,8 +34,9 @@
     <string name="club_toggle_summary_off">Spieler haben keine Vereine</string>
     <string name="club_toggle_summary_on">Spieler haben Vereine</string>
     <string name="club_toggle_title">Vereine an/aus</string>
-    <string name="title_activity_settings">Einstellungen</string>
-    <string name="about_string">About</string>
-    <string name="statistics_menustring">Statistics</string>
+    <string name="about_string">Über</string>
+    <string name="statistics_string">Statistiken</string>
+    <string name="playerClub_accessibilityLabel">Gib den Spielernamen ein</string>
+    <string name="playerName_accessibilityLabel">Gib den Club des Spielers ein</string>
 
 </resources>

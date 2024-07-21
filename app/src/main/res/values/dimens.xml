@@ -34,8 +34,6 @@
     <dimen name="autocompleteTextView_paddingBottom">16dp</dimen>
     <dimen name="score_textSize_playerfragment">72sp</dimen>
     <dimen name="textSize_playerfragment">20sp</dimen>
-
     <dimen name="dropdown_padding">12dp</dimen>
-    <dimen name="winningPointsOffset">120dp</dimen>
 
 </resources>

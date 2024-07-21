@@ -11,12 +11,11 @@ import androidx.fragment.app.DialogFragment;
 
 
 public class AboutFragment extends DialogFragment {
-    private View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_about, container,false);
+        View view = inflater.inflate(R.layout.fragment_about, container,false);
         //Objects.requireNonNull(Objects.requireNonNull(getDialog()).getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         return view;

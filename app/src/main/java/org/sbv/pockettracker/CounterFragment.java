@@ -25,7 +25,6 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class CounterFragment extends Fragment{
@@ -43,7 +42,6 @@ public class CounterFragment extends Fragment{
     private TextInputEditText winningPointsInput;
     private MaterialCardView player1Card, player2Card;
     private MaterialButton  foulButton, missButton, safeButton, redoButton, undoButton, newGameButton;
-    private View view;
     private CounterFragmentListener listener;
 
     @Override
@@ -58,7 +56,7 @@ public class CounterFragment extends Fragment{
 
     @Override
     public View onCreateView(@NonNull LayoutInflater layoutInflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = layoutInflater.inflate(R.layout.fragment_counter, container,false);
+        View view = layoutInflater.inflate(R.layout.fragment_counter, container,false);
 
         player1ScoreView = view.findViewById(R.id.player1ScoreView);
         player2ScoreView = view.findViewById(R.id.player2ScoreView);
@@ -138,11 +136,6 @@ public class CounterFragment extends Fragment{
         });
 
         scoreSheetViewModel = new ViewModelProvider(requireActivity()).get(ScoreSheetViewModel.class);
-        try {
-            System.out.println(Arrays.toString(playersViewModel.getPlayers().getValue().getNames()) + "on line 175");
-        } catch (NullPointerException e) {
-            System.out.println("null on line 175");
-        }
         scoreSheetViewModel.getScoreSheet().observe(getViewLifecycleOwner(), new Observer<ScoreSheet>() {
             @Override
             public void onChanged(ScoreSheet scoreSheet) {
@@ -276,19 +269,9 @@ public class CounterFragment extends Fragment{
             }
         });
 
-        player1Card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onPlayerCardClick(0);
-            }
-        });
+        player1Card.setOnClickListener(v -> listener.onPlayerCardClick(0));
 
-        player2Card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onPlayerCardClick(1);
-            }
-        });
+        player2Card.setOnClickListener(v -> listener.onPlayerCardClick(1));
 
         ballsOnTableFloatingButton.setOnClickListener(v -> listener.onBallsOnTableFloatingButtonClick() );
 
@@ -308,28 +291,18 @@ public class CounterFragment extends Fragment{
             newTurn(getString(R.string.foul_string));
         });
 
-        undoButton.setOnClickListener(v -> {
-            scoreSheetViewModel.rollback();
+        undoButton.setOnClickListener(v -> scoreSheetViewModel.rollback());
+
+        undoButton.setOnLongClickListener(v -> {
+            scoreSheetViewModel.toStart();
+            return true;
         });
 
-        undoButton.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                scoreSheetViewModel.toStart();
-                return true;
-            }
-        });
+        redoButton.setOnClickListener(v -> scoreSheetViewModel.progress());
 
-        redoButton.setOnClickListener(v -> {
-            scoreSheetViewModel.progress();
-        });
-
-        redoButton.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                scoreSheetViewModel.toLatest();
-                return true;
-            }
+        redoButton.setOnLongClickListener(v -> {
+            scoreSheetViewModel.toLatest();
+            return true;
         });
 
         newGameButton.setOnClickListener(v -> {

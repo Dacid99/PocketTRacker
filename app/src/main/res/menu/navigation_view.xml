@@ -4,22 +4,22 @@
     <item
         android:id="@+id/action_to_counterFragment"
         android:icon="@drawable/ic_home"
-        android:title="counter" />
+        android:title="@string/counter_string" />
 
     <item
         android:id="@+id/action_to_scoreSheetFragment"
         android:icon="@drawable/ic_scoresheet"
-        android:title="scoresheet" />
+        android:title="@string/scoresheet_string" />
 
     <item
         android:id="@+id/action_to_statisticsFragment"
         android:icon="@drawable/ic_statistics"
-        android:title="statistics" />
+        android:title="@string/statistics_string" />
 
     <item
-        android:title="settings"
-        android:icon="@drawable/ic_settings"
         android:id="@+id/action_to_settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings_string"
         android:orderInCategory="100"/>
 
 </menu>

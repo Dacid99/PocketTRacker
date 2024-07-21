@@ -30,7 +30,6 @@ public class ScoreSheetFragment extends Fragment {
     private ScoreSheetViewModel scoreSheetViewModel;
     private PlayersViewModel playersViewModel;
     private ScoreBoardViewModel scoreBoardViewModel;
-    private View view;
     private ScoreSheetFragmentListener listener;
 
     public interface ScoreSheetFragmentListener{
@@ -50,7 +49,7 @@ public class ScoreSheetFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater layoutInflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = layoutInflater.inflate(R.layout.fragment_scoresheet, container, false);
+        View view = layoutInflater.inflate(R.layout.fragment_scoresheet, container, false);
 
         tableLayout = view.findViewById(R.id.score_table);
 

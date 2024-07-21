@@ -18,14 +18,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigationrail.NavigationRailView;
 
@@ -70,34 +67,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
 
         applyPreferences();
 
-
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment);
-        NavController navController = navHostFragment.getNavController();
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        if (bottomNavigationView != null) {
-            NavigationUI.setupWithNavController(bottomNavigationView, navController);
-            bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    NavigationUI.onNavDestinationSelected(menuItem, navController);
-                    return true;
-                }
-            });
-        }
-
-        NavigationRailView navigationRailView = findViewById(R.id.rail_navigation);
-        if (navigationRailView != null) {
-            NavigationUI.setupWithNavController(navigationRailView, navController);
-            navigationRailView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    NavigationUI.onNavDestinationSelected(menuItem, navController);
-                    return true;
-                }
-            });
-        }
+        applyNavigation();
 
         createFileActivityLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -176,6 +146,38 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
             }
         };
         preferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
+    }
+
+    private void applyNavigation(){
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        assert navHostFragment != null;
+        NavController navController = navHostFragment.getNavController();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        if (bottomNavigationView != null) {
+            NavigationUI.setupWithNavController(bottomNavigationView, navController);
+            bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    NavigationUI.onNavDestinationSelected(menuItem, navController);
+                    return true;
+                }
+            });
+        }
+
+        NavigationRailView navigationRailView = findViewById(R.id.rail_navigation);
+        if (navigationRailView != null) {
+            NavigationUI.setupWithNavController(navigationRailView, navController);
+            navigationRailView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    NavigationUI.onNavDestinationSelected(menuItem, navController);
+                    return true;
+                }
+            });
+        }
+
     }
 
     private void assignPoints(){
