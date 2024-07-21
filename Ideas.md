@@ -13,6 +13,7 @@
 - options menu for customization
 - settings for toggling options like club on/off
 - remember players via defaults and autocomplete
+- AOD feature
 
 # Future features
 - remember players via profiles
