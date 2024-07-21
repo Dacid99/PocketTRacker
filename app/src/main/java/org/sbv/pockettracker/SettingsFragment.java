@@ -15,9 +15,6 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-
-
 public class SettingsFragment extends Fragment {
 
     private ImageView aboutIcon;

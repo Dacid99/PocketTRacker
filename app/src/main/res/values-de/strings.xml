@@ -38,8 +38,8 @@
     <string name="statistics_string">Statistiken</string>
     <string name="playerClub_accessibilityLabel">Gib den Spielernamen ein</string>
     <string name="playerName_accessibilityLabel">Gib den Club des Spielers ein</string>
-    <string name="versionCode_format">Versionscode</string>
-    <string name="versionName_format">Versionsname</string>
+    <string name="versionCode_format">Versionscode %1$d</string>
+    <string name="versionName_format">Versionsname %1$s</string>
     <string name="author_format">Von %1$s</string>
     <string name="thankyou_string">Vielen Dank dass du meine App benutzt!\nBitte melde Bugs, Featureanfragen und, wenn du möchtest, vergib einen Stern im Gitlab Repo:</string>
     <string name="AODon_string">AOD auf der Hauptseite aktiviert</string>
