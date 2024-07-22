@@ -13,6 +13,5 @@
 - set font
 - make bottomnavigation a topnavigation perhaps
 - move playerfragment switch button out of card if possible
-- land numberpane is broken
 - playerprofiles
 - colored scoresheet via statistics class
