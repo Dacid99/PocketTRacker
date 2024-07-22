@@ -10,60 +10,28 @@
         android:name="org.sbv.pockettracker.CounterFragment"
         android:label="fragment_counter"
         tools:layout="@layout/fragment_counter" >
-        <action
-            android:id="@+id/action_to_scoreSheetFragment"
-            app:destination="@id/scoreSheetFragment" />
-        <action
-            android:id="@+id/action_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_to_statisticsFragment"
-            app:destination="@id/statisticsFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/scoreSheetFragment"
         android:name="org.sbv.pockettracker.ScoreSheetFragment"
         android:label="fragment_scoresheet"
         tools:layout="@layout/fragment_scoresheet" >
-        <action
-            android:id="@+id/action_to_counterFragment"
-            app:destination="@id/counterFragment" />
-        <action
-            android:id="@+id/action_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_to_statisticsFragment"
-            app:destination="@id/statisticsFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="org.sbv.pockettracker.StatisticsFragment"
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics" >
-        <action
-            android:id="@+id/action_to_scoreSheetFragment"
-            app:destination="@id/scoreSheetFragment" />
-        <action
-            android:id="@+id/action_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_to_counterFragment"
-            app:destination="@id/counterFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="org.sbv.pockettracker.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
-        <action
-            android:id="@+id/action_to_scoreSheetFragment"
-            app:destination="@id/scoreSheetFragment" />
-        <action
-            android:id="@+id/action_to_counterFragment"
-            app:destination="@id/counterFragment" />
-        <action
-            android:id="@+id/action_to_statisticsFragment"
-            app:destination="@id/statisticsFragment" />
+
     </fragment>
 
 </navigation>

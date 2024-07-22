@@ -1,5 +1,7 @@
 package org.sbv.pockettracker;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -157,25 +159,11 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         if (bottomNavigationView != null) {
             NavigationUI.setupWithNavController(bottomNavigationView, navController);
-            bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    NavigationUI.onNavDestinationSelected(menuItem, navController);
-                    return true;
-                }
-            });
         }
 
         NavigationRailView navigationRailView = findViewById(R.id.rail_navigation);
         if (navigationRailView != null) {
             NavigationUI.setupWithNavController(navigationRailView, navController);
-            navigationRailView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    NavigationUI.onNavDestinationSelected(menuItem, navController);
-                    return true;
-                }
-            });
         }
 
     }
@@ -242,6 +230,12 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
     public void onBallsOnTableFloatingButtonClick() {
         NumberPaneFragment numberPaneFragment = NumberPaneFragment.newInstance(poolTableViewModel.getOldNumberOfBalls());
         numberPaneFragment.show(getSupportFragmentManager(), "NumberPane");
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+
     }
 
     @Override
