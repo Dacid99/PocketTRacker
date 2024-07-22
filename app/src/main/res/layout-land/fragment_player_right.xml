@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlayerFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/playerCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/toOtherPlayerButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/playerLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/playerScore"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/playerNameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/player_name_hint"
+                    android:layout_alignParentTop="true" >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/playerName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/autocompleteTextView_paddingTop"
+                        android:paddingBottom="@dimen/autocompleteTextView_paddingBottom"
+                        android:textSize="@dimen/playerFragment_inputTextSize" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/swapButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:text="@string/right_swap_string"
+                    android:textSize="@dimen/textSize"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/playerNameLayout" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/playerClubLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/player_club_hint"
+                    android:layout_below="@+id/swapButton" >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/playerClub"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/autocompleteTextView_paddingTop"
+                        android:paddingBottom="@dimen/autocompleteTextView_paddingBottom"
+                        android:textSize="@dimen/playerFragment_inputTextSize" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/playerScore"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/player_score_format"
+                android:textColor="@color/score_color"
+                android:textSize="60sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/playerLayout" />
+
+            <TableLayout
+                android:id="@+id/playerStats_table"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/playerScore"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/inningsPlayer_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="@dimen/textSize" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/meanInningPlayer_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="@dimen/textSize" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/maxRunPlayer_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="@dimen/textSize" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/meanRunPlayer_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="@dimen/textSize" />
+
+            </TableLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.33" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/toOtherPlayerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:paddingBottom="12dp"
+        android:text="@string/right_arrow_string"
+        android:textSize="@dimen/textSize"
+        android:layout_below="@id/playerCard"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>
