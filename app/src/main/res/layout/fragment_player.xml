@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlayerFragment"
-    android:minWidth="@dimen/playerFragment_width"
-    android:minHeight="@dimen/playerFragment_height">
+    tools:context=".PlayerFragment" >
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/playerCard"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="24dp"
         android:backgroundTint="@color/playerCardBackgroundTint"
-        app:layout_constraintBottom_toTopOf="@+id/left_toOtherPlayerButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_alignParentTop="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -50,9 +45,7 @@
                         android:gravity="center"
                         android:paddingTop="@dimen/autocompleteTextView_paddingTop"
                         android:paddingBottom="@dimen/autocompleteTextView_paddingBottom"
-                        android:textSize="@dimen/playerFragment_inputTextSize"
-                        android:hint="@string/playerName_accessibilityLabel"
-                        app:hintEnabled="true" />
+                        android:textSize="@dimen/playerFragment_inputTextSize" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/right_swapButton"
-                    android:hint="@string/player_club_hint">
+                    android:hint="@string/player_club_hint" >
 
                     <AutoCompleteTextView
                         android:id="@+id/playerClub"
@@ -90,9 +83,7 @@
                         android:gravity="center"
                         android:paddingTop="@dimen/autocompleteTextView_paddingTop"
                         android:paddingBottom="@dimen/autocompleteTextView_paddingBottom"
-                        android:textSize="@dimen/playerFragment_inputTextSize"
-                        android:hint="@string/playerClub_accessibilityLabel"
-                        app:hintEnabled="true" />
+                        android:textSize="@dimen/playerFragment_inputTextSize" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -167,10 +158,8 @@
         android:paddingBottom="12dp"
         android:text="@string/right_arrow_string"
         android:textSize="@dimen/textSize"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/left_toOtherPlayerButton"
-        app:layout_constraintTop_toBottomOf="@+id/playerCard" />
+        android:layout_below="@id/playerCard"
+        android:layout_alignParentEnd="true"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/left_toOtherPlayerButton"
@@ -180,9 +169,7 @@
         android:paddingBottom="12dp"
         android:text="@string/left_arrow_string"
         android:textSize="@dimen/textSize"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/right_toOtherPlayerButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerCard" />
+        android:layout_below="@id/playerCard"
+        android:layout_alignParentStart="true"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
