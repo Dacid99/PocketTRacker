@@ -1,21 +1,17 @@
 package org.sbv.pockettracker;
 
-import static androidx.navigation.Navigation.findNavController;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -25,7 +21,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigationrail.NavigationRailView;
 
 import java.io.IOException;
@@ -230,12 +225,6 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
     public void onBallsOnTableFloatingButtonClick() {
         NumberPaneFragment numberPaneFragment = NumberPaneFragment.newInstance(poolTableViewModel.getOldNumberOfBalls());
         numberPaneFragment.show(getSupportFragmentManager(), "NumberPane");
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle savedInstanceState){
-        super.onSaveInstanceState(savedInstanceState);
-
     }
 
     @Override

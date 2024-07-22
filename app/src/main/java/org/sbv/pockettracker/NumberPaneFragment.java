@@ -61,7 +61,6 @@ public class NumberPaneFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_numberpane, container,false);
-        Objects.requireNonNull(Objects.requireNonNull(getDialog()).getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         grid = view.findViewById(R.id.numberGrid);
         findButtons();
         setButtonListeners();

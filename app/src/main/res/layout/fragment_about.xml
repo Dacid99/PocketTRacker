@@ -23,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/about_draghandle"
+        android:contentDescription="app icon"
         android:src="@mipmap/ic_launcher" />
 
     <com.google.android.material.textview.MaterialTextView

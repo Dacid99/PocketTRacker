@@ -22,12 +22,9 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater layoutInflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = layoutInflater.inflate(R.layout.fragment_settings, container, false);
         aboutIcon = view.findViewById(R.id.about_icon);
-        aboutIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AboutFragment aboutFragment = new AboutFragment();
-                aboutFragment.show(getChildFragmentManager(), "about_bottomsheet");
-            }
+        aboutIcon.setOnClickListener(v -> {
+            AboutFragment aboutFragment = new AboutFragment();
+            aboutFragment.show(getChildFragmentManager(), "about_bottomsheet");
         });
 
 

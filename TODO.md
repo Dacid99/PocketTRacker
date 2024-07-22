@@ -1,4 +1,3 @@
-- mark statistics in table
 - add more final keywords to mark immutability
 - more logging and error handling, find better way than assert!!
 - find good statistics and plots library
@@ -10,5 +9,5 @@
 - make beautiful stats fragment
 - set font
 - make bottomnavigation a topnavigation perhaps
-- move playerfragment switch button out of card if possible
 - playerprofiles
+- playerfragment land needs some more attention

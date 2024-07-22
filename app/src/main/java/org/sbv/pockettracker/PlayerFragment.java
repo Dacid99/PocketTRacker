@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +52,7 @@ public class PlayerFragment extends DialogFragment {
     private ScoreSheetViewModel scoreSheetViewModel;
     private TextInputLayout playerClubLayout;
     private AutoCompleteTextView playerNameInput, playerClubInput;
-    private MaterialButton leftToOtherPlayerButton, rightToOtherPlayerButton, leftSwapPlayersButton, rightSwapPlayersButton;
+    private MaterialButton toOtherPlayerButton, rightToOtherPlayerButton, swapPlayersButton, rightSwapPlayersButton;
     private TextView playerScoreView, inningsView, meanInningView, meanRunView, maxRunView;
     private SharedPreferences namePreferences, clubPreferences;
     private Set<String> nameHistorySet, clubHistorySet;
@@ -92,8 +91,7 @@ public class PlayerFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_player, container, false);
-        Objects.requireNonNull(Objects.requireNonNull(getDialog()).getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        View view = inflater.inflate((playerNumber == 0) ? R.layout.fragment_player_right : R.layout.fragment_player_left, container, false);
 
         playerNameInput = view.findViewById(R.id.playerName);
         playerClubLayout = view.findViewById(R.id.playerClubLayout);
@@ -107,24 +105,12 @@ public class PlayerFragment extends DialogFragment {
         meanRunView = view.findViewById(R.id.meanRunPlayer_view);
         maxRunView = view.findViewById(R.id.maxRunPlayer_view);
 
-        leftToOtherPlayerButton = view.findViewById(R.id.left_toOtherPlayerButton);
-        rightToOtherPlayerButton = view.findViewById(R.id.right_toOtherPlayerButton);
-        leftSwapPlayersButton = view.findViewById(R.id.left_swapButton);
-        rightSwapPlayersButton = view.findViewById(R.id.right_swapButton);
+        toOtherPlayerButton = view.findViewById(R.id.toOtherPlayerButton);
+        swapPlayersButton = view.findViewById(R.id.swapButton);
 
         if (!Players.haveClubs){
             playerClubLayout.setVisibility(View.GONE);
             playerClubInput.setVisibility(View.GONE);
-        }
-
-        if (playerNumber == 0){
-            leftToOtherPlayerButton.setVisibility(View.INVISIBLE);
-            leftSwapPlayersButton.setVisibility(View.INVISIBLE);
-        }else if (playerNumber == 1){
-            rightToOtherPlayerButton.setVisibility(View.INVISIBLE);
-            rightSwapPlayersButton.setVisibility(View.INVISIBLE);
-        }else {
-            Log.d("Bad parameter", "In PlayerFragment.onCreateView: playerNumber is neither 0 or 1!");
         }
 
         playersViewModel = new ViewModelProvider(requireActivity()).get(PlayersViewModel.class);
@@ -209,13 +195,10 @@ public class PlayerFragment extends DialogFragment {
         playerClubInput.setAdapter(clubAdapter);
         playerClubInput.setThreshold(1);
 
-        leftToOtherPlayerButton.setOnClickListener(v -> switchToOtherPlayer());
+        toOtherPlayerButton.setOnClickListener(v -> switchToOtherPlayer());
 
-        rightToOtherPlayerButton.setOnClickListener(v -> switchToOtherPlayer());
+        swapPlayersButton.setOnClickListener(v -> listener.onSwapButtonClick());
 
-        leftSwapPlayersButton.setOnClickListener(v -> listener.onSwapButtonClick());
-
-        rightSwapPlayersButton.setOnClickListener(v -> listener.onSwapButtonClick());
 
         return view;
     }
