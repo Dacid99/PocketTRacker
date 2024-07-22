@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -105,7 +106,7 @@ public class ScoreSheetFragment extends Fragment {
     }
 
     private void highlightScoreSheet(ScoreSheet scoreSheet){
-        if (scoreSheet.currentTurn() >= 0 && scoreSheet.currentTurn() < tableLayout.getChildCount()){
+        if (scoreSheet.currentTurn() < tableLayout.getChildCount()){
             TableRow turnRow = (TableRow) tableLayout.getChildAt(scoreSheet.currentTurn());
             Drawable background;
             if (scoreSheet.turnplayerNumber() == 0){
@@ -119,6 +120,14 @@ public class ScoreSheetFragment extends Fragment {
         }else{
             Log.d("Failed ifelse", "ScoreSheetActivity.highlightScoreSheet: check of pointer failed");
         }
+        int[] maxRunIndices = GameStatistics.maxRunIndices(scoreSheet);
+        TableRow maxRunPlayer1TableRow = (TableRow) tableLayout.getChildAt(maxRunIndices[0]+1);
+        TextView maxRunPlayer1View = (TextView) maxRunPlayer1TableRow.getChildAt(2);
+        maxRunPlayer1View.setTextColor(getResources().getColor(R.color.maxRun_color));
+
+        TableRow maxRunPlayer2TableRow = (TableRow) tableLayout.getChildAt(maxRunIndices[1]+1);
+        TextView maxRunPlayer2View = (TextView) maxRunPlayer2TableRow.getChildAt(4);
+        maxRunPlayer2View.setTextColor(getResources().getColor(R.color.maxRun_color));
     }
 
     private void appendTableRow(int turn, ScoreSheet scoreSheet) {

@@ -2,10 +2,21 @@ package org.sbv.pockettracker;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.NoSuchElementException;
 
 public class GameStatistics {
+
+    public static int[] maxRunIndices(ScoreSheet scoreSheet){
+        int[] maxRuns = maxRuns(scoreSheet);
+        int[] maxRunsIndices = new int[2];
+        maxRunsIndices[0] = scoreSheet.getPlayer1IncrementsList().indexOf(maxRuns[0]);
+        maxRunsIndices[1] = scoreSheet.getPlayer2IncrementsList().indexOf(maxRuns[1]);
+        System.out.println(Arrays.toString(maxRunsIndices));
+        return maxRunsIndices;
+    }
+
     public static int[] maxRuns(ScoreSheet scoreSheet){
         int[] maxRun = new int[2];
         try { //should be separated, here in one because both lists are of same length by design -> exception should be thrown at first line
