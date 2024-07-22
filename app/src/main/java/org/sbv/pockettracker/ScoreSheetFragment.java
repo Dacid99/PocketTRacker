@@ -150,11 +150,11 @@ public class ScoreSheetFragment extends Fragment {
         //only show increments for turnplayers
         //also not for 0th turn
         Drawable background = ContextCompat.getDrawable(requireContext(), R.drawable.cell_separator);
-        if (turn % 2 == 1 ) {
-            player1IncrementText.setText(getString(R.string.player_score_format, scoreSheet.getRunOfPlayer1At(turn)));
+        if (scoreSheet.turnplayerNumber() == 1 ) { //looks odd but keep in mind that the pointer lags the turnnr by 1
+            player1IncrementText.setText(getString(R.string.player_score_format, GameStatistics.getIncrementsAt(turn, scoreSheet)[0]));
             background = ContextCompat.getDrawable(requireContext(), R.drawable.cell_separator_turnplayer);
         } else if (turn != 0){
-            player2IncrementText.setText(getString(R.string.player_score_format, scoreSheet.getRunOfPlayer2At(turn)));
+            player2IncrementText.setText(getString(R.string.player_score_format, GameStatistics.getIncrementsAt(turn, scoreSheet)[1]));
         }
         player1TotalText.setText(getString(R.string.player_score_format, scoreSheet.getScoreOfPlayer1At(turn)));
         player2TotalText.setText(getString(R.string.player_score_format, scoreSheet.getScoreOfPlayer2At(turn)));

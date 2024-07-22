@@ -1,27 +1,52 @@
 package org.sbv.pockettracker;
 
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.NoSuchElementException;
 
 public class GameStatistics {
 
+    public static int[] getIncrementsAt(int turn, ScoreSheet scoreSheet){
+        if (turn <= 0 || turn >= scoreSheet.length()) {
+            return new int[]{0,0};
+        }
+        int[] increments = new int[2];
+        int[] scores = scoreSheet.getPlayerScoresAt(turn);
+        int[] prevScores = scoreSheet.getPlayerScoresAt(turn);
+        increments[0] = scores[0] - prevScores[0];
+        increments[1] = scores[1] - prevScores[1];
+        return increments;
+    }
+
+    public static ArrayList<Integer>[] getPlayerIncrementsList(ScoreSheet scoreSheet){
+        ArrayList<Integer>[] playerIncrementsList = new ArrayList[2];
+        playerIncrementsList[0] = new ArrayList<>();
+        playerIncrementsList[1] = new ArrayList<>();
+        int[] run;
+        for (int index =  1; index<scoreSheet.length(); index++){
+            run = getIncrementsAt(index, scoreSheet);
+            playerIncrementsList[0].add(run[0]);
+            playerIncrementsList[1].add(run[1]);
+        }
+        return playerIncrementsList;
+    }
+
+
     public static int[] maxRunIndices(ScoreSheet scoreSheet){
         int[] maxRuns = maxRuns(scoreSheet);
         int[] maxRunsIndices = new int[2];
-        maxRunsIndices[0] = scoreSheet.getPlayer1IncrementsList().indexOf(maxRuns[0]);
-        maxRunsIndices[1] = scoreSheet.getPlayer2IncrementsList().indexOf(maxRuns[1]);
-        System.out.println(Arrays.toString(maxRunsIndices));
+        ArrayList<Integer>[] incrementsList = getPlayerIncrementsList(scoreSheet);
+        maxRunsIndices[0] = incrementsList[0].indexOf(maxRuns[0]);
+        maxRunsIndices[1] = incrementsList[1].indexOf(maxRuns[1]);
         return maxRunsIndices;
     }
 
     public static int[] maxRuns(ScoreSheet scoreSheet){
         int[] maxRun = new int[2];
+        ArrayList<Integer>[] incrementsList = getPlayerIncrementsList(scoreSheet);
         try { //should be separated, here in one because both lists are of same length by design -> exception should be thrown at first line
-            maxRun[0] = Collections.max(scoreSheet.getPlayer1IncrementsList());
-            maxRun[1] = Collections.max(scoreSheet.getPlayer2IncrementsList());
+            maxRun[0] = Collections.max(incrementsList[0]);
+            maxRun[1] = Collections.max(incrementsList[1]);
         } catch (NoSuchElementException e){ //indicating an empty list
             maxRun[0] = 0;
             maxRun[1] = 0;
@@ -29,47 +54,38 @@ public class GameStatistics {
         return maxRun;
     }
 
-    public static int[] playerInnings(ScoreSheet scoreSheet){
-        int[] innings = new int[2];
-        innings[0] = (int) Math.ceil(Math.abs(scoreSheet.length()/2.0 - 0.5));
-        innings[1] = (int) Math.floor(Math.abs(scoreSheet.length()/2.0 - 0.5));
-        return innings;
-    }
-
     public static double[] meanInnings(ScoreSheet scoreSheet){
         double [] meanInnings = new double[2];
-        ArrayList<Integer> player1Innings = scoreSheet.getPlayer1IncrementsList() ;
-        ArrayList<Integer> player2Innings = scoreSheet.getPlayer2IncrementsList() ;
+        ArrayList<Integer>[] playerInnings = getPlayerIncrementsList(scoreSheet) ;
         double sumPlayer1 = 0.0;
         double sumPlayer2 = 0.0;
         for (int index = 0; index < scoreSheet.length() - 1; index++){
-            sumPlayer1 += player1Innings.get(index);
-            sumPlayer2 += player2Innings.get(index);
+            sumPlayer1 += playerInnings[0].get(index);
+            sumPlayer2 += playerInnings[1].get(index);
         }
 
         //scoresheet should never be empty as the constructor of scoresheet set a first element
-        meanInnings[0] = (scoreSheet.length()== 1) ? 0 : sumPlayer1 / playerInnings(scoreSheet)[0];
-        meanInnings[1] = (scoreSheet.length() <= 2) ? 0 : sumPlayer2 / playerInnings(scoreSheet)[1];
+        meanInnings[0] = (scoreSheet.length() <= 1) ? 0 : sumPlayer1 / scoreSheet.innings()[0];
+        meanInnings[1] = (scoreSheet.length() <= 2) ? 0 : sumPlayer2 / scoreSheet.innings()[1];
 
         return meanInnings;
     }
 
     public static double[] meanRuns(ScoreSheet scoreSheet){
         double [] meanRuns = new double[2];
-        ArrayList<Integer> player1Innings = scoreSheet.getPlayer1IncrementsList() ;
-        ArrayList<Integer> player2Innings = scoreSheet.getPlayer2IncrementsList() ;
-        player1Innings.removeAll(Collections.singleton(0));
-        player2Innings.removeAll(Collections.singleton(0));
+        ArrayList<Integer>[] playerInnings = getPlayerIncrementsList(scoreSheet) ;
         double sumPlayer1 = 0.0;
         double sumPlayer2 = 0.0;
-        for (int index = 0; index < player1Innings.size(); index++){
-            sumPlayer1 += player1Innings.get(index);
+        for (int index = 0; index < scoreSheet.length() - 1; index++){
+            sumPlayer1 += playerInnings[0].get(index);
+            sumPlayer2 += playerInnings[1].get(index);
         }
-        for (int index = 0; index < player2Innings.size(); index++){
-            sumPlayer2 += player2Innings.get(index);
-        }
-        meanRuns[0] = (player1Innings.isEmpty()) ? 0 : sumPlayer1 / player1Innings.size();
-        meanRuns[1] = (player2Innings.isEmpty()) ? 0 : sumPlayer2/ player2Innings.size();
+
+        playerInnings[0].removeAll(Collections.singleton(0));
+        playerInnings[1].removeAll(Collections.singleton(0));
+
+        meanRuns[0] = (playerInnings[0].isEmpty()) ? 0 : sumPlayer1 / playerInnings[0].size();
+        meanRuns[1] = (playerInnings[1].isEmpty()) ? 0 : sumPlayer2/ playerInnings[1].size();
 
         return meanRuns;
     }

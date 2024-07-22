@@ -3,10 +3,8 @@
 - more logging and error handling, find better way than assert!!
 - find good statistics and plots library
 - backgrounds in table can be done more concisely using LayerDrawable
-- move increments math to gamestats class
 - use one player fragment for both players, allows for faster switching and saving of states, plus you can get rid of requestplayer interface
 - setting for theme
-- animated transition
 - tablet layouts
 - sort src files into subfolders
 - make beautiful stats fragment
@@ -14,4 +12,3 @@
 - make bottomnavigation a topnavigation perhaps
 - move playerfragment switch button out of card if possible
 - playerprofiles
-- colored scoresheet via statistics class

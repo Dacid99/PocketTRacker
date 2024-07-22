@@ -42,7 +42,7 @@ public class StatisticsFragment extends Fragment {
             public void onChanged(ScoreSheet scoreSheet) {
                 double[] meanInnings = GameStatistics.meanInnings(scoreSheet);
                 double[] meanRuns = GameStatistics.meanRuns(scoreSheet);
-                int[] playerInnings = GameStatistics.playerInnings(scoreSheet);
+                int[] playerInnings = scoreSheet.innings();
                 int[] maxRuns = GameStatistics.maxRuns(scoreSheet);
                 maxRunPlayer1View.setText(getString(R.string.player_maxrun_format, maxRuns[0]));
                 maxRunPlayer2View.setText(getString(R.string.player_maxrun_format, maxRuns[1]));

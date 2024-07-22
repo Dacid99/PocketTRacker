@@ -199,6 +199,13 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         return pointer;
     }
 
+    public int[] innings(){
+        int[] innings = new int[2];
+        innings[0] = (int) Math.ceil(Math.abs(length()/2.0 - 0.5));
+        innings[1] = (int) Math.floor(Math.abs(length()/2.0 - 0.5));
+        return innings;
+    }
+
     public boolean isLatest(){
         //for writing pointer must be at the last index
         return pointer == length() - 1;
@@ -219,32 +226,6 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         }
     }
 
-    public ArrayList<Inning> getInningsList(){
-        return inningsList;
-    }
-
-    public ArrayList<String> getSwitchReasonList(){
-        ArrayList<String> switchReasonsList = new ArrayList<>();
-        for (Inning turn : inningsList){
-            switchReasonsList.add(turn.switchReason);
-        }
-        return switchReasonsList;
-    }
-
-    public ArrayList<int[]> getPlayerScoresList(){
-        ArrayList<int[]> playerScoresList = new ArrayList<>();
-        for (Inning turn : inningsList){
-            playerScoresList.add(turn.playerScores);
-        }
-        return playerScoresList;
-    }
-    public ArrayList<Integer> getBallsOnTableList(){
-        ArrayList<Integer> ballsOnTableList = new ArrayList<>();
-        for (Inning turn : inningsList){
-            ballsOnTableList.add(turn.ballsOnTable);
-        }
-        return ballsOnTableList;
-    }
     public int getScoreOfPlayer1At(int turn){
         return inningsList.get(turn).playerScores[0];
     }
@@ -256,46 +237,6 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     }
     public int getBallsOnTableAt(int turn){
         return inningsList.get(turn).ballsOnTable;
-    }
-
-    public int getRunOfPlayer1At(int turn) {
-        if (turn <= 0 || turn >= length()) {
-            return 0;
-        }
-        return getScoreOfPlayer1At(turn) - getScoreOfPlayer1At(turn - 1 );
-    }
-    public int getRunOfPlayer2At(int turn) {
-        if (turn <= 0 || turn >= length()) {
-            return 0;
-        }
-        return getScoreOfPlayer2At(turn) - getScoreOfPlayer2At(turn - 1);
-    }
-
-    public int[] getIncrementsAt(int turn){
-        if (turn <= 0 || turn >= length()) {
-            return new int[]{0,0};
-        }
-        int[] increments = new int[2];
-        int[] scores = getPlayerScoresAt(turn);
-        int[] prevScores = getPlayerScoresAt(turn);
-        increments[0] = scores[0] - prevScores[0];
-        increments[1] = scores[1] - prevScores[1];
-        return increments;
-    }
-
-    public ArrayList<Integer> getPlayer1IncrementsList(){
-        ArrayList<Integer> player1IncrementsList = new ArrayList<>();
-        for (int index =  1; index<length(); index++){
-            player1IncrementsList.add(getRunOfPlayer1At(index));
-        }
-        return player1IncrementsList;
-    }
-    public ArrayList<Integer> getPlayer2IncrementsList(){
-        ArrayList<Integer> player2IncrementsList = new ArrayList<>();
-        for (int index =  1; index<length(); index++){
-            player2IncrementsList.add(getRunOfPlayer2At(index));
-        }
-        return player2IncrementsList;
     }
 
     public char getSwitchReasonAt(int turn){

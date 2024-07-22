@@ -87,6 +87,12 @@ public class ScoreSheetViewModel extends ViewModel {
             return scoreSheet.currentTurn();
         }else return 0;
     }
+    public int[] innings(){
+        ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
+        if (scoreSheet != null){
+            return scoreSheet.innings();
+        }else return new int[]{0,0};
+    }
     public int length(){
         ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
         if (scoreSheet != null){
