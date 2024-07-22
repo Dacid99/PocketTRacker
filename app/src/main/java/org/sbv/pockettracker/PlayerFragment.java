@@ -15,10 +15,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
@@ -218,6 +220,20 @@ public class PlayerFragment extends DialogFragment {
         return view;
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+
+        Window window = Objects.requireNonNull(getDialog()).getWindow();
+        if (window != null){
+            window.setLayout((int)(width * 0.66), (int)(height * 0.66));
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+    }
 
     @Override
     public void onCancel(@NonNull DialogInterface dialogInterface){
