@@ -144,8 +144,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         Inning turn = new Inning();
         turn.switchReason = reason;
         //this is crucial, otherwise a reference will be created; this would update past elements as well, so the scoresheet scores would all be identical
-        turn.playerScores[0] = trackedScoreBoardViewModel.getScores()[0];
-        turn.playerScores[1] = trackedScoreBoardViewModel.getScores()[1];
+        turn.playerScores = Arrays.copyOf(trackedScoreBoardViewModel.getScores(), 2);
         turn.ballsOnTable = trackedPoolTableViewModel.getNumberOfBalls();
 
         inningsList.add(turn);
@@ -231,19 +230,13 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         }
         return switchReasonsList;
     }
-    public ArrayList<Integer> getPlayer1ScoresList(){
-        ArrayList<Integer> player1ScoresList = new ArrayList<>();
+
+    public ArrayList<int[]> getPlayerScoresList(){
+        ArrayList<int[]> playerScoresList = new ArrayList<>();
         for (Inning turn : inningsList){
-            player1ScoresList.add(turn.playerScores[0]);
+            playerScoresList.add(turn.playerScores);
         }
-        return player1ScoresList;
-    }
-    public ArrayList<Integer> getPlayer2ScoresList(){
-        ArrayList<Integer> player2ScoresList = new ArrayList<>();
-        for (Inning turn : inningsList){
-            player2ScoresList.add(turn.playerScores[1]);
-        }
-        return player2ScoresList;
+        return playerScoresList;
     }
     public ArrayList<Integer> getBallsOnTableList(){
         ArrayList<Integer> ballsOnTableList = new ArrayList<>();
@@ -257,6 +250,9 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     }
     public int getScoreOfPlayer2At(int turn){
         return inningsList.get(turn).playerScores[1];
+    }
+    public int[] getPlayerScoresAt(int turn) {
+        return inningsList.get(turn).playerScores;
     }
     public int getBallsOnTableAt(int turn){
         return inningsList.get(turn).ballsOnTable;
@@ -273,6 +269,18 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
             return 0;
         }
         return getScoreOfPlayer2At(turn) - getScoreOfPlayer2At(turn - 1);
+    }
+
+    public int[] getIncrementsAt(int turn){
+        if (turn <= 0 || turn >= length()) {
+            return new int[]{0,0};
+        }
+        int[] increments = new int[2];
+        int[] scores = getPlayerScoresAt(turn);
+        int[] prevScores = getPlayerScoresAt(turn);
+        increments[0] = scores[0] - prevScores[0];
+        increments[1] = scores[1] - prevScores[1];
+        return increments;
     }
 
     public ArrayList<Integer> getPlayer1IncrementsList(){

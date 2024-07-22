@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
     private PoolTableViewModel poolTableViewModel;
     private ScoreSheetViewModel scoreSheetViewModel;
     private SharedPreferences preferences;
+    private NavController navController;
     private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
 
 
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
         assert navHostFragment != null;
-        NavController navController = navHostFragment.getNavController();
+        navController = navHostFragment.getNavController();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         if (bottomNavigationView != null) {
@@ -165,7 +166,6 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         if (navigationRailView != null) {
             NavigationUI.setupWithNavController(navigationRailView, navController);
         }
-
     }
 
     private void assignPoints(){
