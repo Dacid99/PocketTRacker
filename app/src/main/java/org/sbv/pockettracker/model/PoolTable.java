@@ -1,4 +1,4 @@
-package org.sbv.pockettracker;
+package org.sbv.pockettracker.model;
 
 public class PoolTable {
     private int numberOfBalls ;

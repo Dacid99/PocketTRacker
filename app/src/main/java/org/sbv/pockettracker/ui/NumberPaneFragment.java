@@ -1,4 +1,4 @@
-package org.sbv.pockettracker;
+package org.sbv.pockettracker.ui;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -17,6 +17,8 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+
+import org.sbv.pockettracker.R;
 
 import java.util.Objects;
 

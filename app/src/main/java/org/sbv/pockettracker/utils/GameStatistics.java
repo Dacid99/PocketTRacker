@@ -1,4 +1,6 @@
-package org.sbv.pockettracker;
+package org.sbv.pockettracker.utils;
+
+import org.sbv.pockettracker.model.ScoreSheet;
 
 import java.util.ArrayList;
 import java.util.Collections;

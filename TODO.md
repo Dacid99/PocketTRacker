@@ -8,7 +8,7 @@
 
 for next release:
 - move statistics to scoresheet and add some plots
-- sort src files
 - tablet layouts
 - new screenshots
 - make bottomnavigation a topnavigation
+- improve about

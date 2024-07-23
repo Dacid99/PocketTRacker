@@ -1,4 +1,4 @@
-package org.sbv.pockettracker;
+package org.sbv.pockettracker.utils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,8 +8,13 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvException;
 
+import org.sbv.pockettracker.model.Players;
+import org.sbv.pockettracker.model.PlayersViewModel;
+import org.sbv.pockettracker.model.ScoreSheet;
+import org.sbv.pockettracker.model.ScoreSheetViewModel;
+
 public class ScoreSheetIO {
-    static void writeToFile(OutputStreamWriter outputStreamWriter, Players players, ScoreSheet scoreSheet) throws IOException{
+    public static void writeToFile(OutputStreamWriter outputStreamWriter, Players players, ScoreSheet scoreSheet) throws IOException{
         CSVWriter csvWriter = new CSVWriter(outputStreamWriter);
         String[] headerLine = new String[6];
         headerLine[0] = "Turn#";
@@ -25,7 +30,7 @@ public class ScoreSheetIO {
         csvWriter.close();
     }
 
-    static void readFromFile(InputStreamReader inputStreamReader, PlayersViewModel playersViewModel, ScoreSheetViewModel scoreSheetViewModel) throws IOException{
+    public static void readFromFile(InputStreamReader inputStreamReader, PlayersViewModel playersViewModel, ScoreSheetViewModel scoreSheetViewModel) throws IOException{
         try (CSVReader csvReader = new CSVReader(inputStreamReader)) {
             String[] nextLine;
             nextLine = csvReader.readNext();

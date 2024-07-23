@@ -1,4 +1,4 @@
-package org.sbv.pockettracker;
+package org.sbv.pockettracker.model;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;

@@ -1,4 +1,4 @@
-package org.sbv.pockettracker;
+package org.sbv.pockettracker.ui;
 
 import android.content.Context;
 
@@ -25,6 +25,15 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.apache.commons.lang3.math.NumberUtils;
+import org.sbv.pockettracker.model.Players;
+import org.sbv.pockettracker.model.PlayersViewModel;
+import org.sbv.pockettracker.model.PoolTable;
+import org.sbv.pockettracker.model.PoolTableViewModel;
+import org.sbv.pockettracker.R;
+import org.sbv.pockettracker.model.ScoreBoard;
+import org.sbv.pockettracker.model.ScoreBoardViewModel;
+import org.sbv.pockettracker.model.ScoreSheet;
+import org.sbv.pockettracker.model.ScoreSheetViewModel;
 
 import java.util.Objects;
 

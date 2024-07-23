@@ -1,4 +1,4 @@
-package org.sbv.pockettracker;
+package org.sbv.pockettracker.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,6 +23,16 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigationrail.NavigationRailView;
+
+import org.sbv.pockettracker.model.Players;
+import org.sbv.pockettracker.model.PlayersViewModel;
+import org.sbv.pockettracker.model.PoolTableViewModel;
+import org.sbv.pockettracker.R;
+import org.sbv.pockettracker.model.ScoreBoard;
+import org.sbv.pockettracker.model.ScoreBoardViewModel;
+import org.sbv.pockettracker.utils.ScoreSheetIO;
+import org.sbv.pockettracker.model.ScoreSheetViewModel;
+import org.sbv.pockettracker.model.ScoreSheetViewModelFactory;
 
 import java.io.IOException;
 import java.io.InputStream;

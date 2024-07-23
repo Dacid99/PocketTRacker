@@ -7,28 +7,28 @@
 
     <fragment
         android:id="@+id/counterFragment"
-        android:name="org.sbv.pockettracker.CounterFragment"
+        android:name="org.sbv.pockettracker.ui.CounterFragment"
         android:label="fragment_counter"
         tools:layout="@layout/fragment_counter" >
 
     </fragment>
     <fragment
         android:id="@+id/scoreSheetFragment"
-        android:name="org.sbv.pockettracker.ScoreSheetFragment"
+        android:name="org.sbv.pockettracker.ui.ScoreSheetFragment"
         android:label="fragment_scoresheet"
         tools:layout="@layout/fragment_scoresheet" >
 
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
-        android:name="org.sbv.pockettracker.StatisticsFragment"
+        android:name="org.sbv.pockettracker.ui.StatisticsFragment"
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics" >
 
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="org.sbv.pockettracker.SettingsFragment"
+        android:name="org.sbv.pockettracker.ui.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
 

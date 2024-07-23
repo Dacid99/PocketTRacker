@@ -1,4 +1,4 @@
-package org.sbv.pockettracker;
+package org.sbv.pockettracker.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;

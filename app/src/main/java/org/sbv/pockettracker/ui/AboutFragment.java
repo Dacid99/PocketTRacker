@@ -1,5 +1,7 @@
-package org.sbv.pockettracker;
+package org.sbv.pockettracker.ui;
 import org.sbv.pockettracker.BuildConfig;
+import org.sbv.pockettracker.R;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

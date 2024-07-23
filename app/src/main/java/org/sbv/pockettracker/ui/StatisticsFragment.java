@@ -1,4 +1,4 @@
-package org.sbv.pockettracker;
+package org.sbv.pockettracker.ui;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -13,6 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import org.sbv.pockettracker.utils.GameStatistics;
+import org.sbv.pockettracker.model.Players;
+import org.sbv.pockettracker.model.PlayersViewModel;
+import org.sbv.pockettracker.R;
+import org.sbv.pockettracker.model.ScoreSheet;
+import org.sbv.pockettracker.model.ScoreSheetViewModel;
 
 public class StatisticsFragment extends Fragment {
 
