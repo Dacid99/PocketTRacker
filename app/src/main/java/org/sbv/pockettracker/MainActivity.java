@@ -14,6 +14,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.preference.PreferenceManager;
@@ -120,6 +121,19 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
     }
     private void applyPreferences(){
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String themePreference = preferences.getString("theme","system");
+        switch (themePreference){
+            case "light":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            case "dark":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            default:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+        }
 
         String stringWinnerPoints = preferences.getString("winnerPoints_default", "40");
         try{

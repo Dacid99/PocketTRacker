@@ -49,6 +49,14 @@
             app:summaryOn="@string/AODon_string"
             app:title="@string/AOD_toggle_title" />
 
+        <ListPreference
+            app:key="theme"
+            app:title="Theme"
+            app:summary="Select your prefered theme"
+            app:defaultValue="system"
+            app:entries="@array/theme_options"
+            app:entryValues="@array/theme_values" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

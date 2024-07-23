@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -60,6 +61,17 @@ public class SettingsFragment extends Fragment {
                             return false;
                         }
 
+                    }
+                });
+            }
+
+            ListPreference themePreference = findPreference("theme");
+            if (themePreference != null){
+                themePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                        requireActivity().recreate();
+                        return true;
                     }
                 });
             }

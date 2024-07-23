@@ -3,11 +3,14 @@
 - find good statistics and plots library
 - backgrounds in table can be done more concisely using LayerDrawable
 - use one player fragment for both players, allows for faster switching and saving of states, plus you can get rid of requestplayer interface
-- setting for theme
-- tablet layouts
-- sort src files into subfolders
-- make beautiful stats fragment
-- set font
 - make bottomnavigation a topnavigation perhaps
 - playerprofiles
+
+
+for next release:
+- move statistics to scoresheet and add some plots
+- sort src files
+- set font
 - playerfragment land needs some more attention
+- tablet layouts
+- new screenshots
