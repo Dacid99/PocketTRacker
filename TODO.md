@@ -11,3 +11,4 @@ for next release:
 - tablet layouts
 - new screenshots
 - make bottomnavigation a topnavigation
+- newgame popup
