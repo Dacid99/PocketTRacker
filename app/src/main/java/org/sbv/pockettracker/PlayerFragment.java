@@ -210,10 +210,17 @@ public class PlayerFragment extends DialogFragment {
         requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
+        if (height > width){
+            width = (int) (width * 0.66);
+            height = (int) (height * 0.75);
+        } else {
+            width = (int) (width * 0.75);
+            height = (int) (height * 0.66);
+        }
 
         Window window = Objects.requireNonNull(getDialog()).getWindow();
         if (window != null){
-            window.setLayout((int)(width * 0.66), (int)(height * 0.66));
+            window.setLayout(width, height);
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
     }
