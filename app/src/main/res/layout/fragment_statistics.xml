@@ -15,7 +15,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/colorSecondary"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="@dimen/cardCornerRadius_small"
         app:cardElevation="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -102,7 +102,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:backgroundTint="@color/colorSecondary"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="@dimen/cardCornerRadius_small"
         app:cardElevation="8dp" >
 
         <androidx.constraintlayout.widget.ConstraintLayout

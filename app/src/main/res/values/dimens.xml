@@ -33,5 +33,8 @@
     <dimen name="score_textSize_playerfragment">72sp</dimen>
     <dimen name="textSize_playerfragment">20sp</dimen>
     <dimen name="dropdown_padding">12dp</dimen>
+    <dimen name="cardCornerRadius">16dp</dimen>
+    <dimen name="cardCornerRadius_large">24dp</dimen>
+    <dimen name="cardCornerRadius_small">8dp</dimen>
 
 </resources>

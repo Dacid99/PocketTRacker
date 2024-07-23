@@ -10,7 +10,7 @@
         android:id="@+id/playerCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="@dimen/cardCornerRadius_large"
         app:layout_constraintBottom_toTopOf="@+id/toOtherPlayerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

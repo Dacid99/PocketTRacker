@@ -4,7 +4,7 @@
     android:id="@+id/numberPaneCard"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="24dp"
+    app:cardCornerRadius="@dimen/cardCornerRadius_large"
     app:cardElevation="100dp">
 
     <GridLayout
