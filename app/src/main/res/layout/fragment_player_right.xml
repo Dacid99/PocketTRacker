@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/playerNameLayout"
                     android:layout_alignParentEnd="true"
-                    android:paddingBottom="12dp"
+                    android:paddingBottom="16dp"
                     android:text="@string/right_swap_string"
                     android:textSize="@dimen/textSize" />
 
@@ -145,7 +145,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:paddingBottom="12dp"
+        android:paddingBottom="16dp"
         android:text="@string/right_arrow_string"
         android:textSize="@dimen/textSize"
         android:layout_below="@id/playerCard"

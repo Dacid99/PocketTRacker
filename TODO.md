@@ -9,7 +9,6 @@
 for next release:
 - move statistics to scoresheet and add some plots
 - sort src files
-- playerfragment land needs some more attention
 - tablet layouts
 - new screenshots
 - make bottomnavigation a topnavigation
