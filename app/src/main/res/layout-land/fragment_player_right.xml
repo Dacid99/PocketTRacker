@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/cardCornerRadius_large"
+        android:backgroundTint="@color/playerCardBackgroundTint"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/toOtherPlayerButton">
