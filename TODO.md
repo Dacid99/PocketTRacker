@@ -11,4 +11,3 @@ for next release:
 - tablet layouts
 - new screenshots
 - make bottomnavigation a topnavigation
-- improve about

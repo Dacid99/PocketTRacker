@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     android:id="@+id/about_page">
 
     <com.google.android.material.bottomsheet.BottomSheetDragHandleView
@@ -9,64 +10,79 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/about_appname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="@dimen/textSize"
-        android:layout_toEndOf="@id/about_icon"
-        android:layout_below="@id/about_draghandle"/>
-
     <ImageView
         android:id="@+id/about_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/about_draghandle"
+        android:layout_margin="2dp"
         android:contentDescription="app icon"
         android:src="@mipmap/ic_launcher" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/about_versionName"
+    <RelativeLayout
+        android:id="@+id/about_app_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/about_appname"
         android:layout_toEndOf="@id/about_icon"
-        android:text="versionname"
-        android:textSize="@dimen/smallTextSize"/>
+        android:layout_below="@id/about_draghandle"
+        android:layout_margin="2dp">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/about_versionCode"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/about_appname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="@dimen/textSize" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/about_versionName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about_appname"
+            android:text="versionname"
+            android:textSize="@dimen/smallTextSize"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/about_versionCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about_versionName"
+            android:text="versioncode"
+            android:textSize="@dimen/smallTextSize"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/about_app_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/about_versionName"
-        android:layout_toEndOf="@id/about_icon"
-        android:text="versioncode"
-        android:textSize="@dimen/smallTextSize"/>
+        android:layout_below="@id/about_app_info"
+        android:layout_margin="2dp">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/about_author"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/about_versionCode"
-        android:text="author"
-        android:textSize="@dimen/smallTextSize"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/about_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="author"
+            android:textSize="@dimen/smallTextSize"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/about_thankyou"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/about_author"
-        android:text="@string/thankyou_string"
-        android:textSize="@dimen/smallTextSize"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/about_thankyou"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about_author"
+            android:text="@string/thankyou_string"
+            android:textSize="@dimen/smallTextSize"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/about_gitlab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/about_thankyou"
-        android:text="gitlab"
-        android:autoLink="web"
-        android:linksClickable="true"
-        android:textSize="@dimen/smallTextSize"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/about_gitlab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about_thankyou"
+            android:text="gitlab"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:textSize="@dimen/smallTextSize"/>
+
+    </RelativeLayout>
 </RelativeLayout>
