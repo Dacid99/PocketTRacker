@@ -31,8 +31,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 android:layout_marginStart="10dp"
+                android:layout_marginEnd="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" >
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="2dp"
+                >
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/playerNameLayout"
@@ -98,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="@dimen/textSize" />
+                    android:textSize="@dimen/textSize_playerfragment" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/meanInningPlayer_view"
@@ -106,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="@dimen/textSize" />
+                    android:textSize="@dimen/textSize_playerfragment" />
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -115,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="@dimen/textSize" />
+                    android:textSize="@dimen/textSize_playerfragment" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/meanRunPlayer_view"
@@ -123,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="@dimen/textSize" />
+                    android:textSize="@dimen/textSize_playerfragment" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/playerScore"
