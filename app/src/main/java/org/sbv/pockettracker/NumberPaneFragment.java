@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.Objects;
 
@@ -29,6 +30,7 @@ public class NumberPaneFragment extends DialogFragment {
     private View view;
     private int maxNumber;
 
+    private MaterialCardView numberPaneCard;
     private GridLayout grid;
     private final MaterialButton[] buttonArray = new MaterialButton[15];
 
@@ -61,6 +63,7 @@ public class NumberPaneFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_numberpane, container,false);
+        numberPaneCard = view.findViewById(R.id.numberPaneCard);
         grid = view.findViewById(R.id.numberGrid);
         findButtons();
         setButtonListeners();
