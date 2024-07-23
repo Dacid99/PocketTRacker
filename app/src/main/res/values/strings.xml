@@ -75,8 +75,6 @@
     <string name="right_arrow_string" translatable="false">\u2192</string>
     <string name="left_swap_string" translatable="false">\u21C6</string>
     <string name="right_swap_string" translatable="false">\u21C4</string>
-    <string name="playerName_accessibilityLabel">Enter player name</string>
-    <string name="playerClub_accessibilityLabel">Enter player club</string>
 
     <!-- toolbar strings -->
     <string name="counter_string" translatable="false">counter</string>

@@ -9,6 +9,5 @@
 for next release:
 - move statistics to scoresheet and add some plots
 - tablet layouts
+- newgame button in toolbar
 - new screenshots
-- make bottomnavigation a topnavigation
-- newgame popup
