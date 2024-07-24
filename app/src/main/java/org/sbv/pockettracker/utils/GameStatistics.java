@@ -39,7 +39,13 @@ public class GameStatistics {
         int[] maxRunsIndices = new int[2];
         ArrayList<Integer>[] incrementsList = getPlayerIncrementsList(scoreSheet);
         maxRunsIndices[0] = incrementsList[0].indexOf(maxRuns[0]);
+        if (maxRunsIndices[0] % 2 != 0){
+            maxRunsIndices[0] ++;
+        }
         maxRunsIndices[1] = incrementsList[1].indexOf(maxRuns[1]);
+        if (maxRunsIndices[1] % 2 != 1){
+            maxRunsIndices[1] ++;
+        }
         return maxRunsIndices;
     }
 
