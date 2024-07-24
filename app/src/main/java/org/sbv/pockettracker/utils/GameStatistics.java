@@ -38,14 +38,11 @@ public class GameStatistics {
         int[] maxRuns = maxRuns(scoreSheet);
         int[] maxRunsIndices = new int[2];
         ArrayList<Integer>[] incrementsList = getPlayerIncrementsList(scoreSheet);
-        maxRunsIndices[0] = incrementsList[0].indexOf(maxRuns[0]);
-        if (maxRunsIndices[0] % 2 != 0){
-            maxRunsIndices[0] ++;
-        }
-        maxRunsIndices[1] = incrementsList[1].indexOf(maxRuns[1]);
-        if (maxRunsIndices[1] % 2 != 1){
-            maxRunsIndices[1] ++;
-        }
+
+        maxRunsIndices[0] = (maxRuns[0] != 0) ? incrementsList[0].indexOf(maxRuns[0]) : -5;
+        maxRunsIndices[1] = (maxRuns[1] != 0) ? incrementsList[1].indexOf(maxRuns[1]) : -5;  //return -5 indicating theres no real run
+
+
         return maxRunsIndices;
     }
 

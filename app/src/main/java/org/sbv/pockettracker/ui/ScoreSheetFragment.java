@@ -130,13 +130,16 @@ public class ScoreSheetFragment extends Fragment {
             Log.d("Failed ifelse", "ScoreSheetActivity.highlightScoreSheet: check of pointer failed");
         }
         int[] maxRunIndices = GameStatistics.maxRunIndices(scoreSheet);
-        TableRow maxRunPlayer1TableRow = (TableRow) tableLayout.getChildAt(maxRunIndices[0]+1);
-        TextView maxRunPlayer1View = (TextView) maxRunPlayer1TableRow.getChildAt(2);
-        maxRunPlayer1View.setTextColor(getResources().getColor(R.color.maxRun_color));
-
-        TableRow maxRunPlayer2TableRow = (TableRow) tableLayout.getChildAt(maxRunIndices[1]+1);
-        TextView maxRunPlayer2View = (TextView) maxRunPlayer2TableRow.getChildAt(4);
-        maxRunPlayer2View.setTextColor(getResources().getColor(R.color.maxRun_color));
+        if (maxRunIndices[0] != -5) {
+            TableRow maxRunPlayer1TableRow = (TableRow) tableLayout.getChildAt(maxRunIndices[0] + 1); // +1 because of header row
+            TextView maxRunPlayer1View = (TextView) maxRunPlayer1TableRow.getChildAt(2);
+            maxRunPlayer1View.setTextColor(getResources().getColor(R.color.maxRun_color));
+        }
+        if (maxRunIndices[1] != -5) {
+            TableRow maxRunPlayer2TableRow = (TableRow) tableLayout.getChildAt(maxRunIndices[1] + 1);
+            TextView maxRunPlayer2View = (TextView) maxRunPlayer2TableRow.getChildAt(4);
+            maxRunPlayer2View.setTextColor(getResources().getColor(R.color.maxRun_color));
+        }
     }
 
     private void appendTableRow(int turn, ScoreSheet scoreSheet) {
