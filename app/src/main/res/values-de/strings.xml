@@ -36,8 +36,6 @@
     <string name="club_toggle_title">Vereine an/aus</string>
     <string name="about_string">Über</string>
     <string name="statistics_string">Statistiken</string>
-    <string name="playerClub_accessibilityLabel">Gib den Spielernamen ein</string>
-    <string name="playerName_accessibilityLabel">Gib den Club des Spielers ein</string>
     <string name="versionCode_format">Versionscode %1$d</string>
     <string name="versionName_format">Versionsname %1$s</string>
     <string name="author_format">Von %1$s</string>
@@ -45,5 +43,6 @@
     <string name="AODon_string">AOD auf der Hauptseite aktiviert</string>
     <string name="AODoff_string">AOD auf der Hauptseite deaktiviert</string>
     <string name="AOD_toggle_title">AOD an/aus</string>
+    <string name="theme_summary">Wähle den Farbmodus</string>
 
 </resources>

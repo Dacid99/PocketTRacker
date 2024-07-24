@@ -108,5 +108,6 @@
     <string name="AODon_string">AOD for mainpage enabled</string>
     <string name="AODoff_string">AOD for mainpage disabled</string>
     <string name="AOD_toggle_title">AOD on/off</string>
+    <string name="theme_summary">Select your prefered theme</string>
 
 </resources>
