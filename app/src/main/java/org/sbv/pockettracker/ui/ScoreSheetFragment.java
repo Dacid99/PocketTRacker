@@ -107,6 +107,7 @@ public class ScoreSheetFragment extends Fragment {
     }
 
     private void fillScoreSheetLayout(ScoreSheet scoreSheet) {
+        tableLayout.removeAllViews();
         // Add rows
         for (int index = 0; index < scoreSheet.length(); index++) {
             appendTableRow(index, scoreSheet);

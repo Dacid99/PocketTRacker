@@ -38,7 +38,9 @@ public class ScoreSheetIO {
             playersViewModel.updateClubName(0, nextLine[2]);
             playersViewModel.updatePlayerName(1, nextLine[3]);
             playersViewModel.updateClubName(1, nextLine[4]);
+
             csvReader.readNext(); //skip the first line, it is in scoresheet by default
+
             while ((nextLine = csvReader.readNext()) != null){
                 scoreSheetViewModel.append(new ScoreSheet.Inning(nextLine));
             }
