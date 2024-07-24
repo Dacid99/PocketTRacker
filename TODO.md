@@ -10,5 +10,4 @@ for next release:
 - move statistics to scoresheet and add some plots
 - tablet layouts
 - newgame save load buttons in dropdown in toolbar
-- load doesnt get the increments right
 - new screenshots

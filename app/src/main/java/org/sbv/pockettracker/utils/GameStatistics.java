@@ -14,7 +14,7 @@ public class GameStatistics {
         }
         int[] increments = new int[2];
         int[] scores = scoreSheet.getPlayerScoresAt(turn);
-        int[] prevScores = scoreSheet.getPlayerScoresAt(turn);
+        int[] prevScores = scoreSheet.getPlayerScoresAt(turn - 1 );
         increments[0] = scores[0] - prevScores[0];
         increments[1] = scores[1] - prevScores[1];
         return increments;
