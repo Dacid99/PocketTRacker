@@ -10,7 +10,7 @@
     <string name="player_club_format" translatable="false">@string/rawString_format</string>
     <string name="player_score_format" translatable="false">@string/rawDigit_format</string>
     <string name="remainingBalls_format" translatable="false">@string/rawDigit_format</string>
-    <string name="ballsOnTable_format">On the table: %1$d</string>
+    <string name="ballsOnTable_format">%1$d\non the table</string>
     <string name="switchReason_format" translatable="false">@string/rawString_format</string>
 
 

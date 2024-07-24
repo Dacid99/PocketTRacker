@@ -76,6 +76,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/newBallNumber_hint"
         android:gravity="center"
+        android:maxLines="2"
         android:text="@string/ballsOnTable_format"
         android:textSize="@dimen/textSize"
         app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
