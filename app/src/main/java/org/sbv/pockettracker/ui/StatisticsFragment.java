@@ -149,21 +149,23 @@ public class StatisticsFragment extends Fragment {
         description.setText(getResources().getString(R.string.scoresPlot_description));
 
         lineChart.setDescription(description);
-        lineChart.setBackgroundColor(getResources().getColor(R.color.plotBackground));
+        lineChart.setBackgroundColor(getResources().getColor(R.color.background));
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1f);
         xAxis.setDrawLabels(true);
         xAxis.setLabelRotationAngle(0);
+        xAxis.setTextColor(getResources().getColor(R.color.onBackground));
 
         YAxis yAxisRight = lineChart.getAxisRight();
-        YAxis yAxisLeft = lineChart.getAxisRight();
         yAxisRight.setEnabled(false);
-        yAxisLeft.setEnabled(false);
+        YAxis yAxisLeft = lineChart.getAxisRight();
+        yAxisLeft.setTextColor(getResources().getColor(R.color.onBackground));
 
         Legend legend = lineChart.getLegend();
         legend.setForm(Legend.LegendForm.LINE);
+        legend.setDrawInside(true);
 
         lineChart.setDrawingCacheEnabled(true);
         lineChart.buildDrawingCache();
