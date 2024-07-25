@@ -235,6 +235,16 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     public int[] getPlayerScoresAt(int turn) {
         return inningsList.get(turn).playerScores;
     }
+    public ArrayList<Integer>[] getPlayerScoresList(){
+        ArrayList<Integer>[] playerScoresList = new ArrayList[2];
+        playerScoresList[0] = new ArrayList<>();
+        playerScoresList[1] = new ArrayList<>();
+        for (Inning inning : inningsList){
+            playerScoresList[0].add(inning.playerScores[0]);
+            playerScoresList[1].add(inning.playerScores[1]);
+        }
+        return playerScoresList;
+    }
     public int getBallsOnTableAt(int turn){
         return inningsList.get(turn).ballsOnTable;
     }
