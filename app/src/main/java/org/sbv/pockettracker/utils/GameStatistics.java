@@ -1,9 +1,11 @@
 package org.sbv.pockettracker.utils;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.sbv.pockettracker.model.ScoreSheet;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.NoSuchElementException;
 
 public class GameStatistics {
@@ -57,6 +59,21 @@ public class GameStatistics {
             maxRun[1] = 0;
         }
         return maxRun;
+    }
+
+    public static HashMap<Integer, Integer> getIncrementsHistogram(int playerNumber, ScoreSheet scoreSheet){
+        ArrayList<Integer> playerInnings = getPlayerIncrementsList(scoreSheet)[playerNumber] ;
+        HashMap<Integer, Integer> histogram = new HashMap<>() ;
+        int oldNumber;
+        for (int index = playerNumber ; index < scoreSheet.length()-1; index+=2){
+            try {
+                oldNumber = histogram.get(playerInnings.get(index));
+            } catch (NullPointerException e){
+                oldNumber = 0;
+            }
+            histogram.put(playerInnings.get(index), oldNumber+1);
+        }
+        return histogram;
     }
 
     public static double[] meanInnings(ScoreSheet scoreSheet){

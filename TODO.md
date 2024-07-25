@@ -6,6 +6,7 @@
 - playerprofiles
 - restructure all fields Xplayer1Y and Xplayer2Y into an array
 - sort resources
+- introduce playernumbers as static constants of players for readability
 
 for next release:
 - tablet layouts

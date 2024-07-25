@@ -47,7 +47,9 @@
     <string name="toStatistics_string">Statistiken</string>
     <string name="toScoresheet_string">Spielprotokoll</string>
     <string name="scoresPlot_description">Aufnahme</string>
-    <string name="plotLabel">Score</string>
+    <string name="scoresPlotLabel">Score</string>
     <string name="theme_setting_title">Farbmodus</string>
+    <string name="runsPlot_description">Run</string>
+    <string name="runsPlotLabel">Häufigkeit</string>
 
 </resources>

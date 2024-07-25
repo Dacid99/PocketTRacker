@@ -112,7 +112,9 @@
     <string name="toStatistics_string">Statistics</string>
     <string name="toScoresheet_string">Scoresheet</string>
     <string name="scoresPlot_description">Inning</string>
-    <string name="plotLabel">Score</string>
+    <string name="scoresPlotLabel">Score</string>
     <string name="theme_setting_title">Theme</string>
+    <string name="runsPlot_description">Run</string>
+    <string name="runsPlotLabel">Frequency</string>
 
 </resources>

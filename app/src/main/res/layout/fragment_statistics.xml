@@ -100,6 +100,12 @@
 
                     </com.google.android.material.card.MaterialCardView>
 
+                    <ImageView
+                        android:id="@+id/player1RunsPlot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="runs plot of player 1"/>
+
                 </LinearLayout>
 
             </ScrollView>
@@ -151,7 +157,7 @@
                         android:id="@+id/player2ScorePlot"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:contentDescription="scores plot of player 1"/>
+                        android:contentDescription="scores plot of player 2"/>
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/player2Statistics_card"
@@ -200,6 +206,12 @@
                         </LinearLayout>
 
                     </com.google.android.material.card.MaterialCardView>
+
+                    <ImageView
+                        android:id="@+id/player2RunsPlot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="runs plot of player 2"/>
 
                 </LinearLayout>
 
