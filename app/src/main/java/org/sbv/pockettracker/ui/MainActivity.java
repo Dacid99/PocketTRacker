@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
 
     @Override
     public void onStatisticsButtonClick(){
-        NavOptions navOptions = new NavOptions.Builder().setPopUpTo(R.id.action_scoreSheetFragment_to_statisticsFragment, true).build();
+        NavOptions navOptions = new NavOptions.Builder().setPopUpTo(R.id.scoreSheetFragment, true).build();
         navController.navigate(R.id.action_scoreSheetFragment_to_statisticsFragment, null, navOptions);
     }
 
