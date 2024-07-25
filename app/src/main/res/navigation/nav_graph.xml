@@ -30,6 +30,9 @@
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics" >
 
+        <action
+            android:id="@+id/action_statisticsFragment_to_scoreSheetFragment"
+            app:destination="@id/scoreSheetFragment" />
     </fragment>
 
     <fragment

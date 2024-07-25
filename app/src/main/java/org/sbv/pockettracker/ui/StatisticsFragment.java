@@ -3,6 +3,7 @@ package org.sbv.pockettracker.ui;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -21,6 +22,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.google.android.material.button.MaterialButton;
 
 import org.sbv.pockettracker.utils.GameStatistics;
 import org.sbv.pockettracker.model.Players;
@@ -34,10 +36,26 @@ import java.util.List;
 
 public class StatisticsFragment extends Fragment {
 
+    public interface StatisticsFragmentListener {
+        public void onScoreSheetButtonClick();
+    }
+
+    private StatisticsFragmentListener listener;
     private ScoreSheetViewModel scoreSheetViewModel;
     private PlayersViewModel playersViewModel;
     private TextView player1StatisticsHeader, player2StatisticsHeader, maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
     private final ImageView[] playerScorePlots = new ImageView[2];
+    private MaterialButton toScoreSheetButton;
+
+    @Override
+    public void onAttach(@NonNull Context context){
+        super.onAttach(context);
+        try{
+            listener = (StatisticsFragmentListener) context;
+        }catch (ClassCastException e) {
+            throw new ClassCastException(context + "must implement StatisticsFragmentListener!");
+        }
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,6 +69,7 @@ public class StatisticsFragment extends Fragment {
         meanInningPlayer2View = view.findViewById(R.id.player2statistics_meanInning);
         meanRunPlayer1View = view.findViewById(R.id.player1statistics_meanRun);
         meanRunPlayer2View = view.findViewById(R.id.player2statistics_meanRun);
+
 
         playerScorePlots[0] = view.findViewById(R.id.player1ScorePlot);
         playerScorePlots[1] = view.findViewById(R.id.player2ScorePlot);
@@ -88,6 +107,8 @@ public class StatisticsFragment extends Fragment {
             }
         });
 
+        toScoreSheetButton = view.findViewById(R.id.toScoreSheetButton);
+        toScoreSheetButton.setOnClickListener( v -> listener.onScoreSheetButtonClick());
         return view;
     }
 

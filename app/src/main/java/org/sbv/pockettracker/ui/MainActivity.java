@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.preference.PreferenceManager;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
@@ -45,7 +46,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
-public class MainActivity extends AppCompatActivity implements CounterFragment.CounterFragmentListener, ScoreSheetFragment.ScoreSheetFragmentListener, NumberPaneFragment.NumberPaneFragmentProvider, PlayerFragment.PlayerFragmentProvider{
+public class MainActivity extends AppCompatActivity implements CounterFragment.CounterFragmentListener, ScoreSheetFragment.ScoreSheetFragmentListener, StatisticsFragment.StatisticsFragmentListener, NumberPaneFragment.NumberPaneFragmentProvider, PlayerFragment.PlayerFragmentProvider{
 
     private PlayersViewModel playersViewModel;
     private ScoreBoardViewModel scoreBoardViewModel;
@@ -241,7 +242,13 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
 
     @Override
     public void onStatisticsButtonClick(){
-        navController.navigate(R.id.action_scoreSheetFragment_to_statisticsFragment);
+        NavOptions navOptions = new NavOptions.Builder().setPopUpTo(R.id.action_scoreSheetFragment_to_statisticsFragment, true).build();
+        navController.navigate(R.id.action_scoreSheetFragment_to_statisticsFragment, null, navOptions);
+    }
+
+    @Override
+    public void onScoreSheetButtonClick(){
+        navController.navigate(R.id.action_statisticsFragment_to_scoreSheetFragment);
     }
 
     @Override

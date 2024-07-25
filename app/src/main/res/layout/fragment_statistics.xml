@@ -191,4 +191,10 @@
         android:id="@+id/player2ScorePlot"
         android:contentDescription="scores plot of player 2"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/toScoreSheetButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
 </LinearLayout>
