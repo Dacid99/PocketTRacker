@@ -151,6 +151,11 @@ public class StatisticsFragment extends Fragment {
         lineChart.setDescription(description);
         lineChart.setBackgroundColor(getResources().getColor(R.color.background));
 
+        Legend legend = lineChart.getLegend();
+        legend.setForm(Legend.LegendForm.LINE);
+        legend.setDrawInside(false);
+        legend.setTextColor(getResources().getColor(R.color.onBackground));
+
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1f);
@@ -160,12 +165,8 @@ public class StatisticsFragment extends Fragment {
 
         YAxis yAxisRight = lineChart.getAxisRight();
         yAxisRight.setEnabled(false);
-        YAxis yAxisLeft = lineChart.getAxisRight();
+        YAxis yAxisLeft = lineChart.getAxisLeft();
         yAxisLeft.setTextColor(getResources().getColor(R.color.onBackground));
-
-        Legend legend = lineChart.getLegend();
-        legend.setForm(Legend.LegendForm.LINE);
-        legend.setDrawInside(true);
 
         lineChart.setDrawingCacheEnabled(true);
         lineChart.buildDrawingCache();

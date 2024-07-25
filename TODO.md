@@ -8,7 +8,6 @@
 - sort resources
 
 for next release:
-- adjust plots
 - tablet layouts
 - newgame save load buttons in dropdown in toolbar
 - new screenshots
