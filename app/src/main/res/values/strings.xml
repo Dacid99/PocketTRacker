@@ -113,5 +113,6 @@
     <string name="toScoresheet_string">Scoresheet</string>
     <string name="scoresPlot_description">Inning</string>
     <string name="plotLabel">Score</string>
+    <string name="theme_setting_title">Theme</string>
 
 </resources>
