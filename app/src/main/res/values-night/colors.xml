@@ -27,6 +27,8 @@
 
     <!-- playerfragment colors -->
     <color name="dropdown_background_color">@color/darker_gray</color>
-    <color name="playerCardBackgroundTint">@color/black</color>
+    <color name="playerCardBackgroundTint">@color/background</color>
 
+    <color name="plotBackground">@color/background</color>
+    <color name="plotLineColor">@color/green</color>
 </resources>

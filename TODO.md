@@ -5,6 +5,7 @@
 - use one player fragment for both players, allows for faster switching and saving of states, plus you can get rid of requestplayer interface
 - playerprofiles
 - restructure all fields Xplayer1Y and Xplayer2Y into an array
+- sort resources
 
 for next release:
 - adjust plots

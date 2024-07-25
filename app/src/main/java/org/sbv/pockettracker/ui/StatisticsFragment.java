@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,9 +20,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.components.AxisBase;
 import com.google.android.material.button.MaterialButton;
 
 import org.sbv.pockettracker.utils.GameStatistics;
@@ -125,15 +132,38 @@ public class StatisticsFragment extends Fragment {
             playerScoreData.add( new Entry(index, inning.playerScores[playerNumber]) );
             index++;
         }
-        LineDataSet lineDataSet = new LineDataSet(playerScoreData, "Players scores");
+        LineDataSet lineDataSet = new LineDataSet(playerScoreData, getResources().getString(R.string.plotLabel));
+        lineDataSet.setColor(getResources().getColor(R.color.plotLineColor));
+        lineDataSet.setCircleColor(getResources().getColor(R.color.plotLineColor));
         LineData lineData = new LineData(lineDataSet);
         lineChart.setData(lineData);
 
         lineChart.measure(
-                View.MeasureSpec.makeMeasureSpec(800, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(800, View.MeasureSpec.EXACTLY)
+                View.MeasureSpec.makeMeasureSpec(1000, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY)
         );
-        lineChart.layout(0,0,800,800);
+        lineChart.layout(0,0,1000,600);
+
+        lineChart.setDrawGridBackground(true);
+        Description description = new Description();
+        description.setText(getResources().getString(R.string.scoresPlot_description));
+
+        lineChart.setDescription(description);
+        lineChart.setBackgroundColor(getResources().getColor(R.color.plotBackground));
+
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setGranularity(1f);
+        xAxis.setDrawLabels(true);
+        xAxis.setLabelRotationAngle(0);
+
+        YAxis yAxisRight = lineChart.getAxisRight();
+        YAxis yAxisLeft = lineChart.getAxisRight();
+        yAxisRight.setEnabled(false);
+        yAxisLeft.setEnabled(false);
+
+        Legend legend = lineChart.getLegend();
+        legend.setForm(Legend.LegendForm.LINE);
 
         lineChart.setDrawingCacheEnabled(true);
         lineChart.buildDrawingCache();
