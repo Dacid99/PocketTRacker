@@ -110,5 +110,6 @@
     <string name="AOD_toggle_title">AOD on/off</string>
     <string name="theme_summary">Select your prefered theme</string>
     <string name="toStatistics_string">Statistics</string>
+    <string name="toScoresheet_string">Scoresheet</string>
 
 </resources>

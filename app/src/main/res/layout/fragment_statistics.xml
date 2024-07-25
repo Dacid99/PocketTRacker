@@ -8,193 +8,212 @@
     tools:context=".ui.StatisticsFragment">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/player1Statistics_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/colorSecondary"
-        app:cardCornerRadius="@dimen/cardCornerRadius_small"
-        app:cardElevation="8dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="2dp"
+        android:elevation="10dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/player1statistics_header"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="1dp"
                 android:background="@drawable/roundedcorners_background"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/colorSecondary"
                 android:gravity="center"
                 android:text="@string/player1_default"
                 android:textColor="@color/colorOnPrimary"
                 android:textSize="@dimen/smallTextSize"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/player1statistics_innings"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/player1statistics_innings"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/colorOnSecondary"
-                android:textSize="@dimen/smallTextSize"
-                app:layout_constraintBottom_toTopOf="@+id/player1statistics_maxRun"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/player1statistics_header" />
+            <ScrollView
+                android:id="@+id/player1Statistics_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" >
 
-            <TextView
-                android:id="@+id/player1statistics_maxRun"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/colorOnSecondary"
-                android:textSize="@dimen/smallTextSize"
-                app:layout_constraintBottom_toTopOf="@id/player1statistics_meanInning"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/player1statistics_innings" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/player1statistics_meanInning"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/colorOnSecondary"
-                android:textSize="@dimen/smallTextSize"
-                app:layout_constraintBottom_toTopOf="@id/player1statistics_meanRun"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/player1statistics_maxRun" />
+                    <ImageView
+                        android:id="@+id/player1ScorePlot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="scores plot of player 1"/>
 
-            <TextView
-                android:id="@+id/player1statistics_meanRun"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/colorOnSecondary"
-                android:textSize="@dimen/smallTextSize"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/player1statistics_meanInning" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/player1Statistics_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                        app:cardCornerRadius="@dimen/cardCornerRadius_small"
+                        app:cardElevation="8dp">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/player1statistics_innings"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player1statistics_maxRun"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player1statistics_meanInning"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player1statistics_meanRun"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-    <ImageView
-        android:id="@+id/player1ScorePlot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="scores plot of player 1"/>
-
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/player2Statistics_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/colorSecondary"
-        app:cardCornerRadius="@dimen/cardCornerRadius_small"
-        app:cardElevation="8dp" >
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="2dp"
+        android:elevation="10dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/player2statistics_header"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="1dp"
                 android:background="@drawable/roundedcorners_background"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/colorSecondary"
                 android:gravity="center"
                 android:text="@string/player2_default"
                 android:textColor="@color/colorOnPrimary"
                 android:textSize="@dimen/smallTextSize"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/player2statistics_innings"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/player2statistics_innings"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/colorOnSecondary"
-                android:textSize="@dimen/smallTextSize"
-                app:layout_constraintBottom_toTopOf="@+id/player2statistics_maxRun"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/player2statistics_header" />
+            <ScrollView
+                android:id="@+id/player2Statistics_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" >
 
-            <TextView
-                android:id="@+id/player2statistics_maxRun"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/colorOnSecondary"
-                android:textSize="@dimen/smallTextSize"
-                app:layout_constraintBottom_toTopOf="@+id/player2statistics_meanInning"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/player2statistics_innings" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/player2statistics_meanInning"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/colorOnSecondary"
-                android:textSize="@dimen/smallTextSize"
-                app:layout_constraintBottom_toTopOf="@+id/player2statistics_meanRun"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/player2statistics_maxRun" />
+                    <ImageView
+                        android:id="@+id/player2ScorePlot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="scores plot of player 1"/>
 
-            <TextView
-                android:id="@+id/player2statistics_meanRun"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/colorOnSecondary"
-                android:textSize="@dimen/smallTextSize"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/player2statistics_meanInning" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/player2Statistics_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+
+                        app:cardCornerRadius="@dimen/cardCornerRadius_small"
+                        app:cardElevation="8dp">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/player2statistics_innings"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player2statistics_maxRun"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player2statistics_meanInning"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player2statistics_meanRun"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/player2ScorePlot"
-        android:contentDescription="scores plot of player 2"/>
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/toScoreSheetButton"
+        android:text="@string/toScoresheet_string"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

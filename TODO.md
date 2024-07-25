@@ -7,7 +7,7 @@
 - restructure all fields Xplayer1Y and Xplayer2Y into an array
 
 for next release:
-- test plots
+- adjust plots
 - tablet layouts
 - newgame save load buttons in dropdown in toolbar
 - new screenshots

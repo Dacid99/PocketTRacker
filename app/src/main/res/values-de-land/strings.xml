@@ -2,4 +2,6 @@
 <resources>
     <string name="loadGame_string">L\na\nd\ne\nn</string>
     <string name="saveGame_string">S\np\ne\ni\nc\nh\ne\nr\nn</string>
+    <string name="toStatistics_string">S\nt\na\nt\ni\ns\nt\ni\nk\ne\nn</string>
+    <string name="toScoresheet_string">S\np\ni\ne\nl\np\nr\no\nt\no\nk\no\nl\nl</string>
 </resources>
