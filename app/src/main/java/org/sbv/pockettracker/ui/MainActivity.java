@@ -240,6 +240,11 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
     }
 
     @Override
+    public void onStatisticsButtonClick(){
+        navController.navigate(R.id.action_scoreSheetFragment_to_statisticsFragment);
+    }
+
+    @Override
     public void onPlayerCardClick(int playerNumber) {
         PlayerFragment playerFragment = PlayerFragment.newInstance(playerNumber);
         playerFragment.show(getSupportFragmentManager(), "Player"+playerNumber+1+"Fragment");

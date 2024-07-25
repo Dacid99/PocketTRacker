@@ -8,6 +8,7 @@
         android:id="@+id/scoresheet_table"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="1dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintBottom_toTopOf="@id/loadGame"
@@ -167,6 +168,16 @@
 
     </TableLayout>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/toStatisticsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/toStatistics_string"
+        app:layout_constraintTop_toBottomOf="@+id/scoresheet_table"
+        app:layout_constraintBottom_toTopOf="@id/loadGame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loadGame"
@@ -175,7 +186,7 @@
         android:text="@string/loadGame_string"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/scoresheet_table"
+        app:layout_constraintTop_toBottomOf="@+id/toStatisticsButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/saveGame"/>

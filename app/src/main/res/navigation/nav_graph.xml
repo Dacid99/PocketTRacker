@@ -12,13 +12,18 @@
         tools:layout="@layout/fragment_counter" >
 
     </fragment>
+
     <fragment
         android:id="@+id/scoreSheetFragment"
         android:name="org.sbv.pockettracker.ui.ScoreSheetFragment"
         android:label="fragment_scoresheet"
         tools:layout="@layout/fragment_scoresheet" >
 
+        <action
+            android:id="@+id/action_scoreSheetFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="org.sbv.pockettracker.ui.StatisticsFragment"
@@ -26,6 +31,7 @@
         tools:layout="@layout/fragment_statistics" >
 
     </fragment>
+
     <fragment
         android:id="@+id/settingsFragment"
         android:name="org.sbv.pockettracker.ui.SettingsFragment"

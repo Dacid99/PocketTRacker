@@ -44,5 +44,6 @@
     <string name="AODoff_string">AOD auf der Hauptseite deaktiviert</string>
     <string name="AOD_toggle_title">AOD an/aus</string>
     <string name="theme_summary">Wähle den Farbmodus</string>
+    <string name="toStatistics_string">Statistics</string>
 
 </resources>

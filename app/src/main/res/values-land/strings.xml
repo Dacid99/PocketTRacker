@@ -2,4 +2,5 @@
 <resources>
     <string name="loadGame_string">L\no\na\nd</string>
     <string name="saveGame_string">S\na\nv\ne</string>
+    <string name="toStatistics_string">S\nt\na\nt\ni\ns\nt\ni\nc\ns</string>
 </resources>
