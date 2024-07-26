@@ -76,8 +76,6 @@
     <!-- toolbar strings -->
     <string name="counter_string" translatable="false">counter</string>
     <string name="scoresheet_string" translatable="false">scoresheet</string>
-    <string name="statistics_string">statistics</string>
-    <string name="settings_string" translatable="false">settings</string>
 
     <!-- dropdown menu strings -->
     <string name="newGame_string">New Game</string>

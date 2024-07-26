@@ -1,12 +1,10 @@
 package org.sbv.pockettracker.ui;
 
-import static org.sbv.pockettracker.utils.GamePlotter.drawScoresPlots;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,18 +17,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.material.button.MaterialButton;
 
 import org.sbv.pockettracker.utils.GamePlotter;
@@ -41,13 +27,7 @@ import org.sbv.pockettracker.R;
 import org.sbv.pockettracker.model.ScoreSheet;
 import org.sbv.pockettracker.model.ScoreSheetViewModel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public class StatisticsFragment extends Fragment {
-
-    private BarChart barChart;
 
     public interface StatisticsFragmentListener {
         void onScoreSheetButtonClick();

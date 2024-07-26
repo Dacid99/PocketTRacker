@@ -1,6 +1,6 @@
 - add more final keywords to mark immutability
 - more logging and error handling, find better way than assert!!
-- 
+- more use of navcomponent
 - rethink reset functions of viewmodels
 - investigate blinking in tableheader
 - backgrounds in table can be done more concisely using LayerDrawable
@@ -12,4 +12,7 @@
 
 for next release:
 - tablet layouts
+- icons for dropdown
+- dropdown button into bar if possible
+- adjust popup position in land 
 - new screenshots
