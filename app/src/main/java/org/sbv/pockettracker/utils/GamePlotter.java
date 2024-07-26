@@ -111,8 +111,8 @@ public class GamePlotter {
         barDataSet.setColor(context.getResources().getColor(R.color.plotLineColor));
         barDataSet.setValueFormatter(new ValueFormatter() {
             @Override
-            public String getPointLabel(Entry entry) {
-                return String.valueOf( (int) entry.getY() );
+            public String getBarLabel(BarEntry barEntry) {
+                return String.valueOf( (int) barEntry.getY());
             }
         });
 
