@@ -8,7 +8,7 @@
     <item
         android:id="@+id/saveGame_dropdown"
         android:icon="@drawable/ic_save"
-        android:title="@string/newGame_string"/>
+        android:title="@string/saveGame_string"/>
 
     <item
         android:id="@+id/loadGame_dropdown"
