@@ -1,5 +1,7 @@
 package org.sbv.pockettracker.ui;
 
+import static org.sbv.pockettracker.utils.GamePlotter.drawScoresPlots;
+
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -31,6 +33,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.material.button.MaterialButton;
 
+import org.sbv.pockettracker.utils.GamePlotter;
 import org.sbv.pockettracker.utils.GameStatistics;
 import org.sbv.pockettracker.model.Players;
 import org.sbv.pockettracker.model.PlayersViewModel;
@@ -107,10 +110,10 @@ public class StatisticsFragment extends Fragment {
                 meanRunPlayer1View.setText(getString(R.string.meanRun_format, meanRuns[0]));
                 meanRunPlayer2View.setText(getString(R.string.meanRun_format, meanRuns[1]));
 
-                drawScoresPlots(0, scoreSheet);
-                drawScoresPlots(1, scoreSheet);
-                drawRunsPlots(0, scoreSheet);
-                drawRunsPlots(1, scoreSheet);
+                GamePlotter.drawScoresPlots(playerScorePlots,0, scoreSheet);
+                GamePlotter.drawScoresPlots(playerScorePlots,1, scoreSheet);
+                GamePlotter.drawRunsPlots(playerRunsPlots,0, scoreSheet);
+                GamePlotter.drawRunsPlots(playerRunsPlots,1, scoreSheet);
             }
         });
 
@@ -128,117 +131,4 @@ public class StatisticsFragment extends Fragment {
         return view;
     }
 
-    private void drawScoresPlots(int playerNumber, ScoreSheet scoreSheet){
-        if (playerNumber != 0 && playerNumber != 1){
-            return;
-        }
-
-        LineChart lineChart = new LineChart(requireContext());
-
-        List<Entry> playerScoreData = new ArrayList<>();
-        int index = 0;
-        for (ScoreSheet.Inning inning : scoreSheet){
-            playerScoreData.add( new Entry(index, inning.playerScores[playerNumber]) );
-            index++;
-        }
-        LineDataSet lineDataSet = new LineDataSet(playerScoreData, getResources().getString(R.string.scoresPlotLabel));
-        lineDataSet.setColor(getResources().getColor(R.color.plotLineColor));
-        lineDataSet.setCircleColor(getResources().getColor(R.color.plotLineColor));
-        lineDataSet.setLineWidth(2f);
-        LineData lineData = new LineData(lineDataSet);
-        lineChart.setData(lineData);
-
-        lineChart.measure(
-                View.MeasureSpec.makeMeasureSpec(1000, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY)
-        );
-        lineChart.layout(0,0,1000,600);
-
-        Description description = new Description();
-        description.setText(getResources().getString(R.string.scoresPlot_description));
-
-        lineChart.setDescription(description);
-        lineChart.setBackgroundColor(getResources().getColor(R.color.background));
-
-        Legend legend = lineChart.getLegend();
-        legend.setForm(Legend.LegendForm.LINE);
-        legend.setDrawInside(false);
-        legend.setTextColor(getResources().getColor(R.color.onBackground));
-
-        XAxis xAxis = lineChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setGranularity(1f);
-        xAxis.setDrawLabels(true);
-        xAxis.setLabelRotationAngle(0);
-        xAxis.setTextColor(getResources().getColor(R.color.onBackground));
-
-        YAxis yAxisRight = lineChart.getAxisRight();
-        yAxisRight.setEnabled(false);
-        YAxis yAxisLeft = lineChart.getAxisLeft();
-        yAxisLeft.setGranularity(1f);
-        yAxisLeft.setTextColor(getResources().getColor(R.color.onBackground));
-
-        lineChart.setDrawingCacheEnabled(true);
-        lineChart.buildDrawingCache();
-        Bitmap bitmap = Bitmap.createBitmap(lineChart.getDrawingCache());
-        lineChart.setDrawingCacheEnabled(false);
-
-        playerScorePlots[playerNumber].setImageBitmap(bitmap);
-    }
-
-    private void drawRunsPlots(int playerNumber, ScoreSheet scoreSheet){
-        if (playerNumber != 0 && playerNumber != 1){
-            return;
-        }
-        HashMap<Integer, Integer> runsHistogram = GameStatistics.getIncrementsHistogram(playerNumber, scoreSheet);
-        BarChart barChart = new BarChart(requireContext());
-
-        List<BarEntry> playerScoreData = new ArrayList<>();
-        int index = 0;
-        for (HashMap.Entry<Integer, Integer> entry: runsHistogram.entrySet()){
-            playerScoreData.add( new BarEntry(entry.getKey(), entry.getValue()) );
-        }
-        BarDataSet barDataSet = new BarDataSet(playerScoreData, getResources().getString(R.string.runsPlotLabel));
-        barDataSet.setColor(getResources().getColor(R.color.plotLineColor));
-        BarData barData = new BarData(barDataSet);
-        barChart.setData(barData);
-
-        barChart.measure(
-                View.MeasureSpec.makeMeasureSpec(1000, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY)
-        );
-        barChart.layout(0,0,1000,600);
-
-        Description description = new Description();
-        description.setText(getResources().getString(R.string.runsPlot_description));
-
-        barChart.setDescription(description);
-        barChart.setBackgroundColor(getResources().getColor(R.color.background));
-
-        Legend legend = barChart.getLegend();
-        legend.setForm(Legend.LegendForm.LINE);
-        legend.setDrawInside(false);
-        legend.setTextColor(getResources().getColor(R.color.onBackground));
-
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setGranularity(1f);
-        xAxis.setDrawLabels(false);
-        xAxis.setLabelRotationAngle(0);
-        xAxis.setTextColor(getResources().getColor(R.color.onBackground));
-
-        YAxis yAxisRight = barChart.getAxisRight();
-        yAxisRight.setEnabled(false);
-        YAxis yAxisLeft = barChart.getAxisLeft();
-        yAxisLeft.setGranularity(1f);
-        yAxisLeft.setAxisMinimum(0f);
-        yAxisLeft.setTextColor(getResources().getColor(R.color.onBackground));
-
-        barChart.setDrawingCacheEnabled(true);
-        barChart.buildDrawingCache();
-        Bitmap bitmap = Bitmap.createBitmap(barChart.getDrawingCache());
-        barChart.setDrawingCacheEnabled(false);
-
-        playerRunsPlots[playerNumber].setImageBitmap(bitmap);
-    }
 }
