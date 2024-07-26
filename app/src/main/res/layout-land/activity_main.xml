@@ -34,8 +34,10 @@
             android:id="@+id/dropdown_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:icon="@drawable/ic_settings"
+            app:icon="@drawable/ic_dropdown"
+            android:contentDescription="dropdown"
             app:cornerRadius="0dp"
+            app:iconGravity="textStart"
             android:insetBottom="0dp"
             android:insetTop="0dp" />
 
