@@ -75,6 +75,7 @@ public class GamePlotter {
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
         xAxis.setGranularity(1f);
         xAxis.setDrawLabels(true);
         xAxis.setLabelRotationAngle(0);
@@ -103,7 +104,6 @@ public class GamePlotter {
         BarChart barChart = new BarChart(context);
 
         List<BarEntry> playerScoreData = new ArrayList<>();
-        int index = 0;
         for (HashMap.Entry<Integer, Integer> entry: runsHistogram.entrySet()){
             playerScoreData.add( new BarEntry(entry.getKey(), entry.getValue()) );
         }
@@ -139,7 +139,8 @@ public class GamePlotter {
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1f);
-        xAxis.setDrawLabels(false);
+        xAxis.setDrawLabels(true);
+        xAxis.setDrawGridLines(false);
         xAxis.setLabelRotationAngle(0);
         xAxis.setTextColor(context.getResources().getColor(R.color.onBackground));
 
