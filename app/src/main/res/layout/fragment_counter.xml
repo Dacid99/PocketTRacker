@@ -83,7 +83,7 @@
         app:layout_constraintBottom_toTopOf="@+id/safeButton"
         app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_block2_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/newGame" />
+        app:layout_constraintTop_toBottomOf="@+id/player1CardView" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/winningPointsLayout"
@@ -185,7 +185,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/block1_start"
         app:cardCornerRadius="@dimen/cardCornerRadius"
-        app:layout_constraintBottom_toTopOf="@id/newGame"
+        app:layout_constraintBottom_toTopOf="@id/ballsOnTableFloatingButton"
         app:layout_constraintEnd_toStartOf="@+id/winningPointsLayout"
         app:layout_constraintStart_toStartOf="@+id/start_block1_guideline"
         app:layout_constraintTop_toTopOf="parent">
@@ -250,18 +250,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/newGame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newGame_string"
-        android:textSize="@dimen/textSize"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/ballsOnTableFloatingButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1CardView" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/start_block1_guideline"

@@ -51,7 +51,7 @@ public class CounterFragment extends Fragment{
     private TextView player1NameView, player2NameView, player1ClubView, player2ClubView, player1ScoreView, player2ScoreView, ballsOnTableFloatingButton;
     private TextInputEditText winningPointsInput;
     private MaterialCardView player1Card, player2Card;
-    private MaterialButton  foulButton, missButton, safeButton, redoButton, undoButton, newGameButton;
+    private MaterialButton foulButton, missButton, safeButton, redoButton, undoButton;
     private CounterFragmentListener listener;
 
     @Override
@@ -94,7 +94,6 @@ public class CounterFragment extends Fragment{
         foulButton = view.findViewById(R.id.foulButton);
         undoButton = view.findViewById(R.id.undoButton);
         redoButton = view.findViewById(R.id.redoButton);
-        newGameButton = view.findViewById(R.id.newGame);
 
         assignViewModels();
 
@@ -166,11 +165,6 @@ public class CounterFragment extends Fragment{
             return true;
         });
 
-        newGameButton.setOnClickListener(v -> {
-            newGame();
-            newGameButton.setVisibility(View.INVISIBLE);
-        });
-
         return view;
     }
 
@@ -201,14 +195,11 @@ public class CounterFragment extends Fragment{
                     winningPointsInput.setText(getString(R.string.winnerPoints_format, scoreBoard.getWinnerPoints()));
                     if (scoreBoard.getWinner() == 0){
                         player1Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
-                        newGameButton.setVisibility(View.VISIBLE);
                     }else if (scoreBoard.getWinner() == 1){
                         player2Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
-                        newGameButton.setVisibility(View.VISIBLE);
                     } else {
                         player1Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
                         player2Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
-                        newGameButton.setVisibility(View.INVISIBLE);
                     }
                 }
             }
@@ -344,15 +335,6 @@ public class CounterFragment extends Fragment{
         scoreSheetViewModel.update(reason);
     }
 
-    private void newGame(){
-        playersViewModel.reset();
-
-        poolTableViewModel.reset();
-
-        scoreBoardViewModel.reset();
-
-        scoreSheetViewModel.reset(poolTableViewModel, scoreBoardViewModel);
-    }
 
     private void assignPoints(){
         int points = poolTableViewModel.evaluate();
