@@ -254,17 +254,6 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/newGame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newGame_string"
-        android:textSize="@dimen/textSize"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottom_block2_guideline"
         android:layout_width="wrap_content"
