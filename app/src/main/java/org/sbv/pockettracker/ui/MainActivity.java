@@ -203,13 +203,14 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
 
         dropdownMenu.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.settings_dropdown){
-
+                NavOptions navOptions = new NavOptions.Builder().setPopUpTo(R.id.counterFragment, true).build();
+                navController.navigate(R.id.settingsFragment, null, navOptions);
                 return true;
             } else if (item.getItemId() == R.id.saveGame_dropdown){
                 onSaveButtonClick();
                 return true;
             } else if (item.getItemId() == R.id.newGame_dropdown){
-                System.out.println("test click");
+                onNewGameClick();
                 return true;
             } else if (item.getItemId() == R.id.loadGame_dropdown){
                 onLoadButtonClick();
@@ -251,6 +252,16 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
     }
 
     //counterfragment listener methods
+    @Override
+    public void onNewGameClick(){
+        playersViewModel.reset();
+
+        poolTableViewModel.reset();
+
+        scoreBoardViewModel.reset();
+
+        scoreSheetViewModel.reset(poolTableViewModel, scoreBoardViewModel);
+    }
     @Override
     public void onSaveButtonClick() {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
