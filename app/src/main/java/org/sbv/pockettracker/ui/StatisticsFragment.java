@@ -47,7 +47,7 @@ public class StatisticsFragment extends Fragment {
     private BarChart barChart;
 
     public interface StatisticsFragmentListener {
-        public void onScoreSheetButtonClick();
+        void onScoreSheetButtonClick();
     }
 
     private StatisticsFragmentListener listener;
