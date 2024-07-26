@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
     private void showDropdownMenu(View anchor){
         PopupMenu dropdownMenu = new PopupMenu(this, anchor);
         MenuInflater menuInflater = dropdownMenu.getMenuInflater();
-        menuInflater.inflate(R.menu.dropdown, dropdownMenu.getMenu());
+        menuInflater.inflate(R.menu.dropdown_menu, dropdownMenu.getMenu());
 
         dropdownMenu.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.settings_dropdown){

@@ -1,6 +1,6 @@
 - add more final keywords to mark immutability
 - more logging and error handling, find better way than assert!!
-- find good statistics and plots library
+- 
 - rethink reset functions of viewmodels
 - investigate blinking in tableheader
 - backgrounds in table can be done more concisely using LayerDrawable
@@ -12,5 +12,4 @@
 
 for next release:
 - tablet layouts
-- newgame save load buttons in dropdown in toolbar
 - new screenshots
