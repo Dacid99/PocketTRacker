@@ -35,15 +35,13 @@ import org.sbv.pockettracker.model.ScoreSheetViewModel;
 public class ScoreSheetFragment extends Fragment {
     private TableLayout tableLayout;
     private TextView player1TableHeader, player2TableHeader;
-    private MaterialButton loadGameButton, saveGameButton, statisticsButton;
+    private MaterialButton statisticsButton;
     private ScoreSheetViewModel scoreSheetViewModel;
     private PlayersViewModel playersViewModel;
     private ScoreBoardViewModel scoreBoardViewModel;
     private ScoreSheetFragmentListener listener;
 
     public interface ScoreSheetFragmentListener{
-        void onSaveButtonClick();
-        void onLoadButtonClick();
         void onStatisticsButtonClick();
     }
 
@@ -66,8 +64,6 @@ public class ScoreSheetFragment extends Fragment {
         player1TableHeader = view.findViewById(R.id.player1table_header);
         player2TableHeader = view.findViewById(R.id.player2table_header);
 
-        saveGameButton = view.findViewById(R.id.saveGame);
-        loadGameButton = view.findViewById(R.id.loadGame);
         statisticsButton = view.findViewById(R.id.toStatisticsButton);
 
         playersViewModel = new ViewModelProvider(requireActivity()).get(PlayersViewModel.class);
@@ -100,10 +96,6 @@ public class ScoreSheetFragment extends Fragment {
                 }
             }
         });
-
-        loadGameButton.setOnClickListener(v -> listener.onLoadButtonClick());
-
-        saveGameButton.setOnClickListener(v -> listener.onSaveButtonClick());
 
         statisticsButton.setOnClickListener(v -> listener.onStatisticsButtonClick());
 

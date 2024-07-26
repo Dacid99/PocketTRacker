@@ -228,6 +228,37 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         scoreBoardViewModel.addPoints(scoreSheetViewModel.turnplayerNumber(), points);
     }
 
+    public void onNewGameClick(){
+        playersViewModel.reset();
+
+        poolTableViewModel.reset();
+
+        scoreBoardViewModel.reset();
+
+        scoreSheetViewModel.reset(poolTableViewModel, scoreBoardViewModel);
+    }
+
+    public void onSaveButtonClick() {
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+
+        Date now = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+        formatter.setTimeZone(TimeZone.getTimeZone(TimeZone.getDefault().getID()));
+        String nameProposal = "game_" + formatter.format(now) + ".csv";
+        intent.putExtra(Intent.EXTRA_TITLE, nameProposal);
+
+        createFileActivityLauncher.launch(intent);
+    }
+
+    public void onLoadButtonClick() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        readFileActivityLauncher.launch(intent);
+    }
+
     //numberpanelistener methods
     @Override
     public void onNumberPaneClick(int number){
@@ -251,39 +282,6 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         playersViewModel.swap();
     }
 
-    //counterfragment listener methods
-    @Override
-    public void onNewGameClick(){
-        playersViewModel.reset();
-
-        poolTableViewModel.reset();
-
-        scoreBoardViewModel.reset();
-
-        scoreSheetViewModel.reset(poolTableViewModel, scoreBoardViewModel);
-    }
-    @Override
-    public void onSaveButtonClick() {
-        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
-
-        Date now = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
-        formatter.setTimeZone(TimeZone.getTimeZone(TimeZone.getDefault().getID()));
-        String nameProposal = "game_" + formatter.format(now) + ".csv";
-        intent.putExtra(Intent.EXTRA_TITLE, nameProposal);
-
-        createFileActivityLauncher.launch(intent);
-    }
-
-    @Override
-    public void onLoadButtonClick() {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
-        readFileActivityLauncher.launch(intent);
-    }
 
     @Override
     public void onStatisticsButtonClick(){
