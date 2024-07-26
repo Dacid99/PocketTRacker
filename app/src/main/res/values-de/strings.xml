@@ -51,5 +51,6 @@
     <string name="theme_setting_title">Farbmodus</string>
     <string name="runsPlot_description">Run</string>
     <string name="runsPlotLabel">Häufigkeit</string>
+    <string name="openSettings_string">Einstellungen</string>
 
 </resources>

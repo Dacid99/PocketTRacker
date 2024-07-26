@@ -20,9 +20,6 @@
     <string name="miss_string">Miss</string>
     <string name="undo_string">Undo \u21B6</string>
     <string name="redo_string">Redo \u21B7</string>
-    <string name="newGame_string">New Game</string>
-    <string name="saveGame_string">Save</string>
-    <string name="loadGame_string">Load</string>
 
     <string name="player_name_hint">Player</string>
     <string name="player_club_hint">Club</string>
@@ -81,6 +78,12 @@
     <string name="scoresheet_string" translatable="false">scoresheet</string>
     <string name="statistics_string">statistics</string>
     <string name="settings_string" translatable="false">settings</string>
+
+    <!-- dropdown menu strings -->
+    <string name="newGame_string">New Game</string>
+    <string name="saveGame_string">Save</string>
+    <string name="loadGame_string">Load</string>
+    <string name="openSettings_string">Settings</string>
 
     <!-- Preference Titles -->
     <string name="customization_header">Customization</string>

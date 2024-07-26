@@ -3,20 +3,20 @@
     <item
         android:id="@+id/newGame_dropdown"
         android:icon="@drawable/ic_new"
-        android:title="New Game"/>
+        android:title="@string/newGame_string"/>
 
     <item
         android:id="@+id/saveGame_dropdown"
         android:icon="@drawable/ic_save"
-        android:title="Save Game"/>
+        android:title="@string/newGame_string"/>
 
     <item
         android:id="@+id/loadGame_dropdown"
         android:icon="@drawable/ic_load"
-        android:title="Load Game"/>
+        android:title="@string/loadGame_string"/>
 
     <item
         android:id="@+id/settings_dropdown"
         android:icon="@drawable/ic_settings"
-        android:title="Settings"/>
+        android:title="@string/openSettings_string"/>
 </menu>
