@@ -12,14 +12,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@id/rail_navigation" />
+        android:layout_toEndOf="@id/navigationbar" />
 
-    <com.google.android.material.navigationrail.NavigationRailView
-        android:id="@+id/rail_navigation"
+    <LinearLayout
+        android:id="@+id/navigationbar"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        app:menu="@menu/navigation_menu"
-        app:labelVisibilityMode="unlabeled"
-        />
+        android:orientation="vertical">
+
+        <com.google.android.material.navigationrail.NavigationRailView
+            android:id="@+id/rail_navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:menu="@menu/navigation_menu"
+            app:labelVisibilityMode="unlabeled"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dropdown_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_settings"
+            app:cornerRadius="0dp"
+            android:insetBottom="0dp"
+            android:insetTop="0dp" />
+
+    </LinearLayout>
 </RelativeLayout>

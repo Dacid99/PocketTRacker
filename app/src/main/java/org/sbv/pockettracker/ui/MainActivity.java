@@ -6,7 +6,10 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.widget.PopupMenu;
 import android.widget.Toast;
+import android.view.View;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -23,6 +26,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigationrail.NavigationRailView;
 
 import org.sbv.pockettracker.model.Players;
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
     private ScoreSheetViewModel scoreSheetViewModel;
     private SharedPreferences preferences;
     private NavController navController;
+    private MaterialButton dropdownButton;
     private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
 
 
@@ -186,6 +191,35 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         if (navigationRailView != null) {
             NavigationUI.setupWithNavController(navigationRailView, navController);
         }
+
+        dropdownButton = findViewById(R.id.dropdown_button);
+        dropdownButton.setOnClickListener(this::showDropdownMenu);
+    }
+
+    private void showDropdownMenu(View anchor){
+        PopupMenu dropdownMenu = new PopupMenu(this, anchor);
+        MenuInflater menuInflater = dropdownMenu.getMenuInflater();
+        menuInflater.inflate(R.menu.dropdown, dropdownMenu.getMenu());
+
+        dropdownMenu.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.settings_dropdown){
+
+                return true;
+            } else if (item.getItemId() == R.id.saveGame_dropdown){
+                onSaveButtonClick();
+                return true;
+            } else if (item.getItemId() == R.id.newGame_dropdown){
+                System.out.println("test click");
+                return true;
+            } else if (item.getItemId() == R.id.loadGame_dropdown){
+                onLoadButtonClick();
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+        dropdownMenu.show();
     }
 
     private void assignPoints(){

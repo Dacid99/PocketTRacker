@@ -11,15 +11,33 @@
         app:defaultNavHost="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/bottom_navigation" />
+        android:layout_below="@+id/navigationbar" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+    <LinearLayout
+        android:id="@+id/navigationbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        app:menu="@menu/navigation_menu"
-        app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
-        app:labelVisibilityMode="unlabeled" />
+        android:orientation="horizontal">
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:menu="@menu/navigation_menu"
+            app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
+            app:labelVisibilityMode="unlabeled" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dropdown_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:icon="@drawable/ic_settings"
+            app:iconGravity=""
+            app:cornerRadius="0dp"
+            android:insetBottom="0dp"
+            android:insetTop="0dp" />
+
+    </LinearLayout>
 </RelativeLayout>

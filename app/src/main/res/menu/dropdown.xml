@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/newGame_dropdown"
+        android:title="New Game"/>
+
+    <item
+        android:id="@+id/saveGame_dropdown"
+        android:title="Save Game"/>
+
+    <item
+        android:id="@+id/loadGame_dropdown"
+        android:title="Load Game"/>
+
+    <item
+        android:id="@+id/settings_dropdown"
+        android:title="Settings"/>
+</menu>
