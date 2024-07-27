@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="loadGame_string">L\no\na\nd</string>
-    <string name="saveGame_string">S\na\nv\ne</string>
     <string name="toStatistics_string">S\nt\na\nt\ni\ns\nt\ni\nc\ns</string>
     <string name="toScoresheet_string">S\nc\no\nr\ne\ns\nh\ne\ne\nst</string>
 </resources>
