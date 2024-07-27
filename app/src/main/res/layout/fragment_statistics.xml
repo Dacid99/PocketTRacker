@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_margin="2dp"
+        android:layout_margin="@dimen/statistics_cardMargin"
         android:elevation="@dimen/statistics_cardElevation">
 
         <LinearLayout
@@ -145,7 +145,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_margin="2dp"
+        android:layout_margin="@dimen/statistics_cardMargin"
         android:elevation="@dimen/statistics_cardElevation">
 
         <LinearLayout

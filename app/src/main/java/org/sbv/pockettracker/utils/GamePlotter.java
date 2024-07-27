@@ -64,6 +64,7 @@ public class GamePlotter {
 
         Description description = new Description();
         description.setText(context.getResources().getString(R.string.scoresPlot_description));
+        description.setTextColor(context.getResources().getColor(R.color.onBackground));
 
         lineChart.setDescription(description);
         lineChart.setBackgroundColor(context.getResources().getColor(R.color.background));
@@ -127,6 +128,7 @@ public class GamePlotter {
 
         Description description = new Description();
         description.setText(context.getResources().getString(R.string.runsPlot_description));
+        description.setTextColor(context.getResources().getColor(R.color.onBackground));
 
         barChart.setDescription(description);
         barChart.setBackgroundColor(context.getResources().getColor(R.color.background));

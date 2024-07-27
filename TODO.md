@@ -20,4 +20,3 @@ for new release:
 - more margins in statistics layout
 - improve land statistics and scoresheet buttons
 - dark background color for popupmenu
-- dark plot description color
