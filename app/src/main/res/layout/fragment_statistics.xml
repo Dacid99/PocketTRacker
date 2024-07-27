@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_margin="@dimen/statistics_cardMargin"
-        android:elevation="@dimen/statistics_cardElevation">
+        app:cardElevation="@dimen/statistics_cardElevation">
 
         <LinearLayout
             android:orientation="vertical"
@@ -162,7 +162,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_margin="@dimen/statistics_cardMargin"
-        android:elevation="@dimen/statistics_cardElevation">
+        app:cardElevation="@dimen/statistics_cardElevation">
 
         <LinearLayout
             android:orientation="vertical"
