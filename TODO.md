@@ -10,7 +10,7 @@
 - sort resources
 - introduce playernumbers as static constants of players for readability
 - tablet layouts
-- explainer page
+- explainers
 
 
 for new release:
@@ -19,6 +19,5 @@ for new release:
 - mark winner in scoresheet and stats
 - more margins in statistics layout
 - improve land statistics and scoresheet buttons
-- header for numberpane
 - dark background color for popupmenu
 - dark plot description color

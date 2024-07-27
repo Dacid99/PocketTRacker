@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_margin="2dp"
-        android:elevation="10dp">
+        android:elevation="@dimen/statistics_cardElevation">
 
         <LinearLayout
             android:orientation="vertical"
@@ -50,16 +50,14 @@
                         android:id="@+id/player1ScorePlot"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statistics_cardMargin"
                         android:contentDescription="scores plot of player 1"/>
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/player1Statistics_card"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-
+                        android:layout_margin="@dimen/statistics_cardMargin"
                         app:cardCornerRadius="@dimen/cardCornerRadius_small"
                         app:cardElevation="8dp">
 
@@ -70,6 +68,34 @@
 
                             <TextView
                                 android:id="@+id/player1statistics_innings"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player1statistics_safes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player1statistics_misses"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player1statistics_fouls"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player1statistics_success"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -104,6 +130,7 @@
                         android:id="@+id/player1RunsPlot"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statistics_cardMargin"
                         android:contentDescription="runs plot of player 1"/>
 
                 </LinearLayout>
@@ -119,7 +146,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_margin="2dp"
-        android:elevation="10dp" >
+        android:elevation="@dimen/statistics_cardElevation">
 
         <LinearLayout
             android:orientation="vertical"
@@ -157,16 +184,14 @@
                         android:id="@+id/player2ScorePlot"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statistics_cardMargin"
                         android:contentDescription="scores plot of player 2"/>
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/player2Statistics_card"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-
+                        android:layout_margin="@dimen/statistics_cardMargin"
                         app:cardCornerRadius="@dimen/cardCornerRadius_small"
                         app:cardElevation="8dp">
 
@@ -177,6 +202,34 @@
 
                             <TextView
                                 android:id="@+id/player2statistics_innings"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player2statistics_safes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player2statistics_misses"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player2statistics_fouls"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="@dimen/smallTextSize" />
+
+                            <TextView
+                                android:id="@+id/player2statistics_success"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -211,6 +264,7 @@
                         android:id="@+id/player2RunsPlot"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statistics_cardMargin"
                         android:contentDescription="runs plot of player 2"/>
 
                 </LinearLayout>

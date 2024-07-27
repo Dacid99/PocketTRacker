@@ -38,5 +38,7 @@
     <dimen name="cardCornerRadius_small">8dp</dimen>
     <dimen name="navbarPadding">100dp</dimen>
     <dimen name="about_sidemargin">12dp</dimen>
+    <dimen name="statistics_cardElevation">20dp</dimen>
+    <dimen name="statistics_cardMargin">10dp</dimen>
 
 </resources>
