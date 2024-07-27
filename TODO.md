@@ -18,7 +18,6 @@ for new release:
 - number of fouls
 - mark winner in scoresheet and stats
 - more margins in statistics layout
-- more newlines in about
 - improve land statistics and scoresheet buttons
 - header for numberpane
 - dark background color for popupmenu
