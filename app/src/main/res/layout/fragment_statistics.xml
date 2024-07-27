@@ -46,12 +46,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/player1ScorePlot"
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/statistics_cardMargin"
-                        android:contentDescription="scores plot of player 1"/>
+                        app:cardCornerRadius="@dimen/cardCornerRadius_small"
+                        app:cardElevation="8dp"
+                        android:layout_margin="@dimen/statistics_cardMargin">
+
+                        <ImageView
+                            android:id="@+id/player1ScorePlot"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="scores plot of player 1"/>
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/player1Statistics_card"
@@ -126,12 +134,20 @@
 
                     </com.google.android.material.card.MaterialCardView>
 
-                    <ImageView
-                        android:id="@+id/player1RunsPlot"
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/statistics_cardMargin"
-                        android:contentDescription="runs plot of player 1"/>
+                        app:cardCornerRadius="@dimen/cardCornerRadius_small"
+                        app:cardElevation="8dp"
+                        android:layout_margin="@dimen/statistics_cardMargin">
+
+                        <ImageView
+                            android:id="@+id/player1RunsPlot"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="runs plot of player 1"/>
+
+                    </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
 
@@ -180,12 +196,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/player2ScorePlot"
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/statistics_cardMargin"
-                        android:contentDescription="scores plot of player 2"/>
+                        app:cardCornerRadius="@dimen/cardCornerRadius_small"
+                        app:cardElevation="8dp"
+                        android:layout_margin="@dimen/statistics_cardMargin">
+
+                        <ImageView
+                            android:id="@+id/player2ScorePlot"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="scores plot of player 2"/>
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/player2Statistics_card"
@@ -260,12 +284,20 @@
 
                     </com.google.android.material.card.MaterialCardView>
 
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="@dimen/cardCornerRadius_small"
+                        app:cardElevation="8dp"
+                        android:layout_margin="@dimen/statistics_cardMargin">
+
                     <ImageView
                         android:id="@+id/player2RunsPlot"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/statistics_cardMargin"
                         android:contentDescription="runs plot of player 2"/>
+
+                    </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
 

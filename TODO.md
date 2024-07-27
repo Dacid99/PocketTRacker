@@ -16,6 +16,4 @@
 for new release:
 - new screenshots
 - mark winner in scoresheet and stats
-- more margins in statistics layout
-- improve land statistics and scoresheet buttons
 - dark background color for popupmenu
