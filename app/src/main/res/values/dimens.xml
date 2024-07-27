@@ -36,5 +36,6 @@
     <dimen name="cardCornerRadius">16dp</dimen>
     <dimen name="cardCornerRadius_large">24dp</dimen>
     <dimen name="cardCornerRadius_small">8dp</dimen>
+    <dimen name="navbarPadding">100dp</dimen>
 
 </resources>

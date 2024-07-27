@@ -26,6 +26,7 @@
         <item name="android:statusBarColor">@color/statusBarColor</item>
         <item name="android:textColor">@color/text_color_selector</item>
 
+        <item name="popupMenuBackground">@color/white</item>
         <!-- Bottom navigation style -->
         <item name="bottomNavigationStyle">@style/Widget.BottomNavigation</item>
         <item name="navigationRailStyle">@style/Widget.NavigationRailView</item>
@@ -36,11 +37,13 @@
         <item name="android:background">@color/colorPrimary</item>
         <item name="itemIconTint">@color/colorOnPrimary</item>
         <item name="elevation">20dp</item>
+        <item name="android:layout_gravity">start</item>
     </style>
 
     <style name="Widget.NavigationRailView" parent="Widget.Material3.NavigationRailView">
         <item name="android:background">@color/colorPrimary</item>
         <item name="itemIconTint">@color/colorOnPrimary</item>
         <item name="elevation">20dp</item>
+        <item name="android:layout_gravity">start</item>
     </style>
 </resources>

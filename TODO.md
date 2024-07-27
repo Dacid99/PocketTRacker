@@ -12,6 +12,4 @@
 
 for next release:
 - tablet layouts
-- dropdown button into bar if possible
-- adjust popup position in land 
 - new screenshots
