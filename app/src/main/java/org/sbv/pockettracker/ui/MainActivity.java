@@ -1,5 +1,6 @@
 package org.sbv.pockettracker.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,7 +8,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuInflater;
-import android.widget.PopupMenu;
+
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.PopupMenu;
 import android.widget.Toast;
 import android.view.View;
 
@@ -18,6 +21,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
@@ -199,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
     private void showDropdownMenu(View anchor){
         PopupMenu dropdownMenu = new PopupMenu(this, anchor);
         MenuInflater menuInflater = dropdownMenu.getMenuInflater();
+        dropdownMenu.setForceShowIcon(true);
         menuInflater.inflate(R.menu.dropdown_menu, dropdownMenu.getMenu());
 
         dropdownMenu.setOnMenuItemClickListener(item -> {
