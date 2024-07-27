@@ -249,8 +249,8 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         return inningsList.get(turn).ballsOnTable;
     }
 
-    public char getSwitchReasonAt(int turn){
-        return inningsList.get(turn).switchReason.charAt(0);
+    public String getSwitchReasonAt(int turn){
+        return inningsList.get(turn).switchReason;
     }
 
     public void append(Inning turn){

@@ -35,6 +35,9 @@
     <string name="club_toggle_summary_on">Spieler haben Vereine</string>
     <string name="club_toggle_title">Vereine an/aus</string>
     <string name="about_string">Über</string>
+    <string name="player_safes_format">Safes %1$d</string>
+    <string name="player_misses_format">Misses %1$d</string>
+    <string name="player_fouls_format">Fouls %1$d</string>
     <string name="statistics_string">Statistiken</string>
     <string name="versionCode_format">Versionscode %1$d</string>
     <string name="versionName_format">Versionsname %1$s</string>
@@ -52,5 +55,6 @@
     <string name="runsPlot_description">Run</string>
     <string name="runsPlotLabel">Häufigkeit</string>
     <string name="openSettings_string">Einstellungen</string>
+    <string name="player_success_format">Erfolgsquote: %1$.1f</string>
 
 </resources>

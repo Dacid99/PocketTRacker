@@ -1,5 +1,8 @@
 package org.sbv.pockettracker.utils;
 
+import android.content.Context;
+
+import org.sbv.pockettracker.R;
 import org.sbv.pockettracker.model.ScoreSheet;
 
 import java.util.ArrayList;
@@ -8,6 +11,23 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 
 public class GameStatistics {
+
+    public static int[][] switchReasonNumbers(Context context, ScoreSheet scoreSheet){
+        final String foulString = context.getResources().getString(R.string.foul_string);
+        final String safeString = context.getResources().getString(R.string.safe_string);
+        final String missString = context.getResources().getString(R.string.miss_string);
+        int[][] switchReasonNumbers = new int[2][3]; // 0 safe, 1 miss, 2 foul
+        for (int index = 0; index < scoreSheet.length(); index++){
+            if (scoreSheet.getSwitchReasonAt(index).equals(safeString)){
+                switchReasonNumbers[(index % 2 == 1) ? 0 : 1][0]++;
+            } else if (scoreSheet.getSwitchReasonAt(index).equals(missString)){
+                switchReasonNumbers[(index % 2 == 1) ? 0 : 1][1]++;
+            } else if (scoreSheet.getSwitchReasonAt(index).equals(foulString)){
+                switchReasonNumbers[(index % 2 == 1) ? 0 : 1][2]++;
+            }
+        }
+        return switchReasonNumbers;
+    }
 
     public static int[] getIncrementsAt(int turn, ScoreSheet scoreSheet){
         if (turn <= 0 || turn >= scoreSheet.length()) {

@@ -154,7 +154,7 @@ public class ScoreSheetFragment extends Fragment {
 
 
         turnText.setText(getString(R.string.turnnumber_format, turn));
-        switchReasonText.setText(getString(R.string.switchReason_format, scoreSheet.getSwitchReasonAt(turn)));
+        switchReasonText.setText(getString(R.string.switchReason_format, scoreSheet.getSwitchReasonAt(turn).charAt(0)));
         //only show increments for turnplayers
         //also not for 0th turn
         Drawable background = ContextCompat.getDrawable(requireContext(), R.drawable.cell_separator);

@@ -117,5 +117,9 @@
     <string name="theme_setting_title">Theme</string>
     <string name="runsPlot_description">Run</string>
     <string name="runsPlotLabel">Frequency</string>
+    <string name="player_safes_format">Safes: %1$d</string>
+    <string name="player_misses_format">Misses: %1$d</string>
+    <string name="player_fouls_format">Fouls: %1$d</string>
+    <string name="player_success_format">Success Ratio: %1$.1f </string>
 
 </resources>
