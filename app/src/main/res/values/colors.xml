@@ -86,7 +86,7 @@
     <!-- playerfragment colors -->
     <color name="dropdown_background_color">@color/lighter_gray</color>
     <color name="playerCardBackgroundTint">@color/white</color>
-    <color name="maxRun_color">@color/gold</color>
+    <color name="maxRun_color">@color/darkgold</color>
     <color name="plotLineColor">@color/green</color>
 
 </resources>

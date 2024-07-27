@@ -16,7 +16,6 @@
 for new release:
 - new screenshots
 - number of fouls
-- winnercolor gradually darker
 - mark winner in scoresheet and stats
 - more margins in statistics layout
 - more newlines in about
