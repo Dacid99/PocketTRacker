@@ -38,7 +38,6 @@
     <string name="player_safes_format">Safes %1$d</string>
     <string name="player_misses_format">Misses %1$d</string>
     <string name="player_fouls_format">Fouls %1$d</string>
-    <string name="statistics_string">Statistiken</string>
     <string name="versionCode_format">Versionscode %1$d</string>
     <string name="versionName_format">Versionsname %1$s</string>
     <string name="author_format">Von %1$s</string>
