@@ -45,7 +45,7 @@
 
     <string name="scoresheet_scrollview_description">Scoresheet for the straight pool game</string>
 
-    <string name="player_maxrun_format">Top run: %1$d</string>
+    <string name="player_maxrun_format">Best run: %1$d</string>
     <string name="player_innings_format">Innings: %1$d</string>
     <string name="meanInning_format">\u2300 inning: %1$.2f</string>
     <string name="meanRun_format">\u2300 run: %1$.2f</string>

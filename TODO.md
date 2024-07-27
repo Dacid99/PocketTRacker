@@ -9,7 +9,18 @@
 - restructure all fields Xplayer1Y and Xplayer2Y into an array
 - sort resources
 - introduce playernumbers as static constants of players for readability
-
-for next release:
 - tablet layouts
+- explainer page
+
+
+for new release:
 - new screenshots
+- number of fouls
+- winnercolor gradually darker
+- mark winner in scoresheet and stats
+- more margins in statistics layout
+- more newlines in about
+- improve land statistics and scoresheet buttons
+- header for numberpane
+- dark background color for popupmenu
+- dark plot description color
