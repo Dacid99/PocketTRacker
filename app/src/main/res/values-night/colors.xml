@@ -30,4 +30,6 @@
     <color name="playerCardBackgroundTint">@color/background</color>
 
     <color name="plotLineColor">@color/green</color>
+
+
 </resources>

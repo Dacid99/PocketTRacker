@@ -15,5 +15,3 @@
 
 for new release:
 - new screenshots
-- mark winner in scoresheet and stats
-- dark background color for popupmenu
