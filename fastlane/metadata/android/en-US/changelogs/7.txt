@@ -4,7 +4,7 @@
 - improved landscape layouts
 - added small "about" page
 - overhauled backend code to ensure persistence of data
-- added dedicated statistics view
+- added statistics view with plots and game analysis
 - fixed some smaller issues
 
 Hey there, thanks for checking out my app!

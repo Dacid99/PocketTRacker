@@ -65,12 +65,8 @@
     </style>
 
     <style name="Widget.DropDown" parent="Widget.Material3.PopupMenu">
-        <item name="android:textAppearance">@style/popuptext</item>
         <item name="android:popupBackground">@color/colorPrimary</item>
         <item name="android:dropDownVerticalOffset">0px</item>
-    </style>
-    <style name="popuptext" parent="TextAppearance.Material3.TitleMedium">
-        <item name="android:textColor">@color/colorOnPrimary</item>
     </style>
     <style name="Widget.ActionBar" parent="ThemeOverlay.AppCompat.Light">
         <item name="background">@color/colorPrimary</item>
