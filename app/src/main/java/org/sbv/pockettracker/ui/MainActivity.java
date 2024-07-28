@@ -171,42 +171,9 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, @Nullable String key) {
                 if (key != null) {
-//                    switch (key) {
-//                        case "winnerPoints_default":
-//                            String winnerPointsString = sharedPreferences.getString(key, "40");
-//                            try{
-//                                ScoreBoard.defaultWinnerPoints = Integer.parseInt(winnerPointsString);
-//                            }catch (NumberFormatException e) {
-//                                Log.d("Bad preference","In SettingsActivity.onSharedPreferenceChanged: winnerpoints_default is not a parseable String! e");
-//                                ScoreBoard.defaultWinnerPoints = 40;
-//                            }
-//                            scoreBoardViewModel.updateWinnerPoints(ScoreBoard.defaultWinnerPoints);
-//                            break;
-//
-//                        case "player1_name_default":
-//                            String newNamePlayer1 = sharedPreferences.getString(key,"");
-//                            playersViewModel.updatePlayerName(0,newNamePlayer1);
-//                            Players.defaultPlayerNames[0] = newNamePlayer1;
-//                            break;
-//
-//                        case "player2_name_default":
-//                            String newNamePlayer2 = sharedPreferences.getString(key,"");
-//                            playersViewModel.updatePlayerName(1,newNamePlayer2);
-//                            Players.defaultPlayerNames[1] = newNamePlayer2;
-//                            break;
-//
-//                        case "player1_club_default":
-//                            String newClubPlayer1 = sharedPreferences.getString(key,"");
-//                            playersViewModel.updateClubName(0, newClubPlayer1);
-//                            Players.defaultPlayerClubs[0] = newClubPlayer1;
-//                            break;
-//
-//                        case "player2_club_default":
-//                            String newClubPlayer2 = sharedPreferences.getString(key,"");
-//                            playersViewModel.updateClubName(1, newClubPlayer2);
-//                            Players.defaultPlayerClubs[1] = newClubPlayer2;
-//                            break;
-//                    }
+                    if (key.equals("theme")){
+                        recreate();
+                    }
                 }
             }
         };
@@ -242,7 +209,8 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         dropdownMenu.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.settings_dropdown){
                 //NavOptions navOptions = new NavOptions.Builder().setPopUpTo(R.id.counterFragment, true).build();
-                navController.navigate(R.id.settingsFragment, null);
+                Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(settingsIntent);
                 return true;
             } else if (item.getItemId() == R.id.saveGame_dropdown){
                 onSaveButtonClick();

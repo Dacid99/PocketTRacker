@@ -32,17 +32,52 @@
 
     </style>
 
+    <style name="Theme.PocketTRacker.Settings" parent="Theme.Material3.DayNight">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorVariantPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorVariantSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <!-- Tertiary brand color. -->
+        <item name="colorTertiary">@color/colorTertiary</item>
+        <item name="colorOnTertiary">@color/colorOnTertiary</item>
+        <!-- Specific color overrides for FAB -->
+        <item name="colorPrimaryContainer">@color/primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/onPrimaryContainer</item>
+        <item name="colorSecondaryContainer">@color/secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/onSecondaryContainer</item>
+        <!-- Additional theme colors -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="colorOnBackground">@color/onBackground</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/statusBarColor</item>
+        <item name="actionBarStyle">@style/Widget.ActionBar</item>
+        <item name="android:textColor">@color/text_color_selector</item>
+
+    </style>
+
+    <style name="Widget.ActionBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="background">@color/colorPrimary</item>
+        <item name="colorOnBackground">@color/colorOnPrimary</item>
+        <item name="colorControlNormal">@color/colorOnPrimary</item>
+        <item name="android:colorControlNormal">@color/colorOnPrimary</item>
+    </style>
+
     <style name="Widget.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
         <item name="android:background">@color/colorPrimary</item>
         <item name="itemIconTint">@color/colorOnPrimary</item>
-        <item name="elevation">20dp</item>
+        <item name="elevation">0dp</item>
         <item name="android:layout_gravity">start</item>
     </style>
 
     <style name="Widget.NavigationRailView" parent="Widget.Material3.NavigationRailView">
         <item name="android:background">@color/colorPrimary</item>
         <item name="itemIconTint">@color/colorOnPrimary</item>
-        <item name="elevation">20dp</item>
+        <item name="elevation">0dp</item>
         <item name="android:layout_gravity">start</item>
     </style>
 </resources>

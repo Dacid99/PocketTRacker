@@ -3,12 +3,15 @@ package org.sbv.pockettracker.ui;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.EditTextPreference;
@@ -18,38 +21,53 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import org.sbv.pockettracker.R;
 
-public class SettingsFragment extends Fragment {
+
+public class SettingsActivity extends AppCompatActivity {
 
     private ImageView aboutIcon;
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater layoutInflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = layoutInflater.inflate(R.layout.fragment_settings, container, false);
-        aboutIcon = view.findViewById(R.id.about_icon);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
+
+        ActionBar toolbar = getSupportActionBar();
+        if (toolbar != null){
+            toolbar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        aboutIcon = findViewById(R.id.about_icon);
         aboutIcon.setOnClickListener(v -> {
             AboutFragment aboutFragment = new AboutFragment();
-            aboutFragment.show(getChildFragmentManager(), "about_bottomsheet");
+            aboutFragment.show(getSupportFragmentManager(), "about_bottomsheet");
         });
 
-
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         if (savedInstanceState == null) {
-            FragmentManager fragmentManager = getChildFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.settings, new SettingsSubFragment()).commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.settings, new SettingsFragment())
+                    .commit();
         }
     }
 
-    public static class SettingsSubFragment extends PreferenceFragmentCompat {
-        private EditTextPreference winnerPointsDefault;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        int id = menuItem.getItemId();
+
+        if (id == android.R.id.home){
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(menuItem);
+    }
+
+    public static class SettingsFragment extends PreferenceFragmentCompat {
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
-            winnerPointsDefault = findPreference("winnerPoints_default");
+            EditTextPreference winnerPointsDefault = findPreference("winnerPoints_default");
             if (winnerPointsDefault != null) {
                 winnerPointsDefault.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                     @Override
