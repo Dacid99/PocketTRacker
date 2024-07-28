@@ -14,11 +14,11 @@
 - settings for toggling options like club on/off
 - remember players via defaults and autocomplete
 - AOD feature
-
+- statistics for players and profiles with plots
+- scoresheet with coloring of highest run etc
+- 
 # Future features
 - remember players via profiles
-- extensive statistics for players and profiles with plots
-- extended scoresheet with coloring of highest run etc
 - editing of scores in scoresheet
 - option of tracking by every pot
 - snookertracker in same app

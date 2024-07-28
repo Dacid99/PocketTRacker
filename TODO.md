@@ -11,7 +11,3 @@
 - introduce playernumbers as static constants of players for readability and a comprehensive function to determine turnplayer instead of % operations
 - tablet layouts
 - explainers
-
-
-for new release:
-- new screenshots
