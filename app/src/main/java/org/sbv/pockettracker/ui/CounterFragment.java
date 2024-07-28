@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -255,7 +256,7 @@ public class CounterFragment extends Fragment{
 
     private void applyPreferences(){
         preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
-
+        System.out.println(preferences.getBoolean("AOD_toggle", true));
         if (preferences.getBoolean("AOD_toggle", true)) {
             requireActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
@@ -321,8 +322,11 @@ public class CounterFragment extends Fragment{
                             }
                             break;
                         case "AOD_toggle":
+                            System.out.println(preferences.getBoolean(key, true));
                             if (sharedPreferences.getBoolean(key, true)) {
                                 requireActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                            } else {
+                                requireActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                             }
                     }
                 }
