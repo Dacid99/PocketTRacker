@@ -89,6 +89,7 @@
     <color name="maxRun_color">@color/darkgold</color>
     <color name="plotLineColor">@color/green</color>
 
+    <color name="navigation_icons_color">@color/colorOnPrimary</color>
     <color name="icons_color">@color/onBackground</color>
 
 </resources>

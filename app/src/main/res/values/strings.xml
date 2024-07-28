@@ -74,8 +74,8 @@
     <string name="right_swap_string" translatable="false">\u21C4</string>
 
     <!-- toolbar strings -->
-    <string name="counter_string" translatable="false">counter</string>
-    <string name="scoresheet_string" translatable="false">scoresheet</string>
+    <string name="counter_string">Counter</string>
+    <string name="scoresheet_string">Scoresheet</string>
 
     <!-- dropdown menu strings -->
     <string name="newGame_string">New Game</string>

@@ -30,6 +30,9 @@
         <item name="bottomNavigationStyle">@style/Widget.BottomNavigation</item>
         <item name="navigationRailStyle">@style/Widget.NavigationRailView</item>
 
+        <item name="popupMenuBackground">@color/colorPrimary</item>
+        <item name="popupMenuStyle">@style/Widget.DropDown</item>
+
     </style>
 
     <style name="Theme.PocketTRacker.Settings" parent="Theme.Material3.DayNight">
@@ -58,8 +61,17 @@
         <item name="actionBarStyle">@style/Widget.ActionBar</item>
         <item name="android:textColor">@color/text_color_selector</item>
 
+
     </style>
 
+    <style name="Widget.DropDown" parent="Widget.Material3.PopupMenu">
+        <item name="android:textAppearance">@style/popuptext</item>
+        <item name="android:popupBackground">@color/colorPrimary</item>
+        <item name="android:dropDownVerticalOffset">0px</item>
+    </style>
+    <style name="popuptext" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textColor">@color/colorOnPrimary</item>
+    </style>
     <style name="Widget.ActionBar" parent="ThemeOverlay.AppCompat.Light">
         <item name="background">@color/colorPrimary</item>
         <item name="colorOnBackground">@color/colorOnPrimary</item>

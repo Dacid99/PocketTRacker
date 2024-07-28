@@ -12,6 +12,8 @@
     <string name="miss_string">Miss</string>
     <string name="undo_string">Zurück \u21B6</string>
     <string name="redo_string">Vor \u21B7</string>
+    <string name="counter_string">Zähler</string>
+    <string name="scoresheet_string">Protokoll</string>
     <string name="newGame_string">Neues Spiel</string>
     <string name="turnnumber_columnlabel">Aufnahme</string>
     <string name="player1_default">Spieler1</string>

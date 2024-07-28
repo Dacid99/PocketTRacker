@@ -27,8 +27,7 @@
             android:layout_weight="1"
             android:paddingEnd="@dimen/navbarPadding"
             app:menu="@menu/navigation_menu"
-            app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
-            app:labelVisibilityMode="unlabeled" />
+            app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/dropdown_button"
