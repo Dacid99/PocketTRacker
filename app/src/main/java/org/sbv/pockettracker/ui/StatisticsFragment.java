@@ -89,8 +89,8 @@ public class StatisticsFragment extends Fragment {
                 double[] meanRuns = GameStatistics.meanRuns(scoreSheet);
                 int[] playerInnings = scoreSheet.innings();
                 int[][] switchReasonNumbers = GameStatistics.switchReasonNumbers(requireContext(), scoreSheet);
-                float successRatioPlayer1 = (playerInnings[0] != 0) ? switchReasonNumbers[0][0] * 1f/ playerInnings[0] : 0f;
-                float successRatioPlayer2 = (playerInnings[1] != 0) ? switchReasonNumbers[1][0] * 1f/ playerInnings[1] : 0f;
+                float errorRatioPlayer1 = (playerInnings[0] != 0) ? 1 - switchReasonNumbers[0][0] * 1f/ playerInnings[0] : 0f;
+                float errorRatioPlayer2 = (playerInnings[1] != 0) ? 1 - switchReasonNumbers[1][0] * 1f/ playerInnings[1] : 0f;
                 int[] maxRuns = GameStatistics.maxRuns(scoreSheet);
                 maxRunPlayer1View.setText(getString(R.string.player_maxrun_format, maxRuns[0]));
                 maxRunPlayer2View.setText(getString(R.string.player_maxrun_format, maxRuns[1]));
@@ -102,8 +102,8 @@ public class StatisticsFragment extends Fragment {
                 missesPlayer2View.setText(getString(R.string.player_misses_format, switchReasonNumbers[1][1]));
                 foulsPlayer1View.setText(getString(R.string.player_fouls_format, switchReasonNumbers[0][2]));
                 foulsPlayer2View.setText(getString(R.string.player_fouls_format, switchReasonNumbers[1][2]));
-                successPlayer1View.setText(getString(R.string.player_success_format, successRatioPlayer1));
-                successPlayer2View.setText(getString(R.string.player_success_format, successRatioPlayer2));
+                successPlayer1View.setText(getString(R.string.player_error_format, errorRatioPlayer1));
+                successPlayer2View.setText(getString(R.string.player_error_format, errorRatioPlayer2));
                 meanInningPlayer1View.setText(getString(R.string.meanInning_format, meanInnings[0]));
                 meanInningPlayer2View.setText(getString(R.string.meanInning_format, meanInnings[1]));
                 meanRunPlayer1View.setText(getString(R.string.meanRun_format, meanRuns[0]));

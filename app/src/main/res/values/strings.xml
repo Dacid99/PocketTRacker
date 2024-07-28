@@ -120,7 +120,7 @@
     <string name="player_safes_format">Safes: %1$d</string>
     <string name="player_misses_format">Misses: %1$d</string>
     <string name="player_fouls_format">Fouls: %1$d</string>
-    <string name="player_success_format">Success Ratio: %1$.1f </string>
+    <string name="player_error_format">Error Ratio: %1$.1f </string>
     <string name="title_activity_settings">Settings</string>
 
 </resources>
