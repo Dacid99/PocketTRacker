@@ -95,9 +95,9 @@ public class CounterFragment extends Fragment{
         undoButton = view.findViewById(R.id.undoButton);
         redoButton = view.findViewById(R.id.redoButton);
 
-        assignViewModels();
-
         applyPreferences();
+
+        assignViewModels();
 
         winningPointsInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -345,6 +345,11 @@ public class CounterFragment extends Fragment{
     public void onDestroyView() {
         super.onDestroyView();
         requireActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
         preferences.unregisterOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
     }
 }

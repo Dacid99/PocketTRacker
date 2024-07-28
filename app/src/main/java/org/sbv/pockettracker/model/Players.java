@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.Contract;
 
+import java.sql.Array;
+import java.util.Arrays;
+
 public class Players implements Parcelable {
     public static final String[] defaultPlayerNames = {"",""};
     public static final String[] defaultPlayerClubs = {"",""};
@@ -15,8 +18,8 @@ public class Players implements Parcelable {
     private final String[] clubs;
 
     public Players() {
-        this.names = defaultPlayerNames;
-        this.clubs = defaultPlayerClubs;
+        this.names = Arrays.copyOf(defaultPlayerNames,2);
+        this.clubs = Arrays.copyOf(defaultPlayerClubs, 2);
     }
 
     public String[] getNames() {
