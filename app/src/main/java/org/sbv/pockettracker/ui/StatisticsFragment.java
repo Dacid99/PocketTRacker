@@ -36,7 +36,7 @@ public class StatisticsFragment extends Fragment {
     private StatisticsFragmentListener listener;
     private ScoreSheetViewModel scoreSheetViewModel;
     private PlayersViewModel playersViewModel;
-    private TextView player1StatisticsHeader, player2StatisticsHeader, maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, safesPlayer1View, safesPlayer2View, missesPlayer1View, missesPlayer2View, foulsPlayer1View, foulsPlayer2View,  successPlayer1View, successPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
+    private TextView player1StatisticsHeader, player2StatisticsHeader, maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, safesPlayer1View, safesPlayer2View, missesPlayer1View, missesPlayer2View, foulsPlayer1View, foulsPlayer2View, errorPlayer1View, errorPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
     private final ImageView[] playerScorePlots = new ImageView[2];
     private final ImageView[] playerRunsPlots = new ImageView[2];
     private MaterialButton toScoreSheetButton;
@@ -65,8 +65,8 @@ public class StatisticsFragment extends Fragment {
         missesPlayer2View = view.findViewById(R.id.player2statistics_misses);
         foulsPlayer1View = view.findViewById(R.id.player1statistics_fouls);
         foulsPlayer2View = view.findViewById(R.id.player2statistics_fouls);
-        successPlayer1View = view.findViewById(R.id.player1statistics_success);
-        successPlayer2View = view.findViewById(R.id.player2statistics_success);
+        errorPlayer1View = view.findViewById(R.id.player1statistics_success);
+        errorPlayer2View = view.findViewById(R.id.player2statistics_success);
         meanInningPlayer1View = view.findViewById(R.id.player1statistics_meanInning);
         meanInningPlayer2View = view.findViewById(R.id.player2statistics_meanInning);
         meanRunPlayer1View = view.findViewById(R.id.player1statistics_meanRun);
@@ -102,8 +102,8 @@ public class StatisticsFragment extends Fragment {
                 missesPlayer2View.setText(getString(R.string.player_misses_format, switchReasonNumbers[1][1]));
                 foulsPlayer1View.setText(getString(R.string.player_fouls_format, switchReasonNumbers[0][2]));
                 foulsPlayer2View.setText(getString(R.string.player_fouls_format, switchReasonNumbers[1][2]));
-                successPlayer1View.setText(getString(R.string.player_error_format, errorRatioPlayer1));
-                successPlayer2View.setText(getString(R.string.player_error_format, errorRatioPlayer2));
+                errorPlayer1View.setText(getString(R.string.player_error_format, errorRatioPlayer1));
+                errorPlayer2View.setText(getString(R.string.player_error_format, errorRatioPlayer2));
                 meanInningPlayer1View.setText(getString(R.string.meanInning_format, meanInnings[0]));
                 meanInningPlayer2View.setText(getString(R.string.meanInning_format, meanInnings[1]));
                 meanRunPlayer1View.setText(getString(R.string.meanRun_format, meanRuns[0]));
