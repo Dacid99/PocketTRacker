@@ -18,7 +18,7 @@ public class ScoreSheetViewModel extends ViewModel {
     public void update(String reason){
         ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
         if (scoreSheet != null){
-            scoreSheet.append(reason);
+            scoreSheet.update(reason);
             scoreSheetLiveData.setValue(scoreSheet);
         }
     }
@@ -56,7 +56,7 @@ public class ScoreSheetViewModel extends ViewModel {
     public void append(ScoreSheet.Inning inning){
         ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
         if (scoreSheet != null){
-            scoreSheet.append(inning);
+            scoreSheet.update(inning);
             scoreSheetLiveData.setValue(scoreSheet);
         }
     }

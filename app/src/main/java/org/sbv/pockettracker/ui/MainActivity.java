@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
                                 Uri uri = data.getData();
                                 try (InputStream inputStream = getContentResolver().openInputStream(uri);
                                      InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
+                                    onNewGameClick();
                                     ScoreSheetIO.readFromFile(inputStreamReader, playersViewModel, scoreSheetViewModel);
                                     Toast.makeText(MainActivity.this, "Game loaded successfully!", Toast.LENGTH_SHORT).show();
                                 } catch (IOException e) {

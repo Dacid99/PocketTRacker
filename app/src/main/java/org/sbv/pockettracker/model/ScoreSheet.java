@@ -101,7 +101,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         this.pointer = -1; //directly incremented by update
         //enter starting values
         // this is crucial for statistics, as the list is never empty!
-        append("   ");
+        update("   ");
     }
 
     //Parcelable methods
@@ -137,7 +137,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     };
 
 
-    public void append(String reason){
+    public void update(String reason){
         if (!isLatest()){
             clearAfterPointer();
         }
@@ -253,7 +253,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         return inningsList.get(turn).switchReason;
     }
 
-    public void append(Inning turn){
+    public void update(Inning turn){
         if (!isLatest()){
             clearAfterPointer();
         }
