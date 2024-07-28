@@ -15,4 +15,3 @@
 
 for new release:
 - new screenshots
-- background for dropdown

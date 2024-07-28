@@ -54,7 +54,7 @@
     <string name="runsPlot_description">Run</string>
     <string name="runsPlotLabel">Häufigkeit</string>
     <string name="openSettings_string">Einstellungen</string>
-    <string name="player_error_format">Fehlerquote: %1$.1f</string>
+    <string name="player_error_format">Fehlerquote: %1$d %%</string>
     <string name="title_activity_settings">Settings</string>
 
 </resources>

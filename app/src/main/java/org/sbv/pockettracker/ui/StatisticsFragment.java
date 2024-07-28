@@ -89,8 +89,8 @@ public class StatisticsFragment extends Fragment {
                 double[] meanRuns = GameStatistics.meanRuns(scoreSheet);
                 int[] playerInnings = scoreSheet.innings();
                 int[][] switchReasonNumbers = GameStatistics.switchReasonNumbers(requireContext(), scoreSheet);
-                float errorRatioPlayer1 = (playerInnings[0] != 0) ? 1 - switchReasonNumbers[0][0] * 1f/ playerInnings[0] : 0f;
-                float errorRatioPlayer2 = (playerInnings[1] != 0) ? 1 - switchReasonNumbers[1][0] * 1f/ playerInnings[1] : 0f;
+                int errorRatioPlayer1 =  (playerInnings[0] != 0) ? (int) (100 - switchReasonNumbers[0][0] * 100f/ playerInnings[0]) : 0;
+                int errorRatioPlayer2 = (playerInnings[1] != 0) ? (int) (100 - switchReasonNumbers[1][0] * 100f/ playerInnings[1]) : 0;
                 int[] maxRuns = GameStatistics.maxRuns(scoreSheet);
                 maxRunPlayer1View.setText(getString(R.string.player_maxrun_format, maxRuns[0]));
                 maxRunPlayer2View.setText(getString(R.string.player_maxrun_format, maxRuns[1]));
