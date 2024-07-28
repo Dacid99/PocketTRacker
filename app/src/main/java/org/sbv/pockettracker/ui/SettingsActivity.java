@@ -34,6 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
         ActionBar toolbar = getSupportActionBar();
         if (toolbar != null){
             toolbar.setDisplayHomeAsUpEnabled(true);
+            toolbar.setHomeAsUpIndicator(R.drawable.ic_back);
         }
 
         aboutIcon = findViewById(R.id.about_icon);

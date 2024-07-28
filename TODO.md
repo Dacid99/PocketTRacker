@@ -14,5 +14,4 @@
 
 
 for new release:
-- fix preferences
 - new screenshots
