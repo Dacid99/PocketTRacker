@@ -62,7 +62,9 @@ android {
         // Disables dependency metadata when building Android App Bundles.
         includeInBundle = false
     }
-
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
+    }
 }
 
 dependencies {
