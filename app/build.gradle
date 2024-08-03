@@ -11,8 +11,8 @@ android {
         applicationId "org.sbv.pockettracker"
         minSdk 21
         targetSdk 34
-        versionCode 7
-        versionName "2.0.0"
+        versionCode 8
+        versionName "2.0.1"
         buildConfigField "String", "AUTHOR", "\"Dacid99\""
         buildConfigField "String", "GITLAB", "\"https://gitlab.com/Dacid99/pockettracker\""
 
