@@ -18,8 +18,8 @@
     <string name="safe_string">Safe</string>
     <string name="foul_string">Foul</string>
     <string name="miss_string">Miss</string>
-    <string name="undo_string">Undo \u21B6</string>
-    <string name="redo_string">Redo \u21B7</string>
+    <string name="undo_string">\u21B6</string>
+    <string name="redo_string">\u21B7</string>
 
     <string name="player_name_hint">Player</string>
     <string name="player_club_hint">Club</string>
