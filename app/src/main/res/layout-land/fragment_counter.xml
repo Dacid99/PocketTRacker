@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:text="@string/foul_string"
         android:textSize="@dimen/textSize"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
         app:layout_constraintEnd_toEndOf="@+id/missButton"
         app:layout_constraintStart_toStartOf="@+id/missButton"
         app:layout_constraintTop_toBottomOf="@+id/missButton" />
@@ -79,7 +79,7 @@
         android:maxLines="2"
         android:text="@string/ballsOnTable_format"
         android:textSize="@dimen/textSize"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_block2_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
         app:layout_constraintEnd_toStartOf="@+id/end_block1_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_block1_guideline"
         app:layout_constraintTop_toBottomOf="@+id/player1CardView" />
@@ -255,11 +255,11 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottom_block2_guideline"
+        android:id="@+id/bottom_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@fraction/bottom_block2_guideline_fraction" />
+        app:layout_constraintGuide_percent="@fraction/bottom_guideline_fraction" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/start_block1_guideline"
@@ -288,13 +288,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="@fraction/end_block1_guideline_fraction" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottom_block1_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@fraction/bottom_block1_guideline_fraction" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
