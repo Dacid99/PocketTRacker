@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/scoreSheetFragment">
+
+
+    <fragment
+        android:id="@+id/scoreSheetFragment"
+        android:name="org.sbv.pockettracker.ui.ScoreSheetFragment"
+        android:label="fragment_scoresheet"
+        tools:layout="@layout/fragment_scoresheet" >
+
+        <action
+            android:id="@+id/action_scoreSheetFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="org.sbv.pockettracker.ui.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" >
+
+        <action
+            android:id="@+id/action_statisticsFragment_to_scoreSheetFragment"
+            app:destination="@id/scoreSheetFragment" />
+    </fragment>
+
+
+</navigation>

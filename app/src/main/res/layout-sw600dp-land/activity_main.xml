@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@id/navigationbar"
+        android:layout_alignParentEnd="true"
+        android:baselineAligned="false">
+
+        <include
+            android:id="@+id/counter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            layout="@layout/fragment_counter"
+            />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            app:navGraph="@navigation/nav_graph"
+            app:defaultNavHost="true"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/navigationbar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:orientation="vertical">
+
+        <com.google.android.material.navigationrail.NavigationRailView
+            android:id="@+id/rail_navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:menu="@menu/navigation_menu" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dropdown_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_dropdown"
+            android:contentDescription="dropdown"
+            app:cornerRadius="0dp"
+            app:iconGravity="textStart"
+            android:insetBottom="0dp"
+            android:insetTop="0dp" />
+
+    </LinearLayout>
+</RelativeLayout>

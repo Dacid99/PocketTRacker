@@ -110,8 +110,7 @@
     <string name="AODoff_string">AOD for mainpage disabled</string>
     <string name="AOD_toggle_title">AOD on/off</string>
     <string name="theme_summary">Select your preferred theme</string>
-    <string name="toStatistics_string">Statistics</string>
-    <string name="toScoresheet_string">Scoresheet</string>
+
     <string name="scoresPlot_description">Inning</string>
     <string name="scoresPlotLabel">Score</string>
     <string name="theme_setting_title">Theme</string>
@@ -123,4 +122,12 @@
     <string name="player_error_format">Error Ratio: %1$d %%</string>
     <string name="title_activity_settings">Settings</string>
 
+    <!-- orientation sensitive strings -->
+    <string name="toStatistics_string_portrait">Statistics</string>
+    <string name="toScoresheet_string_portrait">Scoresheet</string>
+    <string name="toStatistics_string_land">S\nt\na\nt\ni\ns\nt\ni\nc\ns</string>
+    <string name="toScoresheet_string_land">S\nc\no\nr\ne\ns\nh\ne\ne\nst</string>
+
+    <string name="toStatistics_string">@string/toStatistics_string_portrait</string>
+    <string name="toScoresheet_string">@string/toScoresheet_string_portrait</string>
 </resources>

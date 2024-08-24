@@ -48,8 +48,6 @@
     <string name="AODoff_string">AOD auf der Hauptseite deaktiviert</string>
     <string name="AOD_toggle_title">AOD an/aus</string>
     <string name="theme_summary">Wähle den Farbmodus</string>
-    <string name="toStatistics_string">Statistiken</string>
-    <string name="toScoresheet_string">Spielprotokoll</string>
     <string name="scoresPlot_description">Aufnahme</string>
     <string name="scoresPlotLabel">Score</string>
     <string name="theme_setting_title">Farbmodus</string>
@@ -58,5 +56,12 @@
     <string name="openSettings_string">Einstellungen</string>
     <string name="player_error_format">Fehlerquote: %1$d %%</string>
     <string name="title_activity_settings">Settings</string>
+
+    <!-- orientation sensitive strings -->
+    <string name="toStatistics_string_portrait">Statistiken</string>
+    <string name="toScoresheet_string_portrait">Spielprotokoll</string>
+    <string name="toStatistics_string_land">S\nt\na\nt\ni\ns\nt\ni\nk\ne\nn</string>
+    <string name="toScoresheet_string_land">S\np\ni\ne\nl\np\nr\no\nt\no\nk\no\nl\nl</string>
+
 
 </resources>

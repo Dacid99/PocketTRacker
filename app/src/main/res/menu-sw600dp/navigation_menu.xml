@@ -1,0 +1,27 @@
+<!-- res/menu/bottom_navigation_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+    <item
+        android:id="@+id/counterFragment"
+        android:icon="@drawable/ic_home"
+        android:title="@string/counter_string" />
+
+    <item
+        android:id="@+id/scoreSheetFragment"
+        android:icon="@drawable/ic_scoresheet"
+        android:title="@string/scoresheet_string" />
+
+
+    <item
+        android:id="@+id/statisticsFragment"
+        android:icon="@drawable/ic_statistics"
+        android:title="@string/statistics_string" />
+    -->
+    <!--
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings_string"
+        android:orderInCategory="100"/>
+    -->
+</menu>

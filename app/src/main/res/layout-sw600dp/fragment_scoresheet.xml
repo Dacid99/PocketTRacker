@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TableLayout
+        android:id="@+id/scoresheet_table"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="1dp"
+        android:layout_weight="1">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/turn_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/turnnumber_columnlabel"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/player1table_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/player1_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/player1_default"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/player2table_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/player2_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/player2_default"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/ballsOnTable_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/ballsOnTable_columnlabel"
+                android:textStyle="bold" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/turnnumber_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/turnnumber_subcolumnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/switchReason_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/switchReason_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/player1Increment_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/player1Increment_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/player1Total_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/player1Total_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/player2Increment_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/player2Increment_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/player2Total_column_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/player2Total_columnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="@dimen/ballsOnTable_subcolumn_weight"
+                android:background="@drawable/cell_separator"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/ballsOnTable_subcolumnlabel"
+                android:textSize="@dimen/tableHeaderTextSize"
+                android:textStyle="bold" />
+
+        </TableRow>
+
+        <ScrollView
+            android:id="@+id/score_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:contentDescription="@string/scoresheet_scrollview_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TableLayout
+                android:id="@+id/score_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </TableLayout>
+
+        </ScrollView>
+
+    </TableLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/toStatisticsButton"
+        android:text="@string/toStatistics_string"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="1dp"/>
+
+</LinearLayout>
