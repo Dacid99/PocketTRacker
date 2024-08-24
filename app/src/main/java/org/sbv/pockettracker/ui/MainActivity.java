@@ -77,15 +77,8 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
 
         applyPreferences();
 
-        playersViewModel = new ViewModelProvider(this).get(PlayersViewModel.class);
-
-        scoreBoardViewModel = new ViewModelProvider(this).get(ScoreBoardViewModel.class);
-
-        poolTableViewModel = new ViewModelProvider(this).get(PoolTableViewModel.class);
-
-        ScoreSheetViewModelFactory factory = new ScoreSheetViewModelFactory(poolTableViewModel, scoreBoardViewModel);
-        scoreSheetViewModel = new ViewModelProvider(this, factory).get(ScoreSheetViewModel.class);
-
+        assignViewModels();
+        
         applyNavigation();
 
         if (savedInstanceState == null){
@@ -149,6 +142,18 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
                     }
                 });
     }
+    
+    private void assignViewModels(){
+        playersViewModel = new ViewModelProvider(this).get(PlayersViewModel.class);
+
+        poolTableViewModel = new ViewModelProvider(this).get(PoolTableViewModel.class);
+
+        scoreBoardViewModel = new ViewModelProvider(this).get(ScoreBoardViewModel.class);
+
+        ScoreSheetViewModelFactory factory = new ScoreSheetViewModelFactory(poolTableViewModel, scoreBoardViewModel);
+        scoreSheetViewModel = new ViewModelProvider(this, factory).get(ScoreSheetViewModel.class);
+    }
+    
     private void applyPreferences(){
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -173,10 +178,10 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
             ScoreBoard.defaultWinnerPoints = 40;
         }
 
-        Players.defaultPlayerNames[0] = preferences.getString("player1_name_default", "");
-        Players.defaultPlayerNames[1] = preferences.getString("player2_name_default", "");
-        Players.defaultPlayerClubs[0] = preferences.getString("player1_club_default", "");
-        Players.defaultPlayerClubs[1] = preferences.getString("player2_club_default", "");
+        Players.defaultPlayerNames[Players.PLAYER_1_NUMBER] = preferences.getString("player1_name_default", "");
+        Players.defaultPlayerNames[Players.PLAYER_2_NUMBER] = preferences.getString("player2_name_default", "");
+        Players.defaultPlayerClubs[Players.PLAYER_1_NUMBER] = preferences.getString("player1_club_default", "");
+        Players.defaultPlayerClubs[Players.PLAYER_2_NUMBER] = preferences.getString("player2_club_default", "");
         Players.haveClubs = preferences.getBoolean("club_toggle", true);
 
         sharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {

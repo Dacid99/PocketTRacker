@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 
 public class GameStatistics {
+    public static final int NORESULT_INDICATOR = -5;
 
     public static int[][] switchReasonNumbers(Context context, ScoreSheet scoreSheet){
         final String foulString = context.getResources().getString(R.string.foul_string);
@@ -60,8 +61,8 @@ public class GameStatistics {
         int[] maxRunsIndices = new int[2];
         ArrayList<Integer>[] incrementsList = getPlayerIncrementsList(scoreSheet);
 
-        maxRunsIndices[0] = (maxRuns[0] != 0) ? incrementsList[0].indexOf(maxRuns[0]) : -5;
-        maxRunsIndices[1] = (maxRuns[1] != 0) ? incrementsList[1].indexOf(maxRuns[1]) : -5;  //return -5 indicating theres no real run
+        maxRunsIndices[0] = (maxRuns[0] != 0) ? incrementsList[0].indexOf(maxRuns[0]) : NORESULT_INDICATOR;
+        maxRunsIndices[1] = (maxRuns[1] != 0) ? incrementsList[1].indexOf(maxRuns[1]) : NORESULT_INDICATOR;  //return -5 indicating theres no real run
 
 
         return maxRunsIndices;

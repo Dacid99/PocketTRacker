@@ -70,8 +70,8 @@ public class ScoreSheetFragment extends Fragment {
         playersViewModel.getPlayers().observe(getViewLifecycleOwner(), new Observer<Players>() {
             @Override
             public void onChanged(Players players) {
-                player1TableHeader.setText((players.getNames()[0].isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, players.getNames()[0]));
-                player2TableHeader.setText((players.getNames()[1].isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, players.getNames()[1]));
+                player1TableHeader.setText((players.getNames()[Players.PLAYER_1_NUMBER].isEmpty()) ? getString(R.string.player1_default) : getString(R.string.player_name_format, players.getNames()[Players.PLAYER_1_NUMBER]));
+                player2TableHeader.setText((players.getNames()[Players.PLAYER_2_NUMBER].isEmpty()) ? getString(R.string.player2_default) : getString(R.string.player_name_format, players.getNames()[Players.PLAYER_2_NUMBER]));
             }
         });
 
@@ -114,7 +114,7 @@ public class ScoreSheetFragment extends Fragment {
         if (scoreSheet.currentTurn() < tableLayout.getChildCount()){
             TableRow turnRow = (TableRow) tableLayout.getChildAt(scoreSheet.currentTurn());
             Drawable background;
-            if (scoreSheet.turnplayerNumber() == 0){
+            if (scoreSheet.turnplayerNumber() == Players.PLAYER_1_NUMBER){
                 background = ContextCompat.getDrawable(requireContext(), R.drawable.cell_separator_turn);
             }else {
                 background = ContextCompat.getDrawable(requireContext(), R.drawable.cell_separator_turnplayer_turn);
@@ -126,12 +126,12 @@ public class ScoreSheetFragment extends Fragment {
             Log.d("Failed ifelse", "ScoreSheetActivity.highlightScoreSheet: check of pointer failed");
         }
         int[] maxRunIndices = GameStatistics.maxRunIndices(scoreSheet);
-        if (maxRunIndices[0] != -5) {
+        if (maxRunIndices[0] != GameStatistics.NORESULT_INDICATOR) {
             TableRow maxRunPlayer1TableRow = (TableRow) tableLayout.getChildAt(maxRunIndices[0] + 1); // +1 because of header row
             TextView maxRunPlayer1View = (TextView) maxRunPlayer1TableRow.getChildAt(2);
             maxRunPlayer1View.setTextColor(getResources().getColor(R.color.maxRun_color));
         }
-        if (maxRunIndices[1] != -5) {
+        if (maxRunIndices[1] != GameStatistics.NORESULT_INDICATOR) {
             TableRow maxRunPlayer2TableRow = (TableRow) tableLayout.getChildAt(maxRunIndices[1] + 1);
             TextView maxRunPlayer2View = (TextView) maxRunPlayer2TableRow.getChildAt(4);
             maxRunPlayer2View.setTextColor(getResources().getColor(R.color.maxRun_color));

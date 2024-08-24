@@ -129,9 +129,9 @@ public class CounterFragment extends Fragment{
             }
         });
 
-        player1Card.setOnClickListener(v -> listener.onPlayerCardClick(0));
+        player1Card.setOnClickListener(v -> listener.onPlayerCardClick(Players.PLAYER_1_NUMBER));
 
-        player2Card.setOnClickListener(v -> listener.onPlayerCardClick(1));
+        player2Card.setOnClickListener(v -> listener.onPlayerCardClick(Players.PLAYER_2_NUMBER));
 
         ballsOnTableFloatingButton.setOnClickListener(v -> listener.onBallsOnTableFloatingButtonClick() );
 
@@ -176,10 +176,10 @@ public class CounterFragment extends Fragment{
             @Override
             public void onChanged(Players players) {
                 if (players != null){
-                    player1NameView.setText(getString(R.string.player_name_format, players.getNames()[0]));
-                    player1ClubView.setText(getString(R.string.player_club_format, players.getClubs()[0]));
-                    player2NameView.setText(getString(R.string.player_name_format, players.getNames()[1]));
-                    player2ClubView.setText(getString(R.string.player_club_format, players.getClubs()[1]));
+                    player1NameView.setText(getString(R.string.player_name_format, players.getNames()[Players.PLAYER_1_NUMBER]));
+                    player1ClubView.setText(getString(R.string.player_club_format, players.getClubs()[Players.PLAYER_1_NUMBER]));
+                    player2NameView.setText(getString(R.string.player_name_format, players.getNames()[Players.PLAYER_2_NUMBER]));
+                    player2ClubView.setText(getString(R.string.player_club_format, players.getClubs()[Players.PLAYER_2_NUMBER]));
                 }
             }
         });
@@ -190,12 +190,12 @@ public class CounterFragment extends Fragment{
             @Override
             public void onChanged(ScoreBoard scoreBoard) {
                 if (scoreBoard != null){
-                    player1ScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[0]));
-                    player2ScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[1]));
+                    player1ScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[Players.PLAYER_1_NUMBER]));
+                    player2ScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[Players.PLAYER_2_NUMBER]));
                     winningPointsInput.setText(getString(R.string.winnerPoints_format, scoreBoard.getWinnerPoints()));
-                    if (scoreBoard.getWinner() == 0){
+                    if (scoreBoard.getWinner() == Players.PLAYER_1_NUMBER){
                         player1Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
-                    }else if (scoreBoard.getWinner() == 1){
+                    }else if (scoreBoard.getWinner() == Players.PLAYER_2_NUMBER){
                         player2Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
                     } else {
                         player1Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
@@ -221,7 +221,7 @@ public class CounterFragment extends Fragment{
             @Override
             public void onChanged(ScoreSheet scoreSheet) {
                 if (scoreSheet != null) {
-                    boolean isTurnplayer1Boolean = scoreSheet.turnplayerNumber() == 0;
+                    boolean isTurnplayer1Boolean = scoreSheet.turnplayerNumber() == Players.PLAYER_1_NUMBER;
                     player1ScoreView.setEnabled(isTurnplayer1Boolean);
                     player1NameView.setEnabled(isTurnplayer1Boolean);
                     player1ClubView.setEnabled(isTurnplayer1Boolean);
@@ -281,33 +281,33 @@ public class CounterFragment extends Fragment{
                         case "player1_name_default":
                             String newNamePlayer1 = sharedPreferences.getString(key,"");
                             if (player1NameView.getText().toString().isEmpty() || player1NameView.getText().toString().equals(Players.defaultPlayerNames[0])){
-                                playersViewModel.updatePlayerName(0,newNamePlayer1);
+                                playersViewModel.updatePlayerName(Players.PLAYER_1_NUMBER, newNamePlayer1);
                             }
-                            Players.defaultPlayerNames[0] = newNamePlayer1;
+                            Players.defaultPlayerNames[Players.PLAYER_1_NUMBER] = newNamePlayer1;
                             break;
 
                         case "player2_name_default":
                             String newNamePlayer2 = sharedPreferences.getString(key,"");
                             if (player2NameView.getText().toString().isEmpty() || player2NameView.getText().toString().equals(Players.defaultPlayerNames[1])){
-                                playersViewModel.updatePlayerName(1,newNamePlayer2);
+                                playersViewModel.updatePlayerName(Players.PLAYER_2_NUMBER, newNamePlayer2);
                             }
-                            Players.defaultPlayerNames[1] = newNamePlayer2;
+                            Players.defaultPlayerNames[Players.PLAYER_2_NUMBER] = newNamePlayer2;
                             break;
 
                         case "player1_club_default":
                             String newClubPlayer1 = sharedPreferences.getString(key,"");
                             if (player1ClubView.getText().toString().isEmpty() || player1ClubView.getText().toString().equals(Players.defaultPlayerClubs[0])){
-                                playersViewModel.updateClubName(0, newClubPlayer1);
+                                playersViewModel.updateClubName(Players.PLAYER_1_NUMBER, newClubPlayer1);
                             }
-                            Players.defaultPlayerClubs[0] = newClubPlayer1;
+                            Players.defaultPlayerClubs[Players.PLAYER_1_NUMBER] = newClubPlayer1;
                             break;
 
                         case "player2_club_default":
                             String newClubPlayer2 = sharedPreferences.getString(key,"");
                             if (player2ClubView.getText().toString().isEmpty() || player2ClubView.getText().toString().equals(Players.defaultPlayerClubs[1])){
-                                playersViewModel.updateClubName(1, newClubPlayer2);
+                                playersViewModel.updateClubName(Players.PLAYER_2_NUMBER, newClubPlayer2);
                             }
-                            Players.defaultPlayerClubs[1] = newClubPlayer2;
+                            Players.defaultPlayerClubs[Players.PLAYER_2_NUMBER] = newClubPlayer2;
                             break;
 
                         case "club_toggle":

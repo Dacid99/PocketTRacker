@@ -19,12 +19,13 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
 import org.sbv.pockettracker.R;
+import org.sbv.pockettracker.model.PoolTable;
 
 import java.util.Objects;
 
 public class NumberPaneFragment extends DialogFragment {
 
-    private static final String MAXNUMBERPARAMETER = "maxNumber";
+    private static final String NUMBERPARAMETER = "maxNumber";
     public interface NumberPaneFragmentProvider {
         void onNumberPaneClick(int number);
     }
@@ -32,14 +33,13 @@ public class NumberPaneFragment extends DialogFragment {
     private View view;
     private int maxNumber;
 
-    private MaterialCardView numberPaneCard;
     private GridLayout grid;
-    private final MaterialButton[] buttonArray = new MaterialButton[15];
+    private final MaterialButton[] buttonArray = new MaterialButton[PoolTable.MAXBALLNUMBER];
 
     public static NumberPaneFragment newInstance(int maxNumber){
         NumberPaneFragment fragment = new NumberPaneFragment();
         Bundle args = new Bundle();
-        args.putInt(MAXNUMBERPARAMETER, maxNumber);
+        args.putInt(NUMBERPARAMETER, maxNumber);
         fragment.setArguments(args);
         return fragment;
     }
@@ -65,7 +65,6 @@ public class NumberPaneFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_numberpane, container,false);
-        numberPaneCard = view.findViewById(R.id.numberPaneCard);
         grid = view.findViewById(R.id.numberGrid);
         findButtons();
         setButtonListeners();
@@ -84,7 +83,16 @@ public class NumberPaneFragment extends DialogFragment {
 
         Window window = Objects.requireNonNull(getDialog()).getWindow();
         if (window != null){
-            window.setLayout((int)(width * 0.66), (int)(height * 0.66));
+            float horizontalScreenFraction = getResources().getFraction(R.fraction.numberpaneFragment_horizontal_screenfraction,1, 1);
+            float verticalScreenFraction = getResources().getFraction(R.fraction.numberpaneFragment_vertical_screenfraction,1, 1);
+            if (height > width){
+                width = (int) (width * horizontalScreenFraction);
+                height = (int) (height * verticalScreenFraction);
+            } else {
+                width = (int) (width * verticalScreenFraction);
+                height = (int) (height * horizontalScreenFraction);
+            }
+            window.setLayout(width, height);
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
     }
@@ -92,7 +100,7 @@ public class NumberPaneFragment extends DialogFragment {
     private void configurePanels(){
         int requiredRows = (int) Math.ceil(maxNumber * 1.0 / grid.getColumnCount());
         int requiredCells = requiredRows * grid.getColumnCount();
-        for (int i = 15; i>maxNumber; i--){
+        for (int i = buttonArray.length; i>maxNumber; i--){
             if (i > requiredCells){
                 buttonArray[i-1].setVisibility(View.GONE); //lets other buttons take over the empty row
             }else {

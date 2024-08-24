@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,13 +95,15 @@ public class PlayerFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             playerNumber = getArguments().getInt(PLAYERNUMBERPARAMETER);
+        }else {
+            Log.d("ProgrammingError", "No playernumber passed to PlayerFragment!");
         }
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate((playerNumber == 0) ? R.layout.fragment_player_right : R.layout.fragment_player_left, container, false);
+        View view = inflater.inflate((playerNumber == Players.PLAYER_1_NUMBER) ? R.layout.fragment_player_right : R.layout.fragment_player_left, container, false);
 
         playerNameInput = view.findViewById(R.id.playerName);
         playerClubLayout = view.findViewById(R.id.playerClubLayout);
@@ -219,16 +222,18 @@ public class PlayerFragment extends DialogFragment {
         requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
-        if (height > width){
-            width = (int) (width * 0.66);
-            height = (int) (height * 0.75);
-        } else {
-            width = (int) (width * 0.75);
-            height = (int) (height * 0.66);
-        }
 
         Window window = Objects.requireNonNull(getDialog()).getWindow();
         if (window != null){
+            float horizontalScreenFraction = getResources().getFraction(R.fraction.playerFragment_horizontal_screenfraction,1, 1);
+            float verticalScreenFraction = getResources().getFraction(R.fraction.playerFragment_vertical_screenfraction,1, 1);
+            if (height > width){
+                width = (int) (width * horizontalScreenFraction);
+                height = (int) (height * verticalScreenFraction);
+            } else {
+                width = (int) (width * verticalScreenFraction);
+                height = (int) (height * horizontalScreenFraction);
+            }
             window.setLayout(width, height);
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }

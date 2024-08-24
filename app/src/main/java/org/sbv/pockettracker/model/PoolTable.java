@@ -1,6 +1,7 @@
 package org.sbv.pockettracker.model;
 
 public class PoolTable {
+    public static final int MAXBALLNUMBER = 15;
     private int numberOfBalls ;
     private int oldNumberOfBalls ;
 
@@ -27,8 +28,8 @@ public class PoolTable {
     }
 
     public void rerack(){
-        this.numberOfBalls = 15;
-        this.oldNumberOfBalls = 15;
+        this.numberOfBalls = MAXBALLNUMBER;
+        this.oldNumberOfBalls = MAXBALLNUMBER;
     }
 
     public boolean isValidBallNumber(int newNumberOfBalls){

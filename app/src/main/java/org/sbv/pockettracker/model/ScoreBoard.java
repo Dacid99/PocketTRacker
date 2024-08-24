@@ -49,7 +49,7 @@ public class ScoreBoard implements Parcelable {
     }
 
     public int getWinner(){
-        for (int index = 0; index < playerScores.length; index++){
+        for (int index = 0; index <= 1; index++){
             if (playerScores[index] >= winnerPoints){
                 return index;
             }

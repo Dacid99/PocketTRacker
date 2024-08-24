@@ -12,6 +12,8 @@ import java.util.Arrays;
 public class Players implements Parcelable {
     public static final String[] defaultPlayerNames = {"",""};
     public static final String[] defaultPlayerClubs = {"",""};
+    public static final int PLAYER_1_NUMBER = 0;
+    public static final int PLAYER_2_NUMBER = 1;
     public static boolean haveClubs = true;
     private final String[] names;
     private final String[] clubs;
@@ -31,25 +33,25 @@ public class Players implements Parcelable {
 
 
     public void setName(int playerNumber, String name) {
-        if (playerNumber == 0 || playerNumber == 1)
+        if (playerNumber == PLAYER_1_NUMBER|| playerNumber == PLAYER_2_NUMBER)
             names[playerNumber] = name;
     }
 
     public void setClub(int playerNumber, String club) {
-        if (playerNumber == 0 || playerNumber == 1)
+        if (playerNumber == PLAYER_1_NUMBER || playerNumber == PLAYER_2_NUMBER)
             this.clubs[playerNumber] = club;
     }
 
 
     public void swap() {
-        String nameBackup = this.names[0];
-        String clubBackup = this.clubs[0];
+        String nameBackup = this.names[PLAYER_1_NUMBER];
+        String clubBackup = this.clubs[PLAYER_1_NUMBER];
 
-        this.names[0] = this.names[1];
-        this.clubs[0] = this.clubs[1];
+        this.names[PLAYER_1_NUMBER] = this.names[PLAYER_2_NUMBER];
+        this.clubs[PLAYER_1_NUMBER] = this.clubs[PLAYER_2_NUMBER];
 
-        this.names[1] = nameBackup;
-        this.clubs[1] = clubBackup;
+        this.names[PLAYER_2_NUMBER] = nameBackup;
+        this.clubs[PLAYER_2_NUMBER] = clubBackup;
     }
 
     //parcelable
