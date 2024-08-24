@@ -11,12 +11,11 @@
         android:layout_alignParentEnd="true"
         android:baselineAligned="false">
 
-        <include
-            android:id="@+id/counter"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/counterFragmentContainer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            layout="@layout/fragment_counter"
             />
 
         <androidx.fragment.app.FragmentContainerView
@@ -28,6 +27,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             />
+
     </LinearLayout>
 
     <LinearLayout

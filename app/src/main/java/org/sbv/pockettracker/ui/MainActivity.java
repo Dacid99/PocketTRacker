@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MenuInflater;
 
@@ -20,6 +21,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
     private ScoreSheetViewModel scoreSheetViewModel;
     private SharedPreferences preferences;
     private NavController navController;
+    private View counterFragment;
     private MaterialButton dropdownButton;
     private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
 
@@ -84,6 +87,15 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         scoreSheetViewModel = new ViewModelProvider(this, factory).get(ScoreSheetViewModel.class);
 
         applyNavigation();
+
+        if (savedInstanceState == null){
+            FragmentContainerView counterFragmentContainer = findViewById(R.id.counterFragmentContainer);
+            if (counterFragmentContainer != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.counterFragmentContainer, new CounterFragment())
+                        .commit();
+            }
+        }
 
         createFileActivityLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
