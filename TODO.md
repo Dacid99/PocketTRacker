@@ -8,7 +8,3 @@
 - explainers
 - restructure all fields Xplayer1Y and Xplayer2Y into an array
 - sort resources
-
-for new release:
-- introduce playernumbers as static constants of players for readability and a comprehensive function to determine turnplayer instead of % operations
-

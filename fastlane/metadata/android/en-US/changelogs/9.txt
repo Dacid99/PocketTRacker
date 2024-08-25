@@ -1,0 +1,6 @@
+- added layouts for tablet
+- some ui tweaks like button click animations
+- minor bug fixes
+
+Hey there, thanks for checking out my app!
+If you have any feedback please let me know!

@@ -16,7 +16,8 @@
 - AOD feature
 - statistics for players and profiles with plots
 - scoresheet with coloring of highest run etc
-- 
+- tablet layouts
+
 # Future features
 - remember players via profiles
 - editing of scores in scoresheet
