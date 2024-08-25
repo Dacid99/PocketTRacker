@@ -1,6 +1,5 @@
 package org.sbv.pockettracker.model;
 
-import androidx.core.util.Pools;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

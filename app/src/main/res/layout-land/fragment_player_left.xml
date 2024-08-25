@@ -31,11 +31,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/guideline"
                 android:layout_marginEnd="10dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="@dimen/playerFragment_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
+                android:layout_marginTop="@dimen/playerFragment_margin"
+                android:layout_marginBottom="@dimen/playerFragment_margin">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/playerNameLayout"
