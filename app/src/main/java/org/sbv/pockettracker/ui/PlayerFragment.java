@@ -225,8 +225,8 @@ public class PlayerFragment extends DialogFragment {
 
         Window window = Objects.requireNonNull(getDialog()).getWindow();
         if (window != null){
-            float horizontalScreenFraction = getResources().getFraction(R.fraction.playerFragment_horizontal_screenfraction,1, 1);
-            float verticalScreenFraction = getResources().getFraction(R.fraction.playerFragment_vertical_screenfraction,1, 1);
+            float horizontalScreenFraction = requireActivity().getResources().getFraction(R.fraction.playerFragment_horizontal_screenfraction,1, 1);
+            float verticalScreenFraction = requireActivity().getResources().getFraction(R.fraction.playerFragment_vertical_screenfraction,1, 1);
             if (height > width){
                 width = (int) (width * horizontalScreenFraction);
                 height = (int) (height * verticalScreenFraction);

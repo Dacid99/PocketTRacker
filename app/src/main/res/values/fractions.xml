@@ -6,11 +6,11 @@
 
     <fraction name="end_block2_guideline_fraction">0.0</fraction>
     <fraction name="bottom_guideline_fraction">0.0</fraction>
-    <fraction name="start_block2_guideline_fraction">0.0</fraction>]
+    <fraction name="start_block2_guideline_fraction">0.0</fraction>
 
-    <fraction name="playerFragment_horizontal_screenfraction">0.66</fraction>
-    <fraction name="playerFragment_vertical_screenfraction">0.75</fraction>
-    <fraction name="numberpaneFragment_horizontal_screenfraction">0.66</fraction>
-    <fraction name="numberpaneFragment_vertical_screenfraction">0.66</fraction>
+    <fraction name="playerFragment_horizontal_screenfraction">66%</fraction>
+    <fraction name="playerFragment_vertical_screenfraction">75%</fraction>
+    <fraction name="numberpaneFragment_horizontal_screenfraction">66%</fraction>
+    <fraction name="numberpaneFragment_vertical_screenfraction">66%</fraction>
 
 </resources>
