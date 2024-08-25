@@ -227,14 +227,8 @@ public class PlayerFragment extends DialogFragment {
         if (window != null){
             float horizontalScreenFraction = requireActivity().getResources().getFraction(R.fraction.playerFragment_horizontal_screenfraction,1, 1);
             float verticalScreenFraction = requireActivity().getResources().getFraction(R.fraction.playerFragment_vertical_screenfraction,1, 1);
-            if (height > width){
-                width = (int) (width * horizontalScreenFraction);
-                height = (int) (height * verticalScreenFraction);
-            } else {
-                width = (int) (width * verticalScreenFraction);
-                height = (int) (height * horizontalScreenFraction);
-            }
-            window.setLayout(width, height);
+
+            window.setLayout((int) (width * horizontalScreenFraction), (int) (height * verticalScreenFraction));
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
     }

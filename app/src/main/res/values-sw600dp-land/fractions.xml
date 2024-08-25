@@ -3,4 +3,8 @@
     <!-- counter_fragment dimensions-->
     <fraction name="start_block1_guideline_fraction">0.05</fraction>
     <fraction name="end_block1_guideline_fraction">0.95</fraction>
+
+    <fraction name="playerFragment_horizontal_screenfraction">66%</fraction>
+    <fraction name="playerFragment_vertical_screenfraction">50%</fraction>
+
 </resources>
