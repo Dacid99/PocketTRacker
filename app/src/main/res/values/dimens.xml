@@ -42,5 +42,6 @@
     <dimen name="statistics_cardMargin">10dp</dimen>
     <dimen name="playerFragment_margin">5dp</dimen>
     <dimen name="dividerWidth">10dp</dimen>
+    <dimen name="scoresheet_freespace">50dp</dimen>
 
 </resources>

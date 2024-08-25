@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import org.sbv.pockettracker.utils.GameStatistics;
 import org.sbv.pockettracker.model.Players;
@@ -35,7 +35,7 @@ import org.sbv.pockettracker.model.ScoreSheetViewModel;
 public class ScoreSheetFragment extends Fragment {
     private TableLayout tableLayout;
     private TextView player1TableHeader, player2TableHeader;
-    private MaterialButton statisticsButton;
+    private ExtendedFloatingActionButton statisticsButton;
     private ScoreSheetViewModel scoreSheetViewModel;
     private PlayersViewModel playersViewModel;
     private ScoreBoardViewModel scoreBoardViewModel;
