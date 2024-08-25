@@ -43,6 +43,7 @@ public class GameStatistics {
     }
 
     public static ArrayList<Integer>[] getPlayerIncrementsList(ScoreSheet scoreSheet){
+        @SuppressWarnings("unchecked")
         ArrayList<Integer>[] playerIncrementsList = new ArrayList[2];
         playerIncrementsList[0] = new ArrayList<>();
         playerIncrementsList[1] = new ArrayList<>();

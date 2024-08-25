@@ -236,6 +236,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         return inningsList.get(turn).playerScores;
     }
     public final ArrayList<Integer>[] getPlayerScoresList(){
+        @SuppressWarnings("unchecked")
         ArrayList<Integer>[] playerScoresList = new ArrayList[2];
         playerScoresList[0] = new ArrayList<>();
         playerScoresList[1] = new ArrayList<>();

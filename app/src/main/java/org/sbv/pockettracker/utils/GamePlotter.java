@@ -2,8 +2,11 @@ package org.sbv.pockettracker.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -43,8 +46,8 @@ public class GamePlotter {
             index++;
         }
         LineDataSet lineDataSet = new LineDataSet(playerScoreData, context.getResources().getString(R.string.scoresPlotLabel));
-        lineDataSet.setColor(context.getResources().getColor(R.color.plotLineColor));
-        lineDataSet.setCircleColor(context.getResources().getColor(R.color.plotLineColor));
+        lineDataSet.setColor(ContextCompat.getColor(context, R.color.plotLineColor));
+        lineDataSet.setCircleColor(ContextCompat.getColor(context, R.color.plotLineColor));
         lineDataSet.setLineWidth(2f);
         lineDataSet.setValueFormatter(new ValueFormatter() {
             @Override
@@ -64,15 +67,15 @@ public class GamePlotter {
 
         Description description = new Description();
         description.setText(context.getResources().getString(R.string.scoresPlot_description));
-        description.setTextColor(context.getResources().getColor(R.color.onBackground));
+        description.setTextColor(ContextCompat.getColor(context, R.color.onBackground));
 
         lineChart.setDescription(description);
-        lineChart.setBackgroundColor(context.getResources().getColor(R.color.background));
+        lineChart.setBackgroundColor(ContextCompat.getColor(context, R.color.background));
 
         Legend legend = lineChart.getLegend();
         legend.setForm(Legend.LegendForm.LINE);
         legend.setDrawInside(false);
-        legend.setTextColor(context.getResources().getColor(R.color.onBackground));
+        legend.setTextColor(ContextCompat.getColor(context, R.color.onBackground));
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -80,18 +83,17 @@ public class GamePlotter {
         xAxis.setGranularity(1f);
         xAxis.setDrawLabels(true);
         xAxis.setLabelRotationAngle(0);
-        xAxis.setTextColor(context.getResources().getColor(R.color.onBackground));
+        xAxis.setTextColor(ContextCompat.getColor(context, R.color.onBackground));
 
         YAxis yAxisRight = lineChart.getAxisRight();
         yAxisRight.setEnabled(false);
         YAxis yAxisLeft = lineChart.getAxisLeft();
         yAxisLeft.setGranularity(1f);
-        yAxisLeft.setTextColor(context.getResources().getColor(R.color.onBackground));
+        yAxisLeft.setTextColor(ContextCompat.getColor(context, R.color.onBackground));
 
-        lineChart.setDrawingCacheEnabled(true);
-        lineChart.buildDrawingCache();
-        Bitmap bitmap = Bitmap.createBitmap(lineChart.getDrawingCache());
-        lineChart.setDrawingCacheEnabled(false);
+        Bitmap bitmap = Bitmap.createBitmap(lineChart.getWidth(), lineChart.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        lineChart.draw(canvas);
 
         imageViews[playerNumber].setImageBitmap(bitmap);
     }
@@ -109,7 +111,7 @@ public class GamePlotter {
             playerScoreData.add( new BarEntry(entry.getKey(), entry.getValue()) );
         }
         BarDataSet barDataSet = new BarDataSet(playerScoreData, context.getResources().getString(R.string.runsPlotLabel));
-        barDataSet.setColor(context.getResources().getColor(R.color.plotLineColor));
+        barDataSet.setColor(ContextCompat.getColor(context, R.color.plotLineColor));
         barDataSet.setValueFormatter(new ValueFormatter() {
             @Override
             public String getBarLabel(BarEntry barEntry) {
@@ -128,15 +130,15 @@ public class GamePlotter {
 
         Description description = new Description();
         description.setText(context.getResources().getString(R.string.runsPlot_description));
-        description.setTextColor(context.getResources().getColor(R.color.onBackground));
+        description.setTextColor(ContextCompat.getColor(context, R.color.onBackground));
 
         barChart.setDescription(description);
-        barChart.setBackgroundColor(context.getResources().getColor(R.color.background));
+        barChart.setBackgroundColor(ContextCompat.getColor(context, R.color.background));
 
         Legend legend = barChart.getLegend();
         legend.setForm(Legend.LegendForm.LINE);
         legend.setDrawInside(false);
-        legend.setTextColor(context.getResources().getColor(R.color.onBackground));
+        legend.setTextColor(ContextCompat.getColor(context, R.color.onBackground));
 
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -144,19 +146,18 @@ public class GamePlotter {
         xAxis.setDrawLabels(true);
         xAxis.setDrawGridLines(false);
         xAxis.setLabelRotationAngle(0);
-        xAxis.setTextColor(context.getResources().getColor(R.color.onBackground));
+        xAxis.setTextColor(ContextCompat.getColor(context, R.color.onBackground));
 
         YAxis yAxisRight = barChart.getAxisRight();
         yAxisRight.setEnabled(false);
         YAxis yAxisLeft = barChart.getAxisLeft();
         yAxisLeft.setGranularity(1f);
         yAxisLeft.setAxisMinimum(0f);
-        yAxisLeft.setTextColor(context.getResources().getColor(R.color.onBackground));
+        yAxisLeft.setTextColor(ContextCompat.getColor(context, R.color.onBackground));
 
-        barChart.setDrawingCacheEnabled(true);
-        barChart.buildDrawingCache();
-        Bitmap bitmap = Bitmap.createBitmap(barChart.getDrawingCache());
-        barChart.setDrawingCacheEnabled(false);
+        Bitmap bitmap = Bitmap.createBitmap(barChart.getWidth(), barChart.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        barChart.draw(canvas);
 
         imageViews[playerNumber].setImageBitmap(bitmap);
     }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -116,14 +117,14 @@ public class CounterFragment extends Fragment{
                 String newText = s.toString();
                 if ( NumberUtils.isParsable(newText)) {
                     if (Integer.parseInt(newText) > 0) {
-                        winningPointsInput.setTextColor(getResources().getColor(R.color.score_color));
+                        winningPointsInput.setTextColor(ContextCompat.getColor(requireContext(), R.color.score_color));
                         int newWinnerPoints = Integer.parseInt(newText);
                         scoreBoardViewModel.updateWinnerPoints(newWinnerPoints);
                     } else {
-                        winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
+                        winningPointsInput.setTextColor(ContextCompat.getColor(requireContext(), R.color.warning_color));
                     }
                 } else {
-                    winningPointsInput.setTextColor(getResources().getColor(R.color.warning_color));
+                    winningPointsInput.setTextColor(ContextCompat.getColor(requireContext(), R.color.warning_color));
                 }
                 winningPointsInput.setSelection(cursorPosition);
             }
@@ -194,12 +195,12 @@ public class CounterFragment extends Fragment{
                     player2ScoreView.setText(getString(R.string.player_score_format, scoreBoard.getPlayerScores()[Players.PLAYER_2_NUMBER]));
                     winningPointsInput.setText(getString(R.string.winnerPoints_format, scoreBoard.getWinnerPoints()));
                     if (scoreBoard.getWinner() == Players.PLAYER_1_NUMBER){
-                        player1Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
+                        player1Card.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.winner_color));
                     }else if (scoreBoard.getWinner() == Players.PLAYER_2_NUMBER){
-                        player2Card.setCardBackgroundColor(getResources().getColor(R.color.winner_color));
+                        player2Card.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.winner_color));
                     } else {
-                        player1Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
-                        player2Card.setCardBackgroundColor(getResources().getColor(R.color.notturnplayer_color));
+                        player1Card.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.notturnplayer_color));
+                        player2Card.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.notturnplayer_color));
                     }
                 }
             }
@@ -231,11 +232,11 @@ public class CounterFragment extends Fragment{
                     player1Card.setCardElevation(getResources().getInteger(isTurnplayer1Boolean ? R.integer.turnplayer_cardelevation : R.integer.notturnplayer_cardelevation) );
                     player2Card.setCardElevation(getResources().getInteger(!isTurnplayer1Boolean ? R.integer.turnplayer_cardelevation : R.integer.notturnplayer_cardelevation) );
 
-                    if (!(player1Card.getCardBackgroundColor().getDefaultColor() == getResources().getColor(R.color.winner_color))) {
-                        player1Card.setCardBackgroundColor(getResources().getColor(isTurnplayer1Boolean ? R.color.turnplayer_color : R.color.notturnplayer_color));
+                    if (!(player1Card.getCardBackgroundColor().getDefaultColor() == ContextCompat.getColor(requireContext(), R.color.winner_color))) {
+                        player1Card.setCardBackgroundColor(ContextCompat.getColor(requireContext(), isTurnplayer1Boolean ? R.color.turnplayer_color : R.color.notturnplayer_color));
                     }
-                    if (!(player2Card.getCardBackgroundColor().getDefaultColor() == getResources().getColor(R.color.winner_color))) {
-                        player2Card.setCardBackgroundColor(getResources().getColor(!isTurnplayer1Boolean ? R.color.turnplayer_color : R.color.notturnplayer_color));
+                    if (!(player2Card.getCardBackgroundColor().getDefaultColor() == ContextCompat.getColor(requireContext(), R.color.winner_color))) {
+                        player2Card.setCardBackgroundColor(ContextCompat.getColor(requireContext(), !isTurnplayer1Boolean ? R.color.turnplayer_color : R.color.notturnplayer_color));
                     }
 
                     if (scoreSheetViewModel.isLatest()) {

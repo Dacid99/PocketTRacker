@@ -4,11 +4,12 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import androidx.window.layout.WindowMetrics;
+import androidx.window.layout.WindowMetricsCalculator;
 import android.widget.GridLayout;
 
 import androidx.annotation.NonNull;
@@ -75,10 +76,9 @@ public class NumberPaneFragment extends DialogFragment {
     @Override
     public void onResume(){
         super.onResume();
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int width = displayMetrics.widthPixels;
-        int height = displayMetrics.heightPixels;
+        WindowMetrics windowMetrics = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(requireActivity());
+        int height = windowMetrics.getBounds().height();
+        int width = windowMetrics.getBounds().width();
 
         Window window = Objects.requireNonNull(getDialog()).getWindow();
         if (window != null){

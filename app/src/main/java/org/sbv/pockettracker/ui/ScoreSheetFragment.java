@@ -129,12 +129,12 @@ public class ScoreSheetFragment extends Fragment {
         if (maxRunIndices[0] != GameStatistics.NORESULT_INDICATOR) {
             TableRow maxRunPlayer1TableRow = (TableRow) tableLayout.getChildAt(maxRunIndices[0] + 1); // +1 because of header row
             TextView maxRunPlayer1View = (TextView) maxRunPlayer1TableRow.getChildAt(2);
-            maxRunPlayer1View.setTextColor(getResources().getColor(R.color.maxRun_color));
+            maxRunPlayer1View.setTextColor(ContextCompat.getColor(requireContext(), R.color.maxRun_color));
         }
         if (maxRunIndices[1] != GameStatistics.NORESULT_INDICATOR) {
             TableRow maxRunPlayer2TableRow = (TableRow) tableLayout.getChildAt(maxRunIndices[1] + 1);
             TextView maxRunPlayer2View = (TextView) maxRunPlayer2TableRow.getChildAt(4);
-            maxRunPlayer2View.setTextColor(getResources().getColor(R.color.maxRun_color));
+            maxRunPlayer2View.setTextColor(ContextCompat.getColor(requireContext(), R.color.maxRun_color));
         }
     }
 
