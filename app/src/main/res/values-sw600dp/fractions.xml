@@ -7,4 +7,7 @@
     <fraction name="end_block2_guideline_fraction">0.97</fraction>
     <fraction name="bottom_guideline_fraction">0.95</fraction>
 
+    <fraction name="playerFragment_horizontal_screenfraction">50%</fraction>
+    <fraction name="playerFragment_vertical_screenfraction">66%</fraction>
+
 </resources>
