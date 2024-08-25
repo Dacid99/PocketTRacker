@@ -18,7 +18,9 @@ public class ScoreSheetViewModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass){
         if (modelClass.isAssignableFrom(ScoreSheetViewModel.class)) {
-            return (T) new ScoreSheetViewModel(poolTableViewModel, scoreBoardViewModel);
+            @SuppressWarnings("unchecked")
+            T viewModel = (T) new ScoreSheetViewModel(poolTableViewModel, scoreBoardViewModel);
+            return viewModel;
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }
