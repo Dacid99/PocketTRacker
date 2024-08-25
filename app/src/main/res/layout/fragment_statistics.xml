@@ -319,10 +319,11 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/toScoreSheetButton"
-            app:icon="@drawable/ic_statistics"
+            app:icon="@drawable/ic_scoresheet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
+            app:elevation="@dimen/scoresheet_statistics_floatingButton_elevation"
             android:layout_margin="@dimen/scoresheet_statistics_floatingButton_margin" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

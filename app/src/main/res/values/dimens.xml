@@ -45,5 +45,6 @@
     <dimen name="toScoresheet_fab_freespace">25dp</dimen>
     <dimen name="toStatistics_fab_freespace">75dp</dimen>
     <dimen name="scoresheet_statistics_floatingButton_margin">25dp</dimen>
+    <dimen name="scoresheet_statistics_floatingButton_elevation">16dp</dimen>
 
 </resources>
