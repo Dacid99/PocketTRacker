@@ -182,7 +182,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        app:elevation="@dimen/scoresheet_statistics_floatingButton_elevation"
+        android:stateListAnimator="@drawable/floatingbutton_state_list_animator"
         android:layout_margin="@dimen/scoresheet_statistics_floatingButton_margin"/>
 
 

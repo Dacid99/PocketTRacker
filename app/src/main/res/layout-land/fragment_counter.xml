@@ -14,6 +14,7 @@
         android:layout_marginEnd="20dp"
         android:text="@string/miss_string"
         android:textSize="@dimen/textSize"
+        android:stateListAnimator="@drawable/button_state_list_animator"
         app:layout_constraintBottom_toTopOf="@+id/foulButton"
         app:layout_constraintEnd_toStartOf="@+id/undoButton"
         app:layout_constraintStart_toStartOf="@+id/start_block2_guideline"
@@ -25,6 +26,7 @@
         android:layout_height="wrap_content"
         android:text="@string/foul_string"
         android:textSize="@dimen/textSize"
+        android:stateListAnimator="@drawable/button_state_list_animator"
         app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
         app:layout_constraintEnd_toEndOf="@+id/missButton"
         app:layout_constraintStart_toStartOf="@+id/missButton"
@@ -36,6 +38,7 @@
         android:layout_height="wrap_content"
         android:text="@string/safe_string"
         android:textSize="@dimen/textSize"
+        android:stateListAnimator="@drawable/button_state_list_animator"
         app:layout_constraintBottom_toTopOf="@+id/missButton"
         app:layout_constraintEnd_toEndOf="@id/missButton"
         app:layout_constraintStart_toStartOf="@id/missButton"
@@ -51,6 +54,7 @@
         android:gravity="center"
         android:text="@string/undo_string"
         android:textSize="@dimen/textSize"
+        android:stateListAnimator="@drawable/button_state_list_animator"
         app:layout_constraintBottom_toTopOf="@+id/redoButton"
         app:layout_constraintEnd_toStartOf="@+id/end_block2_guideline"
         app:layout_constraintStart_toEndOf="@+id/missButton"
@@ -64,6 +68,7 @@
         android:gravity="center"
         android:text="@string/redo_string"
         android:textSize="@dimen/textSize"
+        android:stateListAnimator="@drawable/button_state_list_animator"
         app:layout_constraintBottom_toBottomOf="@+id/foulButton"
         app:layout_constraintEnd_toEndOf="@+id/undoButton"
         app:layout_constraintStart_toStartOf="@+id/undoButton"
@@ -79,6 +84,7 @@
         android:maxLines="2"
         android:text="@string/ballsOnTable_format"
         android:textSize="@dimen/textSize"
+        android:stateListAnimator="@drawable/floatingbutton_state_list_animator"
         app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
         app:layout_constraintEnd_toStartOf="@+id/end_block1_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_block1_guideline"
@@ -235,7 +241,6 @@
                     android:text="@string/player_club_format"
                     android:textSize="@dimen/scoreTextSize" />
             </LinearLayout>
-
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/player1ScoreView"

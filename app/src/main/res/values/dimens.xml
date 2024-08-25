@@ -5,8 +5,8 @@
     <dimen name="block1_start">0dp</dimen>
     <dimen name="textSize">28sp</dimen>
     <dimen name="smallTextSize">20sp</dimen>
-    <dimen name="tableTextSize">8sp</dimen>
-    <dimen name="tableHeaderTextSize">20sp</dimen>
+    <dimen name="tableTextSize">12sp</dimen>
+    <dimen name="tableHeaderTextSize">24sp</dimen>
     <!-- activity_scoresheet dimensions-->
     <dimen name="turn_column_weight">6</dimen>
     <dimen name="player1_column_weight">8</dimen>
@@ -45,6 +45,8 @@
     <dimen name="toScoresheet_fab_freespace">25dp</dimen>
     <dimen name="toStatistics_fab_freespace">75dp</dimen>
     <dimen name="scoresheet_statistics_floatingButton_margin">25dp</dimen>
-    <dimen name="scoresheet_statistics_floatingButton_elevation">16dp</dimen>
+    <dimen name="floatingbutton_unclicked_elevation">18dp</dimen>
+    <dimen name="floatingbutton_clicked_elevation">6dp</dimen>
+    <dimen name="button_elevation">8dp</dimen>
 
 </resources>
