@@ -352,7 +352,9 @@ public class CounterFragment extends Fragment{
 
     @Override
     public void onDestroy(){
+        if (sharedPreferenceChangeListener != null) {
+            preferences.unregisterOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
+        }
         super.onDestroy();
-        preferences.unregisterOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
     }
 }
