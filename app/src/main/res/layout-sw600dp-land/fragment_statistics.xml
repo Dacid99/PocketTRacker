@@ -38,8 +38,7 @@
             <ScrollView
                 android:id="@+id/player1Statistics_scroll"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" >
+                android:layout_height="match_parent" >
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -50,7 +49,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="@dimen/cardCornerRadius_small"
-                        app:cardElevation="8dp"
+                        app:cardElevation="@dimen/statistics_cardElevation"
                         android:layout_margin="@dimen/statistics_cardMargin">
 
                         <ImageView
@@ -67,7 +66,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/statistics_cardMargin"
                         app:cardCornerRadius="@dimen/cardCornerRadius_small"
-                        app:cardElevation="8dp">
+                        app:cardElevation="@dimen/statistics_cardElevation">
 
                         <LinearLayout
                             android:orientation="vertical"
@@ -138,7 +137,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="@dimen/cardCornerRadius_small"
-                        app:cardElevation="8dp"
+                        app:cardElevation="@dimen/statistics_cardElevation"
                         android:layout_margin="@dimen/statistics_cardMargin">
 
                         <ImageView
@@ -149,6 +148,10 @@
 
                     </com.google.android.material.card.MaterialCardView>
 
+                    <View
+                        android:layout_height="@dimen/toScoresheet_fab_freespace"
+                        android:layout_width="match_parent" />
+
                 </LinearLayout>
 
             </ScrollView>
@@ -157,161 +160,171 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="@dimen/statistics_cardMargin"
-        app:cardElevation="@dimen/statistics_cardElevation">
+        android:layout_weight="1">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/statistics_cardMargin"
+            app:cardElevation="@dimen/statistics_cardElevation">
 
-            <TextView
-                android:id="@+id/player2statistics_header"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="1dp"
-                android:layout_marginBottom="1dp"
-                android:background="@drawable/roundedcorners_background"
-                android:backgroundTint="@color/colorSecondary"
-                android:gravity="center"
-                android:text="@string/player2_default"
-                android:textColor="@color/colorOnPrimary"
-                android:textSize="@dimen/smallTextSize"
-                android:textStyle="bold" />
+                android:layout_height="match_parent">
 
-            <ScrollView
-                android:id="@+id/player2Statistics_scroll"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" >
-
-                <LinearLayout
-                    android:orientation="vertical"
+                <TextView
+                    android:id="@+id/player2statistics_header"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:background="@drawable/roundedcorners_background"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:gravity="center"
+                    android:text="@string/player2_default"
+                    android:textColor="@color/colorOnPrimary"
+                    android:textSize="@dimen/smallTextSize"
+                    android:textStyle="bold" />
 
-                    <com.google.android.material.card.MaterialCardView
+                <ScrollView
+                    android:id="@+id/player2Statistics_scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="@dimen/cardCornerRadius_small"
-                        app:cardElevation="8dp"
-                        android:layout_margin="@dimen/statistics_cardMargin">
+                        android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:id="@+id/player2ScorePlot"
+                        <com.google.android.material.card.MaterialCardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:contentDescription="scores plot of player 2"/>
+                            app:cardCornerRadius="@dimen/cardCornerRadius_small"
+                            app:cardElevation="@dimen/statistics_cardElevation"
+                            android:layout_margin="@dimen/statistics_cardMargin">
 
-                    </com.google.android.material.card.MaterialCardView>
+                            <ImageView
+                                android:id="@+id/player2ScorePlot"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="scores plot of player 2"/>
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/player2Statistics_card"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/statistics_cardMargin"
-                        app:cardCornerRadius="@dimen/cardCornerRadius_small"
-                        app:cardElevation="8dp">
+                        </com.google.android.material.card.MaterialCardView>
 
-                        <LinearLayout
-                            android:orientation="vertical"
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/player2Statistics_card"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/statistics_cardMargin"
+                            app:cardCornerRadius="@dimen/cardCornerRadius_small"
+                            app:cardElevation="@dimen/statistics_cardElevation">
 
-                            <TextView
-                                android:id="@+id/player2statistics_innings"
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/player2statistics_innings"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/smallTextSize" />
+
+                                <TextView
+                                    android:id="@+id/player2statistics_safes"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/smallTextSize" />
+
+                                <TextView
+                                    android:id="@+id/player2statistics_misses"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/smallTextSize" />
+
+                                <TextView
+                                    android:id="@+id/player2statistics_fouls"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/smallTextSize" />
+
+                                <TextView
+                                    android:id="@+id/player2statistics_success"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/smallTextSize" />
+
+                                <TextView
+                                    android:id="@+id/player2statistics_maxRun"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/smallTextSize" />
+
+                                <TextView
+                                    android:id="@+id/player2statistics_meanInning"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/smallTextSize" />
+
+                                <TextView
+                                    android:id="@+id/player2statistics_meanRun"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/smallTextSize" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="@dimen/cardCornerRadius_small"
+                            app:cardElevation="@dimen/statistics_cardElevation"
+                            android:layout_margin="@dimen/statistics_cardMargin">
+
+                            <ImageView
+                                android:id="@+id/player2RunsPlot"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:textSize="@dimen/smallTextSize" />
+                                android:contentDescription="runs plot of player 2"/>
 
-                            <TextView
-                                android:id="@+id/player2statistics_safes"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:textSize="@dimen/smallTextSize" />
+                        </com.google.android.material.card.MaterialCardView>
 
-                            <TextView
-                                android:id="@+id/player2statistics_misses"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:textSize="@dimen/smallTextSize" />
+                        <View
+                            android:layout_height="@dimen/toScoresheet_fab_freespace"
+                            android:layout_width="match_parent" />
 
-                            <TextView
-                                android:id="@+id/player2statistics_fouls"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:textSize="@dimen/smallTextSize" />
+                    </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/player2statistics_success"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:textSize="@dimen/smallTextSize" />
+                </ScrollView>
 
-                            <TextView
-                                android:id="@+id/player2statistics_maxRun"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:textSize="@dimen/smallTextSize" />
+            </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/player2statistics_meanInning"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:textSize="@dimen/smallTextSize" />
+        </com.google.android.material.card.MaterialCardView>
 
-                            <TextView
-                                android:id="@+id/player2statistics_meanRun"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:textSize="@dimen/smallTextSize" />
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/toScoreSheetButton"
+            app:icon="@drawable/ic_statistics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="@dimen/scoresheet_statistics_floatingButton_margin" />
 
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="@dimen/cardCornerRadius_small"
-                        app:cardElevation="8dp"
-                        android:layout_margin="@dimen/statistics_cardMargin">
-
-                    <ImageView
-                        android:id="@+id/player2RunsPlot"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="runs plot of player 2"/>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                </LinearLayout>
-
-            </ScrollView>
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/toScoreSheetButton"
-        android:text="@string/toScoresheet_string"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>

@@ -57,11 +57,4 @@
     <string name="player_error_format">Fehlerquote: %1$d %%</string>
     <string name="title_activity_settings">Settings</string>
 
-    <!-- orientation sensitive strings -->
-    <string name="toStatistics_string_portrait">Statistiken</string>
-    <string name="toScoresheet_string_portrait">Spielprotokoll</string>
-    <string name="toStatistics_string_land">S\nt\na\nt\ni\ns\nt\ni\nk\ne\nn</string>
-    <string name="toScoresheet_string_land">S\np\ni\ne\nl\np\nr\no\nt\no\nk\no\nl\nl</string>
-
-
 </resources>

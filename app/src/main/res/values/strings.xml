@@ -125,9 +125,4 @@
     <!-- orientation sensitive strings -->
     <string name="toStatistics_string_portrait">Statistics</string>
     <string name="toScoresheet_string_portrait">Scoresheet</string>
-    <string name="toStatistics_string_land">S\nt\na\nt\ni\ns\nt\ni\nc\ns</string>
-    <string name="toScoresheet_string_land">S\nc\no\nr\ne\ns\nh\ne\ne\nst</string>
-
-    <string name="toStatistics_string">@string/toStatistics_string_portrait</string>
-    <string name="toScoresheet_string">@string/toScoresheet_string_portrait</string>
 </resources>
