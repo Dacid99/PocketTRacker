@@ -1,5 +1,6 @@
 For everyone who likes potting billiard balls better than writing score sheets.
-This app helps you with keeping tabs on the scores of straight pool games. All you have to do is count the remaining balls on the table and it will do the rest for you!
+This app helps you with keeping tabs on the scores of straight pool games. All you have to do is count the remaining balls on the table!
+The app will calculate the current scores, write a full scoresheet for you and create graphs for post-game analysis!
 
-You are welcome to report any issues or ideas in the gitlab repo:
+Please report any issues you find or ideas you have in the gitlab repo:
 https://gitlab.com/Dacid99/PocketTRacker

@@ -1,5 +1,6 @@
 Für alle die beim Billard lieber Bälle lochen als Spielstände aufzuschreiben.
-Diese App hilft dir dabei die Punkte beim 14 und 1 endlos Pool zu erfassen. Du musst nur die restlichen Kugeln auf dem Tisch zählen und sie übernimmt den Rest für dich!
+Diese App hilft dir dabei die Punkte beim 14 und 1 endlos Pool zu erfassen. Du musst nur die restlichen Kugeln auf dem Tisch zählen!
+Die App berechnet dann den Spielstand, erstellt einen vollständigen Spielbogen und Grafiken für die Analyse nach dem Spiel!
 
-Bei Problemen und Ideen kannst du dich gerne im gitlab repo melden:
+Bei Problemen und Ideen melde dich bitte im gitlab repo:
 https://gitlab.com/Dacid99/PocketTRacker
