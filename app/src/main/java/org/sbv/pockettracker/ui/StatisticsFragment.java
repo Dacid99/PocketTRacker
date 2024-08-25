@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import org.sbv.pockettracker.utils.GamePlotter;
 import org.sbv.pockettracker.utils.GameStatistics;
@@ -39,7 +40,7 @@ public class StatisticsFragment extends Fragment {
     private TextView player1StatisticsHeader, player2StatisticsHeader, maxRunPlayer1View, maxRunPlayer2View, inningsPlayer1View, inningsPlayer2View, safesPlayer1View, safesPlayer2View, missesPlayer1View, missesPlayer2View, foulsPlayer1View, foulsPlayer2View, errorPlayer1View, errorPlayer2View, meanInningPlayer1View, meanInningPlayer2View, meanRunPlayer1View, meanRunPlayer2View;
     private final ImageView[] playerScorePlots = new ImageView[2];
     private final ImageView[] playerRunsPlots = new ImageView[2];
-    private MaterialButton toScoreSheetButton;
+    private ExtendedFloatingActionButton toScoreSheetButton;
 
     @Override
     public void onAttach(@NonNull Context context){

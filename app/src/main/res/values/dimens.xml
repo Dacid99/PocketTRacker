@@ -38,10 +38,12 @@
     <dimen name="cardCornerRadius_small">8dp</dimen>
     <dimen name="navbarPadding">100dp</dimen>
     <dimen name="about_sidemargin">12dp</dimen>
-    <dimen name="statistics_cardElevation">8dp</dimen>
+    <dimen name="statistics_cardElevation">4dp</dimen>
     <dimen name="statistics_cardMargin">10dp</dimen>
     <dimen name="playerFragment_margin">5dp</dimen>
     <dimen name="dividerWidth">10dp</dimen>
-    <dimen name="scoresheet_freespace">50dp</dimen>
+    <dimen name="toScoresheet_fab_freespace">25dp</dimen>
+    <dimen name="toStatistics_fab_freespace">75dp</dimen>
+    <dimen name="scoresheet_statistics_floatingButton_margin">25dp</dimen>
 
 </resources>
