@@ -18,6 +18,12 @@
             android:layout_weight="1"
             />
 
+        <View
+            android:id="@+id/divider"
+            android:layout_width="@dimen/dividerWidth"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider" />
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -29,6 +35,7 @@
             />
 
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/navigationbar"

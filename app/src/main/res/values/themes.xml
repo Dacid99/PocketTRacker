@@ -33,6 +33,8 @@
         <item name="popupMenuBackground">@color/colorPrimary</item>
         <item name="popupMenuStyle">@style/Widget.DropDown</item>
 
+        <item name="android:listDivider">@color/colorSecondary</item>
+
     </style>
 
     <style name="Theme.PocketTRacker.Settings" parent="Theme.Material3.DayNight">

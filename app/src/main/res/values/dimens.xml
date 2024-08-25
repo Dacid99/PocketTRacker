@@ -41,5 +41,6 @@
     <dimen name="statistics_cardElevation">8dp</dimen>
     <dimen name="statistics_cardMargin">10dp</dimen>
     <dimen name="playerFragment_margin">5dp</dimen>
+    <dimen name="dividerWidth">10dp</dimen>
 
 </resources>
