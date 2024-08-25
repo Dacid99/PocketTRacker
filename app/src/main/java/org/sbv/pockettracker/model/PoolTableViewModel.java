@@ -1,5 +1,6 @@
 package org.sbv.pockettracker.model;
 
+import androidx.core.util.Pools;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -10,7 +11,7 @@ public class PoolTableViewModel extends ViewModel {
         poolTableLiveData.setValue(new PoolTable());
     }
 
-    public LiveData<PoolTable> getPoolTable(){
+    public final LiveData<PoolTable> getPoolTable(){
         return poolTableLiveData;
     }
 
@@ -43,18 +44,18 @@ public class PoolTableViewModel extends ViewModel {
         }else return 0;
     }
 
-    public int getNumberOfBalls(){
+    public final int getNumberOfBalls(){
         PoolTable poolTable = poolTableLiveData.getValue();
         if (poolTable != null){
             return poolTable.getNumberOfBalls();
-        }else return 15;
+        }else return PoolTable.MAXBALLNUMBER;
     }
 
-    public int getOldNumberOfBalls(){
+    public final int getOldNumberOfBalls(){
         PoolTable poolTable = poolTableLiveData.getValue();
         if (poolTable != null){
             return poolTable.getOldNumberOfBalls();
-        }else return 15;
+        }else return PoolTable.MAXBALLNUMBER;
     }
 
     public void reset(){

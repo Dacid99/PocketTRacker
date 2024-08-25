@@ -10,10 +10,10 @@ public class ScoreBoardViewModel extends ViewModel {
     public ScoreBoardViewModel(){
         scoreBoardLiveData.setValue(new ScoreBoard());
     }
-    public LiveData<ScoreBoard> getScoreBoard(){
+    public final LiveData<ScoreBoard> getScoreBoard(){
         return scoreBoardLiveData;
     }
-    public int[] getScores(){
+    public final int[] getScores(){
         ScoreBoard scoreBoard = scoreBoardLiveData.getValue();
         if (scoreBoard != null){
             return scoreBoard.getPlayerScores();

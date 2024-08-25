@@ -9,11 +9,11 @@ public class PoolTable {
     public PoolTable(){
         rerack();
     }
-    public int getNumberOfBalls(){
+    public final int getNumberOfBalls(){
         return this.numberOfBalls;
     }
 
-    public int getOldNumberOfBalls(){
+    public final int getOldNumberOfBalls(){
         return this.oldNumberOfBalls;
     }
 
@@ -32,7 +32,7 @@ public class PoolTable {
         this.oldNumberOfBalls = MAXBALLNUMBER;
     }
 
-    public boolean isValidBallNumber(int newNumberOfBalls){
+    public final boolean isValidBallNumber(int newNumberOfBalls){
         return newNumberOfBalls <= this.oldNumberOfBalls && newNumberOfBalls >= 1;
     }
 

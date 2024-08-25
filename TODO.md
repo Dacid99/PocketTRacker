@@ -11,5 +11,4 @@
 
 for new release:
 - introduce playernumbers as static constants of players for readability and a comprehensive function to determine turnplayer instead of % operations
-- add more final keywords to mark immutability
 

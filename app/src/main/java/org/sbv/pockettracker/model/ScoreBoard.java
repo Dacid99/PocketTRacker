@@ -18,11 +18,11 @@ public class ScoreBoard implements Parcelable {
         winnerPoints = defaultWinnerPoints;
     }
 
-    public int[] getPlayerScores() {
+    public final int[] getPlayerScores() {
         return playerScores;
     }
 
-    public int getWinnerPoints() {
+    public final int getWinnerPoints() {
         return winnerPoints;
     }
 
@@ -40,7 +40,7 @@ public class ScoreBoard implements Parcelable {
         this.winnerPoints = winnerPoints;
     }
 
-    public boolean existsWinner(){
+    public final boolean existsWinner(){
         boolean existsWinner = false;
         for (int score : playerScores){
             existsWinner |= (score >= winnerPoints);
@@ -48,7 +48,7 @@ public class ScoreBoard implements Parcelable {
         return existsWinner;
     }
 
-    public int getWinner(){
+    public final int getWinner(){
         for (int index = 0; index <= 1; index++){
             if (playerScores[index] >= winnerPoints){
                 return index;

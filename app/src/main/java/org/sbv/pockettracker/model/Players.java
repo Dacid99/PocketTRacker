@@ -23,11 +23,11 @@ public class Players implements Parcelable {
         this.clubs = Arrays.copyOf(defaultPlayerClubs, 2);
     }
 
-    public String[] getNames() {
+    public final String[] getNames() {
         return names;
     }
 
-    public String[] getClubs() {
+    public final String[] getClubs() {
         return clubs;
     }
 

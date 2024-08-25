@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 public class ScoreSheetViewModel extends ViewModel {
     private final MutableLiveData<ScoreSheet> scoreSheetLiveData;
 
-    public LiveData<ScoreSheet> getScoreSheet(){
+    public final LiveData<ScoreSheet> getScoreSheet(){
         return scoreSheetLiveData;
     }
 

@@ -10,7 +10,7 @@ public class PlayersViewModel extends ViewModel {
         playersLiveData.setValue(new Players());
     }
 
-    public LiveData<Players> getPlayers() {
+    public final LiveData<Players> getPlayers() {
         return playersLiveData;
     }
 

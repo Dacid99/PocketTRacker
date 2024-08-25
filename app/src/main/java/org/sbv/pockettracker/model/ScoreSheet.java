@@ -50,7 +50,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
                 Log.d("Bad argument", "In ScoreSheet.Turn.fromStringArray: array.length is not 4!"+ Arrays.toString(array));
             }
         }
-        public String[] toStringArray(){
+        public final String[] toStringArray(){
             String[] array =  new String[4];
             array[0] = switchReason;
             array[1] = String.valueOf(playerScores[0]);
@@ -187,31 +187,31 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         }
     }
 
-    public int length(){
+    public final int length(){
         return inningsList.size();
     }
 
-    public boolean isEmpty(){
+    public final boolean isEmpty(){
         return inningsList.isEmpty();
     }
 
-    public int currentTurn(){
+    public final int currentTurn(){
         return pointer;
     }
 
-    public int[] innings(){
+    public final int[] innings(){
         int[] innings = new int[2];
         innings[0] = (int) Math.ceil(Math.abs(length()/2.0 - 0.5));
         innings[1] = (int) Math.floor(Math.abs(length()/2.0 - 0.5));
         return innings;
     }
 
-    public boolean isLatest(){
+    public final boolean isLatest(){
         //for writing pointer must be at the last index
         return pointer == length() - 1;
     }
 
-    public boolean isStart(){
+    public final boolean isStart(){
         //for writing pointer must be at the last index
         return pointer == 0;
     }
@@ -226,16 +226,16 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         }
     }
 
-    public int getScoreOfPlayer1At(int turn){
+    public final int getScoreOfPlayer1At(int turn){
         return inningsList.get(turn).playerScores[0];
     }
-    public int getScoreOfPlayer2At(int turn){
+    public final int getScoreOfPlayer2At(int turn){
         return inningsList.get(turn).playerScores[1];
     }
-    public int[] getPlayerScoresAt(int turn) {
+    public final int[] getPlayerScoresAt(int turn) {
         return inningsList.get(turn).playerScores;
     }
-    public ArrayList<Integer>[] getPlayerScoresList(){
+    public final ArrayList<Integer>[] getPlayerScoresList(){
         ArrayList<Integer>[] playerScoresList = new ArrayList[2];
         playerScoresList[0] = new ArrayList<>();
         playerScoresList[1] = new ArrayList<>();
@@ -245,11 +245,11 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         }
         return playerScoresList;
     }
-    public int getBallsOnTableAt(int turn){
+    public final int getBallsOnTableAt(int turn){
         return inningsList.get(turn).ballsOnTable;
     }
 
-    public String getSwitchReasonAt(int turn){
+    public final String getSwitchReasonAt(int turn){
         return inningsList.get(turn).switchReason;
     }
 
