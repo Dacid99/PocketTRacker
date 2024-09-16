@@ -42,7 +42,7 @@
     <dimen name="statistics_cardMargin">10dp</dimen>
     <dimen name="playerFragment_margin">5dp</dimen>
     <dimen name="dividerWidth">10dp</dimen>
-    <dimen name="toScoresheet_fab_freespace">25dp</dimen>
+    <dimen name="toScoresheet_fab_freespace">75dp</dimen>
     <dimen name="toStatistics_fab_freespace">75dp</dimen>
     <dimen name="scoresheet_statistics_floatingButton_margin">25dp</dimen>
     <dimen name="floatingbutton_unclicked_elevation">18dp</dimen>
