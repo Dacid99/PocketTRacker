@@ -12,4 +12,3 @@
 # for release
 - test writer class
 - cleanup
-- metadata
