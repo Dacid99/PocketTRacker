@@ -67,14 +67,6 @@ public class ScoreSheetViewModel extends ViewModel {
         return null;
     }
 
-    public void append(ScoreSheet.Inning inning){
-        ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
-        if (scoreSheet != null){
-            scoreSheet.update(inning);
-            scoreSheetLiveData.setValue(scoreSheet);
-        }
-    }
-
     public boolean isStart(){
         ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
         if (scoreSheet != null){

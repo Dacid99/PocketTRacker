@@ -11,7 +11,7 @@ import com.opencsv.exceptions.CsvException;
 import org.sbv.pockettracker.model.Players;
 import org.sbv.pockettracker.model.PlayersViewModel;
 import org.sbv.pockettracker.model.ScoreSheet;
-import org.sbv.pockettracker.model.ScoreSheetViewModel;
+import org.sbv.pockettracker.model.ScoreSheetWriter;
 
 public class ScoreSheetIO {
     public static void writeToFile(OutputStreamWriter outputStreamWriter, Players players, ScoreSheet scoreSheet) throws IOException{
@@ -30,7 +30,7 @@ public class ScoreSheetIO {
         csvWriter.close();
     }
 
-    public static void readFromFile(InputStreamReader inputStreamReader, PlayersViewModel playersViewModel, ScoreSheetViewModel scoreSheetViewModel) throws IOException{
+    public static void readFromFile(InputStreamReader inputStreamReader, PlayersViewModel playersViewModel, ScoreSheetWriter scoreSheetWriter) throws IOException{
         try (CSVReader csvReader = new CSVReader(inputStreamReader)) {
             String[] nextLine;
             nextLine = csvReader.readNext();
@@ -42,7 +42,7 @@ public class ScoreSheetIO {
             csvReader.readNext(); //skip the first line, it is in scoresheet by default
 
             while ((nextLine = csvReader.readNext()) != null){
-                scoreSheetViewModel.append(new ScoreSheet.Inning(nextLine));
+                scoreSheetWriter.append(new ScoreSheet.Inning(nextLine));
             }
         }catch (CsvException e){
             throw new IOException(e.toString());

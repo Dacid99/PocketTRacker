@@ -10,5 +10,4 @@
 - sort resources
 
 # for release
-- test writer class
 - cleanup

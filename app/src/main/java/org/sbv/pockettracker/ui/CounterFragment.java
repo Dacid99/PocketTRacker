@@ -254,6 +254,8 @@ public class CounterFragment extends Fragment{
                 }
             }
         });
+
+        scoreSheetWriter = new ScoreSheetWriter(scoreSheetViewModel, poolTableViewModel, scoreBoardViewModel);
     }
 
     private void applyPreferences(){

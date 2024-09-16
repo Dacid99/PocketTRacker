@@ -99,7 +99,7 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         this.pointer = -1; //directly incremented by update
         //enter starting values
         // this is crucial for statistics, as the list is never empty!
-        Inning firstInning = new Inning(new String[]{"","0","0","15"});
+        Inning firstInning = new Inning(new String[]{" ","0","0","15"});
         update(firstInning);
     }
 

@@ -38,6 +38,7 @@ import org.sbv.pockettracker.model.PoolTableViewModel;
 import org.sbv.pockettracker.R;
 import org.sbv.pockettracker.model.ScoreBoard;
 import org.sbv.pockettracker.model.ScoreBoardViewModel;
+import org.sbv.pockettracker.model.ScoreSheetWriter;
 import org.sbv.pockettracker.utils.ScoreSheetIO;
 import org.sbv.pockettracker.model.ScoreSheetViewModel;
 
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
                                 try (InputStream inputStream = getContentResolver().openInputStream(uri);
                                      InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
                                     onNewGameClick();
-                                    ScoreSheetIO.readFromFile(inputStreamReader, playersViewModel, scoreSheetViewModel);
+                                    ScoreSheetIO.readFromFile(inputStreamReader, playersViewModel, new ScoreSheetWriter(scoreSheetViewModel, poolTableViewModel, scoreBoardViewModel));
                                     Toast.makeText(MainActivity.this, "Game loaded successfully!", Toast.LENGTH_SHORT).show();
                                 } catch (IOException e) {
                                     Toast.makeText(MainActivity.this, "Failed to load game:" + e.getMessage(), Toast.LENGTH_LONG).show();

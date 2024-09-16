@@ -25,6 +25,7 @@ public class ScoreSheetWriter {
         newInning.playerScores[0] = trackedScoreBoardViewModel.getScores()[0];
         newInning.playerScores[1] = trackedScoreBoardViewModel.getScores()[1];
         newInning.ballsOnTable = trackedPoolTableViewModel.getNumberOfBalls();
+        scoreSheetViewModel.update(newInning);
     }
 
     public void rollback(){
@@ -45,5 +46,10 @@ public class ScoreSheetWriter {
     public void toLatest(){
         ScoreSheet.Inning inning = scoreSheetViewModel.toLatest();
         updateViewModels(inning);
+    }
+
+    public void append(ScoreSheet.Inning newInning){
+        scoreSheetViewModel.update(newInning);
+        updateViewModels(newInning);
     }
 }
