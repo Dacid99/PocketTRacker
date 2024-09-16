@@ -9,8 +9,7 @@
 - restructure all fields Xplayer1Y and Xplayer2Y into an array
 - sort resources
 
-# for release 
-- update gradle wrapper
+# for release
 - test writer class
 - cleanup
 - metadata
