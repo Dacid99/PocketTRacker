@@ -40,7 +40,6 @@ import org.sbv.pockettracker.model.ScoreBoard;
 import org.sbv.pockettracker.model.ScoreBoardViewModel;
 import org.sbv.pockettracker.utils.ScoreSheetIO;
 import org.sbv.pockettracker.model.ScoreSheetViewModel;
-import org.sbv.pockettracker.model.ScoreSheetViewModelFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -149,8 +148,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
 
         scoreBoardViewModel = new ViewModelProvider(this).get(ScoreBoardViewModel.class);
 
-        ScoreSheetViewModelFactory factory = new ScoreSheetViewModelFactory(poolTableViewModel, scoreBoardViewModel);
-        scoreSheetViewModel = new ViewModelProvider(this, factory).get(ScoreSheetViewModel.class);
+        scoreSheetViewModel = new ViewModelProvider(this).get(ScoreSheetViewModel.class);
     }
     
     private void applyPreferences(){
@@ -257,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
 
         scoreBoardViewModel.reset();
 
-        scoreSheetViewModel.reset(poolTableViewModel, scoreBoardViewModel);
+        scoreSheetViewModel.reset();
     }
 
     public void onSaveButtonClick() {

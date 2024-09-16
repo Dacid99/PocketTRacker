@@ -35,6 +35,7 @@ import org.sbv.pockettracker.model.ScoreBoard;
 import org.sbv.pockettracker.model.ScoreBoardViewModel;
 import org.sbv.pockettracker.model.ScoreSheet;
 import org.sbv.pockettracker.model.ScoreSheetViewModel;
+import org.sbv.pockettracker.model.ScoreSheetWriter;
 
 import java.util.Objects;
 
@@ -49,6 +50,7 @@ public class CounterFragment extends Fragment{
     private ScoreBoardViewModel scoreBoardViewModel;
     private PoolTableViewModel poolTableViewModel;
     private ScoreSheetViewModel scoreSheetViewModel;
+    private ScoreSheetWriter scoreSheetWriter;
     private TextView player1NameView, player2NameView, player1ClubView, player2ClubView, player1ScoreView, player2ScoreView, ballsOnTableFloatingButton;
     private TextInputEditText winningPointsInput;
     private MaterialCardView player1Card, player2Card;
@@ -152,17 +154,17 @@ public class CounterFragment extends Fragment{
             newTurn(getString(R.string.foul_string));
         });
 
-        undoButton.setOnClickListener(v -> scoreSheetViewModel.rollback());
+        undoButton.setOnClickListener(v -> scoreSheetWriter.rollback());
 
         undoButton.setOnLongClickListener(v -> {
-            scoreSheetViewModel.toStart();
+            scoreSheetWriter.toStart();
             return true;
         });
 
-        redoButton.setOnClickListener(v -> scoreSheetViewModel.progress());
+        redoButton.setOnClickListener(v -> scoreSheetWriter.progress());
 
         redoButton.setOnLongClickListener(v -> {
-            scoreSheetViewModel.toLatest();
+            scoreSheetWriter.toLatest();
             return true;
         });
 
@@ -336,7 +338,7 @@ public class CounterFragment extends Fragment{
     }
 
     private void newTurn(String reason){
-        scoreSheetViewModel.update(reason);
+        scoreSheetWriter.update(reason);
     }
 
 

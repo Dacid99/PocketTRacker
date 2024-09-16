@@ -1,8 +1,12 @@
 package org.sbv.pockettracker.model;
 
+import android.database.sqlite.SQLiteBindOrColumnIndexOutOfRangeException;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.google.android.material.color.utilities.Score;
 
 public class ScoreSheetViewModel extends ViewModel {
     private final MutableLiveData<ScoreSheet> scoreSheetLiveData;
@@ -11,48 +15,58 @@ public class ScoreSheetViewModel extends ViewModel {
         return scoreSheetLiveData;
     }
 
-    public ScoreSheetViewModel(PoolTableViewModel poolTableViewModel, ScoreBoardViewModel scoreBoardViewModel){
-        scoreSheetLiveData = new MutableLiveData<>(new ScoreSheet(poolTableViewModel, scoreBoardViewModel));
+    public ScoreSheetViewModel(){
+        scoreSheetLiveData = new MutableLiveData<>(new ScoreSheet());
     }
 
-    public void update(String reason){
+    public void update(ScoreSheet.Inning newInning){
         ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
         if (scoreSheet != null){
-            scoreSheet.update(reason);
-            scoreSheetLiveData.setValue(scoreSheet);
-        }
-    }
-
-    public void rollback(){
-        ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
-        if (scoreSheet != null){
-            scoreSheet.rollback();
+            scoreSheet.update(newInning);
             scoreSheetLiveData.setValue(scoreSheet);
         }
     }
 
-    public void progress(){
+    public ScoreSheet.Inning rollback(){
         ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
         if (scoreSheet != null){
-            scoreSheet.progress();
+            ScoreSheet.Inning inning = scoreSheet.rollback();
             scoreSheetLiveData.setValue(scoreSheet);
+            return inning;
         }
+        return null;
     }
 
-    public void toStart(){
+    public ScoreSheet.Inning progress(){
         ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
         if (scoreSheet != null){
-            scoreSheet.toStart();
+            ScoreSheet.Inning inning = scoreSheet.progress();
             scoreSheetLiveData.setValue(scoreSheet);
+            return inning;
         }
+        return null;
     }
-    public void toLatest(){
+
+    public ScoreSheet.Inning toStart(){
         ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
         if (scoreSheet != null){
-            scoreSheet.toLatest();
+            ScoreSheet.Inning inning = scoreSheet.toStart();
             scoreSheetLiveData.setValue(scoreSheet);
+            return inning;
         }
+        return null;
     }
+
+    public ScoreSheet.Inning toLatest(){
+        ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
+        if (scoreSheet != null){
+            ScoreSheet.Inning inning = scoreSheet.toLatest();
+            scoreSheetLiveData.setValue(scoreSheet);
+            return inning;
+        }
+        return null;
+    }
+
     public void append(ScoreSheet.Inning inning){
         ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
         if (scoreSheet != null){
@@ -99,8 +113,8 @@ public class ScoreSheetViewModel extends ViewModel {
             return scoreSheet.length();
         }else return 1;
     }
-    public void reset(PoolTableViewModel poolTableViewModel, ScoreBoardViewModel scoreBoardViewModel){
-        ScoreSheet scoreSheet = new ScoreSheet(poolTableViewModel,scoreBoardViewModel);
+    public void reset(){
+        ScoreSheet scoreSheet = new ScoreSheet();
         scoreSheetLiveData.setValue(scoreSheet);
     }
 }

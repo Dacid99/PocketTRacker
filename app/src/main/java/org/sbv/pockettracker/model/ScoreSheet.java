@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.Contract;
 
+import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -91,17 +92,15 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         };
     }
 
-    public ScoreSheet(PoolTableViewModel poolTableViewModel, ScoreBoardViewModel scoreBoardViewModel){
-        //watched objects
-        this.trackedPoolTableViewModel = poolTableViewModel;
-        this.trackedScoreBoardViewModel = scoreBoardViewModel;
+    public ScoreSheet(){
         //set up containers for data
         this.inningsList = new ArrayList<>();
 
         this.pointer = -1; //directly incremented by update
         //enter starting values
         // this is crucial for statistics, as the list is never empty!
-        update("   ");
+        Inning firstInning = new Inning(new String[]{"","0","0","15"});
+        update(firstInning);
     }
 
     //Parcelable methods
@@ -137,54 +136,44 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
     };
 
 
-    public void update(String reason){
+    public void update(Inning newInning){
         if (!isLatest()){
             clearAfterPointer();
         }
-        Inning turn = new Inning();
-        turn.switchReason = reason;
-        //this is crucial, otherwise a reference will be created; this would update past elements as well, so the scoresheet scores would all be identical
-        turn.playerScores = Arrays.copyOf(trackedScoreBoardViewModel.getScores(), 2);
-        turn.ballsOnTable = trackedPoolTableViewModel.getNumberOfBalls();
-
-        inningsList.add(turn);
+        inningsList.add(newInning);
         pointer++;
     }
 
-    public void rollback(){
+    public Inning rollback(){
         if (!isStart()) {
             pointer--;
-            trackedScoreBoardViewModel.updateScores(inningsList.get(pointer).playerScores);
-            trackedPoolTableViewModel.updateOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
-            trackedPoolTableViewModel.updateNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+            return inningsList.get(pointer);
         }
-
+        return null;
     }
 
-    public void toStart(){
+    public Inning toStart(){
         if (!isStart()){
             pointer = 0;
-            trackedScoreBoardViewModel.updateScores( inningsList.get(pointer).playerScores );
-            trackedPoolTableViewModel.updateOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
-            trackedPoolTableViewModel.updateNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+            return inningsList.get(pointer);
         }
+        return null;
     }
 
-    public void progress(){
+    public Inning progress(){
         if (!isLatest()) {
             pointer++;
-            trackedScoreBoardViewModel.updateScores( inningsList.get(pointer).playerScores );
-            trackedPoolTableViewModel.updateOldNumberOfBalls(inningsList.get(pointer).ballsOnTable);
-            trackedPoolTableViewModel.updateNumberOfBalls(inningsList.get(pointer).ballsOnTable);
+            return inningsList.get(pointer);
         }
+        return null;
     }
-    public void toLatest(){
+
+    public Inning toLatest(){
         if (!isLatest()){
             pointer = length() - 1;
-            trackedScoreBoardViewModel.updateScores( inningsList.get(pointer).playerScores );
-            trackedPoolTableViewModel.updateOldNumberOfBalls( inningsList.get(pointer).ballsOnTable );
-            trackedPoolTableViewModel.updateNumberOfBalls( inningsList.get(pointer).ballsOnTable );
+            return inningsList.get(pointer);
         }
+        return null;
     }
 
     public final int length(){
@@ -252,13 +241,5 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
 
     public final String getSwitchReasonAt(int turn){
         return inningsList.get(turn).switchReason;
-    }
-
-    public void update(Inning turn){
-        if (!isLatest()){
-            clearAfterPointer();
-        }
-        inningsList.add(turn);
-        progress();
     }
 }
