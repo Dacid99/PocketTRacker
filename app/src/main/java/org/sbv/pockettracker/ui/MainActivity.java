@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
     private ScoreSheetViewModel scoreSheetViewModel;
     private SharedPreferences preferences;
     private NavController navController;
-    private View counterFragment;
     private MaterialButton dropdownButton;
     private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
 

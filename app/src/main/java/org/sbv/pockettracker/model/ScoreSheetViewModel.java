@@ -1,12 +1,9 @@
 package org.sbv.pockettracker.model;
 
-import android.database.sqlite.SQLiteBindOrColumnIndexOutOfRangeException;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.google.android.material.color.utilities.Score;
 
 public class ScoreSheetViewModel extends ViewModel {
     private final MutableLiveData<ScoreSheet> scoreSheetLiveData;

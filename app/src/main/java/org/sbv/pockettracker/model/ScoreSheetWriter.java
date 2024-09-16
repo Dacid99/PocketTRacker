@@ -1,9 +1,9 @@
 package org.sbv.pockettracker.model;
 
 public class ScoreSheetWriter {
-    PoolTableViewModel trackedPoolTableViewModel;
-    ScoreBoardViewModel trackedScoreBoardViewModel;
-    ScoreSheetViewModel scoreSheetViewModel;
+    private final PoolTableViewModel trackedPoolTableViewModel;
+    private final ScoreBoardViewModel trackedScoreBoardViewModel;
+    private final ScoreSheetViewModel scoreSheetViewModel;
 
     public ScoreSheetWriter(ScoreSheetViewModel scoreSheetViewModel, PoolTableViewModel poolTableViewModel, ScoreBoardViewModel scoreBoardViewModel){
         this.scoreSheetViewModel = scoreSheetViewModel;
