@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId "org.sbv.pockettracker"
         minSdk 21
-        targetSdk 34
+        targetSdk 34    //if you update this, the pipeline sdk must be updated as well!
         versionCode 10
         versionName "2.1.1"
         buildConfigField "String", "AUTHOR", "\"Dacid99\""
@@ -21,9 +21,22 @@ android {
             useSupportLibrary true
         }
     }
+    signingConfigs {
+        release {
+            if (System.getenv("CI") != null) {
+                storeFile file(System.getenv("KEYSTORE_FILE"))
+                storePassword System.getenv("KEYSTORE_PASSWORD")
+                keyAlias System.getenv("KEY_ALIAS")
+                keyPassword System.getenv("KEY_PASSWORD")
+            }
+        }
+    }
 
     buildTypes {
         release {
+            if (System.getenv("CI") != null) {
+                signingConfig signingConfigs.release
+            }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
