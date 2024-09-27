@@ -19,6 +19,11 @@ before_script:
   - mkdir -p $ANDROID_SDK_ROOT && unzip sdk-tools.zip -d $ANDROID_SDK_ROOT
   - echo "Accepting licenses for sdk tools ..."
   - yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
+  - |
+    if [ $? -ne 0 ]; then
+      echo "Error: Failed to accept the licenses!"
+      exit 1
+    fi
   - echo "Successfully accepted licenses for sdk tools."
   - $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-35" "build-tools;35.0.2"  # update this if a new version is set in build.gradle!
   - echo "Successfully installed sdk tools."
