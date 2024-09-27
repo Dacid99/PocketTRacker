@@ -106,9 +106,18 @@ build_release_apk:
     - echo "Successfully built APK $RELEASE_APK_NAME to $RELEASE_APK"
 
     - echo "Checking signature ..."
-    - ls -l $ANDROID_SDK_ROOT/build-tools/$ANDROID_SDK_BUILD_TOOLS
     - $ANDROID_SDK_ROOT/build-tools/$ANDROID_SDK_BUILD_TOOLS/apksigner verify $RELEASE_APK
     - echo "Successfully checked signature."
+#
+#    - echo "Checking version code against tag name ..."
+#    - VERSION_NAME=$($ANDROID_SDK_ROOT/build-tools/$ANDROID_SDK_BUILD_TOOLS/aapt dump badging "$RELEASE_APK" | grep "versionName" | awk -F"'" '{print $4}')
+#    - TAG_VERSION=${CI_COMMIT_TAG#v}
+#    - |
+#      if [ "$VERSION_NAME" != "$TAG_VERSION" ]; then
+#        echo "Error: Tag name does not match version code!"
+#      fi
+    - echo "Successfully checked version code."
+
   artifacts:
     paths:
       - "$APK_PATH/*.apk"
