@@ -1,6 +1,7 @@
 image: eclipse-temurin:17-jdk
 
 stages:
+  - setup
   - build
   - release
 
@@ -12,28 +13,58 @@ variables:
   KEYSTORE_FILE: "$CI_PROJECT_DIR/keystore.jks"
   APK_PATH: "app/build/outputs/apk/release/"
 
-before_script:
-  - echo "Installing basic cli tools ..."
-  - apt-get update && apt-get install -y unzip wget curl jq
-  - echo "Successfully installed basic cli tools."
-  - echo "Installing sdk tools ..."
-  - wget https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip -O sdk-tools.zip
-  - mkdir -p $ANDROID_SDK_ROOT && unzip sdk-tools.zip -d $ANDROID_SDK_ROOT
-  - echo "Accepting licenses for sdk tools ..."
-  - set +o pipefail
-  - yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
-  - set -o pipefail
-  - |
-    if [ $? -ne 0 ]; then
-      echo "Error: Failed to accept the licenses!"
-      exit 1
-    fi
-  - echo "Successfully accepted licenses for sdk tools."
-  - $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platforms;android-$ANDROID_SDK_PLATFORM" "platform-tools" "build-tools;$ANDROID_SDK_BUILD_TOOLS"
-  - echo "Successfully installed sdk tools."
+setup:
+  stage: setup
+  script:
+    - echo "Running checks for secrets ..."
+    - |
+      if [ -z "$GITLAB_TOKEN" ]; then
+        echo "Error: No auth token set!"
+        exit 1
+      fi
+    - |
+      if [ -z "$KEYSTORE_BASE64" ]; then
+        echo "Error: No keystore set!"
+        exit 1
+      fi
+    - |
+      if [ -z "$KEYSTORE_PASSWORD" ]; then
+        echo "Error: No password for keystore set!"
+        exit 1
+      fi
+    - |
+      if [ -z "$KEY_ALIAS" ]; then
+        echo "Error: No key alias set!"
+        exit 1
+      fi
+    - |
+      if [ -z "$KEY_PASSWORD" ]; then
+        echo "Error: No password for key set!"
+        exit 1
+      fi
+    - echo "Installing basic cli tools ..."
+    - apt-get update && apt-get install -y unzip wget curl jq
+    - echo "Successfully installed basic cli tools."
+    - echo "Installing sdk tools ..."
+    - wget https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip -O sdk-tools.zip
+    - mkdir -p $ANDROID_SDK_ROOT && unzip sdk-tools.zip -d $ANDROID_SDK_ROOT
+    - echo "Accepting licenses for sdk tools ..."
+    - set +o pipefail
+    - yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
+    - set -o pipefail
+    - |
+      if [ $? -ne 0 ]; then
+        echo "Error: Failed to accept the licenses!"
+        exit 1
+      fi
+    - echo "Successfully accepted licenses for sdk tools."
+    - $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platforms;android-$ANDROID_SDK_PLATFORM" "platform-tools" "build-tools;$ANDROID_SDK_BUILD_TOOLS"
+    - echo "Successfully installed sdk tools."
 
 build_release_apk:
   stage: build
+  dependencies:
+    - setup
   only:
     - tags
   script:
