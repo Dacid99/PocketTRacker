@@ -6,7 +6,7 @@ stages:
   - release
 
 variables:
-  CI: true
+  CI: "true"
   ANDROID_SDK_ROOT: "/sdk"
   ANDROID_SDK_BUILD_TOOLS: "35.0.0"
   ANDROID_SDK_PLATFORM: "35"   # update this if a new version is set in build.gradle!
@@ -116,7 +116,22 @@ create_release:
   dependencies:
     - build_release_apk
   script:
-    - ls -la
+    - echo "Retrieving artifact APK ..."
+    - ls -l $APK_PATH
+    - export RELEASE_APK=$(find "$APK_PATH" -name "*.apk")
+    - |
+      if [ -z "$RELEASE_APK" ]; then
+        echo "Error: Failed to find the artifact APK!"
+        exit 1
+      fi
+    - |
+      if [ ! -f "$RELEASE_APK" ]; then
+        echo "Error: Failed to find the artifact APK file!"
+        exit 1
+      fi
+    - export RELEASE_APK_NAME=$(basename "$RELEASE_APK")
+    - echo "Successfully found artifact APK $RELEASE_APK_NAME at $RELEASE_APK"
+
     - echo "Installing cli tools ..."
     - apt-get update && apt-get install -y curl jq
     - echo "Successfully installed basic cli tools."
