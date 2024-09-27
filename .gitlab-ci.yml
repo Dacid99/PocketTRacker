@@ -104,6 +104,11 @@ build_release_apk:
       fi
     - export RELEASE_APK_NAME=$(basename "$RELEASE_APK")
     - echo "Successfully built APK $RELEASE_APK_NAME to $RELEASE_APK"
+
+    - echo "Checking signature ..."
+    - ls -l $ANDROID_SDK_ROOT/build-tools/$ANDROID_SDK_BUILD_TOOLS
+    - $ANDROID_SDK_ROOT/build-tools/$ANDROID_SDK_BUILD_TOOLS/apksigner verify $RELEASE_APK
+    - echo "Successfully checked signature."
   artifacts:
     paths:
       - "$APK_PATH/*.apk"
