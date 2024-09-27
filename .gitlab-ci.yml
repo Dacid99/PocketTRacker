@@ -20,11 +20,6 @@ setup:
   script:
     - echo "Running checks for environment ..."
     - |
-      if [ -z "$GITLAB_TOKEN" ]; then
-        echo "Error: No auth token set!"
-        exit 1
-      fi
-    - |
       if [ -z "$KEYSTORE_BASE64" ]; then
         echo "Error: No keystore set!"
         exit 1
