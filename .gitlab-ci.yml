@@ -29,8 +29,13 @@ build_release_apk:
     - echo "Decoding keystore ..."
     - echo $KEYSTORE_BASE64 | base64 -d > $KEYSTORE_FILE
     - |
-      if [ -z $RELEASE_APK ]; then
+      if [ $? -ne 0 ]; then
         echo "Error: Failed to decode the keystore!"
+        exit 1
+      fi
+    - |
+      if [ ! -f "$KEYSTORE_FILE" ]; then
+        echo "Error: Failed to write the keystore file!"
         exit 1
       fi
     - echo "Successfully decoded keystore"
@@ -38,14 +43,14 @@ build_release_apk:
     - echo "Building release apk for new tag $CI_COMMIT_TAG ..."
     - chmod +x ./gradlew
     - ./gradlew assembleRelease
-    - export RELEASE_APK=$(find $APK_PATH -name "*.apk")
+    - export RELEASE_APK=$(find "$APK_PATH" -name "*.apk")
     - |
-      if [ -z $RELEASE_APK ]; then
+      if [ -z "$RELEASE_APK" ]; then
         echo "Error: Failed to find the built APK!"
         exit 1
       fi
-    - export RELEASE_APK_NAME=$(basename $RELEASE_APK)
-    - echo "Successfully built apk $RELEASE_APK_NAME"
+    - export RELEASE_APK_NAME=$(basename "$RELEASE_APK")
+    - echo "Successfully built APK $RELEASE_APK_NAME"
   artifacts:
     paths:
       - $RELEASE_APK
@@ -78,7 +83,7 @@ create_release:
       --form "file=$RELEASE_APK" \ 
       "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/uploads" | jq -r '.url')
     - |
-      if [ -z "$UPLOAD_URL"]; then \
+      if [ -z "$UPLOAD_URL" ]; then \
         echo "Error: Upload of APK failed!"
         exit 1  
       fi
