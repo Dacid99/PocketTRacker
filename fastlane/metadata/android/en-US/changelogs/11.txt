@@ -1,0 +1,2 @@
+- updated dependencies
+- added confirmation dialog for new game
