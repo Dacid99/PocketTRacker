@@ -5,7 +5,7 @@
     <dimen name="block1_start">0dp</dimen>
     <dimen name="textSize">28sp</dimen>
     <dimen name="smallTextSize">20sp</dimen>
-    <dimen name="tableTextSize">12sp</dimen>
+    <dimen name="tableTextSize">10sp</dimen>
     <dimen name="tableHeaderTextSize">24sp</dimen>
     <!-- activity_scoresheet dimensions-->
     <dimen name="turn_column_weight">6</dimen>
