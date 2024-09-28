@@ -1,6 +1,8 @@
 package org.sbv.pockettracker.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -125,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
                                 Uri uri = data.getData();
                                 try (InputStream inputStream = getContentResolver().openInputStream(uri);
                                      InputStreamReader inputStreamReader = new InputStreamReader(inputStream)) {
-                                    onNewGameClick();
+                                    onNewGameButtonClick();
                                     ScoreSheetIO.readFromFile(inputStreamReader, playersViewModel, new ScoreSheetWriter(scoreSheetViewModel, poolTableViewModel, scoreBoardViewModel));
                                     Toast.makeText(MainActivity.this, "Game loaded successfully!", Toast.LENGTH_SHORT).show();
                                 } catch (IOException e) {
@@ -230,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
                 onSaveButtonClick();
                 return true;
             } else if (item.getItemId() == R.id.newGame_dropdown){
-                onNewGameClick();
+                onNewGameButtonClick();
                 return true;
             } else if (item.getItemId() == R.id.loadGame_dropdown){
                 onLoadButtonClick();
@@ -248,7 +250,28 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
         scoreBoardViewModel.addPoints(scoreSheetViewModel.turnplayerNumber(), points);
     }
 
-    public void onNewGameClick(){
+    public void onNewGameButtonClick(){
+        if (scoreSheetViewModel.length() > 1) {
+            AlertDialog.Builder confirmDialog = new AlertDialog.Builder(this);
+            confirmDialog.setMessage(getString(R.string.confirmNewGame))
+                    .setPositiveButton(getString(R.string.positive), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            resetGame();
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .setNegativeButton(getString(R.string.negative), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            confirmDialog.show();
+        }
+    }
+
+    private void resetGame(){
         playersViewModel.reset();
 
         poolTableViewModel.reset();

@@ -121,5 +121,8 @@
     <string name="player_fouls_format">Fouls: %1$d</string>
     <string name="player_error_format">Error Ratio: %1$d %%</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="confirmNewGame">Are you sure?</string>
+    <string name="positive">Yes</string>
+    <string name="negative">No</string>
 
 </resources>
