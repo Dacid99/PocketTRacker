@@ -169,7 +169,7 @@ create_release:
       curl --request POST --header "JOB-TOKEN: $CI_JOB_TOKEN" \
       --data "name=$RELEASE_NAME" \
       --data "tag_name=$CI_COMMIT_TAG" \
-      --data-urlencode "description=[$RELEASE_APK_NAME]($GITLAB_API_URL$UPLOAD_URL)"
+      --data-urlencode "description=[$RELEASE_APK_NAME]($GITLAB_API_URL$UPLOAD_URL)" \
       "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/releases"
     - |
       if [ $? -ne 0 ]; then
