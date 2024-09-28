@@ -179,8 +179,8 @@ create_release:
     - echo "Connecting APK to release"
     - |
       curl --request PUT --header "JOB-TOKEN: $CI_JOB_TOKEN" \
-      --data "assets[links][][name]=$RELEASE_APK_NAME \
-      --data "assets[links][][url]=$CI_PROJECT_URL$UPLOAD_URL \
+      --data-urlencode "assets[links][][name]=$RELEASE_APK_NAME" \
+      --data-urlencode "assets[links][][url]=$CI_PROJECT_URL$UPLOAD_URL" \
       "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/releases/$RELEASE_NAME"
     - |
       if [ $? -ne 0 ]; then
