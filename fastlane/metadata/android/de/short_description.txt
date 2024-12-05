@@ -1,1 +1,1 @@
-Eine App die verlässlich deine 14/1e Billard Spielstände erfasst
+Erfasst und analysiert verlässlich deine 14/1e Billard Spielstände

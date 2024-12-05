@@ -1,1 +1,1 @@
-An app to reliably track the scores of your straight pool games
+Reliably tracks and analyses the scores of your straight pool games
