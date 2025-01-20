@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'org.sbv.pockettracker'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "org.sbv.pockettracker"
         minSdk 21
-        targetSdk 34    //if you update this, the pipeline sdk must be updated as well!
+        targetSdk 35    //if you update this, the pipeline sdk must be updated as well!
         versionCode 14
         versionName "2.2.3"
         buildConfigField "String", "AUTHOR", "\"Dacid99\""
