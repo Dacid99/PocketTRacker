@@ -1,0 +1,5 @@
+- implemented android 13s adaptive icon feature
+- updated dependencies
+
+Hey there, thanks for checking out my app!
+If you have any feedback please let me know!
