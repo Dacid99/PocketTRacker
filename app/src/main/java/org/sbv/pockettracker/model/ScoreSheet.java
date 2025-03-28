@@ -204,6 +204,13 @@ public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
         return pointer == 0;
     }
 
+    public final boolean isSecondConsecutiveFoul(){
+        if (pointer < 3){
+            return false;
+        }
+        return inningsList.get(pointer-1).switchReason.equals("Foul") && inningsList.get(pointer-3).switchReason.equals("Foul");
+    }
+
     public int turnplayerNumber(){
         return pointer % 2;
     }

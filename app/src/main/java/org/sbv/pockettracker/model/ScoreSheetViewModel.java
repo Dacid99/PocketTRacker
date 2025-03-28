@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.android.material.color.utilities.Score;
+
 
 public class ScoreSheetViewModel extends ViewModel {
     private final MutableLiveData<ScoreSheet> scoreSheetLiveData;
@@ -68,6 +70,13 @@ public class ScoreSheetViewModel extends ViewModel {
         ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
         if (scoreSheet != null){
             return scoreSheet.isStart();
+        }else return false;
+    }
+
+    public boolean isSecondConsecutiveFoul(){
+        ScoreSheet scoreSheet = scoreSheetLiveData.getValue();
+        if (scoreSheet != null){
+            return scoreSheet.isSecondConsecutiveFoul();
         }else return false;
     }
 

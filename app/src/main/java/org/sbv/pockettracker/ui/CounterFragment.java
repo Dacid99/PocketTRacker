@@ -150,8 +150,14 @@ public class CounterFragment extends Fragment{
 
         foulButton.setOnClickListener(v -> {
             assignPoints();
-            scoreBoardViewModel.addPoints( scoreSheetViewModel.turnplayerNumber(), (scoreSheetViewModel.currentTurn() == 0) ? -2:-1 );
-            newTurn(getString(R.string.foul_string));
+            if (scoreSheetViewModel.isSecondConsecutiveFoul()){
+                scoreBoardViewModel.addPoints(scoreSheetViewModel.turnplayerNumber(),-15);
+            } else if (scoreSheetViewModel.currentTurn() == 0){
+                scoreBoardViewModel.addPoints( scoreSheetViewModel.turnplayerNumber(), -2 );
+            } else {
+                scoreBoardViewModel.addPoints(scoreSheetViewModel.turnplayerNumber(), -1 );
+            }
+            newTurn("Foul");
         });
 
         undoButton.setOnClickListener(v -> scoreSheetWriter.rollback());
