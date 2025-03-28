@@ -11,8 +11,8 @@ android {
         applicationId "org.sbv.pockettracker"
         minSdk 21
         targetSdk 35    //if you update this, the pipeline sdk must be updated as well!
-        versionCode 18
-        versionName "2.3.1"
+        versionCode 19
+        versionName "2.4.0"
         buildConfigField "String", "AUTHOR", "\"Dacid99\""
         buildConfigField "String", "GITLAB", "\"https://gitlab.com/Dacid99/pockettracker\""
 

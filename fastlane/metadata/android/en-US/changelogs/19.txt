@@ -1,0 +1,5 @@
+- 15 points penalty for 3rd consecutive foul
+- updated dependencies
+
+Hey there, thanks for checking out my app!
+If you have any feedback please let me know!
