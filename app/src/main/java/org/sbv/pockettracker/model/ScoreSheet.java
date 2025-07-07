@@ -15,6 +15,10 @@ import java.util.Iterator;
 // every turn is noted and this log can be accessed for review
 // makes revert feature possible
 public class ScoreSheet implements Parcelable, Iterable<ScoreSheet.Inning> {
+    public static final String MAX_INNINGS_DEFAULT = "-1";
+    public static final String FIRST_INNINGS_WARNING_DEFAULT = "5";
+    public static final String SECOND_INNINGS_WARNING_DEFAULT = "1";
+
     private final ArrayList<Inning> inningsList;
 
     //this member holds the index of the current entry in the ArrayList

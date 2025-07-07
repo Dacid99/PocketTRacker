@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -347,6 +348,21 @@ public class CounterFragment extends Fragment{
 
     private void newTurn(String reason){
         scoreSheetWriter.update(reason);
+        int max_innings = Integer.parseInt(preferences.getString("max_innings", ScoreSheet.MAX_INNINGS_DEFAULT));
+        if (max_innings > 0){
+            if (scoreSheetViewModel.length() == max_innings){
+                Toast.makeText(getContext(), getString(R.string.innings_end), Toast.LENGTH_LONG).show();
+            } else {
+                int first_innings_warning = Integer.parseInt(preferences.getString("first_innings_warning", ScoreSheet.FIRST_INNINGS_WARNING_DEFAULT));
+                if (first_innings_warning > 0 && scoreSheetViewModel.length() == max_innings - first_innings_warning) {
+                    Toast.makeText(getContext(), first_innings_warning + getString(R.string.innings_warning), Toast.LENGTH_SHORT).show();
+                }
+                int second_innings_warning = Integer.parseInt(preferences.getString("second_innings_warning", ScoreSheet.SECOND_INNINGS_WARNING_DEFAULT));
+                if (second_innings_warning > 0 && scoreSheetViewModel.length() == max_innings - second_innings_warning) {
+                    Toast.makeText(getContext(), second_innings_warning + getString(R.string.innings_warning), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
 

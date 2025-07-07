@@ -124,5 +124,11 @@
     <string name="confirmNewGame">Are you sure?</string>
     <string name="positive">Yes</string>
     <string name="negative">No</string>
+    <string name="max_innings_title">Maximum innings per game</string>
+    <string name="game_settings_header">Game settings</string>
+    <string name="innings_warning"> innings left!</string>
+    <string name="innings_end">Maximum innings reached!</string>
+    <string name="first_innings_warning_title">First warning before the last inning</string>
+    <string name="second_innings_warning_title">Second warning before the last inning</string>
 
 </resources>

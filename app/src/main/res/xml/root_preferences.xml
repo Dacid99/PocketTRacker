@@ -33,6 +33,30 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/game_settings_header">
+
+        <EditTextPreference
+            android:id="@+id/max_innings_input"
+            app:key="max_innings"
+            app:title="@string/max_innings_title"
+            app:useSimpleSummaryProvider="true"
+            android:inputType="number"/>
+
+        <EditTextPreference
+            android:id="@+id/first_innings_warning"
+            app:key="first_innings_warning"
+            app:title="@string/first_innings_warning_title"
+            app:useSimpleSummaryProvider="true"
+            android:inputType="number"/>
+
+        <EditTextPreference
+            android:id="@+id/second_innings_warning"
+            app:key="second_innings_warning"
+            app:title="@string/second_innings_warning_title"
+            app:useSimpleSummaryProvider="true"
+            android:inputType="number"/>
+    </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/customization_header">
 
         <SwitchPreferenceCompat

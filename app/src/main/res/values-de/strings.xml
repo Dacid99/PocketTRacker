@@ -59,5 +59,11 @@
     <string name="confirmNewGame">Bist du sicher?</string>
     <string name="positive">Ja</string>
     <string name="negative">Nein</string>
+    <string name="max_innings_title">Maximum an Aufnahmen pro Spiel</string>
+    <string name="game_settings_header">Spieleinstellungen</string>
+    <string name="innings_warning"> Aufnahmen übrig!</string>
+    <string name="innings_end">Maximale Aufnahmen erreicht!</string>
+    <string name="first_innings_warning_title">Erste Warnung vor der letzten Aufnahme</string>
+    <string name="second_innings_warning_title">Zweite Warnung vor der letzten Aufnahme</string>
 
 </resources>
