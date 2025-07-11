@@ -1,0 +1,6 @@
+- fixed overlap between status bar and app ui in android 15
+- setting for maximum innings
+- updated dependencies
+
+Hey there, thanks for checking out my app!
+If you have any feedback please let me know!
