@@ -21,3 +21,16 @@ If you want to continue your games later (or want the data as a memory), you can
      height="80">](https://apt.izzysoft.de/fdroid/index/apk/org.sbv.pockettracker/)
 
 Or download the latest APK from the [Releases Section](https://gitlab.com/Dacid99/pockettracker/-/releases)
+
+## Translators wanted
+
+I'd like to offer this app in as many languages as possible!
+
+If you can help with the translation of PocketTRacker, please check out [weblate](https://hosted.weblate.org/projects/pockettracker/).
+You can add your language in case it is missing!
+
+Thank you!
+
+## License
+
+This project is proudly licensed under the GPLv3 license.
