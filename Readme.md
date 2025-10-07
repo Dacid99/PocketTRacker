@@ -1,10 +1,21 @@
+> **!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!**
+> 
+> **Googles plans to mandate developer verification are threating the existance of the free distribution of apps on android.**
+> 
+> **If these plans come into effect [it will be the end of the f-droid store](https://f-droid.org/de/2025/09/29/google-developer-registration-decree.html)!**
+> 
+> **Please sound the alarm on this, contact your government, representatives, antitrust authorities, etc to prevent this from becoming a reality.**
+> 
+> *Should google win, I will not consent to relinquishing my personal information to them so this app will also not be available on google verified devices any more.*
+>
+> **!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!**
+
 # PocketTRacker ![](app/src/main/res/mipmap-xxhdpi/ic_launcher.webp)
 =============================
 
 ![F-Droid Version](https://img.shields.io/f-droid/v/org.sbv.pockettracker)
 ![Downloads last month](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fkitswas%2Ffdroid-metrics-dashboard%2Fraw%2Frefs%2Fheads%2Fmain%2Fprocessed%2Fmonthly%2Forg.sbv.pockettracker.json&query=%24.total_downloads&logo=fdroid&label=Downloads%20last%20month)
 ![Translation status](https://img.shields.io/weblate/progress/pockettracker)
-
 
 **A little app to keep track of your straight pool games.**
 
