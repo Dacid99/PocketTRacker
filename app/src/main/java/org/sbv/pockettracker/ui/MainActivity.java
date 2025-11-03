@@ -34,6 +34,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigationrail.NavigationRailView;
 
+import org.sbv.pockettracker.BuildConfig;
 import org.sbv.pockettracker.model.Players;
 import org.sbv.pockettracker.model.PlayersViewModel;
 import org.sbv.pockettracker.model.PoolTableViewModel;
@@ -54,6 +55,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
+
+import org.woheller69.freeDroidWarn.FreeDroidWarn;
 
 public class MainActivity extends AppCompatActivity implements CounterFragment.CounterFragmentListener, ScoreSheetFragment.ScoreSheetFragmentListener, StatisticsFragment.StatisticsFragmentListener, NumberPaneFragment.NumberPaneFragmentProvider, PlayerFragment.PlayerFragmentProvider{
 
@@ -141,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements CounterFragment.C
                         }
                     }
                 });
+        FreeDroidWarn.showWarningOnUpgrade(this, BuildConfig.VERSION_CODE);
     }
     
     private void assignViewModels(){
