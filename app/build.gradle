@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "org.sbv.pockettracker"
-        minSdk 21
+        minSdk 23
         targetSdk 35    //if you update this, the pipeline sdk must be updated as well!
         versionCode 27
         versionName "2.5.6"
@@ -85,7 +85,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.9.4' // update requires higher minsdk
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.10.0' // update requires higher minsdk
     implementation 'androidx.activity:activity-compose:1.10.1' //update requires higher compile sdk
     implementation platform('androidx.compose:compose-bom:2025.12.01')
     implementation 'androidx.compose.ui:ui'
@@ -93,8 +93,8 @@ dependencies {
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.9.4' // update requires higher minsdk
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.4' // update requires higher minsdk
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.10.0' // update requires higher minsdk
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0' // update requires higher minsdk
     implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.9.6'
     implementation 'androidx.navigation:navigation-ui-ktx:2.9.6'
@@ -106,7 +106,7 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
-    implementation 'androidx.window:window:1.4.0'  // update requires higher minsdk
+    implementation 'androidx.window:window:1.5.1'  // update requires higher minsdk
 
     implementation 'com.google.android.material:material:1.13.0'
     implementation 'androidx.appcompat:appcompat:1.7.1'

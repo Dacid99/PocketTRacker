@@ -1,4 +1,5 @@
 - updated dependencies
+- dropped support for Android 5 to stay up to date with androidx components
 
 Hey there, thanks for checking out my app!
 If you have any feedback please let me know!
